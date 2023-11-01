@@ -10,5 +10,6 @@ jobs:
         with:
           node-version: '20.x'
       - name: Cd to directory
-        working-directory: ./backend
         run: npm ci && ls
+        working-directory: ./backend
+
