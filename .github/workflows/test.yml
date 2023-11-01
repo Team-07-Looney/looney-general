@@ -17,4 +17,5 @@ jobs:
           npm install --save-dev jest
       - name: Run tests
         run: |
+          cd frontend
           npm run test
