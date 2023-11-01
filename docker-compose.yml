@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+  habits:
+    container_name: ms-habits
+    build: ./backend/habits
+    volumes:
+      - ./backend/habits/code:/usr/src/app
+    networks:
+      - mslooney
+    ports:
+      - "3010:3010"
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm run dev"
+  gateway:
+    container_name: apigateway
+    build: ./backend/api-gateway
+    volumes:
+      - ./backend/api-gateway/code:/usr/src/app
+    networks:
+      - mslooney
+    ports:
+      - "3011:3011"
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm run dev"
+
+networks:
+  mslooney:
+    driver: bridge
