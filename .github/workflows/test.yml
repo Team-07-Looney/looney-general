@@ -12,10 +12,9 @@ jobs:
       - run: echo "Hello there"
       - name: Install dependencies
         run: |
-          cd backend/habits/code
+          cd frontend
           npm install
           npm install --save-dev jest
       - name: Run tests
         run: |
-          cd frontend
           npm run test
