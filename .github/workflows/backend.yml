@@ -10,5 +10,5 @@ jobs:
         with:
           node-version: '20.x'
       - run: cd backend
-      - run: npm ci
       - run: dir
+      - run: npm ci
