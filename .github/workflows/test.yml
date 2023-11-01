@@ -17,5 +17,5 @@ jobs:
           npm i jest supertest
       - name: Run tests
         run: |
-          cd backend/habits/code
+          cd frontend/src
           npm run test
