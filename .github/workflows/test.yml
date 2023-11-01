@@ -14,8 +14,8 @@ jobs:
         run: |
           cd backend/habits/code
           npm install
-          npm i jest supertest
+          npm install --save-dev jest
       - name: Run tests
         run: |
-          cd frontend/src/routes
+          cd frontend
           npm run test
