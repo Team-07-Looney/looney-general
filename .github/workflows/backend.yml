@@ -10,5 +10,6 @@ jobs:
         with:
           node-version: '20.x'
       - name: Cd to directory
-        run: npm ci && ls
         working-directory: ../backend/api-gateway
+        run: ls
+       
