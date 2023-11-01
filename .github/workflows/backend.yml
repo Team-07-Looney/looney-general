@@ -12,3 +12,4 @@ jobs:
       - name: running npm install
         working-directory: ./backend
       - run: npm ci
+      - run: dir
