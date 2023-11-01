@@ -9,6 +9,6 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '20.x'
-      - working-directory: ./backend
-      - run: npm ci
-      - run: dir
+      - name: Cd to directory
+        working-directory: ./backend
+        run: npm ci
