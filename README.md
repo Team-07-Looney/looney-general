@@ -8,6 +8,6 @@ This repo will contain instructions for setting up the local environment of the 
 * **Valeria Stamenova** - [v-stamenova](https://github.com/v-stamenova)
 * **Ihor Novikov** - [IGORnvk](https://github.com/IGORnvk)
 * **Jessica Dinova** - [JessicaDinova](https://github.com/JessicaDinova)
-* **Ana Faraco** - [anafaraco01](https://github.com/anafaraco01)
+* **Ana Rivera Faraco** - [anafaraco01](https://github.com/anafaraco01)
 * **Laura Birau** - [LauraBirau](https://github.com/LauraBirau)
 * **Daniel Bartha** - [DanielBartha](https://github.com/DanielBartha)
