@@ -10,5 +10,5 @@ jobs:
         with:
           node-version: '20.x'
       - name: Cd to directory
-        run: ls
+        run: cd backend/ && ls
        
