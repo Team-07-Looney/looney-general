@@ -17,5 +17,5 @@ jobs:
           npm i jest supertest
       - name: Run tests
         run: |
-          cd frontend/src
+          cd frontend/src/routes
           npm run test
