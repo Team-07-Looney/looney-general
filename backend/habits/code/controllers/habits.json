@@ -1,0 +1,14 @@
+{
+    "meta": {
+      "name": "appointments",
+      "date": "13 Januari 2023"
+    },
+    "data": [
+        {
+            "id": 1,
+            "name": "brush teeth",
+            "starttime": "8:30",
+            "duration": "120"
+        }
+    ]
+}
