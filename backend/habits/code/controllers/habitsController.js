@@ -1,4 +1,5 @@
 import data from './habits.json' assert { type: 'json' };
+import { getAllHabitsData } from '../database/adapter.js';
 
 function getToDay() {
   const date = new Date();
@@ -22,8 +23,8 @@ const tempResponse = {
 
 export async function getHabits(req, res) {
   try {
-    //set header before response
-    res.status(200).send(data);
+    tempResponse.data = await getAllHabitsData();
+    res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
   }
