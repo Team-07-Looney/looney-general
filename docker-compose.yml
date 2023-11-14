@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   habits:
-    container_name: ms-habits
+    container_name: mshabits
     build: ./backend/habits
     volumes:
       - ./backend/habits/code:/usr/src/app
