@@ -1,4 +1,3 @@
-import data from './habits.json' assert { type: 'json' };
 import { getAllHabitsData } from '../database/adapter.js';
 
 function getToDay() {
