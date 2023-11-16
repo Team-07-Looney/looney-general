@@ -19,21 +19,21 @@ These instructions will get you a copy of the project up and running on your loc
 In order to get all microservices running, you need Docker installed with enabled integration with WSL (assuming you are on Windows OS).
 #### How to set up your WSL:
 1. Install Ubuntu from the MS Store. Both base versions and specific LTS versions may be used. Follow the installer and create a user.
-2. Make sure it is WSL2 instead of WSL1 - `wsl -l -v`
+2. Make sure it is WSL2 instead of WSL1 - `wsl -l -v`.
 3. Go to Docker Desktop > Settings > Resources > Check Enable integration with my default WSL distro and check Ubuntu.
-4. Run sudo apt update && sudo apt upgrade to get your kernel and packages up to the latest version
+4. Run `sudo apt update && sudo apt upgrade` to get your kernel and packages up to the latest version.
 
 #### How to install node.js and npm on Ubuntu
 In order to get the front end svelte app running, you would need to have npm and node installed on the WSL.
-1. First, we have to check if there are any versions of npm and node already installed - `npm -v` && `node -v`
-2. If the versions are node above 18 and npm above 9, then you can skip the next steps
-3. If you do not have node.js or npm on your machine, skip to step 5
-4. If their versions are below those, they need to be unistalled - `sudo apt remove nodejs` && `sudo apt remove npm`
-5. Install nvm - ` curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`
-6. To verify it worked properly, we can check the version `nvm -v`
-7. Run `nvm list-remote` to check all available node versions
-8. Now, we install the latest one, in this case 20.2.0 - `nvm install v20.2.0`
-9. To verify it worked, we check the versionsog node and npm - `node -v` && `npm -v`
+1. First, we have to check if there are any versions of npm and node already installed - `npm -v` && `node -v`.
+2. If the versions are node above 18 and npm above 9, then you can skip the next steps.
+3. If you do not have node.js or npm on your machine, skip to step 5.
+4. If their versions are below the mentioned ones, they need to be unistalled - `sudo apt remove nodejs` && `sudo apt remove npm`.
+5. Install nvm - ` curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.35.3/install.sh | bash`.
+6. To verify it worked properly, we can check the version `nvm -v`.
+7. Run `nvm list-remote` to check all available node versions.
+8. Now, we install the latest one, in this case 20.2.0 - `nvm install v20.2.0`.
+9. To verify it worked, we check the versions of node and npm - `node -v` && `npm -v`.
 
 ### Steps
 1. Clone this repo onto your WSL
