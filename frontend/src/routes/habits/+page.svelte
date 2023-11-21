@@ -8,3 +8,5 @@
         <li>{habit.name}</li> 
     {/each}
 </ul>
+
+<a class="p-1.5 bg-red-400 rounded-lg" href="/habits/create">Create habit</a>

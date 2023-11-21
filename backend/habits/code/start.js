@@ -6,8 +6,8 @@ import indexRouter from './routes/index.js';
 const app = express();
 
 // support json encoded and url-encoded bodies, mainly used for post and update
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use('/', indexRouter);
 app.use((req, res, next) => {
