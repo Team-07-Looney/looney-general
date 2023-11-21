@@ -15,5 +15,8 @@
 			<label for="password" class="text-black text-2xl">Password</label>
 			<input id="password" name="password" class="rounded-sm">
 		</div>
+		<a href="/habits" type="button" class="p-1.5 bg-red-400 rounded-lg">
+						Habits
+		</a>
 	</form>
 </div>
