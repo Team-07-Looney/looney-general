@@ -7,3 +7,4 @@ node_modules
 variables.env
 .env.*
 !.env.example
+*.sqlite

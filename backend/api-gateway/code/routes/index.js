@@ -1,8 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
-const router = express.Router();
+import morgan from 'morgan';
 
+const router = express.Router();
+router.use(cors());
+router.use(morgan());
+
+// TODO: Create error handling
 // create a proxy for each microservice
 const habitProxy = createProxyMiddleware({
   target: 'http://mshabits:3010',
@@ -10,6 +15,13 @@ const habitProxy = createProxyMiddleware({
   onProxyReq: fixRequestBody,
 });
 
+const usersProxy = createProxyMiddleware({
+  target: 'http://msusers:3012',
+  changeOrigin: true,
+});
+
 router.use('/habits', cors(), habitProxy);
+router.use('/users', cors(), usersProxy);
+router.use('/', cors(), usersProxy);
 
 export default router;
