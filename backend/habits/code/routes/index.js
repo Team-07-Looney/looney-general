@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import {
+  createHabit,
   getHabits
 } from '../controllers/habitsController.js';
 const router = express.Router();
@@ -28,5 +29,8 @@ router.options('/habits', (req, res, next) => {
 
 // get a collection of all the habits
 router.get('/habits', cors(), getHabits);
+
+// route for creating a habit
+router.post('/habits', cors(), createHabit);
 
 export default router;
