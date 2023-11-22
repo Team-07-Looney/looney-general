@@ -1,4 +1,4 @@
-import { getAllUsers } from '../database/adapter.js';
+import { createNewUser, getAllUsers, getUserBy } from '../database/adapter.js';
 
 function getToDay() {
   const date = new Date();
@@ -23,6 +23,24 @@ const tempResponse = {
 export async function getUsers(req, res) {
   try {
     tempResponse.data = await getAllUsers();
+    res.status(200).send(tempResponse);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function getUser(req, res) {
+  try {
+    tempResponse.data = await getUserBy('id', 1);
+    res.status(200).send(tempResponse);
+  } catch (err) {
+    next(err);
+  }
+}
+
+export async function createUser(req, res) {
+  try {
+    tempResponse.data = await createNewUser(req.body.name, req.body.email, req.body.password);
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);

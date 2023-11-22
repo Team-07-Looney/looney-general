@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { getUsers } from '../controllers/userController.js';
+import { getUsers, getUser, createUser } from '../controllers/userController.js';
 const router = express.Router();
 
 // routes
@@ -26,5 +26,7 @@ router.options('/users', (req, res, next) => {
 
 // get a collection of all the habits
 router.get('/users', cors(), getUsers);
+
+router.post('/register', cors(), createUser);
 
 export default router;

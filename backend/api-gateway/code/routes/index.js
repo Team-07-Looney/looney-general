@@ -22,6 +22,9 @@ const usersProxy = createProxyMiddleware({
 
 router.use('/habits', cors(), habitProxy);
 router.use('/users', cors(), usersProxy);
-router.use('/', cors(), usersProxy);
+
+router.use('/register', cors(), (req, res, next) => {
+  console.log(req.body);
+});
 
 export default router;
