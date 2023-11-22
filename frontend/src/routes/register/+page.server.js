@@ -7,6 +7,7 @@ export const actions = {
     const data = await axios.post('http://localhost:3011/register', {
       name: formData.get('name'),
       password: formData.get('password'),
+      email: formData.get('email'),
     }, {
       headers: {
         "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
