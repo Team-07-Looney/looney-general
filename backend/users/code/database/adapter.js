@@ -1,4 +1,5 @@
 import { db } from './database.js';
+import bcrypt from 'bcrypt';
 
 export async function getAllUsers() {
   return new Promise((resolve, reject) => {
@@ -17,11 +18,17 @@ export async function getAllUsers() {
 }
 
 export async function createNewUser(name, email, password) {
-  const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
-  db.run(query, [name, email, password], (err) => {
-    if (err) {
-      console.error(err);
-    }
+  const saltRounds = 10;
+  
+  bcrypt.hash(password, saltRounds).then(hash => {
+    let hashedPassword = hash;
+
+    const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
+    db.run(query, [name, email, hashedPassword], (err) => {
+      if (err) {
+        console.error(err);
+      }
+    });
   });
 
   let newUser = await getUserBy('email', email);
