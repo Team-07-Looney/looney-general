@@ -2,7 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import {
   createHabit,
-  getHabits
+  getHabits,
+  getHabitById,
+  editHabitById
 } from '../controllers/habitsController.js';
 const router = express.Router();
 
@@ -32,5 +34,11 @@ router.get('/habits', cors(), getHabits);
 
 // route for creating a habit
 router.post('/habits', cors(), createHabit);
+
+// route for getting one habit
+router.get('/habits/:id', cors(), getHabitById);
+
+// route for editing one habit
+router.post('/habits/:id', cors(), editHabitById);
 
 export default router;

@@ -1,4 +1,9 @@
-import { createHabitInstance, getAllHabitsData } from '../database/adapter.js';
+import { 
+  createHabitInstance,
+  getAllHabitsData,
+  getHabitInstanceById,
+  editHabitInstanceById
+} from '../database/adapter.js';
 
 function getToDay() {
   const date = new Date();
@@ -31,11 +36,31 @@ export async function getHabits(req, res, next) {
 
 export async function createHabit(req, res, next) {
   try {
-    console.log(req.body);
     await createHabitInstance(req);
     tempResponse.data.message = "habit created successfully";
     res.status(200).send(tempResponse);
   } catch (err) {
+    next(err);
+  }
+}
+
+export async function getHabitById(req, res, next) {
+  try {
+    const url_parts = req.url.replace(/\/\s*$/, '').split('/');
+    tempResponse.data = await getHabitInstanceById(url_parts[2]);
+    res.status(200).send(tempResponse);
+  } catch(err) {
+    next(err);
+  }
+}
+
+export async function editHabitById(req, res, next) {
+  try {
+    const url_parts = req.url.replace(/\/\s*$/, '').split('/');
+    await editHabitInstanceById(req.body, url_parts[2]);
+    tempResponse.data.message = "habit edited successfully";
+    res.status(200).send(tempResponse);
+  } catch(err) {
     next(err);
   }
 }

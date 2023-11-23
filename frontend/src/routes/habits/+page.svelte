@@ -1,12 +1,11 @@
 <script>
   // Data contains all data passed by the page server
   export let data;
-  console.log(data);
 </script>
 
 <ul class="text-black text-3xl">
   {#each data.habits as habit}
-    <li>{habit.name}</li>
+    <li class="p-1 bg-red-400 rounded-lg mt-2" ><a href={`habits/${habit.id}`}>{habit.name}</a></li>
   {/each}
 </ul>
 <a href="/" type="button" class="p-1.5 bg-red-400 rounded-lg">

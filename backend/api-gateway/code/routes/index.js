@@ -12,4 +12,5 @@ const habitProxy = createProxyMiddleware({
 
 router.use('/habits', cors(), habitProxy);
 
+
 export default router;

@@ -13,7 +13,7 @@ export const actions = {
     const data = await axios.post('http://localhost:3011/habits', {
       name: formData.get('name'),
       start_time: formData.get('start_time'),
-      duration: parseInt(formData.get("duration"))
+      duration: parseInt(formData.get('duration'))
     }, {
       headers: {
         "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
