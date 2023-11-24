@@ -9,7 +9,7 @@
 </ul>
 
 <a class="p-1.5 bg-red-400 rounded-lg mt-3" href={`${data.habit[0].id}/edit`}>Edit</a>
-<form method="POST" action="?/deleteHabit">
-    <button type="submit" class="bg-red-400 rounded-lg p-1">Delete</button>
+<form class="w-full bg-red-400 rounded-lg p-1" method="POST" action="?/deleteHabit">
+    <button type="submit">Delete</button>
 </form>
 <a class="p-1.5 bg-blue-400 rounded-lg mt-3" href="/habits">Back</a>

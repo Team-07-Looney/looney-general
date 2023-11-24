@@ -1,4 +1,5 @@
 import axios from "axios";
+import { redirect } from '@sveltejs/kit';
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve a habit based on id
@@ -31,5 +32,7 @@ export const load = async ({ params }) => {
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       },)
+
+      throw redirect(302, '/habits');
     }
 };

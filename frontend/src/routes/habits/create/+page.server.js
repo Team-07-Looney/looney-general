@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { redirect } from '@sveltejs/kit';
 
 /**
  * createHabit is a function called when the user submits a form to create a habit
@@ -19,5 +20,7 @@ export const actions = {
         "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
       }
     });
+
+    throw redirect(302, '/habits');
   }
 };
