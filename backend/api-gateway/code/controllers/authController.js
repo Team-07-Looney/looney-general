@@ -21,7 +21,6 @@ const tempResponse = {
 };
 
 export async function register(req, res) {
-
   const createUserResponse = await axios.post('http://msusers:3012/users', {
     name: req.body.name,
     password: req.body.password,
@@ -32,16 +31,7 @@ export async function register(req, res) {
     }
   });
 
-  console.log(createUserResponse.data);
+  const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
 
-  // let newUserEmail = response.data.data;
-  // const getUserResponse = await axios.post('http://msusers:3012/users', {
-  //   name: req.body.name,
-  //   password: req.body.password,
-  //   email: req.body.email
-  // }, {
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded'
-  //   }
-  // });
+  console.log(getUserResponse.data);
 }

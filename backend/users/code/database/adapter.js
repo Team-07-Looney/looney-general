@@ -50,9 +50,12 @@ export async function getUserBy(key, value) {
       return;
     }
 
+    let db = openDatabaseConnection();
     const query = `SELECT * FROM users WHERE ${key} = ? LIMIT 1`;
 
     db.all(query, [value], (err, rows) => {
+      closeDatabaseConnection(db);
+
       if (err) {
         console.error(err);
         reject(err);

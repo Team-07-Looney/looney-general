@@ -29,4 +29,6 @@ router.get('/users', cors(), getUsers);
 
 router.post('/users', cors(), createUser);
 
+router.get('/users/email/:userEmail', cors(), getUser);
+
 export default router;

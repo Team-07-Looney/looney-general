@@ -31,10 +31,18 @@ export async function getUsers(req, res) {
 
 export async function getUser(req, res) {
   try {
-    let key = req.body.id ? 'id' : (req.body.email ? 'email' : '');
-    let value = req.body.id ? req.body.id : (req.body.email ? req.body.email : '');
+    if (req.params.userEmail) {
+      tempResponse.data = await getUserBy('email', req.params.userEmail);
+    }
+    
+    // TODO: Contniue and test after the registration is complete
+    // } else if (req.params.userId) {
+    //   tempResponse.data = await getUserBy('id', req.params.userId);
+    // } else {
+    //   tempResponse.data = 'The key for the user is not found';
+    //   res.stats(404).send(tempResponse);
+    // }
 
-    tempResponse.data = await getUserBy(key, value);
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
