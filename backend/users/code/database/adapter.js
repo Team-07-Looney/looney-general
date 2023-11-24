@@ -1,12 +1,16 @@
-import { db } from './database.js';
+import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
+import sqlite3 from 'sqlite3';
 import bcrypt from 'bcrypt';
 
 export async function getAllUsers() {
   return new Promise((resolve, reject) => {
-    var sql = "SELECT * FROM users";
-    var params = [];
+    let db = openDatabaseConnection();
+    let sql = "SELECT * FROM users";
+    let params = [];
 
     db.all(sql, params, (err, rows) => {
+      closeDatabaseConnection(db);
+
       if (err) {
         console.error(err);
         reject(err);
@@ -19,37 +23,36 @@ export async function getAllUsers() {
 
 export async function createNewUser(name, email, password) {
   const saltRounds = 10;
-  
-  bcrypt.hash(password, saltRounds).then(hash => {
-    let hashedPassword = hash;
 
-    const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
-    db.run(query, [name, email, hashedPassword], (err) => {
-      if (err) {
-        console.error(err);
-      }
-    });
-  });
-
-  let newUser = await getUserBy('email', email);
+  let hash = await bcrypt.hash(password, saltRounds);
+  let db = openDatabaseConnection();
+  const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
   return new Promise((resolve, reject) => {
-    resolve(newUser);
+    db.run(query, [name, email, hash], (err) => {
+      closeDatabaseConnection(db);
+      if (err) {
+        console.error(err);
+        reject(409);
+      }
+
+      resolve(200);
+    });
   });
 }
 
 export async function getUserBy(key, value) {
   return new Promise((resolve, reject) => {
-
     const possibleKeys = ['id', 'email'];
+
     if (!possibleKeys.includes(key)) {
       reject(new Error("Invalid param for defining the user. Key must be 'id' or 'email'."));
       return;
     }
 
-    let query = `SELECT * FROM users WHERE ${key} = '${value}'`;
+    const query = `SELECT * FROM users WHERE ${key} = ? LIMIT 1`;
 
-    db.all(query, (err, rows) => {
+    db.all(query, [value], (err, rows) => {
       if (err) {
         console.error(err);
         reject(err);
@@ -57,5 +60,6 @@ export async function getUserBy(key, value) {
         resolve(rows);
       }
     });
-  })
+  });
 }
+

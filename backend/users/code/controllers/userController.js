@@ -31,7 +31,10 @@ export async function getUsers(req, res) {
 
 export async function getUser(req, res) {
   try {
-    tempResponse.data = await getUserBy('id', 1);
+    let key = req.body.id ? 'id' : (req.body.email ? 'email' : '');
+    let value = req.body.id ? req.body.id : (req.body.email ? req.body.email : '');
+
+    tempResponse.data = await getUserBy(key, value);
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
@@ -40,7 +43,17 @@ export async function getUser(req, res) {
 
 export async function createUser(req, res) {
   try {
-    tempResponse.data = await createNewUser(req.body.name, req.body.email, req.body.password);
+    const response = await createNewUser(req.body.name, req.body.email, req.body.password);
+    console.log(response);
+
+    if (response == 200) {
+      tempResponse.data.status = "Success";
+      tempResponse.data.message = "User is successfully added";
+      tempResponse.data.email = req.body.email;
+    } else {
+      tempResponse.data.message = "Error";
+    }
+
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);

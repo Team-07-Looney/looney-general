@@ -27,6 +27,6 @@ router.options('/users', (req, res, next) => {
 // get a collection of all the habits
 router.get('/users', cors(), getUsers);
 
-router.post('/register', cors(), createUser);
+router.post('/users', cors(), createUser);
 
 export default router;
