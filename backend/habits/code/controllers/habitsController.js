@@ -68,7 +68,7 @@ export async function editHabitById(req, res, next) {
 
 export async function deleteHabitById(req, res, next) {
   try {
-    await deleteHabitInstanceById(req.body.id);
+    await deleteHabitInstanceById(req.params.id);
     tempResponse.data.message = "habit deleted successfully";
     res.status(200).send(tempResponse);
   } catch(err) {

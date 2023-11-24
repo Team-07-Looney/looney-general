@@ -24,8 +24,8 @@ export const actions = {
       const formData = await request.formData();
       const { id } = params;
 
-      // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post(`http://localhost:3011/habits/${id}`, {
+      // Set the body of the request, adds a header and sends put request to update habit
+      const data = await axios.put(`http://localhost:3011/habits/${id}`, {
         name: formData.get('name'),
         start_time: formData.get('start_time'),
         duration: parseInt(formData.get('duration'))
