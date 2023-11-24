@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import morgan from 'morgan';
+import { register } from '../controllers/authController.js';
 
 const router = express.Router();
 router.use(cors());
@@ -18,13 +19,12 @@ const habitProxy = createProxyMiddleware({
 const usersProxy = createProxyMiddleware({
   target: 'http://msusers:3012',
   changeOrigin: true,
+  onProxyReq: fixRequestBody,
 });
 
 router.use('/habits', cors(), habitProxy);
 router.use('/users', cors(), usersProxy);
 
-router.use('/register', cors(), (req, res, next) => {
-  console.log(req.body);
-});
+router.post('/register', cors(), register);
 
 export default router;
