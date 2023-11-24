@@ -2,7 +2,8 @@ import {
   createHabitInstance,
   getAllHabitsData,
   getHabitInstanceById,
-  editHabitInstanceById
+  editHabitInstanceById,
+  deleteHabitInstanceById
 } from '../database/adapter.js';
 
 function getToDay() {
@@ -59,6 +60,16 @@ export async function editHabitById(req, res, next) {
     const url_parts = req.url.replace(/\/\s*$/, '').split('/');
     await editHabitInstanceById(req.body, url_parts[2]);
     tempResponse.data.message = "habit edited successfully";
+    res.status(200).send(tempResponse);
+  } catch(err) {
+    next(err);
+  }
+}
+
+export async function deleteHabitById(req, res, next) {
+  try {
+    await deleteHabitInstanceById(req.body.id);
+    tempResponse.data.message = "habit deleted successfully";
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);

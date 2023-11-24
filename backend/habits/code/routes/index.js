@@ -4,7 +4,8 @@ import {
   createHabit,
   getHabits,
   getHabitById,
-  editHabitById
+  editHabitById,
+  deleteHabitById
 } from '../controllers/habitsController.js';
 const router = express.Router();
 
@@ -40,5 +41,8 @@ router.get('/habits/:id', cors(), getHabitById);
 
 // route for editing one habit
 router.post('/habits/:id', cors(), editHabitById);
+
+// route for deleteing a habit
+router.delete('/habits/:id', cors(), deleteHabitById);
 
 export default router;

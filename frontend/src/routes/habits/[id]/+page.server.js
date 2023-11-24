@@ -16,3 +16,21 @@ export const load = async ({ params }) => {
       console.error(error);
     }
   };
+
+  export const actions = {
+    deleteHabit: async ({ params, request }) => {
+          
+      // Retrieves the data from the form
+      const formData = await request.formData();
+      const { id } = params;
+
+      // Set the body of the request, adds a header and sends post request to create habit
+      const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
+        id: id
+      }, {
+        headers: {
+          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+        }
+      },)
+    }
+};

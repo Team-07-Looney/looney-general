@@ -60,3 +60,18 @@ export async function editHabitInstanceById(habit, habitId) {
     });
   });
 }
+
+export async function deleteHabitInstanceById(habitId) {
+  return new Promise((resolve, reject) => {
+    const query = `DELETE FROM habits WHERE id='${habitId}'`;
+    
+    db.run(query, (err) => {
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
