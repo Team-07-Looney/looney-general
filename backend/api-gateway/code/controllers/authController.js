@@ -1,4 +1,7 @@
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+import * as dotenv from 'dotenv';
+dotenv.config({ path: '../variables.env' });
 
 function getToDay() {
   const date = new Date();
@@ -21,17 +24,33 @@ const tempResponse = {
 };
 
 export async function register(req, res) {
-  const createUserResponse = await axios.post('http://msusers:3012/users', {
-    name: req.body.name,
-    password: req.body.password,
-    email: req.body.email
-  }, {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
+  try {
+    const createUserResponse = await axios.post('http://msusers:3012/users', {
+      name: req.body.name,
+      password: req.body.password,
+      email: req.body.email
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+
+    const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
+
+    console.log(createUserResponse.data);
+    console.log(getUserResponse.data);
+    res.status(200).send(tempResponse);
+  } catch (err) {
+    tempResponse.data.message = 'Issue with the registration occured';
+    console.log(tempResponse);
+    res.status(409).send(tempResponse);
+  }
+}
+
+const maxAge = 3 * 24 * 60 * 60;
+
+function createToken(id) {
+  return jwt.sign({ id }, process.env.JWT_SECRET, {
+    expiresIn: maxAge
   });
-
-  const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
-
-  console.log(getUserResponse.data);
 }
