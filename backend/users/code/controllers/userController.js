@@ -20,7 +20,7 @@ const tempResponse = {
   },
 };
 
-export async function getUsers(req, res) {
+export async function getUsers(req, res, next) {
   try {
     tempResponse.data = await getAllUsers();
     res.status(200).send(tempResponse);
@@ -29,12 +29,12 @@ export async function getUsers(req, res) {
   }
 }
 
-export async function getUser(req, res) {
+export async function getUser(req, res, next) {
   try {
     if (req.params.userEmail) {
       tempResponse.data = await getUserBy('email', req.params.userEmail);
     }
-    
+
     // TODO: Contniue and test after the registration is complete
     // } else if (req.params.userId) {
     //   tempResponse.data = await getUserBy('id', req.params.userId);
@@ -43,27 +43,26 @@ export async function getUser(req, res) {
     //   res.stats(404).send(tempResponse);
     // }
 
+    tempResponse.meta.request = 'Get user';
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
   }
 }
 
-export async function createUser(req, res) {
+/**
+ * Handles the creation a new user when a request is called
+ * @param {*} req The POST request 
+ * @param {*} res The response
+ * @param {*} next 
+ */
+export async function createUser(req, res, next) {
   try {
-    const response = await createNewUser(req.body.name, req.body.email, req.body.password);
-    console.log(response);
-
-    if (response == 200) {
-      tempResponse.data.status = "Success";
-      tempResponse.data.message = "User is successfully added";
-      tempResponse.data.email = req.body.email;
-    } else {
-      tempResponse.data.message = "Error";
-    }
-
+    tempResponse.data = await createNewUser(req.body.name, req.body.email, req.body.password);
     res.status(200).send(tempResponse);
   } catch (err) {
-    next(err);
+    // Handle the reject of the promise
+    tempResponse.data = err.message;
+    res.status(409).send(tempResponse);
   }
 }
