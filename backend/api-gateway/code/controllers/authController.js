@@ -25,6 +25,7 @@ const tempResponse = {
 
 export async function register(req, res) {
   try {
+    console.log(req);
     const createUserResponse = await axios.post('http://msusers:3012/users', {
       name: req.body.name,
       password: req.body.password,
@@ -36,12 +37,15 @@ export async function register(req, res) {
     });
 
     const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
+    let token = createToken(getUserResponse.data.data.id);
+    tempResponse.data.token = token;
 
-    console.log(createUserResponse.data);
-    console.log(getUserResponse.data);
+    console.log(token);
     res.status(200).send(tempResponse);
+
   } catch (err) {
-    tempResponse.data.message = 'Issue with the registration occured';
+    tempResponse.data.message = 'Issue with the registration occurred';
+    tempResponse.data.details = err.response.data.data;
     console.log(tempResponse);
     res.status(409).send(tempResponse);
   }

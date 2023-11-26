@@ -5,7 +5,10 @@ import morgan from 'morgan';
 import { register } from '../controllers/authController.js';
 
 const router = express.Router();
-router.use(cors());
+router.use(cors({
+  credentials: true,
+  origin: true
+}));
 router.use(morgan());
 
 // TODO: Create error handling
