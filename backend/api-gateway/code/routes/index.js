@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import morgan from 'morgan';
-import { register } from '../controllers/authController.js';
+import { register, login } from '../controllers/authController.js';
 
 const router = express.Router();
 router.use(cors({
@@ -29,5 +29,6 @@ router.use('/habits', cors(), habitProxy);
 router.use('/users', cors(), usersProxy);
 
 router.post('/register', cors(), register);
+router.post('/login', cors(), login);
 
 export default router;

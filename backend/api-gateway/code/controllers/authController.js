@@ -1,5 +1,6 @@
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '../variables.env' });
 
@@ -46,6 +47,33 @@ export async function register(req, res) {
   } catch (err) {
     tempResponse.data.message = 'Issue with the registration occurred';
     tempResponse.data.details = err.response.data.data;
+    console.log(tempResponse);
+    res.status(409).send(tempResponse);
+  }
+}
+
+export async function login(req, res) {
+  try {
+    console.log(req.body);
+
+    const getUserResponse = await axios.get(`http://msusers:3012/users/email/${req.body.email}`);
+    if (getUserResponse.data.data.password) {
+      const auth = await bcrypt.compare(req.body.password, getUserResponse.data.data.password);
+      console.log(getUserResponse.data);
+      if (auth) {
+        let token = createToken(getUserResponse.data.data.id);
+        tempResponse.data.token = token;
+
+        tempResponse.data.message = 'Successful login';
+        res.status(200).send(tempResponse);
+      } else {
+        tempResponse.data.message = 'Wrong credentials';
+        res.status(401).send(tempResponse);
+      }
+    }
+  } catch (err) {
+    tempResponse.data.message = 'Issue with the credentials';
+    //tempResponse.data.details = err.response.data.data;
     console.log(tempResponse);
     res.status(409).send(tempResponse);
   }
