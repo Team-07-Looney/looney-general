@@ -2,8 +2,8 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 import bcrypt from 'bcrypt';
 
 export async function getAllUsers() {
-  return new Promise((resolve, reject) => {
-    let db = openDatabaseConnection();
+  return new Promise(async (resolve, reject) => {
+    let db = await openDatabaseConnection();
     let sql = "SELECT * FROM users";
     let params = [];
 
@@ -34,13 +34,13 @@ export async function createNewUser(name, email, password) {
   let hash = await bcrypt.hash(password, saltRounds);
 
   // Establishes connection with the db
-  let db = openDatabaseConnection();
-  const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
+  return new Promise(async (resolve, reject) => {
+    let db = await openDatabaseConnection();
+    console.log(db);
+    const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
-  return new Promise((resolve, reject) => {
+
     db.run(query, [name, email, hash], (err) => {
-      // Closes the db connection 
-      closeDatabaseConnection(db);
 
       if (err) {
         console.error(err.message);
@@ -53,6 +53,9 @@ export async function createNewUser(name, email, password) {
       // Check to make sure that the user has been sucessfully added
       const checkIfUserIsAddedQuery = `SELECT count(*) AS isUserCreated FROM users WHERE email = '${email}'`;
       db.get(checkIfUserIsAddedQuery, (err, row) => {
+        // Closes the db connection 
+        closeDatabaseConnection(db);
+
         // If the user has not been added succesfully
         if (row.isUserCreated == 0 || err) {
           reject({
@@ -72,7 +75,7 @@ export async function createNewUser(name, email, password) {
 }
 
 export async function getUserBy(key, value) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     const possibleKeys = ['id', 'email'];
 
     if (!possibleKeys.includes(key)) {
@@ -80,7 +83,7 @@ export async function getUserBy(key, value) {
       return;
     }
 
-    let db = openDatabaseConnection();
+    let db = await openDatabaseConnection();
     const query = `SELECT * FROM users WHERE ${key} = ?`;
 
     db.get(query, [value], (err, row) => {
