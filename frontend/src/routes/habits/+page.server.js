@@ -16,7 +16,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
         'Authorization': `Bearer ${jwt}`
       }
     });
-    
+
     const habits = response.data.data;
     return { habits };
   } catch (error) {
