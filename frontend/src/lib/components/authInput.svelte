@@ -32,10 +32,11 @@
       class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
       type="{type}"
       name="{name}"
+      id="{name}"
       placeholder="{placeholder}"
       aria-label="{label}"
       value="{value ? value : ''}"
-      autocomplete="{autocomplete ? autocomplete : ''}"
-    />
+      {autocomplete}
+      />
   </div>
 </div>
