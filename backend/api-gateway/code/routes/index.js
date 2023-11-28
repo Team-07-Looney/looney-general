@@ -32,4 +32,8 @@ router.use('/users', cors(), requireAuth, usersProxy);
 router.post('/register', cors(), register);
 router.post('/login', cors(), login);
 
+router.get('/verify', cors(), requireAuth, (req, res) => {
+  res.status(200).send({"message": "User is authenticated"});
+});
+
 export default router;

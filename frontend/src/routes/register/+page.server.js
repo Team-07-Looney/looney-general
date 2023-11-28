@@ -2,6 +2,30 @@ import axios from "axios";
 import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
 
+export const load = async ({ cookies }) => {
+  let isUserAuth = false;
+
+  try {
+    const jwt = cookies.get('jwt');
+
+    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    if (isAuthenticated.data.message == "User is authenticated") {
+      isUserAuth = true;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (isUserAuth) {
+    throw redirect(302, "/habits");
+  }
+};
+
 export const actions = {
   register: async ({ cookies, request }) => {
     axios.defaults.withCredentials = true
