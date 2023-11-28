@@ -20,4 +20,10 @@ export default {
 			},
 		}),
 	],
+  safelist: [
+    'text-red-700',
+    'border-red-700',
+    'text-gray-700',
+    'border-gray-700',
+  ],
 };
