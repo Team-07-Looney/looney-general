@@ -12,14 +12,11 @@ export async function openDatabaseConnection() {
       if (err) {
         console.error(err.message);
         reject(err.message);
-      } else {
-        console.log('Connected to SQLite database.');
       }
 
       // Runs a query to check if the users table exists
       db.get("SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type='table' AND name='users'", async (err, row) => {
         // If there is no such table create one
-        console.log(row);
         if (row.tableUsersExists == 0) {
           await createTable(db);
         }
@@ -38,8 +35,6 @@ export function closeDatabaseConnection(db) {
   db.close((err) => {
     if (err) {
       console.error(err.message);
-    } else {
-      console.log('Closed the SQLite database connection.');
     }
   });
 }
@@ -59,8 +54,6 @@ async function createTable(db) {
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL)`,
       (err) => {
-        console.log('here? vol2');
-
         if (err) {
           console.error('Error creating table: ', err.message);
           reject(err.message);

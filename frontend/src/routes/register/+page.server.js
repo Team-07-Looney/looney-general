@@ -33,8 +33,6 @@ export const actions = {
         maxAge: 60 * 60 * 24 // 1 day
       });
 
-      console.log(data.data.data.token);
-
     } catch (err) {
       if (err.response.data.data.details == "SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email") {
         errors = [{ "input": "email", "message": "This email is already in use" }];
