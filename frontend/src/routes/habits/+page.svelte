@@ -3,6 +3,10 @@
   export let data;
 </script>
 
+
+  <h1 class="text-center text-8xl text-black font-chewy">Habits</h1>
+
+
 <ul class="text-black text-3xl">
   {#each data.habits as habit}
     <li class="p-1 bg-red-400 rounded-lg mt-2" ><a href={`habits/${habit.id}`}>{habit.name}</a></li>
