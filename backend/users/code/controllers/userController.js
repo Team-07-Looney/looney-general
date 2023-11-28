@@ -20,6 +20,12 @@ const tempResponse = {
   },
 };
 
+/**
+ * Retrieves all users via the database adapter and returns them via req response
+ * @param {*} req the request
+ * @param {*} res the response
+ * @param {*} next 
+ */
 export async function getUsers(req, res, next) {
   try {
     tempResponse.data = await getAllUsers();
@@ -29,21 +35,25 @@ export async function getUsers(req, res, next) {
   }
 }
 
+/**
+ * Retrieve a user based on the key sent within a request - userEmail or userId
+ * @param {*} req the request
+ * @param {*} res the response
+ * @param {*} next 
+ * @returns 
+ */
 export async function getUser(req, res, next) {
   try {
     if (req.params.userEmail) {
       tempResponse.data = await getUserBy('email', req.params.userEmail);
+    } else if (req.params.userId) {
+      tempResponse.data = await getUserBy('id', req.params.userId);
+    } else {
+      tempResponse.data = 'The key for the user is not found';
+      res.status(404).send(tempResponse);
+      return;
     }
-
-    // TODO: Contniue and test after the registration is complete
-    // } else if (req.params.userId) {
-    //   tempResponse.data = await getUserBy('id', req.params.userId);
-    // } else {
-    //   tempResponse.data = 'The key for the user is not found';
-    //   res.stats(404).send(tempResponse);
-    // }
-
-    tempResponse.meta.request = 'Get user';
+    
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);

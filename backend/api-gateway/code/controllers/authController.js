@@ -23,8 +23,14 @@ const tempResponse = {
   },
 };
 
+/**
+ * Handles the registration request for the user
+ * @param {*} req the request
+ * @param {*} res the response
+ */
 export async function register(req, res) {
   try {
+    // Call the microservice function to create a user
     const createUserResponse = await axios.post('http://msusers:3012/users', {
       name: req.body.name,
       password: req.body.password,
@@ -35,7 +41,10 @@ export async function register(req, res) {
       }
     });
 
+    // Get the newly created user
     const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
+
+    // Create a JWT token
     let token = createToken(getUserResponse.data.data.id);
     tempResponse.data.token = token;
 
@@ -48,12 +57,23 @@ export async function register(req, res) {
   }
 }
 
+/**
+ * Handles the login of the user
+ * @param {*} req the request
+ * @param {*} res the response
+ */
 export async function login(req, res) {
   try {
+    // Get the current user
     const getUserResponse = await axios.get(`http://msusers:3012/users/email/${req.body.email}`);
+
+    // Check the passwords that are matching
     if (getUserResponse.data.data.password) {
+
+      // Compare the login password to the one from the database
       const auth = await bcrypt.compare(req.body.password, getUserResponse.data.data.password);
       if (auth) {
+        // Create the JWT token
         let token = createToken(getUserResponse.data.data.id);
         tempResponse.data.token = token;
 
@@ -70,10 +90,13 @@ export async function login(req, res) {
   }
 }
 
-const maxAge = 3 * 24 * 60 * 60;
-
+/**
+ * Creates a JWT token based on the id of the user and a secret
+ * @param {*} id Id of the user
+ * @returns the JWT token
+ */
 function createToken(id) {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: maxAge
+    expiresIn: 24 * 60 * 60
   });
 }

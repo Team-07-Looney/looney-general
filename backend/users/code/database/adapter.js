@@ -1,6 +1,10 @@
 import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 import bcrypt from 'bcrypt';
 
+/**
+ * Retrieves all the users from the database within a promise
+ * @returns a promise with the rows
+ */
 export async function getAllUsers() {
   return new Promise(async (resolve, reject) => {
     let db = await openDatabaseConnection();
@@ -33,15 +37,14 @@ export async function createNewUser(name, email, password) {
   // Using bcrypt alg to hash the password
   let hash = await bcrypt.hash(password, saltRounds);
 
-  // Establishes connection with the db
   return new Promise(async (resolve, reject) => {
+    // Establishes connection with the db
     let db = await openDatabaseConnection();
     console.log(db);
     const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
-
+    // Run the insert query
     db.run(query, [name, email, hash], (err) => {
-
       if (err) {
         console.error(err.message);
         reject({
@@ -50,13 +53,13 @@ export async function createNewUser(name, email, password) {
         });
       }
 
-      // Check to make sure that the user has been sucessfully added
+      // Check to make sure that the user has been successfully added
       const checkIfUserIsAddedQuery = `SELECT count(*) AS isUserCreated FROM users WHERE email = '${email}'`;
       db.get(checkIfUserIsAddedQuery, (err, row) => {
         // Closes the db connection 
         closeDatabaseConnection(db);
 
-        // If the user has not been added succesfully
+        // If the user has not been added successfully
         if (row.isUserCreated == 0 || err) {
           reject({
             code: 409,
@@ -74,8 +77,15 @@ export async function createNewUser(name, email, password) {
   });
 }
 
+/**
+ * Retrieves a user from the database based on key-value pair within a promise
+ * @param {*} key Possible values: id, email
+ * @param {*} value 
+ * @returns A user based on the matching of the key-value pair
+ */
 export async function getUserBy(key, value) {
   return new Promise(async (resolve, reject) => {
+    // Preventing usage of other keys
     const possibleKeys = ['id', 'email'];
 
     if (!possibleKeys.includes(key)) {
@@ -83,12 +93,12 @@ export async function getUserBy(key, value) {
       return;
     }
 
+    // Establishing the db connection
     let db = await openDatabaseConnection();
     const query = `SELECT * FROM users WHERE ${key} = ?`;
 
     db.get(query, [value], (err, row) => {
       closeDatabaseConnection(db);
-
       if (err) {
         console.error(err);
         reject(err);

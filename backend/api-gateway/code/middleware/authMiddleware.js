@@ -17,6 +17,7 @@ export function requireAuth(req, res, next) {
   const token = authHeader && authHeader.split(' ')[1]; // Extract JWT from 'Authorization' header
 
   if (token) {
+    // Verifies the token
     jwt.verify(token, process.env.JWT_SECRET, (err, decodedToken) => {
       if (err) {
         res.status(401).send('Invalid token');
