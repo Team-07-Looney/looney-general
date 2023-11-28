@@ -7,7 +7,7 @@
   console.log(form);
 </script>
 
-<div class="h-screen">
+<div class="h-screen flex justify-center items-center">
   <div class="grid grid-cols-1">
     <h1 class="text-center text-5xl text-black pt-7">Looney</h1>
     <h2 class="text-center text-3xl text-black">Register</h2>
@@ -72,12 +72,18 @@
 
           <div class="flex items-center justify-center">
             <button
-              class="p-1.5 w-1/2 bg-[#9C9ED3] rounded-lg mt-3"
+              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3"
               type="submit"
             >
               Register
             </button>
           </div>
+
+          <a
+            href="/login"
+            class="text-xs text-center underline text-lavender-600 hover:text-lavender-900"
+            >Already have an account? Log in over here.</a
+          >
         </form>
       </div>
     </div>
