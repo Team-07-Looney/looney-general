@@ -1,4 +1,4 @@
-<h1 class="text-center text-8xl text-black font-chewy">Looney</h1>
+<h1 class="text-center text-8xl text-black">Main</h1>
 <div class="bg-red-300 py-5 px-5 rounded-lg place-self-center">
 	<form class="grid grid-cols-1 gap-8">
 		<div>
