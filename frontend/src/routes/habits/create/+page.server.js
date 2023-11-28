@@ -46,7 +46,7 @@ async function validateCreateData(name, startTime, duration) {
   if (!startTime) {
     errors.push({ "input": "start_time", "message": "Start time is missing" });
   } else {
-    const startTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
+    const startTimeRegex = /^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/; 
     if (!startTimeRegex.test(startTime)) {
       errors.push({ "input": "start_time", "message": "Start time should be of a format hh:mm" })
     }
