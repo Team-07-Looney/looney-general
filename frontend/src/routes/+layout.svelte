@@ -1,5 +1,9 @@
 <script>
-	import '../app.postcss';
+  import "../app.postcss";
 </script>
 
-<slot />
+<div
+  class="bg-cover"
+  style="background-image: url('/src/img/bg-auth.png');">
+  <slot />
+</div>
