@@ -23,7 +23,7 @@ export const load = async ({ params }) => {
           
       // Retrieves the id from the url
       const { id } = params;
-
+  
       // Set the body of the request, adds a header and sends delete request to delete habit
       const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
         id: id
@@ -32,7 +32,7 @@ export const load = async ({ params }) => {
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       },)
-
+  
       throw redirect(302, '/habits');
     }
-};
+  };
