@@ -1,15 +1,11 @@
 <script>
-<<<<<<< HEAD
     import Header from "../../../lib/components/Header.svelte";
-</script>
-
-<Header header="Add Habit"/>
-=======
-    /** @type {import('./$types').ActionData} */
+        /** @type {import('./$types').ActionData} */
 	export let form;
 </script>
 
->>>>>>> feature/crud-for-habits
+<Header header="Add Habit"/>
+
 <form method="POST" class="text-black text-2xl" action="?/createHabit">
     {#if form && form.errors}
         <div class="bg-red-200 text-red-900 p-2 rounded">
