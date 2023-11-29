@@ -1,23 +1,26 @@
 <script>
   import AuthInput from "../../lib/components/authInput.svelte";
-
+  import Header from "../../lib/components/Header.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
+  import FormEars from "../../lib/components/FormEars.svelte";
+    import CoralCluster from "../../lib/components/CoralCluster.svelte";
 </script>
 
 <div class="h-screen flex justify-center items-center">
+  <div class="flex flex-col items-center mt-10">
+    <FormEars/>
   <div class="grid grid-cols-1">
-    <h1 class="text-center text-5xl text-black">Looney</h1>
-    <h2 class="text-center text-3xl text-black">Login</h2>
-    <div class="px-8 pt-8">
-      <div class="bg-white rounded px-4 py-5">
+    <Header header="Looney"/>
+    <div class="px-8 pt-8 z-[2]">
+      <div class="bg-white rounded px-4 py-4 mb-16" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
         <form
           method="POST"
           class="grid grid-cols-1 gap-4 text-gray-900"
           action="?/login"
         >
           {#if form && form.errors}
-            <div class="bg-red-200 text-red-900 p-2 rounded">
+            <div class="bg-red-200 text-red-900 p-2 rounded fixed w-[220px] top-[130px] ml-[3px]">
               <p class="text-sm pb-2">
                 Uh oh! There seems to be an issue with the login:
               </p>
@@ -54,7 +57,7 @@
 
           <div class="flex items-center justify-center">
             <button
-              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3"
+              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3 text-white"
               type="submit"
             >
               Login
@@ -63,11 +66,13 @@
 
           <a
             href="/register"
-            class="text-xs text-center underline text-lavender-600 hover:text-lavender-900"
+            class="text-xs text-center underline text-lavender-900"
             >No account yet? Register over here.</a
           >
         </form>
       </div>
     </div>
   </div>
+</div>
+<CoralCluster/>
 </div>

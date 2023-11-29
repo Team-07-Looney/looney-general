@@ -1,13 +1,13 @@
 <script>
-	import OctopusButton from "../../lib/components/octopusButton.svelte";
+	import OctopusButton from "../../lib/components/OctopusButton.svelte";
+	import Header from "../../lib/components/Header.svelte";
 </script>
 
-<h1 class="text-center text-8xl text-black font-chewy">Looney</h1>
+<Header header="Looney"/>
 <div class="flex flex-col">
-	<div class="flex flex-row ">
-		<div class="bg-white shadow-xl">
-			<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png'/>
-		</div>
+	<div class="flex flex-row">
+		<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/habits"/>
+		<OctopusButton buttonName='Moods' buttonIcon='moodOctopus.png' buttonLink="/habits"/>
 	</div>
 </div>
 <div class="bg-red-300 rounded-lg place-self-center">		

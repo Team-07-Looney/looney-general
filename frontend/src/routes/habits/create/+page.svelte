@@ -1,3 +1,8 @@
+<script>
+    import Header from "../../../lib/components/Header.svelte";
+</script>
+
+<Header header="Add Habit"/>
 <form method="POST" class="text-black text-2xl" action="?/createHabit">
     <div>
         <label for="name">Name</label>
