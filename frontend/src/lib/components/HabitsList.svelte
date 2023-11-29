@@ -18,4 +18,8 @@
         </div>
     </a>
     <!--it should be a dropdwon that says delete of edit <a href={`habits/create`}>...</a>-->
+    <ul>
+        <li></li>
+    </ul>
+    
 </div>

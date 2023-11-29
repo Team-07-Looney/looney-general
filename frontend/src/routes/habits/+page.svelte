@@ -1,4 +1,5 @@
 <script>
+    import { setContext } from "svelte";
     import HabitsList from "../../lib/components/HabitsList.svelte";
     import Heading from "../../lib/components/Heading.svelte";
 
