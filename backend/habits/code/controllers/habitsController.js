@@ -6,6 +6,10 @@ import {
   deleteHabitInstanceById
 } from '../database/adapter.js';
 
+/**
+ * function that calculates today's date
+ * @returns today's date
+ */
 function getToDay() {
   const date = new Date();
   let day = date.getDate();
@@ -26,6 +30,12 @@ const tempResponse = {
   },
 };
 
+/**
+ * get collection of all the habits
+ * @param {*} req request
+ * @param {*} res response sent with all the habits
+ * @param {*} next 
+ */
 export async function getHabits(req, res, next) {
   try {
     tempResponse.data = await getAllHabitsData();
@@ -35,9 +45,15 @@ export async function getHabits(req, res, next) {
   }
 }
 
+/**
+ * create a habit
+ * @param {*} req request with the data for a new habit
+ * @param {*} res response sent with the result message
+ * @param {*} next 
+ */
 export async function createHabit(req, res, next) {
   try {
-    await createHabitInstance(req);
+    await createHabitInstance(req.body);
     tempResponse.data.message = "habit created successfully";
     res.status(200).send(tempResponse);
   } catch (err) {
@@ -45,20 +61,30 @@ export async function createHabit(req, res, next) {
   }
 }
 
+/**
+ * get habit data by specified id
+ * @param {*} req request with habit id
+ * @param {*} res response sent with habit data
+ * @param {*} next 
+ */
 export async function getHabitById(req, res, next) {
   try {
-    const url_parts = req.url.replace(/\/\s*$/, '').split('/');
-    tempResponse.data = await getHabitInstanceById(url_parts[2]);
+    tempResponse.data = await getHabitInstanceById(req.params.id);
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);
   }
 }
 
+/**
+ * edit habit data by specified id
+ * @param {*} req request with habit id
+ * @param {*} res response sent with a result message
+ * @param {*} next 
+ */
 export async function editHabitById(req, res, next) {
   try {
-    const url_parts = req.url.replace(/\/\s*$/, '').split('/');
-    await editHabitInstanceById(req.body, url_parts[2]);
+    await editHabitInstanceById(req.body, req.params.id);
     tempResponse.data.message = "habit edited successfully";
     res.status(200).send(tempResponse);
   } catch(err) {
@@ -66,6 +92,12 @@ export async function editHabitById(req, res, next) {
   }
 }
 
+/**
+ * delete habit by specified id
+ * @param {*} req request with habit id
+ * @param {*} res 
+ * @param {*} next 
+ */
 export async function deleteHabitById(req, res, next) {
   try {
     await deleteHabitInstanceById(req.params.id);
