@@ -5,6 +5,19 @@
 
     // Data contains all data passed by the page server
     export let data;
+
+    import Link from '../../lib/components/Link.svelte';
+	import Button from '../../lib/components/Button.svelte';
+
+
+	
+	let menuOpen = false;
+
+
+	
+	const menuItems = ["About", "Base", "Blog", "Contact", "Custom", "Support", "Tools", "Boats", "Cars", "Bikes", "Sheds", "Billygoats", "Zebras", "Tennis Shoes", "New Zealand"];
+	let filteredItems = [];
+	
 </script>
 
 <Heading title="Habits" route="main" displayBackButton=1/>
@@ -17,11 +30,48 @@
   {/each}
 </ul>
 
-<!-- <a class="p-1.5 bg-red-400 rounded-lg mt-3" href={`${data.habit[0].id}/edit`}>Edit</a>
-<form class="w-full bg-red-400 rounded-lg p-1" method="POST" action="?/deleteHabit">
-    <button type="submit">Delete</button>
-</form>-->
 
 <div class="flex justify-center items-center">
 <a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10"></a>
 </div>
+
+
+
+
+<section class="dropdown">
+  <Button on:click={() => menuOpen = !menuOpen} {menuOpen} />
+	
+  <div id="myDropdown" class:show={menuOpen} class="dropdown-content">		
+  	
+		<!-- MENU -->
+		{#if filteredItems.length > 0}
+			{#each filteredItems as item}
+				<Link link={item} />
+			{/each}
+		{:else}
+			{#each menuItems as item}
+				<Link link={item} />
+			{/each}
+		{/if}		
+  </div>	
+</section>
+	
+	
+<style>		
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+	
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f6f6f6;
+  min-width: 230px;
+  border: 1px solid #ddd;
+  z-index: 1;
+}
+
+/* Show the dropdown menu */	
+.show {display:block;}	
+</style>

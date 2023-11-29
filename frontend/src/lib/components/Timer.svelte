@@ -24,15 +24,15 @@
     });
   </script>
   
-  <label>
-    Timer:
-    <svg height="100" width="100">
+  <!-- svelte-ignore a11y-label-has-associated-control -->
+  
+    <svg height="200" width="200">
       <circle
-        cx="50"
-        cy="50"
+        cx="100"
+        cy="100"
         r="45"
-        stroke="#00796b"
-        stroke-width="3"
+        stroke="#9b9dd1"
+        stroke-width="15"
         fill="transparent"
         style="transition: stroke-dashoffset 0.3s ease"
         stroke-dasharray="283"
@@ -40,7 +40,7 @@
       />
       <text x="50%" y="50%" text-anchor="middle" dy=".3em">{Math.floor(elapsed / 1000)}s</text>
     </svg>
-  </label>
+
 
   
   <button on:click={startTimer}>Start</button>

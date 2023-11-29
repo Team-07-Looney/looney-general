@@ -1,4 +1,6 @@
 <script>
+    import OptionsButton from "./OptionsButton.svelte";
+
     export let title;
     export let time;
     export let iconCount;
@@ -17,9 +19,5 @@
             </div>
         </div>
     </a>
-    <!--it should be a dropdwon that says delete of edit <a href={`habits/create`}>...</a>-->
-    <ul>
-        <li></li>
-    </ul>
-    
+    <OptionsButton />
 </div>
