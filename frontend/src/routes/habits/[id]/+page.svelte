@@ -9,15 +9,21 @@
 <ul>
     <li class="px-10 py-2 ">
         <div class="bg-white rounded-xl shadow-2xl">
-            <div class="">
-                <img src="../../../src/img/icon{data.habit[0].id % 4}.png" style="height: 50px;" class="p-2"/>
+            <div class="flex justify-center">
+                <div class="">
+                    <img src="../../../src/img/icon{data.habit[0].id % 4}.png" style="height: 70px;" class="p-2"/>
+                </div>
+                <div class="pr-6">
+                    <h1 class="p-1 rounded-lg mt-2 text-2xl underline underline-offset-8"><strong>{data.habit[0].name}</strong></h1>
+                    <p class="rounded-lg text-center">Start time {data.habit[0].start_time}</p>
+                </div>
             </div>
-            <h1 class="p-1 rounded-lg mt-2 text-2xl"><strong>{data.habit[0].name}</strong></h1>
-            <p class="p-1 rounded-lg mt-2">Start time {data.habit[0].start_time}</p>
-            <p class="p-1 rounded-lg mt-2">{data.habit[0].duration}</p>
+
+            <div>
+                <Timer duration={data.habit[0].duration} />
+            </div>   
         </div>
     </li> 
 </ul>
 
-<Timer />
-<a class="p-1.5 bg-blue-400 rounded-lg mt-3" href="">Start</a>
+
