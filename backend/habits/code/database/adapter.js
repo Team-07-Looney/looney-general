@@ -1,5 +1,9 @@
 import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 
+/**
+ * executes SQL query that retrieves all the habits from habits table
+ * @returns habits data from the database
+ */
 export async function getAllHabitsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
@@ -19,12 +23,17 @@ export async function getAllHabitsData() {
   });
 }
 
+/**
+ * executes SQL query that inserts values from the request into habits table
+ * @param {*} request request body with the data for a new habit
+ * @returns 
+ */
 export async function createHabitInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const insert = 'INSERT INTO habits (name, start_time, duration) VALUES (?,?,?)';
 
-    db.run(insert, [request.body.name, request.body.start_time, request.body.duration], (err) => {
+    db.run(insert, [request.name, request.start_time, request.duration], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
@@ -37,6 +46,11 @@ export async function createHabitInstance(request) {
   });
 }
 
+/**
+ * executes SQL query that retrieves habit data based on specified id
+ * @param {*} id id of a habit that needs to be retrieved
+ * @returns habit data
+ */
 export async function getHabitInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
@@ -55,6 +69,12 @@ export async function getHabitInstanceById(id) {
   });
 }
 
+/**
+ * executes SQL query that looks for habit with specified id in table habits and updates its values
+ * @param {*} habit new data of a habit
+ * @param {*} habitId id of a habit that needs to be updated
+ * @returns 
+ */
 export async function editHabitInstanceById(habit, habitId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
@@ -73,6 +93,11 @@ export async function editHabitInstanceById(habit, habitId) {
   });
 }
 
+/**
+ * executes SQL query that looks for habit with specified id and deletes it from habits table
+ * @param {*} habitId id of a habit that needs to be deleted
+ * @returns 
+ */
 export async function deleteHabitInstanceById(habitId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
