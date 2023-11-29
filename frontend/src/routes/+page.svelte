@@ -20,7 +20,7 @@
 			<input id="password" name="password" class="rounded-sm">
 		</div>
 		<a href="/habits" type="button" class="p-1.5 bg-red-400 rounded-lg">
-						Login
+			Login
 		</a>
 	</form>
 </div>
