@@ -35,6 +35,7 @@ export const actions = {
         "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
       }
     });
+    
 
     throw redirect(302, '/habits');
   }

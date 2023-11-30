@@ -40,10 +40,10 @@ export const load = async ({ params, cookies}) => {
 
 export const actions = {
     editHabit: async ({ params, request, cookies }) => {
-      const jwt = cookies.get('jwt');
-          
+         
       // Retrieves the data from the form
       const formData = await request.formData();
+      const jwt = cookies.get('jwt');
       const { id } = params;
       const name = formData.get('name');
       const startTimeHours = formData.get('start_time_hours');
@@ -71,7 +71,7 @@ export const actions = {
         }
       },)
 
-      throw redirect(302, `/habits/${id}`);
+      throw redirect(302, `/habits`);
     }
 };
 

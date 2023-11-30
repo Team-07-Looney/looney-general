@@ -1,9 +1,12 @@
 <script>
-    import { onMount } from 'svelte';
+    import { onMount } from "svelte";
 
     /** @type {import('./$types').ActionData} */
-	export let form;
-
+    export let form;
+    import Header from "../../../../lib/components/Header.svelte";
+    import FormEars from "../../../../lib/components/FormEars.svelte";
+    import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
+    import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
 
     onMount(() => {
@@ -13,54 +16,130 @@
             }
         }
 
-        const start_time_minutes = document.getElementById('start_time_minutes');
-        const start_time_hours = document.getElementById('start_time_hours');
-        const duration_seconds = document.getElementById('duration_seconds');
+        const start_time_minutes =
+            document.getElementById("start_time_minutes");
+        const start_time_hours = document.getElementById("start_time_hours");
+        const duration_seconds = document.getElementById("duration_seconds");
 
-        start_time_minutes.addEventListener('change', addNulIfNeeded);
-        start_time_hours.addEventListener('change', addNulIfNeeded);
-        duration_seconds.addEventListener('change', addNulIfNeeded);
+        start_time_minutes.addEventListener("change", addNulIfNeeded);
+        start_time_hours.addEventListener("change", addNulIfNeeded);
+        duration_seconds.addEventListener("change", addNulIfNeeded);
     });
 </script>
 
-<form method="POST" class="text-black text-2xl" action="?/editHabit">
-    {#if form && form.errors}
-        <div class="bg-red-200 text-red-900 p-2 rounded">
-            <p class="text-sm pb-2">
-            Uh oh! There seems to be an issue with the edit:
-            </p>
-            <ul class="text-sm">
-            {#each form?.errors as error}
-                {#if error.message}
-                <li class="error">* {error.message}</li>
-                {/if}
-            {/each}
-            </ul>
-        </div>
-    {/if}
-    <div>
-        <label for="name">Name</label>
-        <input id="name" placeholder="e.g. Brush teeth" name="name" class="rounded-sm" value={data.name}>
-    </div>
+<div class="h-screen flex justify-center items-center">
+    <div class="flex flex-col items-center">
+        <FormEars />
+        <div class="grid grid-cols-1">
+            <Header title="Edit habit" route="habits" displayBackButton="0" />
+            <ShadowsForForms width={307} height={373} />
+            <div class="px-8 pt-8 z-[3]">
+                <div class="bg-white rounded-xl px-4 py-5">
+                    <form
+                        method="POST"
+                        class="grid grid-cols-1 gap-4 text-gray-900"
+                        action="?/editHabit"
+                    >
+                        {#if form && form.errors}
+                            <div
+                                class="bg-red-200 text-red-900 p-2 rounded z-[50] fixed w-[250px] top-[75px]"
+                            >
+                                <p class="text-sm pb-2">
+                                    Uh oh! There seems to be an issue with the
+                                    edit:
+                                </p>
+                                <ul class="text-sm">
+                                    {#each form?.errors as error}
+                                        {#if error.message}
+                                            <li class="error">
+                                                * {error.message}
+                                            </li>
+                                        {/if}
+                                    {/each}
+                                </ul>
+                            </div>
+                        {/if}
 
-    <div>
-        <label for="start_time">Start time</label>
-        <div class="flex">
-            <input type="number" min="0" max="23" id="start_time_hours" name="start_time_hours" value={data.start_time_hours} class="rounded-sm">
-            <p>:</p>
-            <input type="number" min="0" max="59" id="start_time_minutes" name="start_time_minutes" value={data.start_time_minutes} class="rounded-sm">
+                        <AuthInput
+                            name={"name"}
+                            label={"Name"}
+                            type={"text"}
+                            path={"M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"}
+                            value={data.name}
+                            error={form?.errors?.some(
+                                (error) => error.input == "name",
+                            )}
+                        />
+
+                        <div class="flex flex-row gap-5">
+                            <AuthInput
+                                name={"start_time_hours"}
+                                label={"Start time (hours)"}
+                                type={"number"}
+                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+                                value={data.start_time_hours}
+                                error={form?.errors?.some(
+                                    (error) =>
+                                        error.input == "start_time_hours",
+                                )}
+                            />
+
+                            <AuthInput
+                                name={"start_time_minutes"}
+                                label={"Start time (minutes)"}
+                                type={"number"}
+                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+                                value={data.start_time_minutes}
+                                error={form?.errors?.some(
+                                    (error) =>
+                                        error.input == "start_time_minutes",
+                                )}
+                            />
+                        </div>
+
+                        <div class="flex flex-row gap-5">
+                            <AuthInput
+                                name={"duration_minutes"}
+                                label={"Duration (minutes)"}
+                                type={"number"}
+                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+                                value={data.duration_minutes}
+                                error={form?.errors?.some(
+                                    (error) =>
+                                        error.input == "duration_minutes",
+                                )}
+                            />
+
+                            <AuthInput
+                                name={"duration_seconds"}
+                                label={"Duration (seconds)"}
+                                type={"number"}
+                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+                                value={data.duration_seconds}
+                                error={form?.errors?.some(
+                                    (error) =>
+                                        error.input == "duration_seconds",
+                                )}
+                            />
+                        </div>
+
+                        <div
+                            class="flex flex-row gap-12 justify-center items-center"
+                        >
+                            <a
+                                href="/habits"
+                                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                                style="background-color: #B4B4B4">Cancel</a
+                            >
+                            <button
+                                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                                type="submit"
+                                style="background-color: #9B9DD1">Submit</button
+                            >
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div>
-        <label for="duration">Duration</label>
-        <div class="flex">
-            <input type="number" min="0" max="90" id="duration_minutes" value={data.duration_minutes} name="duration_minutes" class="rounded-sm">
-            <p>:</p>
-            <input type="number" min="0" max="59" id="duration_seconds" value={data.duration_seconds} name="duration_seconds" class="rounded-sm">
-        </div>
-    </div>
-
-    <button class="p-1.5 bg-red-400 rounded-lg mt-3" type="submit">Submit</button>
-    <a href="/habits" class="p-1.5 bg-blue-400 rounded-lg mt-3">Cancel</a>
-</form>
+</div>
