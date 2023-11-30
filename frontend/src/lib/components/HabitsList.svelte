@@ -23,35 +23,14 @@
         </div>
     </a>
  
-    <div class="dropdown">
+    <div class="inline-block relative">
         <button on:click={() => (menuOpen = !menuOpen)} {menuOpen} class="p-3 pl-0 mt-1"><img src="../../src/img/optionsButton.png" class="h-5"></button>
-        <div id="myDropdown" class:show={menuOpen} class="dropdown-content flex-auto">
+        <div id="myDropdown" style="display: {menuOpen ? 'block' : 'none'}" class="hidden absolute bg-gray-200 flex-auto rounded-lg shadow-lg min-w-[70px] z-[1]">
             <!-- MENU -->
-            <a class="p-1.5 rounded-lg mt-3" href={`habits/${habitId}/edit`}>Edit</a>
+            <a class="p-1.5 rounded-lg mt-3 border-b-4 border-gray-300" href={`habits/${habitId}/edit`}>Edit</a>
             <form class="w-full rounded-lg p-1" method="POST" action={`/habits/${habitId}?/deleteHabit`}>
                 <button type="submit">Delete</button>
             </form>
         </div>
     </div>
 </div>
- 
-<style>
-    .dropdown {
-        position: relative;
-        display: inline-block;
-    }
- 
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #e6e6e6;
-        min-width: 70px;
-        border: 1px solid #ddd;
-        z-index: 1;
-    }
- 
-    /* Show the dropdown menu */
-    .show {
-        display: block;
-    }
-</style>
