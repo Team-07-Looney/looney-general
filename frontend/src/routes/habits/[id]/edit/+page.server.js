@@ -71,7 +71,7 @@ export const actions = {
         }
       },)
 
-      throw redirect(302, `/habits/${id}`);
+      throw redirect(302, `/habits`);
     }
 };
 

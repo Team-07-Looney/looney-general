@@ -3,11 +3,11 @@
     export let time;
     export let iconCount;
     export let habitId;
-
+ 
     let menuOpen = false;
 </script>
-
-<div class="bg-white rounded-xl shadow-2xl p-1 flex justify-between">
+ 
+<div class="bg-white rounded-xl shadow-lg p-1 flex justify-between">
     <a href={`habits/${habitId}`} class="flex">
         <div>
             <!-- svelte-ignore a11y-missing-attribute -->
@@ -22,7 +22,7 @@
             <p>Start time {time}</p>
         </div>
     </a>
-
+ 
     <div class="dropdown">
         <button on:click={() => (menuOpen = !menuOpen)} {menuOpen} class="p-3 pl-0 mt-1"><img src="../../src/img/optionsButton.png" class="h-5"></button>
         <div id="myDropdown" class:show={menuOpen} class="dropdown-content flex-auto">
@@ -34,13 +34,13 @@
         </div>
     </div>
 </div>
-
+ 
 <style>
     .dropdown {
         position: relative;
         display: inline-block;
     }
-
+ 
     .dropdown-content {
         display: none;
         position: absolute;
@@ -49,7 +49,7 @@
         border: 1px solid #ddd;
         z-index: 1;
     }
-
+ 
     /* Show the dropdown menu */
     .show {
         display: block;
