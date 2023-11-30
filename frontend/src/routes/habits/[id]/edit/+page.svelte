@@ -5,7 +5,6 @@
 	export let form;
 
     export let data;
-    console.log(data);
 
     onMount(() => {
         function addNulIfNeeded(event) {

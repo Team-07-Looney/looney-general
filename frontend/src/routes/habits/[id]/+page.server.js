@@ -7,10 +7,17 @@ import { redirect } from '@sveltejs/kit';
  * @param {*} params id for habit
  * @returns
  */
-export const load = async ({ params }) => {
+export const load = async ({ params, cookies }) => {
     try {
+      const jwt = cookies.get('jwt');
+
       const { id } = params;
-      const response = await axios.get(`http://localhost:3011/habits/${id}`);
+      const response = await axios.get(`http://localhost:3011/habits/${id}`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`
+        }
+      });
+
       const habit = response.data.data;
       return { habit };
     } catch (error) {
@@ -19,16 +26,16 @@ export const load = async ({ params }) => {
   };
 
   export const actions = {
-    deleteHabit: async ({ params, request }) => {
+    deleteHabit: async ({ params, request, cookies }) => {
           
       // Retrieves the id from the url
       const { id } = params;
+      const jwt = cookies.get('jwt');
 
       // Set the body of the request, adds a header and sends delete request to delete habit
       const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
-        id: id
-      }, {
         headers: {
+          "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       },)

@@ -7,10 +7,16 @@ import { redirect, fail } from '@sveltejs/kit';
  * @param {*} params id for habit
  * @returns
  */
-export const load = async ({ params }) => {
+export const load = async ({ params, cookies}) => {
   try {
+    const jwt = cookies.get('jwt');
+
     const { id } = params;
-    const response = await axios.get(`http://localhost:3011/habits/${id}`);
+    const response = await axios.get(`http://localhost:3011/habits/${id}`, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
     const habitData = response.data.data[0];
     
     const start_time = habitData.start_time.split(':');
@@ -33,7 +39,8 @@ export const load = async ({ params }) => {
 };
 
 export const actions = {
-    editHabit: async ({ params, request }) => {
+    editHabit: async ({ params, request, cookies }) => {
+      const jwt = cookies.get('jwt');
           
       // Retrieves the data from the form
       const formData = await request.formData();
@@ -59,6 +66,7 @@ export const actions = {
         duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds)
       }, {
         headers: {
+          "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       },)

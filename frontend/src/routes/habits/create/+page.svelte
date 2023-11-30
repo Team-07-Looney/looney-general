@@ -68,26 +68,52 @@
               error={form?.errors?.some((error) => error.input == "name")}
             />
 
+            <!-- TODO: add min="0" and max="23" -->
             <AuthInput
-              name={"start_time"}
-              label={"Start time"}
-              type={"text"}
+              name={"start_time_hours"}
+              label={"Start time (THIS IS FOR HOURS)"}
+              type={"number"}
               placeholder={"10:00"}
               autocomplete={"given-name"}
               path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-              value={form?.name ?? ""}
-              error={form?.errors?.some((error) => error.input == "start_time")}
+              value={form?.startTimeHours ?? ""}
+              error={form?.errors?.some((error) => error.input == "start_time_hours")}
             />
 
+            <!-- TODO: add min="0" and max="59" -->
             <AuthInput
-              name={"duration"}
-              label={"Duration"}
-              type={"text"}
+              name={"start_time_minutes"}
+              label={"Start time (THIS IS FOR MINUTES)"}
+              type={"number"}
+              placeholder={"10:00"}
+              autocomplete={"given-name"}
+              path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+              value={form?.startTimeMinutes ?? ""}
+              error={form?.errors?.some((error) => error.input == "start_time_minutes")}
+            />
+
+            <!-- TODO: add min="0" and max="90" -->
+            <AuthInput
+              name={"duration_minutes"}
+              label={"Duration (THIS IS FOR MINUTES)"}
+              type={"number"}
               placeholder={"30"}
               autocomplete={"given-name"}
               path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-              value={form?.name ?? ""}
-              error={form?.errors?.some((error) => error.input == "duration")}
+              value={form?.durationMinutes ?? ""}
+              error={form?.errors?.some((error) => error.input == "duration_minutes")}
+            />
+
+            <!-- TODO: add min="0" and max="59" -->
+            <AuthInput
+              name={"duration_seconds"}
+              label={"Duration (THIS IS FOR SECONDS)"}
+              type={"number"}
+              placeholder={"30"}
+              autocomplete={"given-name"}
+              path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
+              value={form?.durationSeconds ?? ""}
+              error={form?.errors?.some((error) => error.input == "duration_seconds")}
             />
 
             <div class="flex flex-row gap-6 justify-center items-center">
@@ -101,25 +127,5 @@
         </div>
       </div>
     </div>
-    <!-- <div>
-        <label>Start time</label>
-        <div class="flex">
-            <input type="number" min="0" max="23" id="start_time_hours" name="start_time_hours" value={form?.startTimeHours ?? ''} class="rounded-sm">
-            <p>:</p>
-            <input type="number" min="0" max="59" id="start_time_minutes" name="start_time_minutes" value={form?.startTimeMinutes ?? ''} class="rounded-sm">
-        </div>
-    </div>
-
-    <div>
-        <label>Duration</label>
-        <div class="flex">
-            <input type="number" min="0" max="90" id="duration_minutes" value={form?.durationMinutes ?? ''} name="duration_minutes" class="rounded-sm">
-            <p>:</p>
-            <input type="number" min="0" max="59" id="duration_seconds" value={form?.durationSeconds ?? ''} name="duration_seconds" class="rounded-sm">
-        </div>
-    </div>
-
-    <button class="p-1.5 bg-red-400 rounded-lg mt-3" type="submit">Create</button>
-    <a href="/habits" class="p-1.5 bg-blue-400 rounded-lg mt-3">Cancel</a> -->
   </div>
 </div>
