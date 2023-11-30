@@ -45,7 +45,7 @@
         display: none;
         position: absolute;
         background-color: #e6e6e6;
-        min-width: 80px;
+        min-width: 70px;
         border: 1px solid #ddd;
         z-index: 1;
     }
