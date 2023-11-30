@@ -7,7 +7,7 @@ import { redirect, fail } from '@sveltejs/kit';
  * @param {*} params id for habit
  * @returns
  */
-export const load = async ({ params, cookies}) => {
+export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
 
@@ -18,7 +18,7 @@ export const load = async ({ params, cookies}) => {
       }
     });
     const habitData = response.data.data[0];
-    
+
     const start_time = habitData.start_time.split(':');
     const duration_minutes = Math.floor(habitData.duration / 60);
     const duration_seconds = habitData.duration - duration_minutes * 60;
@@ -34,13 +34,15 @@ export const load = async ({ params, cookies}) => {
 
     return habit;
   } catch (error) {
-    console.error(error);
+    if (error.response.status == 401) {
+      throw redirect(302, '/login');
+    }
   }
 };
 
 export const actions = {
-    editHabit: async ({ params, request, cookies }) => {
-         
+  editHabit: async ({ params, request, cookies }) => {
+    try {
       // Retrieves the data from the form
       const formData = await request.formData();
       const jwt = cookies.get('jwt');
@@ -69,10 +71,15 @@ export const actions = {
           "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
-      },)
-
-      throw redirect(302, `/habits`);
+      });
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, '/login');
+      }
     }
+
+    throw redirect(302, `/habits`);
+  }
 };
 
 async function validateEditData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds) {

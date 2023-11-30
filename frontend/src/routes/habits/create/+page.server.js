@@ -2,40 +2,67 @@ import axios from 'axios';
 import { fail, redirect } from '@sveltejs/kit';
 
 /**
+ * Executes during the load of the svelte page
+ * @param {*} param0
+*/
+export const load = async ({ cookies }) => {
+  try {
+    // Get the cookie containing the JWT token
+    const jwt = cookies.get('jwt');
+
+    // Send request to the apigateway to check if the user is authenticated
+    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+  } catch (error) {
+    if (error.response.status == 401)  {
+      throw redirect(302, '/login');
+    }
+  }
+};
+
+/**
  * createHabit is a function called when the user submits a form to create a habit
  */
 export const actions = {
   createHabit: async ({ request, cookies }) => {
-    const jwt = cookies.get('jwt');
+    try {
+      const jwt = cookies.get('jwt');
 
-    // Retrieves the data from the form
-    const formData = await request.formData();
-    const name = formData.get('name');
-    const startTimeHours = formData.get('start_time_hours');
-    const startTimeMinutes = formData.get('start_time_minutes');
-    const durationMinutes = formData.get('duration_minutes');
-    const durationSeconds = formData.get('duration_seconds');
+      // Retrieves the data from the form
+      const formData = await request.formData();
+      const name = formData.get('name');
+      const startTimeHours = formData.get('start_time_hours');
+      const startTimeMinutes = formData.get('start_time_minutes');
+      const durationMinutes = formData.get('duration_minutes');
+      const durationSeconds = formData.get('duration_seconds');
 
-    // check for errors in a form data
-    const errors = await validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
+      // check for errors in a form data
+      const errors = await validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
 
-    //if there are any errors, return form with error messages
-    if (errors.length > 0) {
-      return fail(400, { name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds, errors });
-    }
-
-    // Set the body of the request, adds a header and sends post request to create habit
-    const data = await axios.post('http://localhost:3011/habits', {
-      name: name,
-      start_time: `${startTimeHours}:${startTimeMinutes}`,
-      duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds)
-    }, {
-      headers: {
-        "Authorization": `Bearer ${jwt}`,
-        "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+      //if there are any errors, return form with error messages
+      if (errors.length > 0) {
+        return fail(400, { name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds, errors });
       }
-    });
-    
+
+      // Set the body of the request, adds a header and sends post request to create habit
+      const data = await axios.post('http://localhost:3011/habits', {
+        name: name,
+        start_time: `${startTimeHours}:${startTimeMinutes}`,
+        duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds)
+      }, {
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+        }
+      });
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, '/login');
+      }
+    }
 
     throw redirect(302, '/habits');
   }

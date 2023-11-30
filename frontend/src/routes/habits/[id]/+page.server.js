@@ -21,24 +21,32 @@ export const load = async ({ params, cookies }) => {
     const habit = response.data.data;
     return { habit };
   } catch (error) {
-    console.error(error);
+    if (error.response.status == 401) {
+      throw redirect(302, '/login');
+    }
   }
 };
 
 export const actions = {
-  deleteHabit: async ({ params, request, cookies }) => {
+  deleteHabit: async ({ params, cookies }) => {
+    try {
+      // Retrieves the id from the url
+      const { id } = params;
+      const jwt = cookies.get('jwt');
 
-    // Retrieves the id from the url
-    const { id } = params;
-    const jwt = cookies.get('jwt');
+      // Set the body of the request, adds a header and sends delete request to delete habit
+      const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+        }
+      });
 
-    // Set the body of the request, adds a header and sends delete request to delete habit
-    const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
-      headers: {
-        "Authorization": `Bearer ${jwt}`,
-        "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, '/login');
       }
-    },)
+    }
 
     throw redirect(302, '/habits');
   }
