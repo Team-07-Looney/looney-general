@@ -2,7 +2,7 @@
     import Header from "../../../lib/components/Header.svelte";
 </script>
 
-<Header title="Add Habit" displayBackButton=0 route="habits"/>
+<Header title="Add Habit" displayBackButton=0 route="habits" displayMenu=0 />
 <form method="POST" class="text-black text-2xl" action="?/createHabit">
     <div>
         <label for="name">Name</label>

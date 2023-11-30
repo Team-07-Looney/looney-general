@@ -4,7 +4,7 @@
     import CoralCluster from "../../lib/components/CoralCluster.svelte";
 </script>
 
-<Header title="Looney" displayBackButton=0 route="main" />
+<Header title="Looney" displayBackButton=0 route="main" displayMenu=0 path=""/>
 <div class="flex flex-col">
 	<div class="flex flex-row justify-center items-center">
 		<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/habits"/>

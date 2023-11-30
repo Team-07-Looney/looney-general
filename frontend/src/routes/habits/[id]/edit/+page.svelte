@@ -1,6 +1,10 @@
 <script>
+    import Header from "../../../../lib/components/Header.svelte";
+
     export let data;
 </script>
+
+<Header title="Edit habit" route=habits displayBackButton=1 displayMenu=0 path="../" />
 
 <form method="POST" class="text-black text-2xl" action="?/editHabit">
     <div>

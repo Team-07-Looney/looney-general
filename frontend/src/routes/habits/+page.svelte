@@ -8,7 +8,7 @@
     export let data;
 </script>
 
-<Header title="Habits" route="main" displayBackButton=1/>
+<Header title="Habits" route="main" displayBackButton=1 displayMenu=0 path="" />
 
 <ul style="overflow-y: scroll; height:305px;">
   {#each data.habits as habit}
