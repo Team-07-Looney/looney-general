@@ -1,10 +1,10 @@
 <script>
-    import Heading from "../../../lib/components/Heading.svelte";
+    import Header from "../../../lib/components/Header.svelte";
     import Timer from "../../../lib/components/Timer.svelte";
     export let data;
 </script>
 
-<Heading title="Habits" route="habits" displayBackButton=1/>
+<Header title="Habits" route="habits" displayBackButton=1/>
 
 <ul>
     <li class="px-10 py-2 ">
@@ -20,7 +20,7 @@
             </div>
 
             <div>
-                <!--<Timer duration={data.habit[0].duration} />-->
+               <!-- <Timer duration={data.habit[0].duration} /> -->
             </div>   
         </div>
     </li> 

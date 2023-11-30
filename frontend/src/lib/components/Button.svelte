@@ -5,13 +5,13 @@
 <style>	
 /* Dropdown Button */
 .dropbtn {
-  background-color: gray;
-  color: white;
+
+  color: black;
   padding: 16px;
-  font-size: 16px;
+  font-size: 40px;
   border: none;
   cursor: pointer;
 }
 </style>
 
-  <button on:click class="dropbtn">{!menuOpen ? "..." : "Close"}</button>
+  <button on:click class="dropbtn">...</button>

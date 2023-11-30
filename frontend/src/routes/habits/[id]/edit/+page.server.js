@@ -7,10 +7,18 @@ import { redirect } from '@sveltejs/kit';
  * @param {*} params id for habit
  * @returns
  */
-export const load = async ({ params }) => {
+export const load = async ({ params, cookies }) => {
   try {
+    const jwt = cookies.get('jwt');
+
     const { id } = params;
-    const response = await axios.get(`http://localhost:3011/habits/${id}`);
+    const response = await axios.get(`http://localhost:3011/habits/${id}`, {
+      headers: {
+        "Authorization": `Bearer ${jwt}`,
+        "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+      }
+    });
+
     const habit = response.data.data;
     return { habit };
   } catch (error) {
@@ -19,10 +27,11 @@ export const load = async ({ params }) => {
 };
 
 export const actions = {
-    editHabit: async ({ params, request }) => {
+    editHabit: async ({ params, request, cookies }) => {
           
       // Retrieves the data from the form
       const formData = await request.formData();
+      const jwt = cookies.get('jwt');
       const { id } = params;
 
       // Set the body of the request, adds a header and sends put request to update habit
@@ -32,6 +41,7 @@ export const actions = {
         duration: parseInt(formData.get('duration'))
       }, {
         headers: {
+          "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       },)

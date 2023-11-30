@@ -2,7 +2,7 @@
 	import Header from "../lib/components/Header.svelte";
 </script>
 
-<Header header="Looney"/>
+<Header title="Looney"/>
 <div class="bg-red-300 py-5 px-5 rounded-lg place-self-center">
 	<form class="grid grid-cols-1 gap-8">
 		<div>

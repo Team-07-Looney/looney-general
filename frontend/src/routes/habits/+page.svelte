@@ -1,13 +1,13 @@
 <script>
     import { setContext } from "svelte";
     import HabitsList from "../../lib/components/HabitsList.svelte";
-    import Heading from "../../lib/components/Heading.svelte";
+    import Header from "../../lib/components/Header.svelte";
 
     // Data contains all data passed by the page server
     export let data;
 </script>
 
-<Heading title="Habits" route="main" displayBackButton=1/>
+<Header title="Habits" route="main" displayBackButton=1/>
 
 <ul style="overflow-y: scroll; height:305px;">
   {#each data.habits as habit}
