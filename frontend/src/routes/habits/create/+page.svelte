@@ -3,6 +3,7 @@
 import FormEars from "../../../lib/components/FormEars.svelte";
   import Header from "../../../lib/components/Header.svelte";
   import AuthInput from "../../../lib/components/authInput.svelte";
+  import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
@@ -10,12 +11,12 @@ import FormEars from "../../../lib/components/FormEars.svelte";
 <div class="h-screen flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars/>
-    <div class="gird grid-cols-1">
+    <div class="grid grid-cols-1">
       <Header header="Add Habit" />
-      <div class="px-8 pt-8 z-[3] relative">
+      <ShadowsForForms width={260} height={315}/>
+      <div class="px-8 pt-8 z-[3]">
         <div
           class="bg-white rounded-xl px-4 py-5"
-          style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;"
         >
           <form
             method="POST"
