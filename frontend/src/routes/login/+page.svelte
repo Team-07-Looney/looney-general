@@ -4,7 +4,8 @@
   /** @type {import('./$types').ActionData} */
   export let form;
   import FormEars from "../../lib/components/FormEars.svelte";
-    import CoralCluster from "../../lib/components/CoralCluster.svelte";
+  import CoralCluster from "../../lib/components/CoralCluster.svelte";
+  import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
 
 <div class="h-screen flex justify-center items-center">
@@ -12,8 +13,9 @@
     <FormEars/>
   <div class="grid grid-cols-1">
     <Header header="Looney"/>
+    <ShadowsForForms height="200px" width="300px"/>
     <div class="px-8 pt-8 z-[2]">
-      <div class="bg-white rounded px-4 py-4 mb-16" style="box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;">
+      <div class="bg-white rounded px-4 py-4 mb-16">
         <form
           method="POST"
           class="grid grid-cols-1 gap-4 text-gray-900"
@@ -57,7 +59,7 @@
 
           <div class="flex items-center justify-center">
             <button
-              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3 text-white"
+              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3 font-bold text-black"
               type="submit"
             >
               Login

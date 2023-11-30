@@ -8,7 +8,7 @@
     <div class="fixed bottom-[-30px]">
         <img src="/src/img/leftCoral.png" alt="coral" style="scale: 0.7">
     </div>
-    <div class="fixed bottom-[-50px] right-[-78px] z-3">
+    <div class="fixed bottom-[-50px] right-[-78px] z-1">
         <img src="/src/img/centerCoral.png" alt="coral" style="scale: 0.7">
     </div>
 

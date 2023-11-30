@@ -46,5 +46,7 @@ export default {
     'border-red-700',
     'text-gray-700',
     'border-gray-700',
+    'text-black',
+    'border-black',
   ],
 };
