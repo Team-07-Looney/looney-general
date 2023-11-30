@@ -1,4 +1,8 @@
-<h1 class="text-center text-8xl text-black">Looney</h1>
+<script>
+	import Header from "../lib/components/Header.svelte";
+</script>
+
+<Header header="Looney"/>
 <div class="bg-red-300 py-5 px-5 rounded-lg place-self-center">
 	<form class="grid grid-cols-1 gap-8">
 		<div>
@@ -16,7 +20,7 @@
 			<input id="password" name="password" class="rounded-sm">
 		</div>
 		<a href="/habits" type="button" class="p-1.5 bg-red-400 rounded-lg">
-						Habits
+						Login
 		</a>
 	</form>
 </div>

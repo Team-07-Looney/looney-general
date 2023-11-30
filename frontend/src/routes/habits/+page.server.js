@@ -1,3 +1,4 @@
+import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
 
 /**
@@ -6,12 +7,21 @@ import axios from 'axios';
  * @param {*} serverLoadEvent 
  * @returns
  */
-export const load = async (serverLoadEvent) => {
+export const load = async ({ serverLoadEvent, cookies }) => {
   try {
-    const response = await axios.get('http://localhost:3011/habits');
+    const jwt = cookies.get('jwt');
+
+    const response = await axios.get('http://localhost:3011/habits', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
     const habits = response.data.data;
     return { habits };
   } catch (error) {
-    console.error(error);
+    if (error.response.status == 401) {
+      throw redirect(302, '/login');
+    }
   }
 };
