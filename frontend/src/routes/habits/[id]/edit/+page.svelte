@@ -1,8 +1,27 @@
 <script>
+    import { onMount } from 'svelte';
+
     /** @type {import('./$types').ActionData} */
 	export let form;
 
     export let data;
+    console.log(data);
+
+    onMount(() => {
+        function addNulIfNeeded(event) {
+            if (event.target.value >= 0 && event.target.value <= 9) {
+                event.target.value = `0${event.target.value}`;
+            }
+        }
+
+        const start_time_minutes = document.getElementById('start_time_minutes');
+        const start_time_hours = document.getElementById('start_time_hours');
+        const duration_seconds = document.getElementById('duration_seconds');
+
+        start_time_minutes.addEventListener('change', addNulIfNeeded);
+        start_time_hours.addEventListener('change', addNulIfNeeded);
+        duration_seconds.addEventListener('change', addNulIfNeeded);
+    });
 </script>
 
 <form method="POST" class="text-black text-2xl" action="?/editHabit">
@@ -22,17 +41,25 @@
     {/if}
     <div>
         <label for="name">Name</label>
-        <input id="name" placeholder="e.g. Brush teeth" name="name" class="rounded-sm" value={data.habit[0].name}>
+        <input id="name" placeholder="e.g. Brush teeth" name="name" class="rounded-sm" value={data.name}>
     </div>
 
     <div>
         <label for="start_time">Start time</label>
-        <input id="start_time" placeholder="e.g. 10:00" name="start_time" class="rounded-sm" value={data.habit[0].start_time}>
+        <div class="flex">
+            <input type="number" min="0" max="23" id="start_time_hours" name="start_time_hours" value={data.start_time_hours} class="rounded-sm">
+            <p>:</p>
+            <input type="number" min="0" max="59" id="start_time_minutes" name="start_time_minutes" value={data.start_time_minutes} class="rounded-sm">
+        </div>
     </div>
 
     <div>
         <label for="duration">Duration</label>
-        <input type="number" min="0" placeholder="e.g. 120" id="duration" name="duration" class="rounded-sm" value={data.habit[0].duration}>
+        <div class="flex">
+            <input type="number" min="0" max="90" id="duration_minutes" value={data.duration_minutes} name="duration_minutes" class="rounded-sm">
+            <p>:</p>
+            <input type="number" min="0" max="59" id="duration_seconds" value={data.duration_seconds} name="duration_seconds" class="rounded-sm">
+        </div>
     </div>
 
     <button class="p-1.5 bg-red-400 rounded-lg mt-3" type="submit">Submit</button>
