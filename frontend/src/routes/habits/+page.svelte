@@ -1,21 +1,21 @@
 <script>
-  // Data contains all data passed by the page server
-  export let data;
+    import { setContext } from "svelte";
+    import HabitsList from "../../lib/components/HabitsList.svelte";
+    import Header from "../../lib/components/Header.svelte";
+    // Data contains all data passed by the page server
+    export let data;
 </script>
 
+<Header title="Habits" route="main" displayBackButton=1 displayMenu=0 path="" />
 
-  <h1 class="text-center text-8xl text-black font-chewy">Habits</h1>
-
-
-<ul class="text-black text-3xl">
+<ul style="overflow-y: scroll; height:305px;">
   {#each data.habits as habit}
-    <li class="p-1 bg-red-400 rounded-lg mt-2" ><a href={`habits/${habit.id}`}>{habit.name}</a></li>
+    <li class="px-10 py-2">
+      <HabitsList title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} />
+    </li> 
   {/each}
 </ul>
-<a href="/" type="button" class="p-1.5 bg-red-400 rounded-lg">
-    Home 
-</a>
-<a href="/" type="button" class="p-1.5 bg-red-400 rounded-lg">
-    Back button 
-</a>
-<a class="p-1.5 bg-red-400 rounded-lg" href="/habits/create">Create habit</a>
+
+<div class="flex justify-center items-center relative" style="z-index: 10;">
+<a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10"></a>
+</div>

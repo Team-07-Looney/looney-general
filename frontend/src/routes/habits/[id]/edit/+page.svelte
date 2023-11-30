@@ -3,6 +3,7 @@
 
     /** @type {import('./$types').ActionData} */
 	export let form;
+    import Header from "../../../../lib/components/Header.svelte";
 
     export let data;
 
@@ -22,6 +23,8 @@
         duration_seconds.addEventListener('change', addNulIfNeeded);
     });
 </script>
+
+<Header title="Edit habit" route=habits displayBackButton=1 displayMenu=0 path="../" />
 
 <form method="POST" class="text-black text-2xl" action="?/editHabit">
     {#if form && form.errors}
