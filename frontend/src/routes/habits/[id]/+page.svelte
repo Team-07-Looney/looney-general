@@ -20,7 +20,7 @@
             </div>
 
             <div>
-               <!-- <Timer duration={data.habit[0].duration} /> -->
+               <!--<Timer duration={data.habit[0].duration} />-->
             </div>   
         </div>
     </li> 

@@ -3,7 +3,7 @@
 	import Header from "../../lib/components/Header.svelte";
 </script>
 
-<Header title="Looney" displayBackButton=0/>
+<Header title="Looney" displayBackButton=0 route="main" />
 <div class="flex flex-col">
 	<div class="flex flex-row">
 		<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/habits"/>

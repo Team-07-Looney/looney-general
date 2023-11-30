@@ -5,26 +5,28 @@
 
   let elapsed = 0;
   let frame;
-
+function startTimer() {
+      frame = requestAnimationFrame(update);
+    }
   onMount(() => {
-    last_time = window.performance.now();
+    let last_time = window.performance.now();
+    
+
+    function update() {
+      const time = window.performance.now();
+      elapsed -= Math.min(time - last_time, duration - elapsed);
+      last_time = time;
+
+      frame = requestAnimationFrame(update);
+    }
+
+    onDestroy(() => {
+      cancelAnimationFrame(frame);
+    });
+
   });
 
-  function startTimer() {
-    frame = requestAnimationFrame(update);
-  }
-
-  function update() {
-    const time = window.performance.now();
-    elapsed -= Math.min(time - last_time, duration - elapsed);
-    last_time = time;
-
-    frame = requestAnimationFrame(update);
-  }
-
-  onDestroy(() => {
-    cancelAnimationFrame(frame);
-  });
+  
 </script>
 
 <!-- svelte-ignore a11y-label-has-associated-control -->

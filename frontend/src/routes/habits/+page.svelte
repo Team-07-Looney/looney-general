@@ -2,6 +2,7 @@
     import { setContext } from "svelte";
     import HabitsList from "../../lib/components/HabitsList.svelte";
     import Header from "../../lib/components/Header.svelte";
+    import CoralCluster from "../../lib/components/CoralCluster.svelte";
 
     // Data contains all data passed by the page server
     export let data;
@@ -20,3 +21,5 @@
 <div class="flex justify-center items-center">
 <a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10"></a>
 </div>
+
+<CoralCluster />
