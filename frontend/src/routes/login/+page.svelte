@@ -4,7 +4,6 @@
   /** @type {import('./$types').ActionData} */
   export let form;
   import FormEars from "../../lib/components/FormEars.svelte";
-  import CoralCluster from "../../lib/components/CoralCluster.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
 
@@ -76,5 +75,4 @@
     </div>
   </div>
 </div>
-<CoralCluster/>
 </div>

@@ -1,6 +1,5 @@
 <script>
-  import CoralCluster from "../../../lib/components/CoralCluster.svelte";
-import FormEars from "../../../lib/components/FormEars.svelte";
+  import FormEars from "../../../lib/components/FormEars.svelte";
   import Header from "../../../lib/components/Header.svelte";
   import AuthInput from "../../../lib/components/authInput.svelte";
   import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
@@ -85,5 +84,4 @@ import FormEars from "../../../lib/components/FormEars.svelte";
       </div>
     </div>
   </div>
-  <CoralCluster/>
 </div>

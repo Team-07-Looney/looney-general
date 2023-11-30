@@ -2,7 +2,6 @@
   import AuthInput from "../../lib/components/authInput.svelte";
   import Header from "../../lib/components/Header.svelte";
   import FormEars from "../../lib/components/FormEars.svelte";
-  import CoralCluster from "../../lib/components/CoralCluster.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
@@ -96,5 +95,4 @@
     </div>
   </div>
 </div>
-<CoralCluster/>
 </div>
