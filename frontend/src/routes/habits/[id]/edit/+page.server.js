@@ -1,38 +1,52 @@
-import axios from 'axios';
-import { fail, redirect } from '@sveltejs/kit';
+import axios from "axios";
+import { redirect, fail } from '@sveltejs/kit';
 
 /**
- * Executes during the load of the svelte page
- * @param {*} param0
-*/
-export const load = async ({ cookies }) => {
+ * Fetches data from the habits microservice via the API gateway to retrieve a habit based on id
+ * 
+ * @param {*} params id for habit
+ * @returns
+ */
+export const load = async ({ params, cookies }) => {
   try {
-    // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
 
-    // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const { id } = params;
+    const response = await axios.get(`http://localhost:3011/habits/${id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
+    const habitData = response.data.data[0];
+
+    const start_time = habitData.start_time.split(':');
+    const duration_minutes = Math.floor(habitData.duration / 60);
+    const duration_seconds = habitData.duration - duration_minutes * 60;
+
+    const habit = {
+      id: habitData.id,
+      name: habitData.name,
+      start_time_hours: start_time[0],
+      start_time_minutes: start_time[1],
+      duration_minutes: duration_minutes,
+      duration_seconds: ((duration_seconds >= 0 && duration_seconds <= 9) ? `0${duration_seconds}` : duration_seconds)
+    };
+
+    return habit;
   } catch (error) {
-    if (error.response.status == 401)  {
+    if (error.response.status == 401) {
       throw redirect(302, '/login');
     }
   }
 };
 
-/**
- * createHabit is a function called when the user submits a form to create a habit
- */
 export const actions = {
-  createHabit: async ({ request, cookies }) => {
+  editHabit: async ({ params, request, cookies }) => {
     try {
-      const jwt = cookies.get('jwt');
-
       // Retrieves the data from the form
       const formData = await request.formData();
+      const jwt = cookies.get('jwt');
+      const { id } = params;
       const name = formData.get('name');
       const startTimeHours = formData.get('start_time_hours');
       const startTimeMinutes = formData.get('start_time_minutes');
@@ -40,15 +54,15 @@ export const actions = {
       const durationSeconds = formData.get('duration_seconds');
 
       // check for errors in a form data
-      const errors = await validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
+      const errors = await validateEditData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
         return fail(400, { name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds, errors });
       }
 
-      // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post('http://localhost:3011/habits', {
+      // Set the body of the request, adds a header and sends put request to update habit
+      const data = await axios.put(`http://localhost:3011/habits/${id}`, {
         name: name,
         start_time: `${startTimeHours}:${startTimeMinutes}`,
         duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds)
@@ -64,11 +78,11 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, `/habits`);
   }
 };
 
-async function validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds) {
+async function validateEditData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds) {
   let errors = [];
 
   //check if name exists

@@ -1,23 +1,27 @@
 <script>
   import AuthInput from "../../lib/components/authInput.svelte";
-
+  import Header from "../../lib/components/Header.svelte";
+  import FormEars from "../../lib/components/FormEars.svelte";
+  import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
 
 <div class="h-screen flex justify-center items-center">
+  <div class="flex flex-col items-center">
+    <FormEars/>
   <div class="grid grid-cols-1">
-    <h1 class="text-center text-5xl text-black pt-7">Looney</h1>
-    <h2 class="text-center text-3xl text-black">Register</h2>
-    <div class="px-8 pt-8">
-      <div class="bg-white rounded px-4 py-5">
+    <Header title="Looney" displayBackButton=0/>
+    <ShadowsForForms width={280} height={420}/>
+    <div class="px-8 pt-8 z-[2]">
+      <div class=" bg-white rounded-xl px-4 py-5">
         <form
           method="POST"
           class="grid grid-cols-1 gap-4 text-gray-900"
           action="?/register"
         >
           {#if form && form.errors}
-            <div class="bg-red-200 text-red-900 p-2 rounded">
+            <div class="bg-red-200 text-red-900 p-2 rounded z-50 fixed w-[250px] top-[12px]">
               <p class="text-sm pb-2">
                 Uh oh! There seems to be an issue during the registration:
               </p>
@@ -28,6 +32,7 @@
               </ul>
             </div>
           {/if}
+
           <AuthInput
             name={"name"}
             label={"Name"}
@@ -72,7 +77,7 @@
 
           <div class="flex items-center justify-center">
             <button
-              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3"
+              class="p-1.5 w-1/2 bg-lavender-500 rounded-lg mt-3 font-bold text-black"
               type="submit"
             >
               Register
@@ -81,11 +86,13 @@
 
           <a
             href="/login"
-            class="text-xs text-center underline text-lavender-600 hover:text-lavender-900"
+            class="text-xs text-center underline text-lavender-900"
+            style="z-index: 99; position:relative"
             >Already have an account? Log in over here.</a
           >
         </form>
       </div>
     </div>
   </div>
+</div>
 </div>

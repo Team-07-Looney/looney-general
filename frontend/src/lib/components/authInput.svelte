@@ -8,12 +8,12 @@
   export let autocomplete = null;
   export let error = false;
   
-  let color = error ? 'red' : 'gray';
+  let color = error ? 'red-700' : 'black';
 </script>
 
-<div class="text-{color}-700">
+<div class="text-{color}">
   <label for="{name}" class="text-base">{label}</label>
-  <div class="flex items-center border-b border-{color}-700 pb-2">
+  <div class="flex items-center border-b border-{color} pb-2">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
@@ -29,7 +29,7 @@
       />
     </svg>
     <input
-      class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none"
+      class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none font"
       type="{type}"
       name="{name}"
       id="{name}"

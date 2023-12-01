@@ -1,9 +1,11 @@
 <script>
   import "../app.postcss";
+    import CoralCluster from "../lib/components/CoralCluster.svelte";
 </script>
 
-<div
-  class="bg-cover"
-  style="background-image: url('/src/img/bg-auth.png');">
-  <slot />
+<div class="container min-h-screen mx-auto">
+	<div class="w-screen h-screen bg-[url('/src/img/background.png')] bg-cover" style="font-family: 'Montserrat">
+		<slot />
+		<CoralCluster/>
+	</div>
 </div>

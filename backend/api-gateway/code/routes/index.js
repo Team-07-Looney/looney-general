@@ -38,4 +38,5 @@ router.get('/verify', cors(), requireAuth, (req, res) => {
   res.status(200).send({"message": "User is authenticated"});
 });
 
+
 export default router;
