@@ -147,4 +147,5 @@
     {/if}
   </div>
   <button on:click={handleReset}>Reset timer</button>
+  <button on:click={handleStart}>Start</button>
 </div>
