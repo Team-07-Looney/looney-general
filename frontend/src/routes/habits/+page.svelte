@@ -4,14 +4,16 @@
     import Header from "../../lib/components/Header.svelte";
     // Data contains all data passed by the page server
     export let data;
+    let menuOpen = false;
+    let storedId = 0;
 </script>
 
-<Header title="Habits" route="main" displayBackButton=0/>
+<Header title="Habits" route="main" displayBackButton=0 path=""/>
 
   <ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
     {#each data.habits as habit}
       <li class="px-10 py-2">
-        <HabitsList title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} />
+        <HabitsList title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} bind:menuOpen={menuOpen} bind:storedId={storedId} />
       </li> 
     {/each}
   </ul>

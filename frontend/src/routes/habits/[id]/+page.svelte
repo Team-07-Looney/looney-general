@@ -6,7 +6,7 @@
   let countdown;
 </script>
 
-<Header title="Habits" route="habits" displayBackButton=1 displayMenu=0 path=""/>
+<Header title="Habits" route="habits" displayBackButton=1 path=""/>
 <ul class="mt-[100px] z-50 relative">
     <li class="px-10 py-2">
         <div class="bg-white rounded-xl" style="box-shadow: rgba(0, 0, 0, 0.50) 0px 25px 50px -12px">
