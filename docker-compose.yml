@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   habits:
-    container_name: ms-habits
+    container_name: mshabits
     build: ./backend/habits
     volumes:
       - ./backend/habits/code:/usr/src/app
@@ -20,6 +20,17 @@ services:
       - mslooney
     ports:
       - "3011:3011"
+    working_dir: /usr/src/app
+    command: bash -c "npm install && npm run dev"
+  users:
+    container_name: msusers
+    build: ./backend/users
+    volumes:
+      - ./backend/users/code:/usr/src/app
+    networks:
+      - mslooney
+    ports:
+      - "3012:3012"
     working_dir: /usr/src/app
     command: bash -c "npm install && npm run dev"
 
