@@ -5,7 +5,7 @@
 </script>
 
 <Header title="Looney" displayBackButton=0 route="main" displayMenu=0 path=""/>
-<div class="flex flex-col">
+<div class="flex flex-col mt-20">
 	<div class="flex flex-row justify-center items-center">
 		<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/habits"/>
 		<OctopusButton buttonName='Moods' buttonIcon='moodOctopus.png' />
