@@ -1,3 +1,4 @@
+<!-- credits: https://github.com/projectbadger/svelte-touch-timepicker -->
 <script>
     import { createEventDispatcher } from 'svelte';
     import Switcher from './Switcher.svelte';

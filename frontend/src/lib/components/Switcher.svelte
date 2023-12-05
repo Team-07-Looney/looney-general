@@ -1,5 +1,5 @@
+<!-- credits: https://github.com/projectbadger/svelte-touch-timepicker -->
 <script>
-
     import { afterUpdate, onMount, createEventDispatcher } from 'svelte';
   
     const dispatch = createEventDispatcher();
