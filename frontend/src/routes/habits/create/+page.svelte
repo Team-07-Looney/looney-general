@@ -3,10 +3,15 @@
   import Header from "../../../lib/components/Header.svelte";
   import AuthInput from "../../../lib/components/authInput.svelte";
   import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
+  import TimePicker from "../../../lib/components/TimePicker.svelte";
   import { onMount } from "svelte";
 
   /** @type {import('./$types').ActionData} */
   export let form;
+
+  // date for time picker
+  let date = new Date();
+  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
 
   onMount(() => {
     function addNulIfNeeded(event) {
@@ -127,6 +132,9 @@
                 )}
               />
             </div>
+
+            <p>Time: {_date}</p>
+            <TimePicker bind:date />
 
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
