@@ -1,6 +1,7 @@
 <script>
     import Header from "../../../lib/components/Header.svelte";
     import Timer from "../../../lib/components/Timer.svelte";
+    import { tweened } from 'svelte/motion';
     export let data; 
 
   let countdown;
@@ -21,7 +22,7 @@
             </div>
 
             <div>
-               <Timer countdown={data.habit[0].duration} />
+               <Timer bind:countdown={data.habit[0].duration} />
             </div>   
         </div>
     </li> 
