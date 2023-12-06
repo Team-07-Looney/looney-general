@@ -28,9 +28,9 @@
         }
     }
 </script>
- 
+  <!--Clickable-->
 <div class="bg-white rounded-xl shadow-lg p-1 flex justify-between">
-    <a href={`habits/${habitId}`} class="flex">
+    <a href={`habits/${habitId}`} class="flex w-full">
         <div>
             <!-- svelte-ignore a11y-missing-attribute -->
             <img

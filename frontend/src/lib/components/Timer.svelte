@@ -40,6 +40,7 @@
     clearInterval(interval);
   });
 
+  // combine start or resume function
   function handleStart() {
     now = Date.now();
     end = now + (countdown - 1) * 1000;

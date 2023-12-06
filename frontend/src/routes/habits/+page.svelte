@@ -8,7 +8,7 @@
     let storedId = 0;
 </script>
 
-<Header title="Habits" route="main" displayBackButton=1 path="" x|/>
+<Header title="Habits" route="main" displayBackButton=1 path="" />
 
   <ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
     {#each data.habits as habit}
