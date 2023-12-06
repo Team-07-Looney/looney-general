@@ -3,13 +3,16 @@
     import { createEventDispatcher } from 'svelte';
     import Switcher from './Switcher.svelte';
   
-    export let date = new Date();
+    
     export let visible = false;
     export let classes = 'appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none';
     export let display24 = true;
     export let locale = 'en-GB';
     export let label;
     export let placeholder;
+    export let id;
+    export let data;
+    export let date = data ? new Date(`01/01/1970 ${data}`) : new Date();
     let dateChange = false;
   
     const HOURS = new Array(display24?24:12).fill(0).map((v, i) => v + i);
@@ -120,23 +123,32 @@
   }
   </style>
   
-<label for="start_time" class="text-base">{label}</label>
-<div class="flex items-center border-b border-{color} pb-2">
-    <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke-width="1.5"
-    stroke="currentColor"
-    class="w-6 h-6"
-    >
-        <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-    </svg>
-    <input type="text" class='{classes}' readonly value="{dateChange ? _date : placeholder}" placeholder="{placeholder}" on:focus={() => {visible = !visible}}>
+  <div class="text-{color}">
+    <label for="start_time" class="text-base">{label}</label>
+    <div class="flex items-center border-b border-{color} pb-2">
+        <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="w-6 h-6"
+        >
+            <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"
+            />
+        </svg>
+        <input 
+        type="text" 
+        id={id} 
+        name={id} 
+        class='{classes}' 
+        readonly 
+        value="{dateChange ? _date : data ? data : ''}" 
+        placeholder="{placeholder}" on:focus={() => {visible = !visible}}>
+  </div>
 </div>
   <!-- svelte-ignore a11y-no-static-element-interactions -->
   {#if visible}

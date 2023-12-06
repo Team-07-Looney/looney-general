@@ -56,9 +56,20 @@
               error={form?.errors?.some((error) => error.input == "name")}
             />
 
-            <TimePicker bind:_date label="Start Time" placeholder="hours and minutes" />
+            <TimePicker 
+            bind:_date 
+            label="Start Time" 
+            id="start_time" 
+            error={form?.errors?.some((error) => error.input == "start_time")} 
+            placeholder="hours and minutes"
+            data={form?.startTime} />
 
-            <TimePicker label="Duration" placeholder="minutes and seconds" />
+            <TimePicker 
+            label="Duration" 
+            id="duration" 
+            error={form?.errors?.some((error) => error.input == "duration")} 
+            placeholder="minutes and seconds"
+            data={form?.duration} />
 
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
