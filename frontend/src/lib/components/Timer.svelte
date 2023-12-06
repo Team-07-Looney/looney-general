@@ -40,18 +40,13 @@
     clearInterval(interval);
   });
 
-  // combine start or resume function
   function handleStart() {
     now = Date.now();
-    end = now + (countdown - 1) * 1000;
-    interval = setInterval(updateTimer, 1000);
-    isPaused = false;
-    isStarted = true;
-  }
-
-  function handleResume() {
-    now = Date.now();
-    end = now + count * 1000;
+    if (!isStarted) {
+      end = now + (countdown - 1) * 1000;
+    } else {
+      end = now + count * 1000;
+    }
     interval = setInterval(updateTimer, 1000);
     isPaused = false;
     isStarted = true;
@@ -90,13 +85,7 @@
       <title>{count}</title>
       <g fill="none" stroke="purple" stroke-width="9">
         <circle stroke="purple" r="46" />
-        <path
-          stroke="gray"
-          d="M 0 -46 a 46 46 0 0 0 0 92 46 46 0 0 0 0 -92"
-          pathLength="1"
-          stroke-dasharray="1"
-          stroke-dashoffset={$offset}
-        />
+        <path stroke="gray" d="M 0 -46 a 46 46 0 0 0 0 92 46 46 0 0 0 0 -92" pathLength="1" stroke-dasharray="1" stroke-dashoffset={$offset} />
       </g>
       <g fill="purple" stroke="none">
         <g transform="rotate({$rotation})">
@@ -106,19 +95,11 @@
         </g>
       </g>
 
-      <g
-        fill="black"
-        text-anchor="middle"
-        dominant-baseline="baseline"
-        font-size="20"
-      >
+      <g fill="black" text-anchor="middle" dominant-baseline="baseline" font-size="20">
         <text x="-3" y="6.5">
           {#each Object.entries({ h, m, s }) as [key, value], i}
             {#if countdown >= 60 ** (2 - i)}
-              <tspan dx="3" font-weight="bold">{padValue(value)}</tspan><tspan
-                dx="0.5"
-                font-size="10">{key}</tspan
-              >
+              <tspan dx="3" font-weight="bold">{padValue(value)}</tspan><tspan dx="0.5" font-size="10">{key}</tspan>
             {/if}
           {/each}
         </text>
@@ -131,12 +112,13 @@
       <button on:click={handleStart} class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px]">Start</button>  
     {:else if isOver}
       <button on:click={handleReset} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px]">Reset</button>
-    {:else if !isPaused}
-      <button on:click={handlePause} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Pause</button>
-      <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/habits">Done</a></button> 
     {:else}
-      <button on:click={handleResume} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>
-      <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/habits">Done</a></button>   
+      {#if !isPaused}
+        <button on:click={handlePause} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Pause</button>
+      {:else}
+        <button on:click={handleStart} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>
+      {/if}
+      <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/habits">Done</a></button> 
     {/if}
   </div>
 </div>

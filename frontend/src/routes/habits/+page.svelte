@@ -20,5 +20,5 @@
 
 
 <div class="flex justify-center items-center relative" style="z-index: 10;">
-<a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10"></a>
+<a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
 </div>
