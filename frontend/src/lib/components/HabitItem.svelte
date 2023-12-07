@@ -19,7 +19,6 @@
             document.getElementById(`dropdown${storedId}`).style.display = "none";
             dropdown.style.display = "block";
             storedId = id;
-            console.log('3rd con');
         } else {
             // Closes the dropdown
             dropdown.style.display = "none";
@@ -32,11 +31,11 @@
 <div class="bg-white rounded-xl shadow-lg p-1 flex justify-between">
     <a href={`habits/${habitId}`} class="flex w-full">
         <div>
-            <!-- svelte-ignore a11y-missing-attribute -->
             <img
                 src={`../../src/img/icon${iconCount}.png`}
                 style="height: 50px;"
                 class="p-2"
+                alt="icon"
             />
         </div>
         <div>
@@ -47,7 +46,7 @@
  
     <div class="inline-block relative text-center">
         <button id={`button${habitId}`} on:click={() => handleOpening(habitId)} class="p-3 pl-0 mt-1">
-            <img src="../../src/img/optionsButton.png" class="h-5">
+            <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>
         <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-lg shadow-lg min-w-[70px] z-[1] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-12px]">
             <!-- MENU -->

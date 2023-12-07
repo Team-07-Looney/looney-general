@@ -31,7 +31,7 @@
     <div class="flex flex-col items-center">
         <FormEars />
         <div class="grid grid-cols-1">
-            <Header title="Edit habit" route="habits" displayBackButton=0 path="../"/>
+            <Header title="Edit habit" imgExtraPath="../" />
             <ShadowsForForms width={307} height={373} />
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">

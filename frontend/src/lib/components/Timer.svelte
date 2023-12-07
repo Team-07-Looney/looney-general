@@ -110,10 +110,10 @@
   <div class="flex flex-row justify-center items-center mb-4 mt-6">
     {#if !isStarted}
       <button on:click={handleStart} class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px]">Start</button>  
-    {:else if isOver}
-      <button on:click={handleReset} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px]">Reset</button>
     {:else}
-      {#if !isPaused}
+      {#if isOver}
+      <button on:click={handleReset} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Reset</button>
+      {:else if !isPaused}
         <button on:click={handlePause} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Pause</button>
       {:else}
         <button on:click={handleStart} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>

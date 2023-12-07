@@ -2,7 +2,7 @@
 	import Header from "../lib/components/Header.svelte";
 </script>
 
-<Header title="Looney" displayBackButton=0 path="" route="" />
+<Header title="Looney" />
 
 	<div class="flex flex-col justify-center items-center h-screen text-center">
 		<div>
