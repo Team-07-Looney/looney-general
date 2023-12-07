@@ -22,7 +22,7 @@
     </a>
  
     <div class="inline-block relative text-center">
-        <button id={`button${habitId}`} on:click class="p-3 pl-0 mt-1">
+        <button id={`button${habitId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
             <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>
         <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-lg shadow-lg min-w-[70px] z-[1] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px]">

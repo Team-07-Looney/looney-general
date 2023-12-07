@@ -1,5 +1,6 @@
 <script>
     import { setContext } from "svelte";
+    import { onMount } from "svelte";
     import Header from "../../lib/components/Header.svelte";
     import HabitItem from "../../lib/components/HabitItem.svelte";
   
@@ -8,6 +9,16 @@
     
     let menuOpen = false;
     let storedId = 0;
+    let dropdown;
+
+    onMount(() => {
+      window.addEventListener("click", (event) => {
+        if (storedId !== 0 && menuOpen && event.target !== dropdown) {
+          document.getElementById(`dropdown${storedId}`).style.display = "none";
+          menuOpen = false;
+        }
+      })
+    });
 
     function handleOpening(id){
         let dropdown = document.getElementById(`dropdown${id}`);
