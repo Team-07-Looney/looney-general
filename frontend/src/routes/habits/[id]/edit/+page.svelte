@@ -31,7 +31,7 @@
     <div class="flex flex-col items-center">
         <FormEars />
         <div class="grid grid-cols-1">
-            <Header title="Edit habit" route="habits" displayBackButton="0" />
+            <Header title="Edit habit" imgExtraPath="../" />
             <ShadowsForForms width={307} height={373} />
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
@@ -64,6 +64,7 @@
                             name={"name"}
                             label={"Name"}
                             type={"text"}
+                            placeholder={""}
                             path={"M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"}
                             value={data.name}
                             error={form?.errors?.some(
@@ -76,6 +77,7 @@
                                 name={"start_time_hours"}
                                 label={"Start time (hours)"}
                                 type={"number"}
+                                placeholder={""}
                                 path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
                                 value={data.start_time_hours}
                                 error={form?.errors?.some(
@@ -88,6 +90,7 @@
                                 name={"start_time_minutes"}
                                 label={"Start time (minutes)"}
                                 type={"number"}
+                                placeholder={""}
                                 path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
                                 value={data.start_time_minutes}
                                 error={form?.errors?.some(
@@ -102,6 +105,7 @@
                                 name={"duration_minutes"}
                                 label={"Duration (minutes)"}
                                 type={"number"}
+                                placeholder={""}
                                 path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
                                 value={data.duration_minutes}
                                 error={form?.errors?.some(
@@ -114,6 +118,7 @@
                                 name={"duration_seconds"}
                                 label={"Duration (seconds)"}
                                 type={"number"}
+                                placeholder={""}
                                 path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
                                 value={data.duration_seconds}
                                 error={form?.errors?.some(

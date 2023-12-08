@@ -11,7 +11,7 @@
   <div class="flex flex-col items-center">
     <FormEars/>
   <div class="grid grid-cols-1">
-    <Header title="Looney" displayBackButton=0/>
+    <Header title="Looney" />
     <ShadowsForForms width={280} height={420}/>
     <div class="px-8 pt-8 z-[2]">
       <div class=" bg-white rounded-xl px-4 py-5">
