@@ -14,7 +14,7 @@
         <OctopusButton
             buttonName="Thoughts"
             buttonIcon="thoughtsOctopus.png"
-            buttonLink="/thoughts"
+            buttonLink="moods/thoughts"
         />
     </div>
     <!-- <div class="flex flex-row">
