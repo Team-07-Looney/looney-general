@@ -3,13 +3,13 @@
     import Header from "../../lib/components/Header.svelte";
 </script>
 
-<Header title="Moods" displayBackButton="1" route="/main"/>
+<Header title="Moods" displayBackButton="1" displayMenu="1" route="/main"/>
 <div class="flex flex-col justify-center items-center mt-20">
     <div class="flex flex-row">
         <OctopusButton
             buttonName="My Mood"
             buttonIcon="moodOctopus.png"
-            buttonLink="/my-mood"
+            buttonLink="/moods/my-mood"
         />
         <OctopusButton
             buttonName="Thoughts"
