@@ -8,7 +8,7 @@
 <div class="flex flex-col">
 	<div class="flex flex-row justify-center items-center">
 		<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/habits"/>
-		<OctopusButton buttonName='Moods' buttonIcon='moodOctopus.png' />
+		<OctopusButton buttonName='Moods' buttonIcon='moodOctopus.png' buttonLink='/moods'/>
 	</div>
 </div>
 
