@@ -39,7 +39,7 @@ In order to get the front end svelte app running, you would need to have npm and
 1. Clone this repo onto your WSL
 2. With VSCode or editor of your choice check out to remote development to the WSL
 3. Find the repository
-4. Run `docker comopse up -d` to get all microservices running
+4. Run `docker compose up -d` to get all microservices running
 5. Change the directory to frontend
 6. Inside frontend run `npm install`
 7. After `npm install` is executed run `npm run dev`
