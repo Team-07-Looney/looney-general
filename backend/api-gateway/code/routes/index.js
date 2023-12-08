@@ -28,6 +28,7 @@ const usersProxy = createProxyMiddleware({
 
 router.use('/habits', cors(), requireAuth, habitProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
+router.use('/home', cors(), requireAuth);
 
 // Authentication routes
 router.post('/register', cors(), register);
