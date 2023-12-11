@@ -52,7 +52,8 @@
   }
   </style>
 
-<Header title="Habits" route="/main" displayBackButton=1 displayMenu=1 />
+
+<Header title="Habits" route="/home" displayBackButton=1 displayMenu=1 />
 
 <ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
   {#each data.habits as habit}

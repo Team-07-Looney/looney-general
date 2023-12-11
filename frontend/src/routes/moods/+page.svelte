@@ -3,9 +3,9 @@
     import Header from "../../lib/components/Header.svelte";
 </script>
 
-<Header title="Moods" displayBackButton="1" displayMenu="1" route="/main"/>
+<Header title="Moods" displayBackButton="1" displayMenu="1" route="/home"/>
 <div class="flex flex-col justify-center items-center mt-20">
-    <div class="flex flex-row">
+    <div class="flex flex-row gap-7">
         <OctopusButton
             buttonName="My Mood"
             buttonIcon="moodOctopus.png"
