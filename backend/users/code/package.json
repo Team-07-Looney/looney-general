@@ -7,10 +7,13 @@
   "scripts": {
     "dev": "./node_modules/nodemon/bin/nodemon.js start.js",
     "dev win": "./node_modules/.bin/nodemon start.js",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js"
+    "test": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js"
   },
   "jest": {
-    "transform": {}
+    "transform": {},
+    "setupFiles": [
+      "./tests/test-setup.js"
+    ]
   },
   "author": "",
   "license": "ISC",
