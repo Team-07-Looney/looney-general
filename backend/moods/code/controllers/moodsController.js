@@ -1,10 +1,10 @@
 import { 
-    createMoodsInstance,
-    getAllMoodsData,
-    getMoodsInstanceById,
-    editMoodsInstanceById,
-    deleteMoodsInstanceById
-  } from '../database/adapter.js';
+    createMoodInstance,
+    getAllMoodData,
+    getMoodInstanceById,
+    editMoodInstanceById,
+    deleteMoodInstanceById
+  } from '../database/moodsAdapter.js'
   
   /**
    * function that calculates today's date
@@ -36,9 +36,9 @@ import {
    * @param {*} res response sent with all the moods
    * @param {*} next 
    */
-  export async function getMoods(req, res, next) {
+  export async function getMood(req, res, next) {
     try {
-      tempResponse.data = await getAllMoodsData();
+      tempResponse.data = await getAllMoodData();
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -51,9 +51,9 @@ import {
    * @param {*} res response sent with the result message
    * @param {*} next 
    */
-  export async function createMoods(req, res, next) {
+  export async function createMood(req, res, next) {
     try {
-      await createMoodsInstance(req.body);
+      await createMoodInstance(req.body);
       tempResponse.data.message = "moods created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
@@ -67,9 +67,9 @@ import {
    * @param {*} res response sent with moods data
    * @param {*} next 
    */
-  export async function getMoodsById(req, res, next) {
+  export async function getMoodById(req, res, next) {
     try {
-      tempResponse.data = await getMoodsInstanceById(req.params.id);
+      tempResponse.data = await getMoodInstanceById(req.params.id);
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
@@ -82,9 +82,9 @@ import {
    * @param {*} res response sent with a result message
    * @param {*} next 
    */
-  export async function editMoodsById(req, res, next) {
+  export async function editMoodById(req, res, next) {
     try {
-      await editMoodsInstanceById(req.body, req.params.id);
+      await editMoodInstanceById(req.body, req.params.id);
       tempResponse.data.message = "moods edited successfully";
       res.status(200).send(tempResponse);
     } catch(err) {
@@ -98,9 +98,9 @@ import {
    * @param {*} res 
    * @param {*} next 
    */
-  export async function deleteMoodsById(req, res, next) {
+  export async function deleteMoodById(req, res, next) {
     try {
-      await deleteMoodsInstanceById(req.params.id);
+      await deleteMoodInstanceById(req.params.id);
       tempResponse.data.message = "moods deleted successfully";
       res.status(200).send(tempResponse);
     } catch(err) {

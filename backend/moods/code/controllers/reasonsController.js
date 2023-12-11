@@ -1,10 +1,10 @@
 import { 
-    createReasonsInstance,
-    getAllReasonsData,
-    getReasonsInstanceById,
-    editReasonsInstanceById,
-    deleteReasonsInstanceById
-  } from '../database/adapter.js';
+    createReasonInstance,
+    getAllReasonData,
+    getReasonInstanceById,
+    editReasonInstanceById,
+    deleteReasonInstanceById
+  } from '../database/reasonsAdapter.js';
   
   /**
    * function that calculates today's date
@@ -36,9 +36,9 @@ import {
    * @param {*} res response sent with all the reasons
    * @param {*} next 
    */
-  export async function getReasons(req, res, next) {
+  export async function getReason(req, res, next) {
     try {
-      tempResponse.data = await getAllReasonsData();
+      tempResponse.data = await getAllReasonData();
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -51,9 +51,9 @@ import {
    * @param {*} res response sent with the result message
    * @param {*} next 
    */
-  export async function createReasons(req, res, next) {
+  export async function createReason(req, res, next) {
     try {
-      await createReasonsInstance(req.body);
+      await createReasonInstance(req.body);
       tempResponse.data.message = "reasons created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
@@ -67,9 +67,9 @@ import {
    * @param {*} res response sent with reasons data
    * @param {*} next 
    */
-  export async function getReasonsById(req, res, next) {
+  export async function getReasonById(req, res, next) {
     try {
-      tempResponse.data = await getReasonsInstanceById(req.params.id);
+      tempResponse.data = await getReasonInstanceById(req.params.id);
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
@@ -82,9 +82,9 @@ import {
    * @param {*} res response sent with a result message
    * @param {*} next 
    */
-  export async function editReasonsById(req, res, next) {
+  export async function editReasonById(req, res, next) {
     try {
-      await editReasonsInstanceById(req.body, req.params.id);
+      await editReasonInstanceById(req.body, req.params.id);
       tempResponse.data.message = "reasons edited successfully";
       res.status(200).send(tempResponse);
     } catch(err) {
@@ -98,9 +98,9 @@ import {
    * @param {*} res 
    * @param {*} next 
    */
-  export async function deleteReasonsById(req, res, next) {
+  export async function deleteReasonById(req, res, next) {
     try {
-      await deleteReasonsInstanceById(req.params.id);
+      await deleteReasonInstanceById(req.params.id);
       tempResponse.data.message = "reasons deleted successfully";
       res.status(200).send(tempResponse);
     } catch(err) {

@@ -1,10 +1,10 @@
 import { 
-    createMoodTypesInstance,
-    getAllMoodTypesData,
-    getMoodTypesInstanceById,
-    editMoodTypesInstanceById,
-    deleteMoodTypesInstanceById
-  } from '../database/adapter.js';
+    createMoodTypeInstance,
+    getAllMoodTypeData,
+    getMoodTypeInstanceById,
+    editMoodTypeInstanceById,
+    deleteMoodTypeInstanceById
+  } from '../database/moodTypesAdapter.js';
   
   /**
    * function that calculates today's date
@@ -36,9 +36,9 @@ import {
    * @param {*} res response sent with all the moodtypes
    * @param {*} next 
    */
-  export async function getMoodTypes(req, res, next) {
+  export async function getMoodType(req, res, next) {
     try {
-      tempResponse.data = await getAllMoodTypesData();
+      tempResponse.data = await getAllMoodTypeData();
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -51,9 +51,9 @@ import {
    * @param {*} res response sent with the result message
    * @param {*} next 
    */
-  export async function createMoodTypes(req, res, next) {
+  export async function createMoodType(req, res, next) {
     try {
-      await createMoodTypesInstance(req.body);
+      await createMoodTypeInstance(req.body);
       tempResponse.data.message = "moodtypes created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
@@ -67,9 +67,9 @@ import {
    * @param {*} res response sent with moodtypes data
    * @param {*} next 
    */
-  export async function getMoodTypesById(req, res, next) {
+  export async function getMoodTypeById(req, res, next) {
     try {
-      tempResponse.data = await getMoodTypesInstanceById(req.params.id);
+      tempResponse.data = await getMoodTypeInstanceById(req.params.id);
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
@@ -82,9 +82,9 @@ import {
    * @param {*} res response sent with a result message
    * @param {*} next 
    */
-  export async function editMoodTypesById(req, res, next) {
+  export async function editMoodTypeById(req, res, next) {
     try {
-      await editMoodTypesInstanceById(req.body, req.params.id);
+      await editMoodTypeInstanceById(req.body, req.params.id);
       tempResponse.data.message = "moodtypes edited successfully";
       res.status(200).send(tempResponse);
     } catch(err) {
@@ -98,9 +98,9 @@ import {
    * @param {*} res 
    * @param {*} next 
    */
-  export async function deleteMoodTypesById(req, res, next) {
+  export async function deleteMoodTypeById(req, res, next) {
     try {
-      await deleteMoodTypesInstanceById(req.params.id);
+      await deleteMoodTypeInstanceById(req.params.id);
       tempResponse.data.message = "moodtypes deleted successfully";
       res.status(200).send(tempResponse);
     } catch(err) {

@@ -4,7 +4,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
  * executes SQL query that retrieves all the records from records table
  * @returns records data from the database
  */
-export async function getAllRecordsData() {
+export async function getAllRecordData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = "SELECT * FROM Records";
@@ -28,12 +28,12 @@ export async function getAllRecordsData() {
  * @param {*} request request body with the data for a new record
  * @returns 
  */
-export async function createRecordsInstance(request) {
+export async function createRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Records (user_id, reason_id, record_id) VALUES (1, 1, 1)';
+    const insert = 'INSERT INTO Records (user_id, mood_id, reason_id) VALUES (?, ?, ?)';
 
-    db.run(insert, [request.user_id, request.reason_id, request.record_id], (err) => {
+    db.run(insert, [request.user_id, request.mood_id, request.reason_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
@@ -51,7 +51,7 @@ export async function createRecordsInstance(request) {
  * @param {*} id id of a records that needs to be retrieved
  * @returns records data
  */
-export async function getRecordsInstanceById(id) {
+export async function getRecordInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = `SELECT * FROM Records WHERE id='${id}'`;
@@ -75,10 +75,10 @@ export async function getRecordsInstanceById(id) {
  * @param {*} recordId id of a record that needs to be updated
  * @returns 
  */
-export async function editRecordsInstanceById(record, recordId) {
+export async function editRecordInstanceById(record, recordId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Records SET user_id='${record.user_id}', mood_id='${record.mood_id}', reason_id='${record.reason_id}', WHERE id=${recordId}`;
+    const update = `UPDATE Records SET user_id='${record.user_id}', mood_id='${record.mood_id}', reason_id='${record.reason_id}' WHERE id=${recordId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);
@@ -98,7 +98,7 @@ export async function editRecordsInstanceById(record, recordId) {
  * @param {*} recordId id of a record that needs to be deleted
  * @returns 
  */
-export async function deleteRecordsInstanceById(recordId) {
+export async function deleteRecordInstanceById(recordId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const query = `DELETE FROM Records WHERE id='${recordId}'`;

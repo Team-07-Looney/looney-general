@@ -1,10 +1,10 @@
 import { 
-    createThoughtsInstance,
-    getAllThoughtsData,
-    getThoughtsInstanceById,
-    editThoughtsInstanceById,
-    deleteThoughtsInstanceById
-  } from '../database/adapter.js';
+    createThoughtInstance,
+    getAllThoughtData,
+    getThoughtInstanceById,
+    editThoughtInstanceById,
+    deleteThoughtInstanceById
+  } from '../database/thoughtsAdapter.js';
   
   /**
    * function that calculates today's date
@@ -36,9 +36,9 @@ import {
    * @param {*} res response sent with all the thoughts
    * @param {*} next 
    */
-  export async function getThoughts(req, res, next) {
+  export async function getThought(req, res, next) {
     try {
-      tempResponse.data = await getAllThoughtsData();
+      tempResponse.data = await getAllThoughtData();
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -51,9 +51,9 @@ import {
    * @param {*} res response sent with the result message
    * @param {*} next 
    */
-  export async function createThoughts(req, res, next) {
+  export async function createThought(req, res, next) {
     try {
-      await createThoughtsInstance(req.body);
+      await createThoughtInstance(req.body);
       tempResponse.data.message = "thoughts created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
@@ -67,9 +67,9 @@ import {
    * @param {*} res response sent with thoughts data
    * @param {*} next 
    */
-  export async function getThoughtsById(req, res, next) {
+  export async function getThoughtById(req, res, next) {
     try {
-      tempResponse.data = await getThoughtsInstanceById(req.params.id);
+      tempResponse.data = await getThoughtInstanceById(req.params.id);
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
@@ -82,9 +82,9 @@ import {
    * @param {*} res response sent with a result message
    * @param {*} next 
    */
-  export async function editThoughtsById(req, res, next) {
+  export async function editThoughtById(req, res, next) {
     try {
-      await editThoughtsInstanceById(req.body, req.params.id);
+      await editThoughtInstanceById(req.body, req.params.id);
       tempResponse.data.message = "thoughts edited successfully";
       res.status(200).send(tempResponse);
     } catch(err) {
@@ -98,9 +98,9 @@ import {
    * @param {*} res 
    * @param {*} next 
    */
-  export async function deleteThoughtsById(req, res, next) {
+  export async function deleteThoughtById(req, res, next) {
     try {
-      await deleteThoughtsInstanceById(req.params.id);
+      await deleteThoughtInstanceById(req.params.id);
       tempResponse.data.message = "thoughts deleted successfully";
       res.status(200).send(tempResponse);
     } catch(err) {

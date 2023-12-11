@@ -4,7 +4,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
  * executes SQL query that retrieves all the reasonss from reasonss table
  * @returns reasonss data from the database
  */
-export async function getAllReasonsData() {
+export async function getAllReasonData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = "SELECT * FROM Reasons";
@@ -28,7 +28,7 @@ export async function getAllReasonsData() {
  * @param {*} request request body with the data for a new reasons
  * @returns 
  */
-export async function createReasonsInstance(request) {
+export async function createReasonInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const insert = 'INSERT INTO Reasons (name) VALUES (?)';
@@ -51,7 +51,7 @@ export async function createReasonsInstance(request) {
  * @param {*} id id of a reasonss that needs to be retrieved
  * @returns reasons data
  */
-export async function getReasonsInstanceById(id) {
+export async function getReasonInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = `SELECT * FROM Reasons WHERE id='${id}'`;
@@ -75,7 +75,7 @@ export async function getReasonsInstanceById(id) {
  * @param {*} reasonsTypeId id of a reasons that needs to be updated
  * @returns 
  */
-export async function editReasonsInstanceById(reasonsType, reasonsTypeId) {
+export async function editReasonInstanceById(reasonsType, reasonsTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const update = `UPDATE Reasons SET name='${reasonsType.name}' WHERE id=${reasonsTypeId}`;
@@ -98,7 +98,7 @@ export async function editReasonsInstanceById(reasonsType, reasonsTypeId) {
  * @param {*} reasonsTypeId id of a reasons that needs to be deleted
  * @returns 
  */
-export async function deleteReasonsInstanceById(reasonsTypeId) {
+export async function deleteReasonInstanceById(reasonsTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const query = `DELETE FROM Reasons WHERE id='${reasonsTypeId}'`;

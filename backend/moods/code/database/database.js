@@ -9,26 +9,26 @@ const tableQueries = [
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL)`,
 //Create Moods table if it doesn't exists
- `CRAETE TABLE IF NOT EXISTS Moods (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     mood_type_id INTEGER FOREIGN KEY REFERENCES Mood_Types(id),
-     name TEXT UNIQUE NOT NULL)`,
+ `CREATE TABLE IF NOT EXISTS Moods (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  mood_type_id INTEGER REFERENCES Mood_Types(id),
+  name TEXT UNIQUE NOT NULL)`,
 //Create Reasons table if it doesn't exists
  `CREATE TABLE IF NOT EXISTS Reasons (
-     id PRIMARY KEY AUTOINCREMENT,
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
      name TEXT NOT NULL)`,
 //Create Records table if it doesn't exists
  `CREATE TABLE IF NOT EXISTS Records (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     user_id INTEGER,
-     reason_id INTEGER FOREIGN KEY REFERENCES Reasons(id),
-     mood_id INTEGER FOREING KEY REFERENCES Moods(id))`,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  user_id INTEGER,
+  reason_id INTEGER REFERENCES Reasons(id),
+  mood_id INTEGER REFERENCES Moods(id))`,
 //Create Thoughts table if it doesn't exists
  `CREATE TABLE IF NOT EXISTS Thoughts (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     title TEXT,
-     body TEXT NOT NULL,
-     record_id INTEGER FOREIGN KEY REFERENCES Records(id))`
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT,
+  body TEXT NOT NULL,
+  record_id INTEGER REFERENCES Records(id))`
 ];
 
 /**

@@ -4,7 +4,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
  * executes SQL query that retrieves all the habits from habits table
  * @returns habits data from the database
  */
-export async function getAllMoodsData() {
+export async function getAllMoodData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = "SELECT * FROM Moods";
@@ -28,10 +28,10 @@ export async function getAllMoodsData() {
  * @param {*} request request body with the data for a new habit
  * @returns 
  */
-export async function createMoodsInstance(request) {
+export async function createMoodInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Moods (name, mood_type_id) VALUES (?, 1)';
+    const insert = 'INSERT INTO Moods (name, mood_type_id) VALUES (?, ?)';
 
     db.run(insert, [request.name, request.mood_type_id], (err) => {
       closeDatabaseConnection(db);
@@ -51,7 +51,7 @@ export async function createMoodsInstance(request) {
  * @param {*} id id of a moods that needs to be retrieved
  * @returns mood data
  */
-export async function getMoodsInstanceById(id) {
+export async function getMoodInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = `SELECT * FROM Moods WHERE id='${id}'`;
@@ -75,7 +75,7 @@ export async function getMoodsInstanceById(id) {
  * @param {*} moodId id of a mood that needs to be updated
  * @returns 
  */
-export async function editMoodsInstanceById(mood, moodId) {
+export async function editMoodInstanceById(mood, moodId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const update = `UPDATE Moods SET name='${mood.name}', mood_type_id='${mood.mood_type_id}' WHERE id=${moodId}`;
@@ -98,7 +98,7 @@ export async function editMoodsInstanceById(mood, moodId) {
  * @param {*} moodId id of a mood that needs to be deleted
  * @returns 
  */
-export async function deleteMoodsInstanceById(moodId) {
+export async function deleteMoodInstanceById(moodId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const query = `DELETE FROM Moods WHERE id='${moodId}'`;

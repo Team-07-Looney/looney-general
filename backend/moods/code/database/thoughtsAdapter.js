@@ -4,7 +4,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
  * executes SQL query that retrieves all the thoughtss from thoughtss table
  * @returns thoughtss data from the database
  */
-export async function getAllThoughtsData() {
+export async function getAllThoughtData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = "SELECT * FROM Thoughts";
@@ -28,10 +28,10 @@ export async function getAllThoughtsData() {
  * @param {*} request request body with the data for a new thoughts
  * @returns 
  */
-export async function createThoughtsInstance(request) {
+export async function createThoughtInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Thoughts (title, body, record_id) VALUES (?, ?, 1)';
+    const insert = 'INSERT INTO Thoughts (title, body, record_id) VALUES (?, ?, ?)';
 
     db.run(insert, [request.title, request.body, request.record_id], (err) => {
       closeDatabaseConnection(db);
@@ -51,7 +51,7 @@ export async function createThoughtsInstance(request) {
  * @param {*} id id of a thoughtss that needs to be retrieved
  * @returns thoughts data
  */
-export async function getThoughtsInstanceById(id) {
+export async function getThoughtInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = `SELECT * FROM Thoughts WHERE id='${id}'`;
@@ -75,10 +75,10 @@ export async function getThoughtsInstanceById(id) {
  * @param {*} thoughtsId id of a thoughts that needs to be updated
  * @returns 
  */
-export async function editThoughtsInstanceById(thoughts, thoughtsId) {
+export async function editThoughtInstanceById(thoughts, thoughtsId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Thoughts SET title='${thoughts.title}', body='${thoughts.body}', record_id='${thoughts.record_id}', WHERE id=${thoughtsId}`;
+    const update = `UPDATE Thoughts SET title='${thoughts.title}', body='${thoughts.body}', record_id='${thoughts.record_id}' WHERE id=${thoughtsId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);
@@ -98,7 +98,7 @@ export async function editThoughtsInstanceById(thoughts, thoughtsId) {
  * @param {*} thoughtsId id of a thoughts that needs to be deleted
  * @returns 
  */
-export async function deleteThoughtsInstanceById(thoughtsId) {
+export async function deleteThoughtInstanceById(thoughtsId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const query = `DELETE FROM Thoughts WHERE id='${thoughtsId}'`;
