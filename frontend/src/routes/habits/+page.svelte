@@ -42,6 +42,16 @@
     }
 </script>
 
+<style>
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  </style>
+
 <Header title="Habits" route="/main" displayBackButton=1 displayMenu=1 />
 
 <ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
