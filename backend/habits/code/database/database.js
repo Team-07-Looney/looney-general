@@ -17,11 +17,38 @@ export async function openDatabaseConnection() {
       }
 
       // Runs a query to check if the habits table exists
+      db.get("SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type='table' AND name='categories'", async (err, row) => {
+        // If there is no such table create one
+        console.log(row);
+        if (row.tableCategoriesExists == 0) {
+          await createCategoriesTable(db);
+        }
+
+        resolve(db);
+      });
+      db.get("SELECT count(*) AS tablePredefinedHabitsExists FROM sqlite_master WHERE type='table' AND name='predefined_habits'", async (err, row) => {
+        // If there is no such table create one
+        console.log(row);
+        if (row.tablePredefinedHabitsExists == 0) {
+          await createPredefinedHabitsTable(db);
+        }
+
+        resolve(db);
+      });
       db.get("SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type='table' AND name='habits'", async (err, row) => {
         // If there is no such table create one
         console.log(row);
         if (row.tableHabitsExists == 0) {
-          await createTable(db);
+          await createHabitsTable(db);
+        }
+
+        resolve(db);
+      });
+      db.get("SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type='table' AND name='records'", async (err, row) => {
+        // If there is no such table create one
+        console.log(row);
+        if (row.tableRecordsExists == 0) {
+          await createRecordsTable(db);
         }
 
         resolve(db);
@@ -44,28 +71,87 @@ export function closeDatabaseConnection(db) {
   });
 }
 
+/**
+ * Creates a table for Categories
+ * @param {*} db 
+ * @returns 
+ */
+async function createCategoriesTable(db) {
+  return new Promise((resolve, reject) => {
+    db.run(`CREATE TABLE categories (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL)`,
+      (err) => {
+        if (err) {
+          console.error('Error creating table: ', err.message);
+          reject(err.message);
+        } else {
+          console.log('Table categories created.');
+          resolve();
+        }
+      });
+  })
+}
+
+async function createPredefinedHabitsTable(db) {
+  return new Promise((resolve, reject) => {
+    db.run(`CREATE TABLE predefined_habits (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT NOT NULL)`,
+      (err) => {
+        if (err) {
+          console.error('Error creating table: ', err.message);
+          reject(err.message);
+        } else {
+          console.log('Table predined habits created.');
+          resolve();
+        }
+      });
+  })
+}
+
 
 /**
+ * The user_id is missing to be implemented
+ * 
  * Creates asynchronously habits table
  * @param {*} db the database in which the table should be created
  */
 // The function needs to be async because otherwise other functions were taking over
 // priority (which were using the table in question) and would result in an error
-async function createTable(db) {
+async function createHabitsTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL, 
       start_time TEXT, 
-      duration INTEGER)`,
+      duration INTEGER,
+      category_id INTEGER NOT NULL,
+      FOREIGN KEY (category_id) REFERENCES categories(id))`,
       (err) => {
-        console.log('here? vol2');
-
         if (err) {
           console.error('Error creating table: ', err.message);
           reject(err.message);
         } else {
           console.log('Table habits created.');
+          resolve();
+        }
+      });
+  })
+}
+
+async function createRecordsTable(db) {
+  return new Promise((resolve, reject) => {
+    db.run(`CREATE TABLE records (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      habit_id INTEGER NOT NULL,
+      FOREIGN KEY (habit_id) REFERENCES habits(id))`,
+      (err) => {
+        if (err) {
+          console.error('Error creating table: ', err.message);
+          reject(err.message);
+        } else {
+          console.log('Table records created.');
           resolve();
         }
       });
