@@ -1,25 +1,33 @@
+import axios from "axios";
 import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
+import { fail } from '@sveltejs/kit';
 
 /**
- * @param {*} serverLoadEvent 
- * @returns
+ * Executes during the load of the svelte page
+ * @param {*} param0 
  */
-export const load = async ({ serverLoadEvent, cookies }) => {
+export const load = async ({ cookies }) => {
+  let isUserAuth = false;
+
   try {
+    // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
 
-    const response = await axios.get('http://localhost:3011/home', {
+    // Send request to the apigateway to check if the user is authenticated
+    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
-    const habits = response.data.data;
-    return { habits };
-  } catch (error) {
-    if (error.response.status == 401) {
-      throw redirect(302, '/login');
+    if (isAuthenticated.data.message == "User is authenticated") {
+      isUserAuth = true;
     }
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!isUserAuth) {
+    throw redirect(302, "/login");
   }
 };
