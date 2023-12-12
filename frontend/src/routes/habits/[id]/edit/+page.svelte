@@ -61,6 +61,7 @@
                         bind:_date 
                         label="Start Time" 
                         data={data.start_time} 
+                        display24=true
                         id="start_time" 
                         placeholder="hours and minutes"
                         error={form?.errors?.some((error) => error.input == "start_time")} />

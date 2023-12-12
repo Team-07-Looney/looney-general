@@ -3,27 +3,45 @@
     import { createEventDispatcher } from 'svelte';
     import Switcher from './Switcher.svelte';
   
-    
     export let visible = false;
     export let classes = 'appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none';
-    export let display24 = true;
+    export let display24 = false;
     export let locale = 'en-GB';
     export let label;
     export let placeholder;
     export let id;
     export let data;
-    export let date = data ? new Date(`01/01/1970 ${data}`) : new Date();
+    const dataElements = data?data.split(':'):[0, 0];
+    let currentDate = new Date();
+    export let date = data && display24 ? new Date(`01/01/1970 ${data}`) : data && !display24 && dataElements[0] < 60 ? new Date(`01/01/1970 ${currentDate.getHours()}:${data}`) : data && !display24 && dataElements[0] >= 60 ? new Date(`01/01/1970 ${currentDate.getHours() + Math.floor(dataElements[0] / 60)}:${dataElements[0] - Math.floor(dataElements[0] / 60) * 60}:${dataElements[1]}`) : new Date();
+    console.log(date);
+    let timeStyle = display24?"short":"medium";
+    let currentMinutes = data && dataElements[0] >= 60 ? (date.getHours() - currentDate.getHours()) * 60 + date.getMinutes() : data ? date.getMinutes() : 0;
+    let currentSeconds = data?date.getSeconds():0;
     let dateChange = false;
+    let minutesChange = false;
+    let secondsChange = false;
   
-    const HOURS = new Array(display24?24:12).fill(0).map((v, i) => v + i);
-    const MINUTES = new Array(60).fill(0).map((v, i) => v + i);
+    const HOURS = new Array(24).fill(0).map((v, i) => v + i);
+    const MINUTES = new Array(display24?60:90).fill(0).map((v, i) => v + i);
+    const SECONDS = new Array(60).fill(0).map((v, i) => v + i);
     const dispatch = createEventDispatcher();
   
     let _date, popup;
-    $:  _date = date.toLocaleTimeString(locale, { timeStyle: 'short' });
+    $:  _date = date.toLocaleTimeString(locale, { timeStyle: timeStyle });
   
     let resetDate = () => {
-      date = new Date();
+      if (display24) date = new Date();
+      else {
+        currentMinutes = 0;
+        currentSeconds = 0;
+        date = new Date(`01/01/1970 ${currentDate.getHours()}:00:00`);
+        dateChange = false;
+        minutesChange = false;
+        secondsChange = false;
+        console.log(date);
+        console.log((date.getHours() - currentDate.getHours()) * 60 + date.getMinutes());
+      }
     }
   
     let dateChanged = (event) => {
@@ -31,13 +49,25 @@
       let newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), date.getSeconds());
       switch(type) {
         case 'hour':
-          if(!display24 && date.getHours() >= 12) {
-            changedData += 12
-          }
           newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), changedData, date.getMinutes(), date.getSeconds());
           break;
         case 'minute':
-          newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), changedData, date.getSeconds());
+          console.log(changedData);
+          if (changedData >= 60) {
+            const hours = Math.floor(changedData / 60);
+            newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), currentDate.getHours() + hours, changedData - hours * 60, date.getSeconds());
+            console.log(newDate);
+          } else {
+            newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), display24?date.getHours():currentDate.getHours(), changedData, date.getSeconds());
+            console.log(newDate);
+          }
+          currentMinutes = changedData;
+          minutesChange = true;
+          break;
+        case 'second':
+          currentSeconds = changedData;
+          newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes(), changedData);
+          secondsChange = true;
           break;
       }
   
@@ -48,8 +78,8 @@
   
     function confirmDate(event){
       visible = !visible
-      dispatch('confirmDate', {MouseEvent:event, date});
       dateChange = true;
+      dispatch('confirmDate', {MouseEvent:event, date});
     }
   
     function clickedOutside(event){
@@ -146,8 +176,9 @@
         name={id} 
         class='{classes}' 
         readonly 
-        value="{dateChange ? _date : data ? data : ''}" 
-        placeholder="{placeholder}" on:focus={() => {visible = !visible}}>
+        value={dateChange && display24 ? _date : dateChange && !display24 ? `${currentMinutes}:${currentSeconds}` : data ? data : ''}
+        placeholder="{placeholder}" 
+        on:focus={() => {visible = !visible}}>
   </div>
 </div>
   <!-- svelte-ignore a11y-no-static-element-interactions -->
@@ -157,11 +188,17 @@
       <div>
         <div class="touch-date-wrapper">
           <div class='touch-date-picker'>
-            <Switcher type='hour' data={HOURS} selected={display24?date.getHours()+1:date.getHours()%12+1} on:dateChange={dateChanged}/>
-            <Switcher type='minute' data={MINUTES} selected={date.getMinutes()+1} on:dateChange={dateChanged}/>
+            {#if display24}
+              <Switcher type='hour' data={HOURS} selected={date.getHours()+1} on:dateChange={dateChanged}/>
+              <Switcher type='minute' data={MINUTES} selected={date.getMinutes()+1} on:dateChange={dateChanged}/>
+            {:else}
+              <Switcher type='minute' data={MINUTES} selected={data || minutesChange?(date.getHours() - currentDate.getHours()) * 60 + date.getMinutes() + 1:1} on:dateChange={dateChanged}/>
+              <Switcher type='second' data={SECONDS} selected={data || secondsChange?date.getSeconds() + 1:1} on:dateChange={dateChanged}/>
+            {/if}
+            
           </div>
           <div class='touch-date-reset'>
-            <button on:click|stopPropagation={resetDate}>Reset</button>
+            <button on:click|stopPropagation|preventDefault={resetDate}>Reset</button>
             <button on:click|stopPropagation={confirmDate}>Ok</button>
           </div>
         </div>

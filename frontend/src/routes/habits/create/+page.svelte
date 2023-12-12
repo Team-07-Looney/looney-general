@@ -58,15 +58,16 @@
 
             <TimePicker 
             bind:_date 
-            label="Start Time" 
-            id="start_time" 
+            label="Start Time"
+            id="start_time"
+            display24=true
             error={form?.errors?.some((error) => error.input == "start_time")} 
             placeholder="hours and minutes"
             data={form?.startTime} />
 
             <TimePicker 
             label="Duration" 
-            id="duration" 
+            id="duration"
             error={form?.errors?.some((error) => error.input == "duration")} 
             placeholder="minutes and seconds"
             data={form?.duration} />

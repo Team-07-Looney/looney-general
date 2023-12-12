@@ -87,7 +87,7 @@ async function validateEditData(name, startTime, duration) {
     errors.push({ "input": "name", "message": "Name is missing" });
   } else {
     //if it exists, check if it contains only english letters
-    const nameRegex = /^[a-zA-Z]+$/;
+    const nameRegex = /^[a-zA-Z\s]+$/;
     if (!nameRegex.test(name)) {
       errors.push({ "input": "name", "message": "Name should contain only English letters" });
     }
@@ -109,10 +109,10 @@ async function validateEditData(name, startTime, duration) {
     errors.push({ "input": "duration", "message": "Duration is missing" });
   } else {
     //if it exists, check for invalid input
-    const durationRegex = /^(?:[0-8]?\d|90):[0-5]\d|90:00$/;
+    const durationRegex = /^([0-8]?[0-9]|90):([0-5]?[0-9]|60)$/;
     const durationElements = duration.split(':');
     if (!durationRegex.test(duration)) {
-      errors.push({ "input": "duration", "message": "Duration should be of a format mm:ss" });
+      errors.push({ "input": "duration", "message": "Duration should be of a format (m)m:(s)s" });
     } else if (parseInt(durationElements[0]) === 0 && parseInt(durationElements[1]) === 0) {
       errors.push({ "input": "duration", "message": "Duration should be more than zero" });
     }
