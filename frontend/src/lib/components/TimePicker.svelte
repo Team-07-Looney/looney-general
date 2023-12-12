@@ -14,7 +14,6 @@
     const dataElements = data?data.split(':'):[0, 0];
     let currentDate = new Date();
     export let date = data && display24 ? new Date(`01/01/1970 ${data}`) : data && !display24 && dataElements[0] < 60 ? new Date(`01/01/1970 ${currentDate.getHours()}:${data}`) : data && !display24 && dataElements[0] >= 60 ? new Date(`01/01/1970 ${currentDate.getHours() + Math.floor(dataElements[0] / 60)}:${dataElements[0] - Math.floor(dataElements[0] / 60) * 60}:${dataElements[1]}`) : new Date();
-    console.log(date);
     let timeStyle = display24?"short":"medium";
     let currentMinutes = data && dataElements[0] >= 60 ? (date.getHours() - currentDate.getHours()) * 60 + date.getMinutes() : data ? date.getMinutes() : 0;
     let currentSeconds = data?date.getSeconds():0;
@@ -39,8 +38,6 @@
         dateChange = false;
         minutesChange = false;
         secondsChange = false;
-        console.log(date);
-        console.log((date.getHours() - currentDate.getHours()) * 60 + date.getMinutes());
       }
     }
   
@@ -187,6 +184,10 @@
     <div class="touch-date-popup" on:click={clickedOutside} bind:this={popup}>
       <div>
         <div class="touch-date-wrapper">
+          <div class="flex flex-row">
+            <p class="m-2">{display24?"Hours":"Minutes"}</p>
+            <p class="m-2">Minutes</p>
+          </div>
           <div class='touch-date-picker'>
             {#if display24}
               <Switcher type='hour' data={HOURS} selected={date.getHours()+1} on:dateChange={dateChanged}/>

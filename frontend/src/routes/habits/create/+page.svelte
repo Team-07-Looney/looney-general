@@ -18,7 +18,7 @@
     <FormEars />
     <div class="grid grid-cols-1">
       <Header title="Add Habit" displayBackButton="0" />
-      <ShadowsForForms width={267} height={360} />
+      <ShadowsForForms width={267} height={327} />
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
           <form
