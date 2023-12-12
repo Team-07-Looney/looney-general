@@ -72,43 +72,59 @@ export function closeDatabaseConnection(db) {
 }
 
 /**
- * Creates a table for Categories
+ * Creates a table for Categories and add predefined categories
  * @param {*} db 
  * @returns 
  */
 async function createCategoriesTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE categories (
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL)`,
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL)`,
       (err) => {
         if (err) {
           console.error('Error creating table: ', err.message);
           reject(err.message);
         } else {
           console.log('Table categories created.');
-          resolve();
+
+          // Insert predefined data
+          const predefinedCategories = ['Morning Routine', 'Afternoon Routine', 'Evening Routine', 'Anytime'];
+          const insertQuery = 'INSERT INTO categories (name) VALUES (?)';
+
+          predefinedCategories.forEach((name) => {
+            db.run(insertQuery, [name], (err) => {
+              if (err) {
+                console.error(`Error inserting data for category `, err.message);
+                reject(err.message);
+              } else {
+                console.log(`Data inserted for category: ${name}`);
+                resolve();
+              }
+            });
+          });
         }
       });
-  })
+  });
 }
 
+
 async function createPredefinedHabitsTable(db) {
-  return new Promise((resolve, reject) => {
-    db.run(`CREATE TABLE predefined_habits (
+      return new Promise((resolve, reject) => {
+        db.run(`CREATE TABLE predefined_habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table predined habits created.');
-          resolve();
-        }
-      });
-  })
-}
+          (err) => {
+            if (err) {
+              console.error('Error creating table: ', err.message);
+              reject(err.message);
+            } else {
+              console.log('Table predined habits created.');
+              resolve();
+            }
+          });
+      })
+    }
 
 
 /**
@@ -120,40 +136,40 @@ async function createPredefinedHabitsTable(db) {
 // The function needs to be async because otherwise other functions were taking over
 // priority (which were using the table in question) and would result in an error
 async function createHabitsTable(db) {
-  return new Promise((resolve, reject) => {
-    db.run(`CREATE TABLE habits (
+      return new Promise((resolve, reject) => {
+        db.run(`CREATE TABLE habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL, 
       start_time TEXT, 
       duration INTEGER,
       category_id INTEGER NOT NULL,
       FOREIGN KEY (category_id) REFERENCES categories(id))`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table habits created.');
-          resolve();
-        }
-      });
-  })
-}
+          (err) => {
+            if (err) {
+              console.error('Error creating table: ', err.message);
+              reject(err.message);
+            } else {
+              console.log('Table habits created.');
+              resolve();
+            }
+          });
+      })
+    }
 
 async function createRecordsTable(db) {
-  return new Promise((resolve, reject) => {
-    db.run(`CREATE TABLE records (
+      return new Promise((resolve, reject) => {
+        db.run(`CREATE TABLE records (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       habit_id INTEGER NOT NULL,
       FOREIGN KEY (habit_id) REFERENCES habits(id))`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table records created.');
-          resolve();
-        }
-      });
-  })
-}
+          (err) => {
+            if (err) {
+              console.error('Error creating table: ', err.message);
+              reject(err.message);
+            } else {
+              console.log('Table records created.');
+              resolve();
+            }
+          });
+      })
+    }
