@@ -26,7 +26,18 @@ const usersProxy = createProxyMiddleware({
   onProxyReq: fixRequestBody,
 });
 
+const moodProxy = createProxyMiddleware({
+  target: 'http://msmoods:3013',
+  changeOrigin: true,
+  onProxyReq: fixRequestBody,
+});
+
 router.use('/habits', cors(), requireAuth, habitProxy);
+router.use('/moods', cors(), requireAuth, moodProxy);
+router.use('/mood-types', cors(), requireAuth, moodProxy);
+router.use('/thoughts', cors(), requireAuth, moodProxy);
+router.use('/reasons', cors(), requireAuth, moodProxy);
+router.use('/records', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
 
 // Authentication routes
