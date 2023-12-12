@@ -49,14 +49,11 @@
           newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), changedData, date.getMinutes(), date.getSeconds());
           break;
         case 'minute':
-          console.log(changedData);
           if (changedData >= 60) {
             const hours = Math.floor(changedData / 60);
             newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), currentDate.getHours() + hours, changedData - hours * 60, date.getSeconds());
-            console.log(newDate);
           } else {
             newDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), display24?date.getHours():currentDate.getHours(), changedData, date.getSeconds());
-            console.log(newDate);
           }
           currentMinutes = changedData;
           minutesChange = true;
