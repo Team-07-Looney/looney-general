@@ -2,7 +2,7 @@
     import { setContext } from "svelte";
     import { onMount } from "svelte";
     import Header from "../../lib/components/Header.svelte";
-    import HabitItem from "../../lib/components/HabitItem.svelte";
+    import CategoryItem from "../../lib/components/CategoryItem.svelte";
  
     // Data contains all data passed by the page server
     export let data;
@@ -10,7 +10,7 @@
     let menuOpen = false;
     let storedId = 0;
     let dropdown;
-  console.log(data);
+    
     onMount(() => {
       window.addEventListener("click", (event) => {
         if (storedId !== 0 && menuOpen && event.target !== dropdown) {
@@ -42,27 +42,16 @@
     }
 </script>
  
-<style>
-  ::-webkit-scrollbar-thumb {
-    background: gray;
-    border-radius: 20px;
-  }
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-  </style>
+<Header title="My Routines" route="/home" displayBackButton=1 displayMenu=1 />
  
- 
-<Header title="Habits" route="/home" displayBackButton=1 displayMenu=1 />
- 
-<ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
-  {#each data.habits as habit}
+<ul style="margin-top: 110px; position:relative; z-index: 5">
+  {#each data.categories as category}
     <li class="px-10 py-2">
-      <HabitItem title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} on:click={handleOpening(habit.id)} />
+      <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
     </li>
   {/each}
 </ul>
  
 <div class="flex justify-center items-center relative" style="z-index: 10;">
-<a class="p-2" href="/habits/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
+<a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
 </div>

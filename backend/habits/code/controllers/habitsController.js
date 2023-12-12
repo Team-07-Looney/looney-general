@@ -4,7 +4,7 @@ import {
   getHabitInstanceById,
   editHabitInstanceById,
   deleteHabitInstanceById
-} from '../database/adapter.js';
+} from '../database/habitsAdapter.js';
 
 /**
  * function that calculates today's date

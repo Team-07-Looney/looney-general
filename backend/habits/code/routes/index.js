@@ -37,6 +37,22 @@ router.options('/habits', (req, res, next) => {
   }
 });
 
+router.options('/categories', (req, res, next) => {
+  try {
+    //set header before response
+    res.header({
+      allow: 'GET, POST, DELETE, OPTIONS',
+      'Content-type': 'habit/json',
+      Data: Date.now(),
+      'Content-length': 0,
+    });
+    //response
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
+});
+
 
 
 
@@ -56,18 +72,24 @@ router.options('/habits', (req, res, next) => {
 // router.delete('/habits/:id', cors(), deleteCategoryById);
 
 // get a collection of all the habits
-router.get('/habits', cors(), getHabits);
+router.get('/categories', cors(), getCategories);
 
 // route for creating a habit
-router.post('/habits', cors(), createHabit);
+router.post('/categories', cors(), createCategory);
 
 // route for getting a habit
-router.get('/habits/:id', cors(), getHabitById);
+router.get('/categories/:categoryId', cors(), getCategoryById);
 
 // route for editing a habit
-router.put('/habits/:id', cors(), editHabitById);
+router.put('/categories/:categoryId', cors(), editCategoryById);
 
 // route for deleteing a habit
-router.delete('/habits/:id', cors(), deleteHabitById);
+router.delete('/categories/:categoryId', cors(), deleteCategoryById);
+
+router.get('/categories/:categoryId/habits', cors(), getHabits);
+router.post('/categories/:categoryId/habits', cors(), createHabit);
+router.get('/categories/:categoryId/habits/:habitId', cors(), getHabitById);
+router.put('/categories/:categoryId/habits/:habitId', cors(), editHabitById);
+router.delete('/categories/:categoryId/habits/:habitId', cors(), deleteHabitById);
 
 export default router;

@@ -5,7 +5,7 @@ import {
     editCategoryInstanceById,
     deleteCategoryInstanceById
 
-} from '../database/adapter.js';
+} from '../database/categoryAdapter.js';
 
 /**
  * function that calculates today's date
@@ -64,7 +64,7 @@ export async function createCategory(req, res, next) {
  */
 export async function getCategoryById(req, res, next) {
   try {
-    tempResponse.data = await getCategoryInstanceById(req.params.id);
+    tempResponse.data = await getCategoryInstanceById(req.params.categoryId);
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);

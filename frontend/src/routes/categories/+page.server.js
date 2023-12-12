@@ -11,14 +11,14 @@ export const load = async ({ serverLoadEvent, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
 
-    const response = await axios.get('http://localhost:3011/habits', {
+    const response = await axios.get('http://localhost:3011/categories', {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
-    const habits = response.data.data;
-    return { habits };
+    const categories = response.data.data;
+    return { categories };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');

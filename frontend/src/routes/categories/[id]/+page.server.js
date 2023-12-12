@@ -12,14 +12,14 @@ export const load = async ({ params, cookies }) => {
     const jwt = cookies.get('jwt');
 
     const { id } = params;
-    const response = await axios.get(`http://localhost:3011/habits/${id}`, {
+    const response = await axios.get(`http://localhost:3011/categories/${id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
-    const habit = response.data.data;
-    return { habit };
+    const categories = response.data.data;
+    return { categories };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');
@@ -28,14 +28,14 @@ export const load = async ({ params, cookies }) => {
 };
 
 export const actions = {
-  deleteHabit: async ({ params, cookies }) => {
+  deleteCategory: async ({ params, cookies }) => {
     try {
       // Retrieves the id from the url
       const { id } = params;
       const jwt = cookies.get('jwt');
 
       // Set the body of the request, adds a header and sends delete request to delete habit
-      const data = await axios.delete(`http://localhost:3011/habits/${id}`, {
+      const data = await axios.delete(`http://localhost:3011/categories/${id}`, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
@@ -48,6 +48,6 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, '/categories');
   }
 };
