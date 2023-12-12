@@ -2,12 +2,22 @@ import sqlite3 from 'sqlite3';
 
 export let DBSOURCE = "./database/db.sqlite"
 
+// Only testing database, DO NOT USE IN ANYTHING BUT JEST
+let testingDatabase = new sqlite3.Database(":memory:");
+
 /**
- * When running unit tests with npm test it uses the memory database instead of the 
- * sqlite file ./database/db.sqlite
+ * USED ONLY FOR TESTING WITH JEST
+ * Refreshes the in memory database to allow fresh db every time
+ * a new test is ran
+ * @returns the testing database
  */
-if (process.env.NODE_ENV === 'test') {
-  DBSOURCE = ":memory:";
+export async function refreshTestingDatabase() {
+  return new Promise(async (resolve) => {
+    testingDatabase = new sqlite3.Database(":memory:");
+    await createTable(testingDatabase);
+
+    resolve(testingDatabase);
+  });
 }
 
 /**
@@ -16,6 +26,13 @@ if (process.env.NODE_ENV === 'test') {
  */
 export async function openDatabaseConnection() {
   return new Promise(async (resolve, reject) => {
+
+    // Not the cleanest solution but works - NODE_ENV is set by npm test - refer to package.json
+    if (process.env.NODE_ENV === 'test') {
+      await createTable(testingDatabase);
+      resolve(testingDatabase);
+    }
+
     const db = new sqlite3.Database(DBSOURCE, (err) => {
       if (err) {
         console.error(err.message);
