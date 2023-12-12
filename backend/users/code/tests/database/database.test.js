@@ -1,9 +1,10 @@
-import { openDatabaseConnection, closeDatabaseConnection, createTable } from "../database/database";
+import { openDatabaseConnection, closeDatabaseConnection, createTable, refreshTestingDatabase } from "../../database/database";
 import sqlite3 from "sqlite3";
 
 describe('database connection opening', () => {
   test('successful opening a database connection and existence of users table', async () => {
     // Arrange + Act
+    await refreshTestingDatabase();
     const db = await openDatabaseConnection();
 
     // Assert
@@ -18,6 +19,7 @@ describe('database connection opening', () => {
 describe('database connection closing', () => {
   test('successful closing of a database connection', async () => {
     // Arrange
+    await refreshTestingDatabase();
     const db = await openDatabaseConnection();
     console.error = jest.fn();
 
@@ -63,6 +65,7 @@ describe('creation of table users', () => {
 
   test('no additional tables created when creating table users if it already exists', async () => {
     // Arrange
+    await refreshTestingDatabase();
     const db = await openDatabaseConnection();
 
     // Act
