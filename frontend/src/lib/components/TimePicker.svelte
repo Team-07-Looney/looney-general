@@ -181,9 +181,9 @@
     <div class="touch-date-popup" on:click={clickedOutside} bind:this={popup}>
       <div>
         <div class="touch-date-wrapper">
-          <div class="flex flex-row">
-            <p class="m-2">{display24?"Hours":"Minutes"}</p>
-            <p class="m-2">Minutes</p>
+          <div class="flex flex-row items-center gap-6 {display24?"pl-3":""} mx-10">
+            <p>{display24?"Hours":"Minutes"}</p>
+            <p>{display24?"Minutes":"Seconds"}</p>
           </div>
           <div class='touch-date-picker'>
             {#if display24}
