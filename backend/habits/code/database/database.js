@@ -141,9 +141,7 @@ async function createHabitsTable(db) {
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL, 
       start_time TEXT, 
-      duration INTEGER,
-      category_id INTEGER NOT NULL,
-      FOREIGN KEY (category_id) REFERENCES categories(id))`,
+      duration INTEGER)`,
           (err) => {
             if (err) {
               console.error('Error creating table: ', err.message);

@@ -40,34 +40,34 @@ router.options('/habits', (req, res, next) => {
 
 
 
-// get a collection of all the habits
-router.get('/habits', cors(), getCategories);
-
-// route for creating a habit
-router.post('/habits', cors(), createCategory);
-
-// route for getting a habit
-router.get('/habits/:id', cors(), getCategoryById);
-
-// route for editing a habit
-router.put('/habits/:id', cors(), editCategoryById);
-
-// route for deleteing a habit
-router.delete('/habits/:id', cors(), deleteCategoryById);
-
 // // get a collection of all the habits
-// router.get('/habits', cors(), getHabits);
+// router.get('/habits', cors(), getCategories);
 
 // // route for creating a habit
-// router.post('/habits', cors(), createHabit);
+// router.post('/habits', cors(), createCategory);
 
 // // route for getting a habit
-// router.get('/habits/:id', cors(), getHabitById);
+// router.get('/habits/:id', cors(), getCategoryById);
 
 // // route for editing a habit
-// router.put('/habits/:id', cors(), editHabitById);
+// router.put('/habits/:id', cors(), editCategoryById);
 
 // // route for deleteing a habit
-// router.delete('/habits/:id', cors(), deleteHabitById);
+// router.delete('/habits/:id', cors(), deleteCategoryById);
+
+// get a collection of all the habits
+router.get('/habits', cors(), getHabits);
+
+// route for creating a habit
+router.post('/habits', cors(), createHabit);
+
+// route for getting a habit
+router.get('/habits/:id', cors(), getHabitById);
+
+// route for editing a habit
+router.put('/habits/:id', cors(), editHabitById);
+
+// route for deleteing a habit
+router.delete('/habits/:id', cors(), deleteHabitById);
 
 export default router;
