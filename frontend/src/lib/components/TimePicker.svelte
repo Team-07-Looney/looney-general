@@ -122,22 +122,6 @@
     overflow: hidden;
   }
   
-  .touch-date-reset > button {
-    width: 100px;
-    height: 30px;
-    border-radius: 15px;
-    border: var(--svtd-border, 1px solid grey);
-    outline: none;
-    color: var(--svtd-button-color, black);
-    background-color: var(--svtd-button-bg-color, transparent);
-    box-shadow: var(--svtd-button-box-shadow, none) ;
-    font-weight: 300;
-  }
-  .touch-date-reset button:active {
-    -webkit-transform: scale(0.95);
-            transform: scale(0.95);
-  }
-  
   .date-line {
     font-size: 30px;
     font-weight: 300;
@@ -195,9 +179,15 @@
             {/if}
             
           </div>
-          <div class='touch-date-reset'>
-            <button on:click|stopPropagation|preventDefault={resetDate}>Reset</button>
-            <button on:click|stopPropagation={confirmDate}>Ok</button>
+          <div class="flex gap-4">
+            <button 
+            class="px-5 py-2 rounded-lg mt-3"
+            style="background-color: #B4B4B4" 
+            on:click|stopPropagation|preventDefault={resetDate}>Reset</button>
+            <button
+            class="px-9 py-2 rounded-lg mt-3"
+            style="background-color: #9B9DD1" 
+            on:click|stopPropagation={confirmDate}>Ok</button>
           </div>
         </div>
       </div>
