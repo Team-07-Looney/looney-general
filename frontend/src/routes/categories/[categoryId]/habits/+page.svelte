@@ -58,7 +58,7 @@
   {#each data.habits as habit}
     {#if data.category[0].id == habit.category_id} 
       <li class="px-10 py-2">
-          <HabitItem title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} on:click={handleOpening(habit.id)} />
+          <HabitItem title={habit.name} time={habit.start_time} iconCount={habit.id%4} categoryId={habit.category_id} habitId={habit.id} on:click={handleOpening(habit.id)} />
       </li> 
     {/if}
   {/each}

@@ -10,16 +10,18 @@ import { redirect } from '@sveltejs/kit';
 export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
+    console.log(params);
+    const { categoryId, habitId } = params;
 
-    const { id } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${id}`, {
+    const response = await axios.get(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
-    const categories = response.data.data;
-    return { categories };
+    const habit = response.data.data;
+
+    return { habit };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');
@@ -28,14 +30,14 @@ export const load = async ({ params, cookies }) => {
 };
 
 export const actions = {
-  deleteCategory: async ({ params, cookies }) => {
+  deleteHabit: async ({ params, cookies }) => {
+    const { categoryId, habitId } = params;
     try {
       // Retrieves the id from the url
-      const { id } = params;
       const jwt = cookies.get('jwt');
 
       // Set the body of the request, adds a header and sends delete request to delete habit
-      const data = await axios.delete(`http://localhost:3011/categories/${id}`, {
+      const data = await axios.delete(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
@@ -48,6 +50,6 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/categories');
+    throw redirect(302, `/categories/${categoryId}/habits`);
   }
 };

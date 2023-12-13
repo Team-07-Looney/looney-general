@@ -11,12 +11,13 @@ export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
 
-    const { id } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${id}`, {
+    const response = await axios.get(`http://localhost:3011/categories/${params.categoryId}/habits/${params.habitId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
+
+    const category = params.categoryId;
     const habitData = response.data.data[0];
 
     const duration_minutes = Math.floor(habitData.duration / 60);
@@ -29,7 +30,7 @@ export const load = async ({ params, cookies }) => {
       duration: ((duration_seconds >= 0 && duration_seconds <= 9) ? `${duration_minutes}:0${duration_seconds}` : `${duration_minutes}:${duration_seconds}`)
     };
 
-    return habit;
+    return { habit, category };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');
@@ -39,12 +40,12 @@ export const load = async ({ params, cookies }) => {
 
 export const actions = {
   editHabit: async ({ params, request, cookies }) => {
+    const { categoryId, habitId } = params;
     try {
       // Retrieves the data from the form
       const formData = await request.formData();
       const jwt = cookies.get('jwt');
-
-      const { id } = params;
+      
       const name = formData.get('name');
       const startTime = formData.get('start_time');
       const duration = formData.get('duration');
@@ -59,7 +60,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
-      const data = await axios.put(`http://localhost:3011/habits/${id}`, {
+      const data = await axios.put(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
         name: name,
         start_time: startTime,
         duration: parseInt(durationElements[0]) * 60 + parseInt(durationElements[1])
@@ -75,7 +76,7 @@ export const actions = {
       }
     }
 
-    throw redirect(302, `/habits`);
+    throw redirect(302, `/categories/${categoryId}/habits`);
   }
 };
 

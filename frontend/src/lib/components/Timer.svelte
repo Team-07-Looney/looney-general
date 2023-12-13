@@ -5,6 +5,7 @@
 
     // Duration of the timer
     export let countdown;
+    export let categoryId;
 
     let now = Date.now();
     let end = now + countdown * 1000;
@@ -125,7 +126,7 @@
         {:else}
           <button on:click={handleStart} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>
         {/if}
-        <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/habits">Done</a></button> 
+        <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/categories/{categoryId}/habits">Done</a></button> 
       {/if}
     </div>
   </div>

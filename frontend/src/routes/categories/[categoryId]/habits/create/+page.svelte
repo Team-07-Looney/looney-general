@@ -7,6 +7,8 @@
   
     /** @type {import('./$types').ActionData} */
     export let form;
+
+    export let data;
   
     // date for time picker
     let date = new Date();
@@ -75,7 +77,7 @@
 
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
-                href="/categories"
+                href="/categories/{data.categoryId}/habits"
                 class="px-5 py-2 rounded-lg mt-3 font-bold"
                 style="background-color: #B4B4B4">Cancel</a
               >

@@ -22,7 +22,7 @@ console.log(data);
             </div>
 
             <div>
-               <Timer bind:countdown={data.habit[0].duration} />
+               <Timer bind:countdown={data.habit[0].duration} categoryId={data.habit[0].category_id} />
             </div>   
         </div>
     </li> 

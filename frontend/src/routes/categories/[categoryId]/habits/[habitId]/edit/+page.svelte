@@ -8,6 +8,8 @@
     import AuthInput from "../../../../../../lib/components/authInput.svelte";
     export let data;
 
+    console.log(data);
+
   // date for time picker
   let date = new Date();
   $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
@@ -52,7 +54,7 @@
                             type={"text"}
                             placeholder={""}
                             path={"M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"}
-                            value={data.name}
+                            value={data.habit.name}
                             error={form?.errors?.some(
                                 (error) => error.input == "name",
                             )}
@@ -61,7 +63,7 @@
                         <TimePicker 
                         bind:_date 
                         label="Start Time" 
-                        data={data.start_time} 
+                        data={data.habit.start_time} 
                         display24=true
                         id="start_time" 
                         placeholder="hours and minutes"
@@ -69,7 +71,7 @@
 
                         <TimePicker 
                         label="Duration" 
-                        data={data.duration} 
+                        data={data.habit.duration} 
                         id="duration" 
                         placeholder="minutes and seconds"
                         error={form?.errors?.some((error) => error.input == "duration")} />
@@ -78,7 +80,7 @@
                             class="flex flex-row gap-12 justify-center items-center"
                         >
                             <a
-                                href="/categories/habits"
+                                href="/categories/{data.category}/habits"
                                 class="px-5 py-2 rounded-lg mt-3 font-bold"
                                 style="background-color: #B4B4B4">Cancel</a
                             >

@@ -11,8 +11,8 @@ export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
 
-    const { id } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${id}`, {
+    const { categoryId } = params;
+    const response = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -38,7 +38,7 @@ export const actions = {
       // Retrieves the data from the form
       const formData = await request.formData();
       const jwt = cookies.get('jwt');
-      const { id } = params;
+      const { categoryId } = params;
       const name = formData.get('name');
 
       // check for errors in a form data
@@ -50,7 +50,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
-      const data = await axios.put(`http://localhost:3011/categories/${id}`, {
+      const data = await axios.put(`http://localhost:3011/categories/${categoryId}`, {
         name: name
       }, {
         headers: {

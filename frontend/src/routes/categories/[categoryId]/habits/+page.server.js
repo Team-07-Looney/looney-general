@@ -10,15 +10,15 @@ import axios from 'axios';
 export const load = async ({ serverLoadEvent, cookies, params }) => {
   try {
     const jwt = cookies.get('jwt');
-    const { id } = params
+    const { categoryId } = params
 
-    const responseCategory = await axios.get(`http://localhost:3011/categories/${id}`, {
+    const responseCategory = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    const responseHabits = await axios.get(`http://localhost:3011/categories/${id}/habits`, {
+    const responseHabits = await axios.get(`http://localhost:3011/categories/${categoryId}/habits`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
