@@ -10,7 +10,6 @@ import { redirect } from '@sveltejs/kit';
 export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
-    console.log(params);
     const { categoryId, habitId } = params;
 
     const response = await axios.get(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {

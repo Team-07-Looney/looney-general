@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { fail, redirect } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 /**
  * Executes during the load of the svelte page
@@ -29,7 +30,8 @@ export const load = async ({ cookies }) => {
 export const actions = {
   createCategory: async ({ request, cookies }) => {
     try {
-      const jwt = cookies.get('jwt');
+      const jwtoken = cookies.get('jwt');
+      const payload = jwt.decode(jwtoken);
 
       // Retrieves the data from the form
       const formData = await request.formData();
@@ -46,13 +48,15 @@ export const actions = {
       // Set the body of the request, adds a header and sends post request to create habit
       const data = await axios.post('http://localhost:3011/categories', {
         name: name,
+        user_id: payload.id
       }, {
         headers: {
-          "Authorization": `Bearer ${jwt}`,
+          "Authorization": `Bearer ${jwtoken}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       });
     } catch (error) {
+      console.log(error);
       if (error.response.status == 401) {
         throw redirect(302, '/login');
       }

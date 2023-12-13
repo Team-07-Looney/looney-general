@@ -80,7 +80,8 @@ async function createCategoriesTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        name TEXT NOT NULL)`,
+        name TEXT NOT NULL,
+        user_id INTEGER)`,
       (err) => {
         if (err) {
           console.error('Error creating table: ', err.message);
