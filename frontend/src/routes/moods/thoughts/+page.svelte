@@ -11,5 +11,14 @@
              route="/moods"
              displayBackButton=1
              imgExtraPath = "../"/>
-
+            
+<div>
+{#if data.thoughts.length > 0}
+{#each data.thoughts as thought}
+<div><p>{thought.body}</p></div>
+{/each}
+{:else}
+<p>lol</p>
+{/if}
+</div>
 <BottomMenu imgPath="../" displayMoodText=1/>
