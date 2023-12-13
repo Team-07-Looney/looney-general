@@ -100,16 +100,26 @@ export async function getAllCategoriesData() {
   export async function deleteCategoryInstanceById(categoryId) {
     return new Promise(async (resolve, reject) => {
       const db = await openDatabaseConnection();
-      const query = `DELETE FROM categories WHERE id='${categoryId}'`;
+      const categoryQuery = `DELETE FROM categories WHERE id='${categoryId}'`;
+      const habitQuery = `DELETE FROM habits WHERE category_id='${categoryId}'`;
       
-      db.run(query, (err) => {
+      db.run(categoryQuery, (err) => {
         closeDatabaseConnection(db);
   
         if (err) {
           console.error(err);
           reject(err);
         } else {
-          resolve();
+          db.run(habitQuery, (err) => {
+            closeDatabaseConnection(db);
+
+            if (err) {
+              console.error(err);
+              reject(err);
+            } else {
+              resolve();
+            }
+          })
         }
       });
     });
