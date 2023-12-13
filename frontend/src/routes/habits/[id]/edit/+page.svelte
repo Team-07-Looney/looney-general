@@ -1,38 +1,24 @@
 <script>
-    import { onMount } from "svelte";
+  /** @type {import('./$types').ActionData} */
+  export let form;
+  import Header from "../../../../lib/components/Header.svelte";
+  import FormEars from "../../../../lib/components/FormEars.svelte";
+  import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
+  import AuthInput from "../../../../lib/components/authInput.svelte";
+  import TimePicker from "../../../../lib/components/TimePicker.svelte";
+  export let data;
 
-    /** @type {import('./$types').ActionData} */
-    export let form;
-    import Header from "../../../../lib/components/Header.svelte";
-    import FormEars from "../../../../lib/components/FormEars.svelte";
-    import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
-    import AuthInput from "../../../../lib/components/authInput.svelte";
-    export let data;
-
-    onMount(() => {
-        function addNulIfNeeded(event) {
-            if (event.target.value >= 0 && event.target.value <= 9) {
-                event.target.value = `0${event.target.value}`;
-            }
-        }
-
-        const start_time_minutes =
-            document.getElementById("start_time_minutes");
-        const start_time_hours = document.getElementById("start_time_hours");
-        const duration_seconds = document.getElementById("duration_seconds");
-
-        start_time_minutes.addEventListener("change", addNulIfNeeded);
-        start_time_hours.addEventListener("change", addNulIfNeeded);
-        duration_seconds.addEventListener("change", addNulIfNeeded);
-    });
+  // date for time picker
+  let date = new Date();
+  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
 </script>
 
 <div class="h-screen flex justify-center items-center">
     <div class="flex flex-col items-center">
         <FormEars />
         <div class="grid grid-cols-1">
-            <Header title="Edit habit" imgExtraPath="../" />
-            <ShadowsForForms width={307} height={373} />
+            <Header title="Edit habit" route="habits" displayBackButton="0" />
+            <ShadowsForForms width={267} height={327} />
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form
@@ -72,61 +58,21 @@
                             )}
                         />
 
-                        <div class="flex flex-row gap-5">
-                            <AuthInput
-                                name={"start_time_hours"}
-                                label={"Start time (hours)"}
-                                type={"number"}
-                                placeholder={""}
-                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-                                value={data.start_time_hours}
-                                error={form?.errors?.some(
-                                    (error) =>
-                                        error.input == "start_time_hours",
-                                )}
-                            />
+                        <TimePicker 
+                        bind:_date 
+                        label="Start Time" 
+                        data={data.start_time} 
+                        display24=true
+                        id="start_time" 
+                        placeholder="hours and minutes"
+                        error={form?.errors?.some((error) => error.input == "start_time")} />
 
-                            <AuthInput
-                                name={"start_time_minutes"}
-                                label={"Start time (minutes)"}
-                                type={"number"}
-                                placeholder={""}
-                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-                                value={data.start_time_minutes}
-                                error={form?.errors?.some(
-                                    (error) =>
-                                        error.input == "start_time_minutes",
-                                )}
-                            />
-                        </div>
-
-                        <div class="flex flex-row gap-5">
-                            <AuthInput
-                                name={"duration_minutes"}
-                                label={"Duration (minutes)"}
-                                type={"number"}
-                                placeholder={""}
-                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-                                value={data.duration_minutes}
-                                error={form?.errors?.some(
-                                    (error) =>
-                                        error.input == "duration_minutes",
-                                )}
-                            />
-
-                            <AuthInput
-                                name={"duration_seconds"}
-                                label={"Duration (seconds)"}
-                                type={"number"}
-                                placeholder={""}
-                                path={"M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"}
-                                value={data.duration_seconds}
-                                error={form?.errors?.some(
-                                    (error) =>
-                                        error.input == "duration_seconds",
-                                )}
-                            />
-                        </div>
+                        <TimePicker 
+                        label="Duration" 
+                        data={data.duration} 
+                        id="duration" 
+                        placeholder="minutes and seconds"
+                        error={form?.errors?.some((error) => error.input == "duration")} />
 
                         <div
                             class="flex flex-row gap-12 justify-center items-center"
