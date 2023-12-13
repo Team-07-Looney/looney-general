@@ -10,7 +10,7 @@
     let menuOpen = false;
     let storedId = 0;
     let dropdown;
-    
+
     onMount(() => {
       window.addEventListener("click", (event) => {
         if (storedId !== 0 && menuOpen && event.target !== dropdown) {
@@ -46,9 +46,11 @@
  
   <ul style="margin-top: 10px; position:relative; z-index: 5">
   {#each data.categories as category}
-    <li class="px-10 py-2">
-      <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
-    </li>
+    {#if category.user_id == null || category.user_id == data.userId}
+      <li class="px-10 py-2">
+        <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
+      </li>
+    {/if}
   {/each}
   </ul>
  
