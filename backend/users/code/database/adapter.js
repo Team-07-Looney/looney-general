@@ -40,7 +40,6 @@ export async function createNewUser(name, email, password) {
   return new Promise(async (resolve, reject) => {
     // Establishes connection with the db
     let db = await openDatabaseConnection();
-    console.log(db);
     const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
     // Run the insert query
