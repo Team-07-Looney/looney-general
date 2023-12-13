@@ -14,6 +14,7 @@
     onMount(() => {
       window.addEventListener("click", (event) => {
         if (storedId !== 0 && menuOpen && event.target !== dropdown) {
+          console.log(storedId)
           document.getElementById(`dropdown${storedId}`).style.display = "none";
           menuOpen = false;
         }
@@ -42,15 +43,15 @@
     }
 </script>
  
-<Header title="My Routines" route="/home" displayBackButton=1 displayMenu=1 />
+<Header title="My Habits" route="/home" displayBackButton=1 displayMenu=1 />
  
-<ul style="margin-top: 110px; position:relative; z-index: 5">
+<div style="margin-top: 10px; z-index: 5">
   {#each data.categories as category}
-    <li class="px-10 py-2">
+    <div class="bg-white rounded-xl p-1 shadow-lg ml-4 mr-4 mb-4">
       <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
-    </li>
+    </div>
   {/each}
-</ul>
+  </div>
  
 <div class="flex justify-center items-center relative" style="z-index: 10;">
 <a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>

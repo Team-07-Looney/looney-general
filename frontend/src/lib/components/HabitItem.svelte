@@ -26,7 +26,7 @@
             <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>
         <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-lg shadow-lg min-w-[70px] z-[1] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px]">
-            <!-- MENU -->
+            <!-- DROPDOWN MENU -->
             <div>
                 <a class="p-1.5 rounded-lg mt-3" href={`habits/${habitId}/edit`}>Edit</a>
             </div>

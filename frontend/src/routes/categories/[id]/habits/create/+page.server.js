@@ -27,7 +27,10 @@ export const load = async ({ cookies }) => {
  * createHabit is a function called when the user submits a form to create a habit
  */
 export const actions = {
-  createHabit: async ({ request, cookies }) => {
+  createHabit: async ({ request, cookies, params }) => {
+
+    const { id } = params
+
     try {
       const jwt = cookies.get('jwt');
 
@@ -38,6 +41,7 @@ export const actions = {
       const startTimeMinutes = formData.get('start_time_minutes');
       const durationMinutes = formData.get('duration_minutes');
       const durationSeconds = formData.get('duration_seconds');
+      const categoryId = formData.get('category_id');
 
       // check for errors in a form data
       const errors = await validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
@@ -48,10 +52,11 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post('http://localhost:3011/habits', {
+      const data = await axios.post(`http://localhost:3011/categories/${id}`, {
         name: name,
         start_time: `${startTimeHours}:${startTimeMinutes}`,
-        duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds)
+        duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds),
+        category_id: id
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -64,7 +69,7 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, `/categories/${id}/habits`);
   }
 };
 

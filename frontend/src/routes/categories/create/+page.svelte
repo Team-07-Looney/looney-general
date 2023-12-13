@@ -6,12 +6,12 @@
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
-
-<div class="h-screen flex justify-center items-center">
+<Header title="Add Category"/>
+<div class="flex justify-center items-center mt-4">
   <div class="flex flex-col items-center">
 
     <div class="grid grid-cols-1">
-      <Header title="Add Category" />
+      
      
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">

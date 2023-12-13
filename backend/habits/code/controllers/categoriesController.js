@@ -79,7 +79,7 @@ export async function getCategoryById(req, res, next) {
  */
 export async function editCategoryById(req, res, next) {
   try {
-    await editCategoryInstanceById(req.body, req.params.id);
+    await editCategoryInstanceById(req.body, req.params.categoryId);
     tempResponse.data.message = "category edited successfully";
     res.status(200).send(tempResponse);
   } catch(err) {
@@ -95,7 +95,7 @@ export async function editCategoryById(req, res, next) {
  */
 export async function deleteCategoryById(req, res, next) {
   try {
-    await deleteCategoryInstanceById(req.params.id);
+    await deleteCategoryInstanceById(req.params.categoryId);
     tempResponse.data.message = "category deleted successfully";
     res.status(200).send(tempResponse);
   } catch(err) {

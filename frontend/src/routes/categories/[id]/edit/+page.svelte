@@ -4,14 +4,14 @@
     import Header from "../../../../lib/components/Header.svelte";
     import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
-    console.log(data);
+   
 </script>
-
-<div class="h-screen flex justify-center items-center">
+<Header title="Edit Category" imgExtraPath="../" />
+<div class="mt-4 flex justify-center items-center">
     <div class="flex flex-col items-center">
-      
+
         <div class="grid grid-cols-1">
-            <Header title="Edit Category" imgExtraPath="../" />
+            
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form
@@ -50,8 +50,6 @@
                                 (error) => error.input == "name",
                             )}
                         />
-
-                        
 
                         <div
                             class="flex flex-row gap-12 justify-center items-center"

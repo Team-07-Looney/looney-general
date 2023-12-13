@@ -4,8 +4,8 @@
     import OverviewItem from "../../lib/components/mainPageComponents/OverviewItem.svelte";
 </script>
 
-<Header title="Looney" displayBackButton=0 route="main" displayMenu=0/>
-<div class="h-screen flex justify-center items-center">
+<Header title="Looney" />
+<div class=" mt-2 flex justify-center items-center">
 	<div class="flex flex-col justify-center items-center gap-4 mb-10">
 		<div class="flex flex-row gap-7">
 			<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/categories"/>
