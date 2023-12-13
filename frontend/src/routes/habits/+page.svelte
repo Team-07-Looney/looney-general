@@ -6,6 +6,7 @@
   
     // Data contains all data passed by the page server
     export let data;
+    console.log(data);
     
     let menuOpen = false;
     let storedId = 0;
