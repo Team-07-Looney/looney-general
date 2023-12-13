@@ -41,7 +41,6 @@ export const actions = {
       const startTimeMinutes = formData.get('start_time_minutes');
       const durationMinutes = formData.get('duration_minutes');
       const durationSeconds = formData.get('duration_seconds');
-      const categoryId = formData.get('category_id');
 
       // check for errors in a form data
       const errors = await validateCreateData(name, startTimeHours, startTimeMinutes, durationMinutes, durationSeconds);
@@ -52,7 +51,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post(`http://localhost:3011/categories/${id}`, {
+      const data = await axios.post(`http://localhost:3011/categories/${id}/habits`, {
         name: name,
         start_time: `${startTimeHours}:${startTimeMinutes}`,
         duration: parseInt(durationMinutes) * 60 + parseInt(durationSeconds),

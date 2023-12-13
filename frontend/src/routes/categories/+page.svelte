@@ -45,13 +45,13 @@
  
 <Header title="My Habits" route="/home" displayBackButton=1 displayMenu=1 />
  
-<div style="margin-top: 10px; z-index: 5">
+  <ul style="margin-top: 10px; position:relative; z-index: 5">
   {#each data.categories as category}
-    <div class="bg-white rounded-xl p-1 shadow-lg ml-4 mr-4 mb-4">
+    <li class="px-10 py-2">
       <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
-    </div>
+    </li>
   {/each}
-  </div>
+  </ul>
  
 <div class="flex justify-center items-center relative" style="z-index: 10;">
 <a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>

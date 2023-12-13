@@ -6,13 +6,13 @@
     /** @type {import('./$types').ActionData} */
     export let form;
   </script>
+
+<Header title="Add Habit" imgExtraPath="../../" />
   
-  <div class="h-screen flex justify-center items-center">
+  <div class=" flex justify-center items-center">
     <div class="flex flex-col items-center">
     
       <div class="grid grid-cols-1">
-        <Header title="Add Habit" imgExtraPath="../../" />
-      
         <div class="px-8 pt-8 z-[3]">
           <div class="bg-white rounded-xl px-4 py-5">
             <form

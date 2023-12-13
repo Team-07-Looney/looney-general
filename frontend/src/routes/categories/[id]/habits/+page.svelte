@@ -54,11 +54,13 @@
 
 <Header title={data.category[0].name} route="/categories" displayBackButton=1 displayMenu=1 imgExtraPath="../" />
 
-<ul style="overflow-y: scroll; height:305px; margin-top: 110px; position:relative; z-index: 5">
+<ul style="overflow-y: scroll; height:305px; margin-top: 10px; position:relative; z-index: 5">
   {#each data.habits as habit}
-    <li class="px-10 py-2">
-        <HabitItem title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} on:click={handleOpening(habit.id)} />
-    </li> 
+    {#if data.category[0].id == habit.category_id} 
+      <li class="px-10 py-2">
+          <HabitItem title={habit.name} time={habit.start_time} iconCount={habit.id%4} habitId={habit.id} on:click={handleOpening(habit.id)} />
+      </li> 
+    {/if}
   {/each}
 </ul>
 

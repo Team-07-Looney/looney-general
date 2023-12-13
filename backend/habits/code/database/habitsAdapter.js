@@ -31,9 +31,9 @@ export async function getAllHabitsData() {
 export async function createHabitInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO habits (name, start_time, duration) VALUES (?,?,?)';
+    const insert = 'INSERT INTO habits (name, start_time, duration, category_id) VALUES (?,?,?,?)';
 
-    db.run(insert, [request.name, request.start_time, request.duration], (err) => {
+    db.run(insert, [request.name, request.start_time, request.duration, request.category_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
