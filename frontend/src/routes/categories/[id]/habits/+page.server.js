@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
 
 /**
- * Fetches data from the habits microservice via the API gateway to retrieve all habits
+ * Fetches data from the habits microservice via the API gateway to retrieve all categories
  * 
  * @param {*} serverLoadEvent 
  * @returns
@@ -26,7 +26,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
 
     const habits = responseHabits.data.data;
     const category = responseCategory.data.data;
-    console.log(id);
+
     return { habits, category };
   } catch (error) {
     if (error.response.status == 401) {

@@ -10,15 +10,17 @@ import { redirect } from '@sveltejs/kit';
 export const load = async ({ params, cookies }) => {
   try {
     const jwt = cookies.get('jwt');
-
+    console.log(params);
     const { id } = params;
-    const response = await axios.get(`http://localhost:3011/habits/${id}`, {
+
+    const response = await axios.get(`http://localhost:3011/categories/${id}/habits/${id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
     const habit = response.data.data;
+
     return { habit };
   } catch (error) {
     if (error.response.status == 401) {
@@ -48,6 +50,6 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, `/categories/${categoryId}/habits`);
   }
 };

@@ -3,35 +3,20 @@
 
     /** @type {import('./$types').ActionData} */
     export let form;
-    import Header from "../../../../lib/components/Header.svelte";
-    import FormEars from "../../../../lib/components/FormEars.svelte";
-    import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
-    import AuthInput from "../../../../lib/components/authInput.svelte";
+    import Header from "../../../../../../lib/components/Header.svelte";
+    import FormEars from "../../../../../../lib/components/FormEars.svelte";
+    import ShadowsForForms from "../../../../../../lib/components/ShadowsForForms.svelte";
+    import AuthInput from "../../../../../../lib/components/authInput.svelte";
     export let data;
-
-    onMount(() => {
-        function addNulIfNeeded(event) {
-            if (event.target.value >= 0 && event.target.value <= 9) {
-                event.target.value = `0${event.target.value}`;
-            }
-        }
-
-        const start_time_minutes =
-            document.getElementById("start_time_minutes");
-        const start_time_hours = document.getElementById("start_time_hours");
-        const duration_seconds = document.getElementById("duration_seconds");
-
-        start_time_minutes.addEventListener("change", addNulIfNeeded);
-        start_time_hours.addEventListener("change", addNulIfNeeded);
-        duration_seconds.addEventListener("change", addNulIfNeeded);
-    });
+    console.log(data)
 </script>
 
-<div class="h-screen flex justify-center items-center">
+<Header title="Edit habit" imgExtraPath="../../../" />
+<div class="flex justify-center items-center mt-4">
     <div class="flex flex-col items-center">
         <FormEars />
         <div class="grid grid-cols-1">
-            <Header title="Edit habit" imgExtraPath="../" />
+            
             <ShadowsForForms width={307} height={373} />
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
@@ -132,7 +117,7 @@
                             class="flex flex-row gap-12 justify-center items-center"
                         >
                             <a
-                                href="/habits"
+                                href="/categories/habits"
                                 class="px-5 py-2 rounded-lg mt-3 font-bold"
                                 style="background-color: #B4B4B4">Cancel</a
                             >

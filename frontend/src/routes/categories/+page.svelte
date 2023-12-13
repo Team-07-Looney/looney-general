@@ -14,7 +14,6 @@
     onMount(() => {
       window.addEventListener("click", (event) => {
         if (storedId !== 0 && menuOpen && event.target !== dropdown) {
-          console.log(storedId)
           document.getElementById(`dropdown${storedId}`).style.display = "none";
           menuOpen = false;
         }
