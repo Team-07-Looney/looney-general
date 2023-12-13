@@ -1,6 +1,15 @@
 <script>
-    import Header from "../../../lib/components/Header.svelte";
-
+    import BottomMenu from '../../../lib/components/BottomMenu.svelte';
+   import WhiteBanner from '../../../lib/components/WhiteBanner.svelte';
+   // Data contains all data passed by the page server
+   export let data;
+   console.log(data);
 </script>
 
-<Header title="Thoughts" displayBackButton="1" displayMenu="1" route="/moods"/>
+<WhiteBanner title="My Thoughts"
+             description="Vent out your feelings and look back at them to see your personal growth"
+             route="/moods"
+             displayBackButton=1
+             imgExtraPath = "../"/>
+
+<BottomMenu imgPath="../" displayMoodText=1/>
