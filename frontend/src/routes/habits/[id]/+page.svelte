@@ -1,12 +1,13 @@
 <script>
     import Header from "../../../lib/components/Header.svelte";
     import Timer from "../../../lib/components/Timer.svelte";
+    import { tweened } from 'svelte/motion';
     export let data; 
 
   let countdown;
 </script>
 
-<Header title="Habits" route="habits" displayBackButton=1 displayMenu=0 path=""/>
+<Header title="Habits" route="/habits" displayMenu=1 displayBackButton=1 />
 <ul class="mt-[100px] z-50 relative">
     <li class="px-10 py-2">
         <div class="bg-white rounded-xl" style="box-shadow: rgba(0, 0, 0, 0.50) 0px 25px 50px -12px">
@@ -21,7 +22,7 @@
             </div>
 
             <div>
-               <Timer countdown={data.habit[0].duration} />
+               <Timer bind:countdown={data.habit[0].duration} />
             </div>   
         </div>
     </li> 

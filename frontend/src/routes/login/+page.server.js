@@ -31,7 +31,7 @@ export const load = async ({ cookies }) => {
   // If they are authenticated they should not be able to access the login
   // Svelte issue with throwing redirect within a try-catch block workaround
   if (isUserAuth) {
-    throw redirect(302, "/habits");
+    throw redirect(302, "/home");
   }
 };
 
@@ -80,7 +80,7 @@ export const actions = {
       return fail(400, { email, errors });
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, '/home');
   }
 };
 
