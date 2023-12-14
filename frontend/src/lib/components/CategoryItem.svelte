@@ -2,12 +2,14 @@
     import CircularProgressBar from './CircularProgressBar.svelte';
     export let title;
     export let categoryId;
+
+    const progress = 0.5;
 </script>
 
 <div class="bg-white rounded-xl p-1 flex justify-between" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
-        <CircularProgressBar />
-        <h1 class="text-lg ml-3 mt-3"><strong>{title}</strong></h1>
+        <CircularProgressBar progress={progress} />
+        <h1 class="text-lg ml-3 mt-1"><strong>{title}</strong></h1>
     </a>
     <div class="inline-block relative text-center mt-3">
         <button id={`button${categoryId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
