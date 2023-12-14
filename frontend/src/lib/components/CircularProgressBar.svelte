@@ -16,8 +16,8 @@
   border-radius: 50%;
   width: 70px;
   height: 70px;
-	transition: all 500ms ease-in;
-	will-change: transform;
+  transition: all 500ms ease-in;
+  will-change: transform;
 }
 </style>
 
