@@ -111,6 +111,7 @@ async function validateChangingPasswordData(currentPassword, newPassword, confir
 
   if (newPassword.length < 12) {
     validationIssues.push({ "input": "new-password", "message": "The new password should be at least 12 characters long" });
+    validationIssues.push({ "input": "confirm-new-password", "message": "" });
   }
 
   return validationIssues;
