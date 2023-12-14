@@ -33,7 +33,6 @@ export const actions = {
   createHabit: async ({ request, cookies, params }) => {
 
     const { categoryId } = params
-    console.log(categoryId);
 
     try {
       const jwt = cookies.get('jwt');

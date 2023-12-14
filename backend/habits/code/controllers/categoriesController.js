@@ -5,7 +5,7 @@ import {
     editCategoryInstanceById,
     deleteCategoryInstanceById
 
-} from '../database/categoryAdapter.js';
+} from '../database/categoriesAdapter.js';
 
 /**
  * function that calculates today's date

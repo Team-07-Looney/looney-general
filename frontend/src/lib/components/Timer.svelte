@@ -6,6 +6,7 @@
     // Duration of the timer
     export let countdown;
     export let categoryId;
+    export let habitId;
 
     let now = Date.now();
     let end = now + countdown * 1000;
@@ -126,7 +127,9 @@
         {:else}
           <button on:click={handleStart} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>
         {/if}
-        <button class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2"><a href="/categories/{categoryId}/habits">Done</a></button> 
+        <form method="POST" action={`/categories/${categoryId}/habits/${habitId}?/createRecord`}>
+          <button type="submit" class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2">Done</button>
+        </form>
       {/if}
     </div>
   </div>

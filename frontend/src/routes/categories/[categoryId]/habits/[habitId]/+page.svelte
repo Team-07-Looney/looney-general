@@ -3,8 +3,6 @@
     import Timer from "../../../../../lib/components/Timer.svelte";
     import { tweened } from 'svelte/motion';
     export let data; 
-console.log(data);
-    let countdown;
 </script>
 
 <Header title="Habit" route="/categories/{data.habit[0].category_id}/habits" displayMenu=1 displayBackButton=1 imgExtraPath="../../" />
@@ -22,8 +20,8 @@ console.log(data);
             </div>
 
             <div>
-               <Timer bind:countdown={data.habit[0].duration} categoryId={data.habit[0].category_id} />
-            </div>   
+               <Timer bind:countdown={data.habit[0].duration} categoryId={data.habit[0].category_id} habitId={data.habit[0].id} />
+            </div>
         </div>
     </li> 
 </ul>

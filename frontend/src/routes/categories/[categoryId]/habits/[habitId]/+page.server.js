@@ -50,5 +50,28 @@ export const actions = {
     }
 
     throw redirect(302, `/categories/${categoryId}/habits`);
+  },
+
+  createRecord: async ({ request, cookies, params }) => {
+    const { categoryId, habitId } = params
+    try {
+      const jwt = cookies.get('jwt');
+
+      // Set the body of the request, adds a header and sends post request to create record
+      const data = await axios.post(`http://localhost:3011/records`, {
+        habit_id: habitId
+      }, {
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+        }
+      });
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, '/login');
+      }
+    }
+
+    throw redirect(302, `/categories/${categoryId}/habits`);
   }
 };
