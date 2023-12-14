@@ -2,19 +2,21 @@
   import { getContext } from "svelte";
   import Header from "../../../lib/components/Header.svelte";
   import MoodItem from "../../../lib/components/MoodItem.svelte";
-  // let moods = document.getElementsByTagName("li");
-  // moods.array.forEach(element => {
-  //   console.log(element);
-  // });
+    import ReasonItem from "../../../lib/components/ReasonItem.svelte";
   // Data contains all data passed by the page server
   export let data;
   export let moodId;
+  export let reasonId;
 
   function handleMoodClick(event) {
     console.log("Mood clicked:", event.detail.moodId);
     moodId = event.detail.moodId;
   }
-</script>
+  function handleReasonClick(event) {
+    console.log("Reason clicked:", event.detail.reasonId);
+    reasonId = event.detail.reasonId;
+  }
+  </script>
 
 <Header title="My mood" displayBackButton="1" displayMenu="1" route="/moods" />
 <div
@@ -42,7 +44,7 @@
     <ul>
       {#each data.reasons as reason}
         <div class="px-10 py-2">
-          <MoodItem title={reason.name} moodId={reason.id} />
+          <ReasonItem title={reason.name} reasonId={reason.id} on:reasonSelected={handleReasonClick}/>
         </div>
       {/each}
     </ul>
