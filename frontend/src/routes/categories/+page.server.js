@@ -11,7 +11,7 @@ import jwt from 'jsonwebtoken';
 export const load = async ({ serverLoadEvent, cookies }) => {
   try {
     const jwtoken = cookies.get('jwt');
-      const payload = jwt.decode(jwtoken);
+    const payload = jwt.decode(jwtoken);
 
     const response = await axios.get('http://localhost:3011/categories', {
       headers: {

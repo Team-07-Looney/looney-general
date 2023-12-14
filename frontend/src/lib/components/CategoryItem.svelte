@@ -1,5 +1,5 @@
 <script>
-    import CircularProgressBar from './CircularProgressBar.svelte';
+    // import CircularProgressBar from './CircularProgressBar.svelte';
     export let title;
     export let categoryId;
 
@@ -8,7 +8,8 @@
 
 <div class="bg-white rounded-xl p-1 flex justify-between" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
-        <CircularProgressBar progress={progress} />
+        <img alt="routine icon" src="../../src/img/routineIcon{categoryId}.png" class="object-scale-down">
+        <!-- <CircularProgressBar progress={progress} /> -->
         <h1 class="text-lg ml-3 mt-1"><strong>{title}</strong></h1>
     </a>
     <div class="inline-block relative text-center mt-3">

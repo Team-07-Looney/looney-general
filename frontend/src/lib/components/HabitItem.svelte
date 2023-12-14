@@ -1,20 +1,27 @@
 <script>
     export let title;
     export let time;
-    export let iconCount;
     export let habitId;
     export let categoryId;
+    export let done;
 </script>
 
 <div class="bg-white rounded-xl p-1 flex justify-between" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`habits/${habitId}`} class="flex w-full">
         <div>
+            {#if !done}
             <img
-                src={`../../src/img/icon${iconCount}.png`}
-                style="height: 50px;"
-                class="p-2"
+                src={`../../src/img/checkUndone.png`}
+                class="p-2 object-scale-down"
                 alt="icon"
             />
+            {:else}
+            <img
+                src={`../../src/img/checkDone.png`}
+                class="p-2 object-scale-down"
+                alt="icon"
+            />
+            {/if}
         </div>
         <div>
             <h1 class="text-lg"><strong>{title}</strong></h1>
