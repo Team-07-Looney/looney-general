@@ -13,12 +13,13 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-click-events-have-key-events -->
+<!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-  class="hover:bg-neutral-400 active:bg-neutral-200 focus:outline-none focus:ring focus:ring-neutral-300 bg-neutral-100 rounded-xl p-1"
-  style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px"
+  class="hover:bg-gray-400 font-light active:bg-gray-200 focus:outline-none focus:ring focus:ring-gray-300 bg-gray-100 rounded-lg py-1 px-3"
   on:click={handleMoodSelection}
 >
   <div>
-    <h1 class="text-lg"><strong>{title}</strong></h1>
+    <h1 class="text-base"><strong>{title}</strong></h1>
   </div>
 </div>

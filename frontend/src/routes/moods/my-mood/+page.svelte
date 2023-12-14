@@ -20,59 +20,52 @@
 
 <Header title="My mood" displayBackButton="1" displayMenu="1" route="/moods" />
 <div
-  class="bg-white mt-24 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
+  class="bg-white z-20 mt-24 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
 >
 <form method="POST" action="?/createRecord">
 
-  <div class="flex">
+  <div class="flex justify-center items-center">
     <h2 class="text-xl">How do you feel?</h2>
   </div>
-  <div class="flex flex-row">
-    <ul>
-      {#each data.moods as mood}
-        <li class="px-4 py-2 flex-auto" id="element">
-          <MoodItem
-            title={mood.name}
-            moodId={mood.id}
-            on:moodSelected={handleMoodClick}
-          />
-        </li>
-      {/each}
-    </ul>
+  <div class="flex flex-wrap justify-center items-center mt-2 mb-2">
+    {#each data.moods as mood}
+      <div class="p-1" id="element">
+        <MoodItem
+          title={mood.name}
+          moodId={mood.id}
+          on:moodSelected={handleMoodClick}
+        />
+      </div>
+    {/each}
   </div>
 
-  <div class="flex">
+  <div class="flex justify-center items-center">
     <h2 class="text-xl">Why do you feel this way?</h2>
   </div>
-  <div class="flex flex-row">
-    <ul>
+  <div class="flex flex-wrap justify-center items-center mt-2">
       {#each data.reasons as reason}
-          <li class="px-4 py-2 flex-auto" id="element">
-          <ReasonItem
-            title={reason.name}
-            reasonId={reason.id}
-            on:reasonSelected={handleReasonClick}
-          />
-          </li>
+        <div class="p-1" id="element">
+        <ReasonItem
+          title={reason.name}
+          reasonId={reason.id}
+          on:reasonSelected={handleReasonClick}
+        />
+        </div>
       {/each}
-    </ul>
   </div>
 
 
   <input type="hidden" name="moodId" bind:value={moodId} />
   <input type="hidden" name="reasonId"  bind:value={reasonId} />
-  <div class="flex flex-row gap-8">
+  <div class="flex flex-row gap-8 justify-center items-center mt-2">
     <a
-      class="bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
-      style="z-index: 10;"
+      class="z-10 flex justify-center items-center bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
       href="/moods"
     >Cancel</a>
-    <div class="flex justify-center items-center relative" style="z-index: 10;">
-      <button
-        class="bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"
-        type="submit"
-      >Next</button>
-    </div>
+    <button
+      class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"
+      type="submit"
+    >Next</button>
   </div>
 </form>
 </div>
