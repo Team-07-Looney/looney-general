@@ -92,5 +92,17 @@
         </div>
       </div>
     </div>
+    <div class="grid grid-cols-1">
+      <div class="bg-white rounded px-4 py-4 mb-16">
+        <form method="POST" class="text-gray-900" action="?/logout">
+          <button
+            class="p-1.5 bg-lavender-500 rounded-lg mt-3 font-bold text-black"
+            type="submit"
+          >
+            Logout
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>

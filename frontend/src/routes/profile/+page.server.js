@@ -79,6 +79,12 @@ export const actions = {
     }
 
     throw redirect(302, '/home');
+  },
+  logout: async ({ cookies }) => {
+    const jwt = cookies.get('jwt');
+    cookies.delete('jwt');
+
+    throw redirect(302, '/login');
   }
 };
 
