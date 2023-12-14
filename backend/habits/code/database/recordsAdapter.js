@@ -31,17 +31,16 @@ export async function getAllRecordsData() {
 export async function createRecordInstance(request, date) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const lookForExistingRecord = `SELECT * FROM records WHERE date=${date} AND habit_id=${request.habit_id}`;
+    const lookForExistingRecord = `SELECT * FROM records WHERE date='${date}' AND habit_id=${request.habit_id}`;
     const insert = 'INSERT INTO records (habit_id, date) VALUES (?,?)';
 
     db.all(lookForExistingRecord, (err, rows) => {
       closeDatabaseConnection(db);
-      console.log(rows);
 
       if (err) {
         console.error(err);
         reject(err);
-      } else if (!rows) {
+      } else if (rows.length === 0) {
         db.run(insert, [request.habit_id, date], (err) => {
           closeDatabaseConnection(db);
 
@@ -53,7 +52,7 @@ export async function createRecordInstance(request, date) {
           }
         });
       } else {
-        resolve("this habit was already recorded today");
+        resolve("This habit was already recorded today");
       }
     });
   });

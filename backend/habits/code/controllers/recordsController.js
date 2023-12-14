@@ -51,8 +51,8 @@ import {
    */
   export async function createRecord(req, res, next) {
     try {
-      await createRecordInstance(req.body, tempResponse.meta.date);
-      tempResponse.data.message = "Record created successfully";
+      const message = await createRecordInstance(req.body, tempResponse.meta.date);
+      tempResponse.data.message = message?message:"Record created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
