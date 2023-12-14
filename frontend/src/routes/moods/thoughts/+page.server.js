@@ -18,10 +18,13 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     });
 
     const thoughts = response.data.data;
-    return { thoughts };
+    const thoughtsDate = response.data.meta.date;
+
+    return { thoughts, thoughtsDate };
   } catch (error) {
-    if (error.response.status == 401) {
-      throw redirect(302, '/login');
-    }
+    console.log(error);
+     if (error.response.status == 401) {
+       throw redirect(302, '/login');
+     }
   }
 };
