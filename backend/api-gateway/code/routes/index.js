@@ -3,7 +3,7 @@ import cors from 'cors';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import morgan from 'morgan';
 import { requireAuth } from '../middleware/authMiddleware.js';
-import { register, login } from '../controllers/authController.js';
+import { register, login, changePassword } from '../controllers/authController.js';
 
 const router = express.Router();
 router.use(cors({
@@ -43,6 +43,7 @@ router.use('/users', cors(), requireAuth, usersProxy);
 // Authentication routes
 router.post('/register', cors(), register);
 router.post('/login', cors(), login);
+router.post('/profile/change-password', cors(), changePassword);
 
 // Route to make sure user is authenticated
 router.get('/verify', cors(), requireAuth, (req, res) => {
