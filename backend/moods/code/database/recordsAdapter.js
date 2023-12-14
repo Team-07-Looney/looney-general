@@ -31,11 +31,11 @@ export async function getAllRecordData() {
 export async function createRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Records (user_id, mood_id, reason_id) VALUES (?, ?, ?)';
+    const insert = 'INSERT INTO Records (mood_id, reason_id) VALUES (?, ?)';
 
-    db.run(insert, [request.user_id, request.mood_id, request.reason_id], (err) => {
+    db.run(insert, [request.mood_id, request.reason_id], (err) => {
       closeDatabaseConnection(db);
-
+      console.log(request.mood_id, request.reason_id);
       if (err) {
         console.error(err);
         reject(err);
@@ -78,7 +78,7 @@ export async function getRecordInstanceById(id) {
 export async function editRecordInstanceById(record, recordId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Records SET user_id='${record.user_id}', mood_id='${record.mood_id}', reason_id='${record.reason_id}' WHERE id=${recordId}`;
+    const update = `UPDATE Records SET mood_id='${record.mood_id}', reason_id='${record.reason_id}' WHERE id=${recordId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);

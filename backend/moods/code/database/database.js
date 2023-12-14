@@ -20,7 +20,6 @@ const tableQueries = [
   //Create Records table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER,
   reason_id INTEGER REFERENCES Reasons(id),
   mood_id INTEGER REFERENCES Moods(id))`,
   //Create Thoughts table if it doesn't exists
