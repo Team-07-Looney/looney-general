@@ -28,8 +28,12 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const reasons = response2.data.data;
     return { moods, reasons};
   } catch (error) {
-    if (error.response.status == 401) {
-      throw redirect(302, '/login');
-    }
+    console.log(error);
   }
 };
+
+export const actions = {
+  test: async(request) => {
+    console.log(moodId);
+  }
+}
