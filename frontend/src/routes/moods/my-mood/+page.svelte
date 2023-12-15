@@ -3,10 +3,14 @@
   import Header from "../../../lib/components/Header.svelte";
   import MoodItem from "../../../lib/components/MoodItem.svelte";
   import ReasonItem from "../../../lib/components/ReasonItem.svelte";
+  import { onMount } from "svelte";
+  import showElement from '$lib/showElement'
   // Data contains all data passed by the page server
   export let data;
   export let moodId;
   export let reasonId;
+
+  $showElement = false;
 
   function handleMoodClick(event) {
     console.log("Mood clicked:", event.detail.moodId);
@@ -16,6 +20,13 @@
     console.log("Reason clicked:", event.detail.reasonId);
     reasonId = event.detail.reasonId;
   }
+  onMount(() => {
+    // Assuming the element has an ID, you can remove it using JavaScript
+    const elementToRemove = document.getElementById('elementId');
+    if (elementToRemove) {
+      elementToRemove.remove();
+    }
+  });
 </script>
 
 <Header title="My mood" displayBackButton="1" displayMenu="1" route="/moods" />
