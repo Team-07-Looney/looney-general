@@ -2,7 +2,6 @@
   import "../app.postcss";
     import CoralCluster from "../lib/components/CoralCluster.svelte";
 	import showElement from '$lib/showElement';
-	console.log($showElement);
 	
 </script>
 
