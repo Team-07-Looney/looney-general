@@ -1,12 +1,23 @@
 <script>
+    import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
+    import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
     /** @type {import('./$types').ActionData} */
     export let form;
-    import Header from "../../../../lib/components/Header.svelte";
     import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
+    import showElement from '$lib/showElement';
+
+$showElement = false;
    
 </script>
-<Header title="Edit Category" imgExtraPath="../" />
+
+<WhiteBanner
+    title="Edit Category"
+    description="Tweak your category like a pro. Use this form to remix and upgrade your routine."
+    route="/"
+    displayBackButton="0"
+    imgExtraPath="../"
+/>
 <div class="mt-4 flex justify-center items-center">
     <div class="flex flex-col items-center">
 
@@ -71,3 +82,4 @@
         </div>
     </div>
 </div>
+<BottomMenu imgPath="../" displayHabitText="1" />

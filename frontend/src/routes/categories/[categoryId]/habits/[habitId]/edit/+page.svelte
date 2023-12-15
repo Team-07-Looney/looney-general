@@ -2,12 +2,15 @@
     /** @type {import('./$types').ActionData} */
     export let form;
     import TimePicker from "../../../../../../lib/components/TimePicker.svelte";
-    import Header from "../../../../../../lib/components/Header.svelte";
     import FormEars from "../../../../../../lib/components/FormEars.svelte";
     import ShadowsForForms from "../../../../../../lib/components/ShadowsForForms.svelte";
     import AuthInput from "../../../../../../lib/components/authInput.svelte";
     export let data;
+    import showElement from '$lib/showElement';
+    import WhiteBanner from "../../../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../../../lib/components/BottomMenu.svelte";
 
+$showElement = false;
     console.log(data);
 
   // date for time picker
@@ -15,7 +18,13 @@
   $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
 </script>
 
-<Header title="Edit habit" imgExtraPath="../../../" />
+<WhiteBanner
+title="Edit Habit"
+description="Tweak your habit like a pro. Use this form to remix and upgrade your routine."
+route="/"
+displayBackButton="0"
+imgExtraPath="../"
+/>
 <div class="flex justify-center items-center mt-4">
     <div class="flex flex-col items-center">
         <FormEars />
@@ -96,3 +105,4 @@
         </div>
     </div>
 </div>
+<BottomMenu imgPath="../../../" displayHabitText="1" />

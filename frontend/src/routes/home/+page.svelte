@@ -1,10 +1,20 @@
 <script>
+    import BottomMenu from "../../lib/components/BottomMenu.svelte";
 	import OctopusButton from "../../lib/components/OctopusButton.svelte";
-	import Header from "../../lib/components/Header.svelte";
+    import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
     import OverviewItem from "../../lib/components/mainPageComponents/OverviewItem.svelte";
+	import showElement from '$lib/showElement';
+
+	$showElement = false;
 </script>
 
-<Header title="Looney" />
+<WhiteBanner
+    title="Hi, John!"
+    description="How can I help you today? Anything on your mind?"
+    route="/"
+    displayBackButton="0"
+    imgExtraPath="../"
+/>
 <div class=" mt-2 flex justify-center items-center">
 	<div class="flex flex-col justify-center items-center gap-4 mb-10">
 		<div class="flex flex-row gap-7">
@@ -21,3 +31,4 @@
 		</div>
 	</div>
 </div>
+<BottomMenu imgPath="../" displayHomeText="1" />

@@ -1,10 +1,14 @@
 <script>
     import { setContext } from "svelte";
     import { onMount } from "svelte";
-    import Header from "../../../../lib/components/Header.svelte";
     import HabitItem from "../../../../lib/components/HabitItem.svelte";
+    import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
     // Data contains all data passed by the page server
     export let data;
+    import showElement from '$lib/showElement';
+
+$showElement = false;
     
     let menuOpen = false;
     let storedId = 0;
@@ -50,9 +54,13 @@
     width: 5px;
   }
   </style>
-
-
-<Header title={data.category[0].name} route="/categories" displayBackButton=1 displayMenu=1 imgExtraPath="../" />
+<WhiteBanner
+title="{data.category[0].name}"
+description="Add new ones, check the old ones, Looney is going to be with you"
+route="/categories"
+displayBackButton="1"
+imgExtraPath="../"
+/>
 
 <ul style="overflow-y: scroll; height:305px; margin-top: 10px; position:relative; z-index: 5">
   {#each data.habits as habit}
@@ -67,3 +75,4 @@
 <div class="flex justify-center items-center relative" style="z-index: 10;">
 <a class="p-2" href="/categories/{data.category[0].id}/habits/create"><img src="../../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
 </div>
+<BottomMenu imgPath="../" displayHabitText="1" />

@@ -1,12 +1,20 @@
 <script>
 
-  import Header from "../../../lib/components/Header.svelte";
   import AuthInput from "../../../lib/components/authInput.svelte";
- 
+    import BottomMenu from "../../../lib/components/BottomMenu.svelte";
+    import showElement from '$lib/showElement';
+    import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
+  $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
-<Header title="Add Category"/>
+<WhiteBanner
+    title="Create Category"
+    description="Organize your habit with your own personal folder"
+    route="/"
+    displayBackButton="0"
+    imgExtraPath="../"
+/> 
 <div class="flex justify-center items-center mt-4">
   <div class="flex flex-col items-center">
 
@@ -68,3 +76,4 @@
     </div>
   </div>
 </div>
+<BottomMenu imgPath="../" displayHabitText="1" />
