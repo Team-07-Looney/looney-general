@@ -5,10 +5,11 @@ import { fail, redirect } from '@sveltejs/kit';
  * Executes during the load of the svelte page
  * @param {*} param0
 */
-export const load = async ({ cookies }) => {
+export const load = async ({ cookies, params }) => {
   try {
     // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
+    const { categoryId } = params;
 
     // Send request to the apigateway to check if the user is authenticated
     const isAuthenticated = await axios.get('http://localhost:3011/verify', {
@@ -16,6 +17,8 @@ export const load = async ({ cookies }) => {
         'Authorization': `Bearer ${jwt}`
       }
     });
+
+    return { categoryId };
   } catch (error) {
     if (error.response.status == 401)  {
       throw redirect(302, '/login');
@@ -27,7 +30,10 @@ export const load = async ({ cookies }) => {
  * createHabit is a function called when the user submits a form to create a habit
  */
 export const actions = {
-  createHabit: async ({ request, cookies }) => {
+  createHabit: async ({ request, cookies, params }) => {
+
+    const { categoryId } = params
+
     try {
       const jwt = cookies.get('jwt');
 
@@ -47,10 +53,11 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post('http://localhost:3011/habits', {
+      const data = await axios.post(`http://localhost:3011/categories/${categoryId}/habits`, {
         name: name,
         start_time: startTime,
-        duration: parseInt(durationElements[0]) * 60 + parseInt(durationElements[1])
+        duration: parseInt(durationElements[0]) * 60 + parseInt(durationElements[1]),
+        category_id: categoryId
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -63,7 +70,7 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, `/categories/${categoryId}/habits`);
   }
 };
 

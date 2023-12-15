@@ -1,30 +1,23 @@
 <script>
-  /** @type {import('./$types').ActionData} */
-  export let form;
-  import Header from "../../../../lib/components/Header.svelte";
-  import FormEars from "../../../../lib/components/FormEars.svelte";
-  import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
-  import AuthInput from "../../../../lib/components/authInput.svelte";
-  import TimePicker from "../../../../lib/components/TimePicker.svelte";
-  export let data;
-
-  // date for time picker
-  let date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+    /** @type {import('./$types').ActionData} */
+    export let form;
+    import Header from "../../../../lib/components/Header.svelte";
+    import AuthInput from "../../../../lib/components/authInput.svelte";
+    export let data;
+   
 </script>
-
-<div class="h-screen flex justify-center items-center">
+<Header title="Edit Category" imgExtraPath="../" />
+<div class="mt-4 flex justify-center items-center">
     <div class="flex flex-col items-center">
-        <FormEars />
+
         <div class="grid grid-cols-1">
-            <Header title="Edit habit" route="habits" displayBackButton="0" />
-            <ShadowsForForms width={267} height={327} />
+            
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form
                         method="POST"
                         class="grid grid-cols-1 gap-4 text-gray-900"
-                        action="?/editHabit"
+                        action="?/editCategory"
                     >
                         {#if form && form.errors}
                             <div
@@ -58,27 +51,11 @@
                             )}
                         />
 
-                        <TimePicker 
-                        bind:_date 
-                        label="Start Time" 
-                        data={data.start_time} 
-                        display24=true
-                        id="start_time" 
-                        placeholder="hours and minutes"
-                        error={form?.errors?.some((error) => error.input == "start_time")} />
-
-                        <TimePicker 
-                        label="Duration" 
-                        data={data.duration} 
-                        id="duration" 
-                        placeholder="minutes and seconds"
-                        error={form?.errors?.some((error) => error.input == "duration")} />
-
                         <div
                             class="flex flex-row gap-12 justify-center items-center"
                         >
                             <a
-                                href="/habits"
+                                href="/categories"
                                 class="px-5 py-2 rounded-lg mt-3 font-bold"
                                 style="background-color: #B4B4B4">Cancel</a
                             >

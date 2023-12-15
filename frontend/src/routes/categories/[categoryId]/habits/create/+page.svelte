@@ -1,23 +1,26 @@
-<script>
-  import FormEars from "../../../lib/components/FormEars.svelte";
-  import Header from "../../../lib/components/Header.svelte";
-  import AuthInput from "../../../lib/components/authInput.svelte";
-  import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
-  import TimePicker from "../../../lib/components/TimePicker.svelte";
+  <script>
+    import FormEars from "../../../../../lib/components/FormEars.svelte";
+    import Header from "../../../../../lib/components/Header.svelte";
+    import AuthInput from "../../../../../lib/components/authInput.svelte";
+    import ShadowsForForms from "../../../../../lib/components/ShadowsForForms.svelte";
+    import TimePicker from "../../../../../lib/components/TimePicker.svelte";
+  
+    /** @type {import('./$types').ActionData} */
+    export let form;
 
-  /** @type {import('./$types').ActionData} */
-  export let form;
+    export let data;
+  
+    // date for time picker
+    let date = new Date();
+    $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+  </script>
 
-  // date for time picker
-  let date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
-</script>
+<Header title="Add Habit" imgExtraPath="../../" />
 
-<div class="h-screen flex justify-center items-center">
+<div class="mt-10 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
-      <Header title="Add Habit" displayBackButton="0" />
       <ShadowsForForms width={267} height={327} />
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
@@ -74,7 +77,7 @@
 
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
-                href="/habits"
+                href="/categories/{data.categoryId}/habits"
                 class="px-5 py-2 rounded-lg mt-3 font-bold"
                 style="background-color: #B4B4B4">Cancel</a
               >
@@ -90,3 +93,4 @@
     </div>
   </div>
 </div>
+  
