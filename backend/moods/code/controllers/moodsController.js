@@ -38,7 +38,12 @@ import {
    */
   export async function getMood(req, res, next) {
     try {
-      tempResponse.data = await getAllMoodData();
+      const moods = await getAllMoodData();
+      const moodAPIresponse = moods.map(mood => ({
+        ...mood,
+        mood_type_id:`/mood-types/${mood.mood_type_id}`
+      }))
+      tempResponse.data = moodAPIresponse;
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -69,7 +74,12 @@ import {
    */
   export async function getMoodById(req, res, next) {
     try {
-      tempResponse.data = await getMoodInstanceById(req.params.id);
+      const moodsById = await getMoodInstanceById(req.params.id);
+      const moodsByIdAPIResponse = moodsById.map(moodById => ({
+        ...moodById,
+        mood_type_id:`/mood-types/${moodById.mood_type_id}`
+      }))
+      tempResponse.data = moodsByIdAPIResponse;
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);

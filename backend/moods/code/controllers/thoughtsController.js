@@ -38,7 +38,15 @@ import {
    */
   export async function getThought(req, res, next) {
     try {
-      tempResponse.data = await getAllThoughtData();
+      const thoughts = await getAllThoughtData();
+      
+      const thoughtAPIResponse = thoughts.map(thought => ({
+        ...thought,
+        record_id: `/records/${thought.record_id}`
+      }))
+
+      tempResponse.data = thoughtAPIResponse;
+
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);

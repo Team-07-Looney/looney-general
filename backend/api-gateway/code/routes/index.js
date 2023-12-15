@@ -3,7 +3,7 @@ import cors from 'cors';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import morgan from 'morgan';
 import { requireAuth } from '../middleware/authMiddleware.js';
-import { register, login } from '../controllers/authController.js';
+import { register, login, changePassword } from '../controllers/authController.js';
 
 const router = express.Router();
 router.use(cors({
@@ -32,7 +32,9 @@ const moodProxy = createProxyMiddleware({
   onProxyReq: fixRequestBody,
 });
 
-router.use('/habits', cors(), requireAuth, habitProxy);
+router.use('/categories', cors(), requireAuth, habitProxy);
+router.use('/records', cors(), requireAuth, habitProxy);
+router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
 router.use('/mood-types', cors(), requireAuth, moodProxy);
 router.use('/thoughts', cors(), requireAuth, moodProxy);
@@ -43,6 +45,7 @@ router.use('/users', cors(), requireAuth, usersProxy);
 // Authentication routes
 router.post('/register', cors(), register);
 router.post('/login', cors(), login);
+router.post('/profile/change-password', cors(), changePassword);
 
 // Route to make sure user is authenticated
 router.get('/verify', cors(), requireAuth, (req, res) => {

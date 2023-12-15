@@ -4,7 +4,7 @@
 
 <Header title="Looney" />
 
-	<div class="flex flex-col justify-center items-center h-screen text-center">
+	<div class="flex flex-col justify-center items-center mt-40 text-center">
 		<div>
 			<a href="/login" type="button" class="bg-white rounded-lg shadow-lg text-lg min-w-[200px] p-2 flex-row m-2">
 				Login

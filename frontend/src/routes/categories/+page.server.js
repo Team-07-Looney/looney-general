@@ -1,5 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve all habits
@@ -9,16 +10,18 @@ import axios from 'axios';
  */
 export const load = async ({ serverLoadEvent, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwtoken = cookies.get('jwt');
+    const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get('http://localhost:3011/habits', {
+    const response = await axios.get('http://localhost:3011/categories', {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const habits = response.data.data;
-    return { habits };
+    const categories = response.data.data;
+    const userId = payload.id
+    return { categories, userId };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');

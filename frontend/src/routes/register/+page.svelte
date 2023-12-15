@@ -7,11 +7,11 @@
   export let form;
 </script>
 
-<div class="h-screen flex justify-center items-center">
+<Header title="Looney" />
+<div class="mt-4 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars/>
   <div class="grid grid-cols-1">
-    <Header title="Looney" />
     <ShadowsForForms width={280} height={420}/>
     <div class="px-8 pt-8 z-[2]">
       <div class=" bg-white rounded-xl px-4 py-5">
