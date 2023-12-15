@@ -14,13 +14,11 @@
     route="/"
     displayBackButton="0"
     imgExtraPath="../"
+    displayMenuButton="1"
 /> 
-<div class="flex justify-center items-center mt-4">
+<div class="flex justify-center items-center mt-20">
   <div class="flex flex-col items-center">
-
     <div class="grid grid-cols-1">
-      
-     
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
           <form

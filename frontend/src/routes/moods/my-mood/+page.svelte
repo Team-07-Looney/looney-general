@@ -36,7 +36,6 @@ title="My Mood"
 description="Gain more insight in how you are feeling, Looney will always be there
 "
 route="/moods"
-displayBackButton="1"
 imgExtraPath="../"
 />
 
@@ -90,4 +89,4 @@ imgExtraPath="../"
   </div>
 </form>
 </div>
-<BottomMenu imgPath="../../../" displayHabitText="1" />
+<BottomMenu imgPath="../../../" displayMoodText="1" />

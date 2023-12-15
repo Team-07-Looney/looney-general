@@ -1,13 +1,14 @@
 <script>
   import AuthInput from "../../lib/components/authInput.svelte";
-  import Header from "../../lib/components/Header.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
   import FormEars from "../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
+    import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
 </script>
 
-<Header title="Looney" />
+<WhiteBanner title="Looney" description="Please Login" displayMenuButton=0/>
+
 <div class="mt-6 flex justify-center items-center">
   <div class="flex flex-col items-center mt-10">
     <FormEars/>

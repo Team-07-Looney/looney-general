@@ -18,7 +18,7 @@ $showElement = false;
     displayBackButton="0"
     imgExtraPath="../"
 />
-<div class="mt-4 flex justify-center items-center">
+<div class="mt-20 flex justify-center items-center">
     <div class="flex flex-col items-center">
 
         <div class="grid grid-cols-1">

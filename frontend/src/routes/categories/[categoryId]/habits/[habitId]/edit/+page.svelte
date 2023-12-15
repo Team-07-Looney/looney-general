@@ -23,13 +23,13 @@ title="Edit Habit"
 description="Tweak your habit like a pro. Use this form to remix and upgrade your routine."
 route="/"
 displayBackButton="0"
-imgExtraPath="../"
+imgExtraPath="../../../"
 />
-<div class="flex justify-center items-center mt-4">
+<div class="flex justify-center items-center mt-10">
     <div class="flex flex-col items-center">
         <FormEars />
         <div class="grid grid-cols-1">
-            <ShadowsForForms width={267} height={327} />
+            <ShadowsForForms width={260} height={310} />
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form

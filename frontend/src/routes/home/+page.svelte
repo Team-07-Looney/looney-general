@@ -12,10 +12,9 @@
     title="Hi, John!"
     description="How can I help you today? Anything on your mind?"
     route="/"
-    displayBackButton="0"
     imgExtraPath="../"
 />
-<div class=" mt-2 flex justify-center items-center">
+<div class="mt-7 flex justify-center items-center">
 	<div class="flex flex-col justify-center items-center gap-4 mb-10">
 		<div class="flex flex-row gap-7">
 			<OctopusButton buttonName='Habits' buttonIcon='habitOctopus.png' buttonLink="/categories"/>
