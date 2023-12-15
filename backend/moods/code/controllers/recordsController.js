@@ -38,7 +38,13 @@ import {
    */
   export async function getRecord(req, res, next) {
     try {
-      tempResponse.data = await getAllRecordData();
+      const records = await getAllRecordData();
+      const recordAPIresponse = records.map(record => ({
+        ...record,
+        reason_id: `/reasons/${record.reason_id}`,
+        mood_id: `/moods/${record.mood_id}`
+      }))
+      tempResponse.data = recordAPIresponse;
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -69,7 +75,13 @@ import {
    */
   export async function getRecordById(req, res, next) {
     try {
-      tempResponse.data = await getRecordInstanceById(req.params.id);
+      const recordsById = await getRecordInstanceById(req.params.id);
+      const recordsByIdAPIresponse = recordsById.map(recordById => ({
+        ...recordById,
+        reason_id: `/reasons/${recordById.reason_id}`,
+        mood_id: `/moods/${recordById.mood_id}`
+      }))
+      tempResponse.data = recordsByIdAPIresponse;
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
