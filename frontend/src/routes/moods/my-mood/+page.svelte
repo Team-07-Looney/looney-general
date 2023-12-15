@@ -5,6 +5,9 @@
   import ReasonItem from "../../../lib/components/ReasonItem.svelte";
   import { onMount } from "svelte";
   import showElement from '$lib/showElement'
+    import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../lib/components/BottomMenu.svelte";
+
   // Data contains all data passed by the page server
   export let data;
   export let moodId;
@@ -28,8 +31,15 @@
     }
   });
 </script>
+<WhiteBanner
+title="My Mood"
+description="Gain more insight in how you are feeling, Looney will always be there
+"
+route="/moods"
+displayBackButton="1"
+imgExtraPath="../"
+/>
 
-<Header title="My mood" displayBackButton="1" displayMenu="1" route="/moods" />
 <div
   class="bg-white z-20 mt-24 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
 >
@@ -80,3 +90,4 @@
   </div>
 </form>
 </div>
+<BottomMenu imgPath="../../../" displayHabitText="1" />

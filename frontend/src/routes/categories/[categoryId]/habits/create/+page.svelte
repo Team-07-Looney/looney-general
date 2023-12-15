@@ -1,10 +1,13 @@
   <script>
     import FormEars from "../../../../../lib/components/FormEars.svelte";
-    import Header from "../../../../../lib/components/Header.svelte";
     import AuthInput from "../../../../../lib/components/authInput.svelte";
     import ShadowsForForms from "../../../../../lib/components/ShadowsForForms.svelte";
     import TimePicker from "../../../../../lib/components/TimePicker.svelte";
-  
+    import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+    import showElement from '$lib/showElement';
+
+$showElement = false;
     /** @type {import('./$types').ActionData} */
     export let form;
 
@@ -15,8 +18,13 @@
     $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
   </script>
 
-<Header title="Add Habit" imgExtraPath="../../" />
-
+<WhiteBanner
+title="Create Habit"
+description="Time to build your new habit, use this form and let’s make it happen"
+route="/"
+displayBackButton="0"
+imgExtraPath="../"
+/>
 <div class="mt-10 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars />
@@ -93,4 +101,4 @@
     </div>
   </div>
 </div>
-  
+<BottomMenu imgPath="../" displayHabitText="1" />

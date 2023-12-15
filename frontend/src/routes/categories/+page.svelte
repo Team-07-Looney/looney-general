@@ -1,9 +1,12 @@
 <script>
     import { setContext } from "svelte";
     import { onMount } from "svelte";
-    import Header from "../../lib/components/Header.svelte";
     import CategoryItem from "../../lib/components/CategoryItem.svelte";
- 
+    import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../lib/components/BottomMenu.svelte";
+    import showElement from '$lib/showElement';
+
+  $showElement = false;
     // Data contains all data passed by the page server
     export let data;
    
@@ -42,8 +45,13 @@
     }
 </script>
  
-<Header title="My Habits" route="/home" displayBackButton=1 displayMenu=1 />
- 
+<WhiteBanner
+    title="My Habits"
+    description="Add new ones, check the old ones, Looney is going to be with you"
+    route="/home"
+    displayBackButton="1"
+    imgExtraPath="../"
+/> 
   <ul style="margin-top: 10px; position:relative; z-index: 5">
   {#each data.categories as category}
     {#if category.user_id == null || category.user_id == data.userId}
@@ -57,3 +65,4 @@
 <div class="flex justify-center items-center relative" style="z-index: 10;">
 <a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
 </div>
+<BottomMenu imgPath="../" displayHabitText="1" />

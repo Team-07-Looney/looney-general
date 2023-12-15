@@ -4,7 +4,9 @@
     import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
     // Data contains all data passed by the page server
     export let data;
+	import showElement from '$lib/showElement';
 
+	$showElement = false;
     console.log(data);
 </script>
 
