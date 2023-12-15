@@ -14,7 +14,7 @@
         <!-- <CircularProgressBar progress={progress} /> -->
         <h1 class="text-lg ml-3 mt-1"><strong>{title}</strong></h1>
     </a>
-    <div class="inline-block relative text-center mt-3">
+    <div class="inline-block relative text-center mt-0">
         <button id={`button${categoryId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
             <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>

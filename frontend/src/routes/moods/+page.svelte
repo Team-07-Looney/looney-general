@@ -42,4 +42,4 @@ imgExtraPath="../"
         />
     </div> -->
 </div>
-<BottomMenu imgPath="../../../" displayHabitText="1" />
+<BottomMenu imgPath="../../../" displayMoodText="1" />
