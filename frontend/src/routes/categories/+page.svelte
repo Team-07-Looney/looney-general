@@ -62,7 +62,7 @@
   {/each}
   </ul>
  
-<div class="flex justify-center items-center relative" style="z-index: 10;">
+<div class="flex justify-center items-center relative" style="z-index: 1;">
 <a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
 </div>
 <BottomMenu imgPath="../" displayHabitText="1" />

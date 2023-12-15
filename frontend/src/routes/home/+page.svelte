@@ -9,7 +9,7 @@
 </script>
 
 <WhiteBanner
-    title="Hi, John!"
+    title="Hi, Balint!"
     description="How can I help you today? Anything on your mind?"
     route="/"
     imgExtraPath="../"

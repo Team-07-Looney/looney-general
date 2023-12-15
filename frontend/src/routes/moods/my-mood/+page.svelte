@@ -40,7 +40,7 @@ imgExtraPath="../"
 />
 
 <div
-  class="bg-white z-20 mt-24 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
+  class="bg-white z-20 mt-1 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
 >
 <form method="POST" action="?/createRecord">
 
