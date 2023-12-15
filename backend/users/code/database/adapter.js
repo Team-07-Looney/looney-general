@@ -40,7 +40,6 @@ export async function createNewUser(name, email, password) {
   return new Promise(async (resolve, reject) => {
     // Establishes connection with the db
     let db = await openDatabaseConnection();
-    console.log(db);
     const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
     // Run the insert query
@@ -109,3 +108,33 @@ export async function getUserBy(key, value) {
   });
 }
 
+export async function updateUserWith(id, key, value) {
+  return new Promise(async (resolve, reject) => {
+    const possibleKeys = ['password'];
+    if (!possibleKeys.includes(key)) {
+      reject(new Error("Invalid param for updating the user. Currently only the password is allowed."));
+      return;
+    }
+
+    const query = `UPDATE users SET ${key} = "${value}" WHERE id = ${id}`;
+
+    let db = await openDatabaseConnection();
+    db.run(query, function (err) {
+      if (err) {
+        console.error(err);
+        reject({
+          code: 403,
+          message: "Failed to update the user",
+          userId: id,
+          error: err.message // Include the specific error message
+        });
+      } else {
+        resolve({
+          code: 200,
+          message: `Successfully updated the user's ${key}`,
+          userId: id
+        });
+      }
+    });
+  });
+}

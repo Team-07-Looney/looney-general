@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import { getUsers, getUser, createUser } from '../controllers/userController.js';
+import { getUsers, getUser, createUser, updateUser } from '../controllers/userController.js';
 const router = express.Router();
 
 // routes
@@ -30,5 +30,8 @@ router.get('/users', cors(), getUsers);
 router.post('/users', cors(), createUser);
 
 router.get('/users/email/:userEmail', cors(), getUser);
+router.get('/users/id/:userId', cors(), getUser);
+
+router.post('/users/:userId', cors(), updateUser);
 
 export default router;

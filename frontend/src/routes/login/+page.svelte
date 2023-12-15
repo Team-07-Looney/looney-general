@@ -7,11 +7,11 @@
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
 
-<div class="h-screen flex justify-center items-center">
+<Header title="Looney" />
+<div class="mt-6 flex justify-center items-center">
   <div class="flex flex-col items-center mt-10">
     <FormEars/>
   <div class="grid grid-cols-1">
-    <Header title="Looney" />
     <ShadowsForForms height={194} width={260}/>
     <div class="px-8 pt-8 z-[2]">
       <div class="bg-white rounded px-4 py-4 mb-16">
