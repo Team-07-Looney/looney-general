@@ -4,27 +4,26 @@ export const DBSOURCE = "./database/db.sqlite";
 
 // Define table creation queries
 const tableQueries = [
-//Create Mood_Types table if it doesn't exists
-`CREATE TABLE IF NOT EXISTS Mood_Types (
+  //Create Mood_Types table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Mood_Types (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL)`,
-//Create Moods table if it doesn't exists
- `CREATE TABLE IF NOT EXISTS Moods (
+  //Create Moods table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Moods (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   mood_type_id INTEGER REFERENCES Mood_Types(id),
   name TEXT UNIQUE NOT NULL)`,
-//Create Reasons table if it doesn't exists
- `CREATE TABLE IF NOT EXISTS Reasons (
+  //Create Reasons table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Reasons (
      id INTEGER PRIMARY KEY AUTOINCREMENT,
      name TEXT NOT NULL)`,
-//Create Records table if it doesn't exists
- `CREATE TABLE IF NOT EXISTS Records (
+  //Create Records table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  user_id INTEGER,
   reason_id INTEGER REFERENCES Reasons(id),
   mood_id INTEGER REFERENCES Moods(id))`,
-//Create Thoughts table if it doesn't exists
- `CREATE TABLE IF NOT EXISTS Thoughts (
+  //Create Thoughts table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Thoughts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
@@ -46,9 +45,19 @@ export async function openDatabaseConnection() {
       }
 
       try {
-        // Use a separate async function within the callback
-        await createTables(db);
-        resolve(db);
+
+        db.get("SELECT count(*) AS tableMoodsExists FROM sqlite_master WHERE type='table' AND name='Moods'", async (err, row) => {
+          // If there is no such table create one
+          if (row.tableMoodsExists == 0) {
+            // Use a separate async function within the callback
+            await createTables(db);
+            await populateMoodsTypeTable(db);
+            await populateMoodsTable(db);
+            await populateReasonsTable(db);
+          }
+
+          resolve(db);
+        });
       } catch (error) {
         reject(error);
       }
@@ -94,6 +103,117 @@ async function createTableIfNotExists(db, query) {
         console.log('Table created or already exists.');
         resolve();
       }
+    });
+  });
+}
+
+async function populateMoodsTypeTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedCategories = ['Positive', 'Neutral', 'Negative'];
+    const insertQuery = 'INSERT INTO Mood_Types (name) VALUES (?)';
+
+    predefinedCategories.forEach((name) => {
+      db.run(insertQuery, [name], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    });
+  });
+}
+
+async function populateMoodsTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedCategories = [
+      {
+        moodTypeId: 1,
+        name: 'Joyful'
+      },
+      {
+        moodTypeId: 1,
+        name: 'Excited'
+      },
+      {
+        moodTypeId: 1,
+        name: 'Greatful'
+      },
+      {
+        moodTypeId: 1,
+        name: 'Optimistic'
+      },
+      {
+        moodTypeId: 1,
+        name: 'Playful'
+      },
+      {
+        moodTypeId: 2,
+        name: 'Calm'
+      },
+      {
+        moodTypeId: 2,
+        name: 'Indifferent'
+      },
+      {
+        moodTypeId: 2,
+        name: 'Thoughtful'
+      },
+      {
+        moodTypeId: 2,
+        name: 'Reserved'
+      },
+      {
+        moodTypeId: 2,
+        name: 'Tolerant'
+      },
+      {
+        moodTypeId: 3,
+        name: 'Gloomy'
+      },
+      {
+        moodTypeId: 3,
+        name: 'Agitated'
+      },
+      {
+        moodTypeId: 3,
+        name: 'Overwhelmed'
+      },
+      {
+        moodTypeId: 3,
+        name: 'Disappointed'
+      },
+      {
+        moodTypeId: 3,
+        name: 'Iritated'
+      }
+    ];
+    const insertQuery = 'INSERT INTO Moods (mood_type_id, name) VALUES (?,?)';
+    predefinedCategories.forEach((mood) => {
+      db.run(insertQuery, [mood.moodTypeId, mood.name], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    })
+  });
+}
+
+async function populateReasonsTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedCategories = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
+    const insertQuery = 'INSERT INTO Reasons (name) VALUES (?)';
+
+    predefinedCategories.forEach((name) => {
+      db.run(insertQuery, [name], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
     });
   });
 }

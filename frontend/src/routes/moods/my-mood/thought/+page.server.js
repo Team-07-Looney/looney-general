@@ -1,14 +1,11 @@
-import axios from "axios";
-import { redirect } from '@sveltejs/kit';
-import { fail } from '@sveltejs/kit';
+import axios from 'axios';
+import { fail, redirect } from '@sveltejs/kit';
 
 /**
  * Executes during the load of the svelte page
- * @param {*} param0 
- */
+ * @param {*} param0
+*/
 export const load = async ({ cookies }) => {
-  let isUserAuth = false;
-
   try {
     // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
@@ -19,16 +16,9 @@ export const load = async ({ cookies }) => {
         'Authorization': `Bearer ${jwt}`
       }
     });
-
-    if (isAuthenticated.data.message == "User is authenticated") {
-      isUserAuth = true;
-    }
   } catch (error) {
-    console.log(error);
-  }
-
-  if (!isUserAuth) {
-    throw redirect(302, "/login");
+    if (error.response.status == 401)  {
+      throw redirect(302, '/login');
+    }
   }
 };
-
