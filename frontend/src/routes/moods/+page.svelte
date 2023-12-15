@@ -16,7 +16,7 @@ displayBackButton="1"
 imgExtraPath="../"
 />
 
-<div class="flex flex-col justify-center items-center mt-20">
+<div class="flex flex-col justify-center items-center mt-6">
     <div class="flex flex-row gap-7">
         <OctopusButton
             buttonName="My Mood"
@@ -42,4 +42,4 @@ imgExtraPath="../"
         />
     </div> -->
 </div>
-<BottomMenu imgPath="../../../" displayHabitText="1" />
+<BottomMenu imgPath="../../../" displayMoodText="1" />

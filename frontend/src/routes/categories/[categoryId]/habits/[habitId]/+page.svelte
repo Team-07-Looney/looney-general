@@ -10,7 +10,7 @@ $showElement = false;
 </script>
 
 <WhiteBanner
-title="Habit"
+title="{data.habit[0].name}"
 description="Start it, pause it, resume it, cancel it!
 No shame of doing so!"
 route="/categories/{data.habit[0].category_id}/habits"

@@ -23,13 +23,13 @@ title="Create Habit"
 description="Time to build your new habit, use this form and let’s make it happen"
 route="/"
 displayBackButton="0"
-imgExtraPath="../"
+imgExtraPath="../../"
 />
 <div class="mt-10 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
-      <ShadowsForForms width={267} height={327} />
+      <ShadowsForForms width={260} height={310} />
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
           <form
@@ -101,4 +101,4 @@ imgExtraPath="../"
     </div>
   </div>
 </div>
-<BottomMenu imgPath="../" displayHabitText="1" />
+<BottomMenu imgPath="../../" displayHabitText="1" />
