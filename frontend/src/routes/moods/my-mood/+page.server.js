@@ -63,13 +63,21 @@ export const actions = {
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       });
+
+      const responseRecord = await axios.get('http://localhost:3011/recordsMoods', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+
     } catch (error) {
       if (error.response.status == 401) {
         throw redirect(302, '/login');
       }
     }
 
-    throw redirect(302, '/moods');
+    throw redirect(302, `/moods/my-mood/thought`);
   }
 };
 
