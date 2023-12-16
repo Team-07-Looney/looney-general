@@ -103,13 +103,13 @@ router.put('/reasons/:id', cors(), editReasonById);
 router.delete('/reasons/:id', cors(), deleteReasonById);
 
 // get a collection of all the records
-router.get('/records', cors(), getRecord);
+router.get('/recordsMoods', cors(), getRecord);
 // route for creating a record
-router.post('/records', cors(), createRecord);
+router.post('/recordsMoods', cors(), createRecord);
 // route for getting a record
-router.get('/records/:id', cors(), getRecordById);
+router.get('/recordsMoods/:id', cors(), getRecordById);
 // route for editing a record
-router.put('/records/:id', cors(), editRecordById);
+router.put('/recordsMoods/:id', cors(), editRecordById);
 // route for deleteing a record
-router.delete('/records/:id', cors(), deleteRecordById);
+router.delete('/recordsMoods/:id', cors(), deleteRecordById);
 export default router;
