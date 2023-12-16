@@ -1,12 +1,12 @@
 <script>
-    import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
+    import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
 </script>
 
 <WhiteBanner
     title="My Mood"
     description="Gain more insight in how you are feeling, Looney will always be there
 "
-    imgExtraPath="../"
+    imgExtraPath="../../"
 />
 
 <div
@@ -24,7 +24,7 @@
                 name="title"
             />
             <label>Story:</label>
-            <textarea type="text" class="bg-gray-300 w-full p-4 rounded-lg"
+            <textarea type="text" name="body" class="bg-gray-300 w-full p-4 rounded-lg"
             ></textarea>
             <div class="flex flex-row gap-8 justify-center items-center mt-2">
                 <a
