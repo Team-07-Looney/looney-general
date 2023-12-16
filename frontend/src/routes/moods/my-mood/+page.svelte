@@ -21,6 +21,7 @@
   }
 
   let storedMoodId = 0;
+  let storedReasonId = 0;
 </script>
 
 <WhiteBanner
@@ -60,6 +61,7 @@
           <ReasonItem
             title={reason.name}
             reasonId={reason.id}
+            bind:storedReasonId
             on:reasonSelected={handleReasonClick}
           />
         </div>
