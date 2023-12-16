@@ -54,7 +54,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/records', {
+      const data = await axios.post('http://localhost:3011/recordsMoods', {
         mood_id: moodId,
         reason_id: reasonId,
       }, {
