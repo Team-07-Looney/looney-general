@@ -3,17 +3,13 @@
   import Header from "../../../lib/components/Header.svelte";
   import MoodItem from "../../../lib/components/MoodItem.svelte";
   import ReasonItem from "../../../lib/components/ReasonItem.svelte";
-  import { onMount } from "svelte";
-  import showElement from '$lib/showElement'
-    import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
-    import BottomMenu from "../../../lib/components/BottomMenu.svelte";
+  import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
+  import BottomMenu from "../../../lib/components/BottomMenu.svelte";
 
   // Data contains all data passed by the page server
   export let data;
   export let moodId;
   export let reasonId;
-
-  $showElement = false;
 
   function handleMoodClick(event) {
     console.log("Mood clicked:", event.detail.moodId);
@@ -23,13 +19,10 @@
     console.log("Reason clicked:", event.detail.reasonId);
     reasonId = event.detail.reasonId;
   }
-  onMount(() => {
-    // Assuming the element has an ID, you can remove it using JavaScript
-    const elementToRemove = document.getElementById('elementId');
-    if (elementToRemove) {
-      elementToRemove.remove();
-    }
-  });
+ 
+  let storedMoodId = 0;
+ 
+
 </script>
 <WhiteBanner
 title="My Mood"
@@ -53,6 +46,7 @@ imgExtraPath="../"
         <MoodItem
           title={mood.name}
           moodId={mood.id}
+          bind:storedMoodId={storedMoodId}
           on:moodSelected={handleMoodClick}
         />
       </div>
