@@ -1,5 +1,4 @@
 <script>
-    import { onMount } from "svelte";
     export let title;
     export let date;
     export let iconType;
@@ -19,7 +18,7 @@
    // Define deleteThought function outside onMount
    async function deleteThought() {
     try {
-      const response = await fetch(`/thoughts/${thoughtId}`, {
+      const response = await fetch(`http://localhost:3011/thoughts/${thoughtId}`, {
         method: 'DELETE',
       });
 
@@ -34,11 +33,6 @@
       console.error('Error deleting thought:', error.message);
     }
   }
-
-  onMount(() => {
-    // Call deleteThought within onMount if needed
-    // deleteThought();
-  });
   </script>
   
   <div class="bg-white rounded-xl py-2 px-3 flex flex-row w-full justify-between items-center" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
