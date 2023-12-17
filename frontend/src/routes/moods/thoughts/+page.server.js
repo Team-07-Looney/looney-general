@@ -19,31 +19,36 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
     const thoughts = response.data.data;
     const thoughtsDate = response.data.meta.date;
+    const records = [];
+    const moods = [];
+    const moodType = [];
 
-    
-    const recordResponse = await axios.get(`http://localhost:3011${thoughts[0].record_id}`, {
-      headers: {
-        'Authorization': `Bearer ${jwt}`
-      }
-    });
 
-    const records = recordResponse.data.data;
+    for(let i = 0; i<thoughts.lenght; i++) {
+      const recordResponse = await axios.get(`http://localhost:3011${thoughts[i].record_id}`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`
+        }
+      });
 
-    const moodResponse = await axios.get(`http://localhost:3011${records[0].mood_id}`, {
-      headers: {
-        'Authorization': `Bearer ${jwt}`
-      }
-    });
+      records.push(recordResponse.data.data);
+  
+      const moodResponse = await axios.get(`http://localhost:3011${records[i].mood_id}`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`
+        }
+      });
 
-    const moods = moodResponse.data.data;
+      moods.push(moodResponse.data.data);
+  
+      const moodTypeResponse = await axios.get(`http://localhost:3011${moods[i].mood_type_id}`, {
+        headers: {
+          'Authorization': `Bearer ${jwt}`
+        }
+      });
 
-    const moodTypeResponse = await axios.get(`http://localhost:3011${moods[0].mood_type_id}`, {
-      headers: {
-        'Authorization': `Bearer ${jwt}`
-      }
-    });
-
-    const moodType = moodTypeResponse.data.data[0].name;
+      moodType.push(moodTypeResponse.data.data[i].name);
+    }
 
     return { thoughts, thoughtsDate, records, moods, moodType};
   } catch (error) {
