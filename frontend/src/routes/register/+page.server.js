@@ -30,7 +30,7 @@ export const load = async ({ cookies }) => {
   // If they are authenticated they should not be able to access the register
   // Svelte issue with throwing redirect within a try-catch block workaround
   if (isUserAuth) {
-    throw redirect(302, "/habits");
+    throw redirect(302, "/home");
   }
 };
 
@@ -79,7 +79,7 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/habits');
+    throw redirect(302, '/home');
   }
 };
 
@@ -113,6 +113,9 @@ async function validateRegistrationData(formData) {
     validationIssues.push({ "input": "password", "message": "The passwords are missing" });
   } else if (password != confirmPassword) {
     validationIssues.push({ "input": "password", "message": "The password are not matching" });
+  } else if (password.length < 12) {
+    validationIssues.push({ "input": "password", "message": "The password needs to be at least 12 characters long" });
+    validationIssues.push({ "input": "confirm-password", "message": "" });
   }
 
   return validationIssues;

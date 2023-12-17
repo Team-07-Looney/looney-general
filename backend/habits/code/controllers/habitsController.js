@@ -4,7 +4,7 @@ import {
   getHabitInstanceById,
   editHabitInstanceById,
   deleteHabitInstanceById
-} from '../database/adapter.js';
+} from '../database/habitsAdapter.js';
 
 /**
  * function that calculates today's date
@@ -69,7 +69,7 @@ export async function createHabit(req, res, next) {
  */
 export async function getHabitById(req, res, next) {
   try {
-    tempResponse.data = await getHabitInstanceById(req.params.id);
+    tempResponse.data = await getHabitInstanceById(req.params.habitId);
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);
@@ -84,7 +84,7 @@ export async function getHabitById(req, res, next) {
  */
 export async function editHabitById(req, res, next) {
   try {
-    await editHabitInstanceById(req.body, req.params.id);
+    await editHabitInstanceById(req.body, req.params.habitId);
     tempResponse.data.message = "habit edited successfully";
     res.status(200).send(tempResponse);
   } catch(err) {
@@ -100,7 +100,7 @@ export async function editHabitById(req, res, next) {
  */
 export async function deleteHabitById(req, res, next) {
   try {
-    await deleteHabitInstanceById(req.params.id);
+    await deleteHabitInstanceById(req.params.habitId);
     tempResponse.data.message = "habit deleted successfully";
     res.status(200).send(tempResponse);
   } catch(err) {

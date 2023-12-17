@@ -91,6 +91,43 @@ export async function login(req, res) {
 }
 
 /**
+ * Handles changing the password of the user
+ * @param {*} req 
+ * @param {*} res 
+ */
+export async function changePassword(req, res) {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Extract JWT from 'Authorization' header
+  
+  const decoded = jwt.decode(token, { complete: true });
+
+  // Get the user so that the current password is compared with the one with the database
+  const getUserResponse = await axios.get(`http://msusers:3012/users/id/${decoded.payload.id}`);
+
+  // Comparing the passwords
+  const auth = await bcrypt.compare(req.body.currentPassword, getUserResponse.data.data.password);
+  if(auth) {
+    const saltRounds = 12;
+    let hash = await bcrypt.hash(req.body.newPassword, saltRounds);
+
+    // Call the microservice function to update a user on a key (column) and value
+    const data = await axios.post(`http://msusers:3012/users/${decoded.payload.id}`, {
+      key: "password",
+      value: hash
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
+
+    res.status(209).send(data.data);
+  } else {
+    tempResponse.data.message = "The current password does not match";
+    res.status(409).send(tempResponse);
+  }
+}
+
+/**
  * Creates a JWT token based on the id of the user and a secret
  * @param {*} id Id of the user
  * @returns the JWT token

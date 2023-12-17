@@ -1,26 +1,26 @@
 <script>
-	import Header from "../lib/components/Header.svelte";
+	  import showElement from '$lib/showElement'
+    import WhiteBanner from '../lib/components/WhiteBanner.svelte';
+	  $showElement = true;
 </script>
 
-<Header title="Looney"/>
-<div class="bg-red-300 py-5 px-5 rounded-lg place-self-center">
-	<form class="grid grid-cols-1 gap-8">
+<div>
+	<WhiteBanner title="Looney" description="Please Login or Register" displayMenuButton=0/>
+	<div class=" mt-32 flex flex-col justify-center items-center text-center">
 		<div>
-			<label for="name" class="text-black text-2xl">Name</label>
-			<input id="name" name="name" class="rounded-sm">
+			<a href="/login" type="button" class="bg-white rounded-lg shadow-lg text-lg min-w-[200px] p-2 flex-row m-2">
+				Login
+			</a>
 		</div>
 		
 		<div>
-			<label for="email" class="text-black text-2xl">Email</label>
-			<input id="email" name="email" class="rounded-sm">
+			<a href="/register" type="button" class="bg-white rounded-lg shadow-lg text-lg min-w-[200px] p-2 flex-row m-2">
+				Register
+			</a>
 		</div>
-		
-		<div>
-			<label for="password" class="text-black text-2xl">Password</label>
-			<input id="password" name="password" class="rounded-sm">
-		</div>
-		<a href="/habits" type="button" class="p-1.5 bg-red-400 rounded-lg">
-			Login
-		</a>
-	</form>
+	</div>
 </div>
+
+		
+	
+

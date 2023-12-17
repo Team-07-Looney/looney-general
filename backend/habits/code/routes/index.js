@@ -7,6 +7,14 @@ import {
   editHabitById,
   deleteHabitById
 } from '../controllers/habitsController.js';
+import {
+  createCategory,
+  deleteCategoryById,
+  editCategoryById,
+  getCategories,
+  getCategoryById
+} from '../controllers/categoriesController.js';
+import { createRecord, getRecordById, getRecords } from '../controllers/recordsController.js';
 const router = express.Router();
 
 // routes
@@ -14,7 +22,7 @@ router.get('/', (req, res, next) => {
   res.json('hi');
 });
 
-router.options('/habits', (req, res, next) => {
+router.options('/categories', (req, res, next) => {
   try {
     //set header before response
     res.header({
@@ -30,19 +38,44 @@ router.options('/habits', (req, res, next) => {
   }
 });
 
+// get a collection of all the categories
+router.get('/categories', cors(), getCategories);
+
+// route for creating a category
+router.post('/categories', cors(), createCategory);
+
+// route for getting a category
+router.get('/categories/:categoryId', cors(), getCategoryById);
+
+// route for editing a category
+router.put('/categories/:categoryId', cors(), editCategoryById);
+
+// route for deleteing a category
+router.delete('/categories/:categoryId', cors(), deleteCategoryById);
+
+
 // get a collection of all the habits
-router.get('/habits', cors(), getHabits);
+router.get('/categories/:categoryId/habits', cors(), getHabits);
 
 // route for creating a habit
-router.post('/habits', cors(), createHabit);
+router.post('/categories/:categoryId/habits', cors(), createHabit);
 
 // route for getting a habit
-router.get('/habits/:id', cors(), getHabitById);
+router.get('/categories/:categoryId/habits/:habitId', cors(), getHabitById);
 
-// route for editing a habit
-router.put('/habits/:id', cors(), editHabitById);
+// route for editing a category
+router.put('/categories/:categoryId/habits/:habitId', cors(), editHabitById);
 
-// route for deleteing a habit
-router.delete('/habits/:id', cors(), deleteHabitById);
+// route for deleting a category
+router.delete('/categories/:categoryId/habits/:habitId', cors(), deleteHabitById);
+
+// get a collection of all the records
+router.get('/records', cors(), getRecords);
+
+// route for creating a record
+router.post('/records', cors(), createRecord);
+
+// route for getting a record
+router.get('/records/:id', cors(), getRecordById);
 
 export default router;

@@ -1,4 +1,4 @@
-import { createNewUser, getAllUsers, getUserBy } from '../database/adapter.js';
+import { createNewUser, getAllUsers, getUserBy, updateUserWith } from '../database/adapter.js';
 
 function getToDay() {
   const date = new Date();
@@ -11,7 +11,7 @@ function getToDay() {
   return currentDate;
 }
 
-const tempResponse = {
+let tempResponse = {
   meta: {
     date: getToDay(),
   },
@@ -53,7 +53,7 @@ export async function getUser(req, res, next) {
       res.status(404).send(tempResponse);
       return;
     }
-    
+
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
@@ -75,4 +75,31 @@ export async function createUser(req, res, next) {
     tempResponse.data = err.message;
     res.status(409).send(tempResponse);
   }
+}
+
+export async function updateUser(req, res, next) {
+  try {
+    const userId = req.params.userId;
+    const key = req.body.key;
+    const value = req.body.value;
+
+    tempResponse = await freshResponse();
+    tempResponse.data = await updateUserWith(userId, key, value);
+
+    res.status(200).send(tempResponse);
+  } catch (err) {
+    tempResponse.data = err.message;
+    res.status(409).send(tempResponse);
+  }
+}
+
+async function freshResponse() {
+  return {
+    meta: {
+      date: getToDay(),
+    },
+    data: {
+      message: 'this route is not implemented yet',
+    },
+  };
 }
