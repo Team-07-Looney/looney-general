@@ -23,7 +23,7 @@
 <div class="flex flex-col overflow-y-scroll ml-2 h-80 items-center w-80 px-1 gap-2">
     {#if data.thoughts.length > 0}
         {#each data.thoughts as thought}
-            <ThoughtItem title={thought.title} date={data.thoughtsDate} iconType={data}/>
+            <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
             <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
             <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
             <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
