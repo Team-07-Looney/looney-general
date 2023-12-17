@@ -23,7 +23,7 @@
     <div class="flex flex-col overflow-y-scroll ml-2 h-80 items-center w-80 px-1 gap-2">
         {#if data.thoughts.length > 0}
             {#each data.thoughts as thought, i}
-                <ThoughtItem title={thought.title} date={data.thoughtsDate} iconType={data.moodType[i]}/>
+                <ThoughtItem thoughtId={thought.id} title={thought.title} date={data.thoughtsDate} iconType={data.moodType[i]}/>
             {/each}
         {:else}
             <p>lol</p>
