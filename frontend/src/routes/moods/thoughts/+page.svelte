@@ -24,12 +24,9 @@
     {#if data.thoughts.length > 0}
         {#each data.thoughts as thought}
             <ThoughtItem title={thought.title} date={data.thoughtsDate} iconType={data}/>
-            <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
-            <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
-            <ThoughtItem title={thought.title} date={data.thoughtsDate}/>
         {/each}
     {:else}
-        <p>lol</p>
+        <p>Here you will see your thoughts!</p>
     {/if}
 </div>
 </div>

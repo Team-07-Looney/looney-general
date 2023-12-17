@@ -33,7 +33,7 @@
 />
 
 <div
-  class="bg-white z-20 mt-1 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center"
+  class="bg-white z-20 mt-1 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg"
 >
   <form method="POST" action="?/createRecord">
     <div class="flex justify-center items-center">
@@ -75,10 +75,9 @@
         class="z-10 flex justify-center items-center bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
         href="/moods">Cancel</a
       >
-      <button
-        class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"
-        type="submit">Next</button
-      >
+      {#if moodId && reasonId}
+      <button class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20" type="submit">Next</button>
+    {/if}
     </div>
   </form>
 </div>

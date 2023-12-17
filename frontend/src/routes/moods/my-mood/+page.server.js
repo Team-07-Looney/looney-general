@@ -22,7 +22,6 @@ export const load = async ({ serverLoadEvent, cookies }) => {
         'Authorization': `Bearer ${jwt}`
       }
     });
-    console.log(response1)
 
     const moods = response1.data.data;
     const reasons = response2.data.data;
@@ -37,6 +36,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
  */
 export const actions = {
   createRecord: async ({ request, cookies }) => {
+    let recordId;
     try {
       const jwt = cookies.get('jwt');
 
@@ -44,6 +44,7 @@ export const actions = {
       const formData = await request.formData();
       const moodId = formData.get('moodId');
       const reasonId = formData.get('reasonId');
+
 
       // check for errors in a form data
       const errors = await validateCreateData(moodId, reasonId);
@@ -63,13 +64,24 @@ export const actions = {
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       });
+
+      const responseRecords = await axios.get('http://localhost:3011/recordsMoods', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+      const records = responseRecords.data.data;
+      const lastRecordId = records.length;
+      recordId = lastRecordId;
+      
     } catch (error) {
       if (error.response.status == 401) {
         throw redirect(302, '/login');
       }
     }
 
-    throw redirect(302, '/moods');
+    throw redirect(302, `/moods/my-mood/${recordId}/thought`);
   }
 };
 
