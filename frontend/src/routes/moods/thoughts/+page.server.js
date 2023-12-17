@@ -24,14 +24,15 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const moodType = [];
 
 
-    for(let i = 0; i<thoughts.lenght; i++) {
+    for(let i = 0; i < thoughts.length; i++) {
+
       const recordResponse = await axios.get(`http://localhost:3011${thoughts[i].record_id}`, {
         headers: {
           'Authorization': `Bearer ${jwt}`
         }
       });
 
-      records.push(recordResponse.data.data);
+      records.push(recordResponse.data.data[0]);
   
       const moodResponse = await axios.get(`http://localhost:3011${records[i].mood_id}`, {
         headers: {
@@ -39,7 +40,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
         }
       });
 
-      moods.push(moodResponse.data.data);
+      moods.push(moodResponse.data.data[0]);
   
       const moodTypeResponse = await axios.get(`http://localhost:3011${moods[i].mood_type_id}`, {
         headers: {
@@ -47,7 +48,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
         }
       });
 
-      moodType.push(moodTypeResponse.data.data[i].name);
+      moodType.push(moodTypeResponse.data.data[0].name);
     }
 
     return { thoughts, thoughtsDate, records, moods, moodType};
