@@ -13,16 +13,16 @@ export const load = async ({ cookies }) => {
     // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
 
-    // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const payload = JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString());
+
+    const response = await axios.get(`http://localhost:3011/users/id/${payload.id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
     });
 
-    if (isAuthenticated.data.message == "User is authenticated") {
-      isUserAuth = true;
-    }
+    const user = response.data.data;
+    return user;
   } catch (error) {
     console.log(error);
   }

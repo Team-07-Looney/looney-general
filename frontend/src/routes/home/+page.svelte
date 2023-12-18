@@ -4,12 +4,13 @@
     import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
     import OverviewItem from "../../lib/components/mainPageComponents/OverviewItem.svelte";
 	import showElement from '$lib/showElement';
-
+	export let data;
+	
 	$showElement = false;
 </script>
 
 <WhiteBanner
-    title="Hi, Balint!"
+    title="Hi, { data.username }!"
     description="How can I help you today? Anything on your mind?"
     route="/"
     imgExtraPath="../"
