@@ -121,7 +121,7 @@
         <button on:click={handleStart} class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px]">Start</button>  
       {:else}
         {#if isOver}
-        <button on:click={handleReset} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Reset</button>
+        <button on:click={handleReset} class="rounded-lg p-2 min-w-[85px] mr-2 bg-indigo-200 border-black">Reset</button>
         {:else if !isPaused}
           <button on:click={handlePause} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Pause</button>
         {:else}
