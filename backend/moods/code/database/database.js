@@ -27,7 +27,8 @@ const tableQueries = [
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
-  record_id INTEGER REFERENCES Records(id))`
+  record_id INTEGER REFERENCES Records(id),
+  user_id INTEGER)`
 ];
 
 /**

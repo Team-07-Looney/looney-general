@@ -52,15 +52,21 @@
     displayBackButton="1"
     imgExtraPath="../"
 /> 
-  <ul style="margin-top: 10px; position:relative; z-index: 5">
-  {#each data.categories as category}
-    {#if category.user_id == null || category.user_id == data.userId}
-      <li class="px-10 py-2">
-        <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
-      </li>
-    {/if}
-  {/each}
-  </ul>
+
+  {#if data.filteredCategoriesByUser.length == 0} 
+    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4" style="background-color: #fdefc7;">
+      <h1 class="font-bold">Create a Routine!</h1> 
+      <p >Here you can organize your habits<br>based on different routines.</p>
+    </div>
+  {:else}
+    <ul style="margin-top: 10px; position:relative; z-index: 5">
+      {#each data.filteredCategoriesByUser as category}
+        <li class="px-10 py-2">
+          <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
+        </li>
+      {/each}
+    </ul>
+  {/if}
  
 <div class="flex justify-center items-center relative" style="z-index: 1;">
 <a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>

@@ -33,8 +33,9 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
     const habits = responseHabits.data.data;
     const category = responseCategory.data.data;
     const records = responseRecords.data.data;
+    const filteredHabitsByCategory = habits.filter(habit => habit.category_id === category[0].id);
 
-    habits.forEach(habit => {
+    filteredHabitsByCategory.forEach(habit => {
       records.forEach(record => {
         if (habit.id === record.habit_id && record.date === responseHabits.data.meta.date) {
           habit.done = true;
@@ -46,7 +47,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       }
     });
 
-    return { habits, category };
+    return { category, filteredHabitsByCategory };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');
