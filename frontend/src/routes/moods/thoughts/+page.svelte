@@ -25,7 +25,7 @@
                 <ThoughtItem thoughtId={thought.id} title={thought.title} date={data.thoughtsDate} iconType={data.moodType[i]}/>
             {/each}
         {:else}
-            <p>lol</p>
+            <p>Here you will see your thoughts!</p>
         {/if}
     </div>
 </div>
