@@ -8,7 +8,6 @@
     import showElement from '$lib/showElement';
 
     $showElement = false;
-    console.log(data);
 </script>
 
 <WhiteBanner
