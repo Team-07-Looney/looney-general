@@ -2,7 +2,7 @@ import axios from 'axios';
 import { fail, redirect } from '@sveltejs/kit';
 
 export const actions = {
-  createMood: async ({ request, cookies}) => {
+  createReason: async ({ request, cookies}) => {
     
     try {
       const jwt = cookies.get('jwt');
@@ -10,20 +10,18 @@ export const actions = {
       // Retrieves the data from the form
       const formData = await request.formData();
       const name = formData.get('name');
-      const mood_type_id = formData.get('mood_type_id');
 
       // check for errors in a form data
-      const errors = await validateCreateData(name, mood_type_id);
+      const errors = await validateCreateData(name);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
-        return fail(400, { name, mood_type_id, errors });
+        return fail(400, { name, errors });
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/moods', {
+      const data = await axios.post('http://localhost:3011/reasons', {
         name: name,
-        mood_type_id: mood_type_id
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -40,13 +38,10 @@ export const actions = {
   }
 };
 
-async function validateCreateData(name, mood_type_id) {
+async function validateCreateData(name) {
   let errors = [];
   if (!name) {
-    errors.push({ "input": "name", "message": "Name is missing" });
-  }
-  if (!mood_type_id) {
-    errors.push({ "input": "mood_type_id", "message": "Select a mood type" });
+    errors.push({ "input": "name", "message": "Your reason is missing" });
   }
   return errors;
 }

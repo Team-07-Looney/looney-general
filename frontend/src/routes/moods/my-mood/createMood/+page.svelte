@@ -16,7 +16,6 @@
 <WhiteBanner
   title="Add Mood"
   description="Add a mood that fits your emotions"
-  route="/"
   displayBackButton="0"
   imgExtraPath="../"
   displayMenuButton="1"
@@ -126,4 +125,4 @@
     </div>
   </div>
 </div>
-<BottomMenu imgPath="../" displayHabitText="1" />
+<BottomMenu imgPath="../" displayMoodText="1" />

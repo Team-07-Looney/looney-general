@@ -70,7 +70,7 @@
         </div>
       {/each}
       <!-- add new reason button -->
-      <a class="p-1" href="/"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
+      <a class="p-1" href="/moods/my-mood/createReason"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
     </div>
 
     <input type="hidden" name="moodId" bind:value={moodId} />
