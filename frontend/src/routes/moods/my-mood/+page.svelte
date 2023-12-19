@@ -29,6 +29,7 @@
   description="Gain more insight in how you are feeling, Looney will always be there
 "
   route="/moods"
+  displayBackButton="1"
   imgExtraPath="../"
 />
 
@@ -50,6 +51,8 @@
           />
         </div>
       {/each}
+   <!-- add new mood button -->
+      <a class="p-1" href="/moods/my-mood/createMood"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
     </div>
 
     <div class="flex justify-center items-center">
@@ -66,6 +69,8 @@
           />
         </div>
       {/each}
+      <!-- add new reason button -->
+      <a class="p-1" href="/"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
     </div>
 
     <input type="hidden" name="moodId" bind:value={moodId} />
