@@ -20,7 +20,33 @@ export const load = async ({ params, cookies }) => {
 
     const thoughts = response.data.data;
     const thoughtsDate = response.data.meta.date;
-    return { thoughts, thoughtsDate };
+
+    
+    const responseRecords = await axios.get(`http://localhost:3011/recordsMoods/${thoughts[0].record_id}`, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    const records = responseRecords.data.data;
+
+    const responseMoods = await axios.get(`http://localhost:3011${records[0].mood_id}`, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    const moods = responseMoods.data.data;
+
+    const responseMoodType = await axios.get(`http://localhost:3011${moods[0].mood_type_id}`, {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    const moodType = responseMoodType.data.data[0].name;
+ 
+    return { thoughts, thoughtsDate, records, moods, moodType };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');
