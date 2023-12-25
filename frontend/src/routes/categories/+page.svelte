@@ -70,7 +70,7 @@
     </div>
   {:else}
     <div class="flex justify-center items-center pt-4 position:relative z-index-0 mb-3">
-      <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[22rem] items-center w-80 px-1 gap-2">
+      <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
         {#each data.filteredCategoriesByUser as category}
           <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
         {/each}

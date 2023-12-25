@@ -17,7 +17,7 @@ imgExtraPath="../"
 />
 
 <div class="flex flex-col justify-center items-center mt-6">
-    <div class="flex flex-row gap-7">
+    <div class="flex flex-row gap-4">
         <OctopusButton
             buttonName="My Mood"
             buttonIcon="myMoodOctopus.png"
@@ -29,7 +29,7 @@ imgExtraPath="../"
             buttonLink="moods/thoughts"
         />
     </div>
-    <!-- <div class="flex flex-row">
+    <div class="flex flex-row gap-4 mt-4">
         <OctopusButton
             buttonName="Tracker"
             buttonIcon="trackerOctopus.png"
@@ -40,6 +40,6 @@ imgExtraPath="../"
             buttonIcon="mapOctopus.png"
             buttonLink="/"
         />
-    </div> -->
+    </div>
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />
