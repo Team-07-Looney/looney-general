@@ -14,14 +14,14 @@
 
     let reasonElement = document.getElementById(`reasonElement${id}`);
     if (storedReasonId == 0) {
-      reasonElement.classList.add("bg-gray-400");
+      reasonElement.classList.add("bg-[#fdefc7]");
       storedReasonId = id;
     } else {
       let previousreasonElement = document.getElementById(
         `reasonElement${storedReasonId}`,
       );
-      previousreasonElement.classList.remove("bg-gray-400");
-      reasonElement.classList.add("bg-gray-400");
+      previousreasonElement.classList.remove("bg-[#fdefc7]");
+      reasonElement.classList.add("bg-[#fdefc7]");
       storedReasonId = id;
     }
   }
@@ -31,7 +31,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
   id="reasonElement{reasonId}"
-  class="font-light active:bg-gray-200 focus:outline-none focus:ring focus:ring-gray-300 bg-gray-100 rounded-lg py-1 px-3"
+  class="font-light focus:outline-none focus:ring focus:ring-gray-300 bg-gray-100 rounded-lg py-1 px-3"
   on:click={handleReasonSelection(reasonId)}
 >
   <h1 class="text-base"><strong>{title}</strong></h1>

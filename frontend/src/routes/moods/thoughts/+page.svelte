@@ -28,7 +28,7 @@
 />
 
 {#if data.filteredThoughtsByUser.length == 0}
-    <div class="rounded-xl p-1 shadow-lg text-center pt-2 pb-2 ml-10 mr-10 mt-4" style="background-color: #fdefc7;">
+    <div class="rounded-xl p-1 shadow-lg text-center pt-2 pb-2 ml-10 mr-10 mt-4 bg-[#fdefc7]">
         <h1 class="font-bold">Here you'll see your writings</h1>
         <p>After recording your mood<br />you can come back here to check it.</p>
     </div>

@@ -13,7 +13,7 @@
 />
 
 <div
-    class="bg-white z-20 mt-1 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg"
+    class="bg-white z-20 mt-2 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg"
 >
     <div class="flex justify-center items-center flex-col">
         <h2 class="text-xl text-center">

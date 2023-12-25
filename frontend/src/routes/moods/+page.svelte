@@ -20,7 +20,7 @@ imgExtraPath="../"
     <div class="flex flex-row gap-7">
         <OctopusButton
             buttonName="My Mood"
-            buttonIcon="moodOctopus.png"
+            buttonIcon="myMoodOctopus.png"
             buttonLink="/moods/my-mood"
         />
         <OctopusButton

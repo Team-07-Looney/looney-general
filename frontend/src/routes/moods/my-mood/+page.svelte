@@ -24,6 +24,16 @@
   let storedReasonId = 0;
 </script>
 
+<style>
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+</style>
+
 <WhiteBanner
   title="My Mood"
   description="Gain more insight in how you are feeling, Looney will always be there"
@@ -33,10 +43,10 @@
 />
 
 <div
-  class="bg-white z-20 mt-1 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg"
+  class="bg-white z-20 mt-2 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg h-4/6 overflow-y-scroll overflow-x-hidden"
 >
   <form method="POST" action="?/createRecord">
-    <div class="flex justify-center items-center">
+    <div class="flex justify-center items-center mt-14 pt-2">
       <h2 class="text-xl">How do you feel?</h2>
     </div>
     <div class="flex flex-wrap justify-center items-center mt-2 mb-2">
