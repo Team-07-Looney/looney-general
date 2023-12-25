@@ -6,7 +6,7 @@
     import BottomMenu from "../../lib/components/BottomMenu.svelte";
     import showElement from '$lib/showElement';
 
-  $showElement = false;
+    $showElement = false;
     // Data contains all data passed by the page server
     export let data;
    
@@ -44,6 +44,16 @@
         }
     }
 </script>
+
+<style>
+  ::-webkit-scrollbar-thumb {
+    background: gray;
+    border-radius: 20px;
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+</style>
  
 <WhiteBanner
     title="My Habits"
@@ -59,13 +69,13 @@
       <p >Here you can organize your habits<br>based on different routines.</p>
     </div>
   {:else}
-    <ul style="margin-top: 10px; position:relative; z-index: 5">
-      {#each data.filteredCategoriesByUser as category}
-        <li class="px-10 py-2">
+    <div class="flex justify-center items-center pt-4 position:relative z-index-0 mb-3">
+      <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[22rem] items-center w-80 px-1 gap-2">
+        {#each data.filteredCategoriesByUser as category}
           <CategoryItem title={category.name} categoryId={category.id} on:click={handleOpening(category.id)} />
-        </li>
-      {/each}
-    </ul>
+        {/each}
+      </div>
+    </div>
   {/if}
  
 <div class="flex justify-center items-center relative" style="z-index: 1;">

@@ -10,19 +10,18 @@
     import WhiteBanner from "../../../../../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../../../../../lib/components/BottomMenu.svelte";
 
-$showElement = false;
-    console.log(data);
+    $showElement = false;
 
-  // date for time picker
-  let date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+    // date for time picker
+    let date = new Date();
+    $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
 </script>
 
 <WhiteBanner
 title="Edit Habit"
 description="Tweak your habit like a pro. Use this form to remix and upgrade your routine."
-route="/"
-displayBackButton="0"
+route="/categories/{data.category}/habits"
+displayBackButton="1"
 imgExtraPath="../../../"
 />
 <div class="flex justify-center items-center mt-10">

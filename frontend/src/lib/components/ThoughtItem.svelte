@@ -3,7 +3,7 @@
  export let date;
  export let iconType;
  let icon;
- console.log(iconType);
+
  if(iconType === "Negative") {
     icon = "sad";
  }
