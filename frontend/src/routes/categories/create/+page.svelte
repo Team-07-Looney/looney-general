@@ -1,10 +1,10 @@
 <script>
-
-  import AuthInput from "../../../lib/components/authInput.svelte";
+    import AuthInput from "../../../lib/components/authInput.svelte";
     import BottomMenu from "../../../lib/components/BottomMenu.svelte";
     import showElement from '$lib/showElement';
     import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
-  $showElement = false;
+    import * as Icon from 'svelte-twitter-emoji';
+    $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
@@ -16,7 +16,7 @@
     imgExtraPath="../"
     displayMenuButton="1"
 /> 
-<div class="flex justify-center items-center mt-20">
+<div class="flex justify-center items-center">
   <div class="flex flex-col items-center">
     <div class="grid grid-cols-1">
       <div class="px-8 pt-8 z-[3]">
@@ -55,6 +55,35 @@
               value={form?.name ?? ""}
               error={form?.errors?.some((error) => error.input == "name")}
             />
+
+            <label>Choose an icon:</label>
+            <div class="border-black-300 border-2 p-1">
+            <div class="flex">
+              <Icon.A1F315 class="m-2" size="35" />
+              <Icon.A1F316 class="m-2" size="35" />
+              <Icon.A1F318 class="m-2" size="35" />
+              <Icon.A1F313 class="m-2" size="35" />  
+              <Icon.A1F311 class="m-2" size="35" />
+              <Icon.A1F320 class="m-2" size="35" />
+            </div>
+            <div class="flex">
+              <Icon.A2600 class="m-2" size="35" />
+              <Icon.A2B50 class="m-2" size="35" />   
+              <Icon.A1F33b class="m-2" size="35" /> 
+              <Icon.A1F338 class="m-2" size="35" />  
+              <Icon.A1F4aa1f3fc class="m-2" size="35" />
+              <Icon.A1F98b class="m-2" size="35" />
+           
+            </div>
+            <div class="flex"> 
+              <Icon.A1F3bc class="m-2" size="35" />   
+              <Icon.A1F4af class="m-2" size="35" />
+              <Icon.A1F4d5 class="m-2" size="35" />  
+              <Icon.A2764 class="m-2" size="35" />
+              <Icon.A2708 class="m-2" size="35" />
+              <Icon.A1F3ae class="m-2" size="35" />
+            </div>
+          </div>
 
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
