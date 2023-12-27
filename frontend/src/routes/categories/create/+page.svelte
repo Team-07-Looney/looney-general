@@ -73,7 +73,6 @@
               value={form?.name ?? ""}
               error={form?.errors?.some((error) => error.input == "name")}
             />
-
             <label>Choose an icon:</label>
             <div class="border-black-300 border-2 p-1">
             <div class="flex">

@@ -1,16 +1,15 @@
 <script>
-    // import CircularProgressBar from './CircularProgressBar.svelte';
     import * as Icon from 'svelte-twitter-emoji';
+  
     export let title;
     export let categoryId;
     export let iconId;
 
-    
 </script>
 
 <div class="bg-white rounded-xl p-1 flex justify-between" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
-        <!-- <Icon.{iconId} /> -->
+        <!-- <Icon. /> -->
         <h1 class="text-lg ml-3 mt-1"><strong>{title}</strong></h1>
     </a>
     <div class="inline-block relative text-center mt-0">
