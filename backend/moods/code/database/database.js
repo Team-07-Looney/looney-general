@@ -21,7 +21,8 @@ const tableQueries = [
   `CREATE TABLE IF NOT EXISTS Records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   reason_id INTEGER REFERENCES Reasons(id),
-  mood_id INTEGER REFERENCES Moods(id))`,
+  mood_id INTEGER REFERENCES Moods(id),
+  user_id INTEGER)`,
   //Create Thoughts table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Thoughts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -109,10 +110,10 @@ async function createTableIfNotExists(db, query) {
 
 async function populateMoodsTypeTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = ['Positive', 'Neutral', 'Negative'];
+    const predefinedMoodTypes = ['Positive', 'Neutral', 'Negative'];
     const insertQuery = 'INSERT INTO Mood_Types (name) VALUES (?)';
 
-    predefinedCategories.forEach((name) => {
+    predefinedMoodTypes.forEach((name) => {
       db.run(insertQuery, [name], (err) => {
         if (err) {
           reject(err.message);
@@ -126,7 +127,7 @@ async function populateMoodsTypeTable(db) {
 
 async function populateMoodsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = [
+    const predefinedMoods = [
       {
         moodTypeId: 1,
         name: 'Joyful'
@@ -189,7 +190,7 @@ async function populateMoodsTable(db) {
       }
     ];
     const insertQuery = 'INSERT INTO Moods (mood_type_id, name) VALUES (?,?)';
-    predefinedCategories.forEach((mood) => {
+    predefinedMoods.forEach((mood) => {
       db.run(insertQuery, [mood.moodTypeId, mood.name], (err) => {
         if (err) {
           reject(err.message);
@@ -203,10 +204,10 @@ async function populateMoodsTable(db) {
 
 async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
+    const predefinedReasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
     const insertQuery = 'INSERT INTO Reasons (name) VALUES (?)';
 
-    predefinedCategories.forEach((name) => {
+    predefinedReasons.forEach((name) => {
       db.run(insertQuery, [name], (err) => {
         if (err) {
           reject(err.message);

@@ -5,9 +5,9 @@ import { fail, redirect } from '@sveltejs/kit';
  * Executes during the load of the svelte page
  * @param {*} param0 
  */
-export const load = async ({ cookies }) => {
+export const load = async ({ cookies, params }) => {
   let isUserAuth = false;
-
+  const { recordId } = params;
   try {
     // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
@@ -22,6 +22,7 @@ export const load = async ({ cookies }) => {
     if (isAuthenticated.data.message == "User is authenticated") {
       isUserAuth = true;
     }
+    return { recordId }
   } catch (error) {
     console.log(error);
   }
