@@ -36,18 +36,20 @@ export const actions = {
       // Retrieves the data from the form
       const formData = await request.formData();
       const name = formData.get('name');
+      const iconId = formData.get('icon_id');
 
       // check for errors in a form data
-      const errors = await validateCreateData(name);
+      const errors = await validateCreateData(name, iconId);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
-        return fail(400, { name, errors });
+        return fail(400, { name, iconId, errors });
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
       const data = await axios.post('http://localhost:3011/categories', {
         name: name,
+        icon_id: iconId,
         user_id: payload.id
       }, {
         headers: {
@@ -66,12 +68,17 @@ export const actions = {
   }
 };
 
-async function validateCreateData(name) {
+async function validateCreateData(name, iconId) {
   let errors = [];
 
   //check if name exists
   if (!name) {
     errors.push({ "input": "name", "message": "Name is missing" });
+  }
+
+  //check if an icon had been selected
+  if (!iconId) {
+    errors.push({ "input": "icon_id", "message": "You need to select an icon" });
   }
 
   return errors;
