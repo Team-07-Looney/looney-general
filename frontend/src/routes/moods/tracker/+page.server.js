@@ -9,9 +9,8 @@ import jwt from 'jsonwebtoken';
  * @returns
  */
 
-export const load = async ({ serverLoadEvent, cookies, params }) => {
+export const load = async ({ serverLoadEvent, cookies }) => {
   let isUserAuth = false;
-  const { recordId } = params;
   try {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
@@ -34,12 +33,24 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       }
     });
 
+    const thoughtsResponse = await axios.get('http://localhost:3011/thoughts', {
+      headers: {
+        'Authorization': `Bearer ${jwtoken}`
+      }
+    });
+
     if (isAuthenticated.data.message == "User is authenticated") {
         isUserAuth = true;
       }
       const records = recordsResponse.data.data;
       const userId = payload.id;
       const moods = moodsResponse.data.data;
+      const thoughts = thoughtsResponse.data.data;
+    
+      const totalThoughts = thoughts.filter((thought) => {
+        const record = records.find((r) => r.id === parseInt(thought.record_id.split('/').pop(), 10) && r.user_id === userId);
+        return record !== undefined;
+      }).length;
 
       const filteredRecordsByUser = records.filter(record => record.user_id === userId);
       const moodTypeCounts = {};
@@ -72,7 +83,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
             "total": totalMoodTypes
         };
 
-      return { statistics, recordId};
+      return { statistics, totalThoughts};
     } catch (error) {
       console.log(error);
     }

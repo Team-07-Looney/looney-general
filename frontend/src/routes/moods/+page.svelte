@@ -29,17 +29,17 @@ imgExtraPath="../"
             buttonLink="moods/thoughts"
         />
     </div>
-    <!-- <div class="flex flex-row">
+    <div class="flex flex-row">
         <OctopusButton
             buttonName="Tracker"
             buttonIcon="trackerOctopus.png"
-            buttonLink="/"
+            buttonLink="/moods/tracker"
         />
-        <OctopusButton
+        <!--<OctopusButton
             buttonName="Map"
             buttonIcon="mapOctopus.png"
             buttonLink="/"
-        />
-    </div> -->
+        />-->
+    </div> 
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />
