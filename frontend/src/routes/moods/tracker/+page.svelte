@@ -25,14 +25,15 @@ imgExtraPath="../"
         <ProgressBar total={data.statistics.total} progress={data.statistics.negative} icon="sad" color="bg-[#666e9f]" />
     </div>
 </div>
-<div class="flex p-2 justify-center items-center mt-1 text-center">
-    <div class="bg-white shadow-lg p-2 rounded-lg">
-        <p class="text-m">You have<br>written</p>
-        <p class="text-4xl font-chewy text-[#666e9f]">{data.totalThoughts}</p>
+<div class="flex p-2 justify-center items-center text-center">
+    <div class="bg-white shadow-lg p-2 rounded-lg w-40 mr-2 h-32">
+        <p class="text-m">You have written</p>
+        <p class="text-6xl font-chewy text-[#666e9f]">{data.totalThoughts}</p>
         <p class="text-m">thoughts</p>
     </div>
-    <div class="bg-white shadow-lg p-2 rounded-lg">
+    <div class="bg-white shadow-lg p-2 rounded-lg w-40 h-32">
         <p class="text-m">You have picked</p>
+        <p class="text-4xl font-chewy text-[#666e9f]">{data.mostRecordedReasonName}</p>
         <p class="text-m">As main cause<br>of your emotions</p>
     </div>
 </div>
