@@ -94,33 +94,41 @@ async function createPredefinedCategoriesTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE predefined_categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT NOT NULL)`,
+      name TEXT NOT NULL,
+      icon_id TEXT)`,
       (err) => {
         if (err) {
           console.error('Error creating table: ', err.message);
           reject(err.message);
         } else {
           console.log('Table predefined categories created.');
-          
-          // Insert Data
-          const predefinedCategories = ['Morning Routine', 'Afternoon Routine', 'Anytime'];
-          const insertQuery = 'INSERT INTO predefined_categories (name) VALUES (?)';
 
-          predefinedCategories.forEach((name) => {
-            db.run(insertQuery, [name], (err) => {
+          const insertQuery = 'INSERT INTO predefined_categories (name, icon_id) VALUES (?, ?)';
+
+          const predefinedCategories = [
+            { name: 'Morning Routine', icon_id: 'A1F315' },
+            { name: 'Afternoon Routine', icon_id: 'A1F318' },
+            { name: 'Anytime', icon_id: 'A2B50' }
+          ];
+
+          predefinedCategories.forEach(({ name, icon_id }) => {
+            db.run(insertQuery, [name, icon_id], (err) => {
               if (err) {
-                console.error(`Error inserting data for category `, err.message);
+                console.error(`Error inserting data for category ${name}: `, err.message);
                 reject(err.message);
               } else {
                 console.log(`Data inserted for category: ${name}`);
-                resolve();
               }
             });
           });
+
+          console.log('Data inserted successfully in predefined categories');
+          resolve();
         }
       });
-  })
+  });
 }
+
 
 /**
  * Created predefined habits
@@ -138,7 +146,7 @@ async function createPredefinedHabitsTable(db) {
           reject(err.message);
         } else {
           console.log('Table predefined habits created.');
-          
+
           // Insert Data
           const predefinedHabits = ['Brush Teeth', 'Eat Breakfast', 'Walk', 'Read', 'Workout', 'Eat Lunch', 'Study', 'Paint', 'Eat Dinner', 'Go Out'];
           const insertQuery = 'INSERT INTO predefined_habits (name) VALUES (?)';
@@ -176,26 +184,11 @@ async function createCategoriesTable(db) {
           console.error('Error creating table: ', err.message);
           reject(err.message);
         } else {
-          console.log('Table categories created.');
-
-          // Delete this
-          const categories = ['Morning Routine', 'Afternoon Routine', 'Anytime'];
-          const insertQuery = 'INSERT INTO categories (name) VALUES (?)';
-
-          categories.forEach((name) => {
-            db.run(insertQuery, [name], (err) => {
-              if (err) {
-                console.error(`Error inserting data for category `, err.message);
-                reject(err.message);
-              } else {
-                console.log(`Data inserted for category: ${name}`);
-                resolve();
-              }
-            });
-          });
+          console.log('Table habits created.');
+          resolve();
         }
       });
-  });
+  })
 }
 
 
