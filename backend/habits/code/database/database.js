@@ -169,7 +169,8 @@ async function createCategoriesTable(db) {
     db.run(`CREATE TABLE categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        user_id INTEGER)`,
+        user_id INTEGER,
+        icon_id TEXT)`,
       (err) => {
         if (err) {
           console.error('Error creating table: ', err.message);

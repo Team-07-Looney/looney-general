@@ -30,9 +30,9 @@ export async function getAllCategoriesData() {
   export async function createCategoryInstance(request) {
     return new Promise(async (resolve, reject) => {
       const db = await openDatabaseConnection();
-      const insert = 'INSERT INTO categories (name, user_id) VALUES (?,?)';
+      const insert = 'INSERT INTO categories (name, user_id, icon_id) VALUES (?,?,?)';
   
-      db.run(insert, [request.name, request.user_id], (err) => {
+      db.run(insert, [request.name, request.user_id, request.icon_id], (err) => {
         closeDatabaseConnection(db);
   
         if (err) {
