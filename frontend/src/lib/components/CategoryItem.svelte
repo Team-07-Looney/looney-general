@@ -1,21 +1,40 @@
 <script>
-    import * as Icon from 'svelte-twitter-emoji';
-    
+import { A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50, A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae } from 'svelte-twitter-emoji';
 
-    import { A1F316 } from 'svelte-twitter-emoji';
-    export let iconId;
-    export let title;
-    export let categoryId;
-    
-  
+export let iconId;
+export let title;
+export let categoryId;
 
+let iconComponent;
+
+const iconComponents = {
+    A1F315,
+    A1F316,
+    A1F318,
+    A1F313,
+    A1F311,
+    A1F320,
+    A2600,
+    A2B50,
+    A1F33b,
+    A1F338,
+    A1F4aa1f3fc,
+    A1F98b,
+    A1F3bc,
+    A1F4af,
+    A1F4d5,
+    A2764,
+    A2708,
+    A1F3ae
+};
+// Assign the corresponding component to iconComponent
+iconComponent = iconComponents[iconId];
 </script>
 
 <div class="bg-white rounded-xl p-1 flex justify-between" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
-    <a href={`categories/${categoryId}/habits`} class="flex w-full">
-        <!-- <Icon.A1F316 /> -->
-        <svelte:component this="{A1F316}" />
-        <h1 class="text-lg ml-3 mt-1"><strong>{title}</strong></h1>
+    <a href={`categories/${categoryId}/habits`} class="flex w-full items-center p-2">
+        <svelte:component this="{iconComponent}" size=30 />
+        <h1 class="text-lg ml-3"><strong>{title}</strong></h1>
     </a>
     <div class="inline-block relative text-center mt-0">
         <button id={`button${categoryId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
