@@ -5,12 +5,13 @@
     import OverviewItem from "../../lib/components/mainPageComponents/OverviewItem.svelte";
 	import showElement from '$lib/showElement';
 	export let data;
+	console.log(data);
 	
 	$showElement = false;
 </script>
 
 <WhiteBanner
-    title="Hi, { data.username }!"
+    title="Hi, {data.user.checkedUsername}!"
     description="How can I help you today? Anything on your mind?"
     route="/"
     imgExtraPath="../"

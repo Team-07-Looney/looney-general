@@ -22,7 +22,29 @@ export const load = async ({ cookies }) => {
     });
 
     const user = response.data.data;
-    return user;
+    const originalUsername = user.username
+
+    // Checks that the username is no longer than 12 or returns a shorter version
+    function checkUsernameLength(name) {
+      if (name.length > 12) {
+        // Finds the index of the first space
+        const spaceIndex = name.indexOf(' ');
+    
+       // Returns the string within the first space
+        if (spaceIndex !== -1) {
+          user.checkedUsername = name.substring(0, spaceIndex);
+        } else {
+          // Returns the first 10 characters and adds ...
+          user.checkedUsername = name.substring(0, 10) + "...";
+        }
+      } else {
+        user.checkedUsername = name;
+      } 
+    }
+    
+    checkUsernameLength(originalUsername);
+
+   return { user };
   } catch (error) {
     console.log(error);
   }
