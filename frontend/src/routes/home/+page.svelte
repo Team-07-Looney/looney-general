@@ -9,9 +9,15 @@
 	import { onMount } from "svelte";
 	let tagIsOpen;
 	let tagButton = 1;
+	
 	function toggleTag() {
 		tagIsOpen = !tagIsOpen;
 		tagButton = 0;
+	}
+
+	function toggleButton() {
+		toggleTag()
+		tagButton = 1;
 	}
 
 	onMount(() => {
@@ -30,6 +36,10 @@
 	imgExtraPath="../"
 />
 
+<div class="absolute bottom-24 right-0 opacity-{tagButton}">
+	<button on:click={toggleTag}> <img src="/src/img/tag.png" alt="tag" class=" h-24"></button>
+</div>
+
 <div class="mt-7 flex justify-center items-center">
 	<div class="flex flex-col justify-center items-center gap-4 mb-10">
 		<div class="flex flex-col gap-6">
@@ -45,15 +55,13 @@
 				buttonLink="/moods"
 				buttonDescription="Gain more insight in how you are feeling, Looney will always be there"
 			/>
+			{#if tagIsOpen}
+			<button on:click={toggleButton}>
+				<BuyLooney/>
+			</button>
+			{/if}
 		</div>
 	</div>
 </div>
-<div class="absolute right-0 opacity-{tagButton}">
-	<button on:click={toggleTag}> <img src="/src/img/tag.png" alt="tag" class="h-28"></button>
-</div>
-
-{#if tagIsOpen}
-	<BuyLooney/>
-{/if}
 
 <BottomMenu imgPath="../" displayHomeText="1" />
