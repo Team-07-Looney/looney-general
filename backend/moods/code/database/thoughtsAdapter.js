@@ -31,9 +31,9 @@ export async function getAllThoughtData() {
 export async function createThoughtInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Thoughts (title, body, record_id) VALUES (?, ?, ?)';
+    const insert = 'INSERT INTO Thoughts (title, body, record_id, user_id) VALUES (?, ?, ?,?)';
 
-    db.run(insert, [request.title, request.body, request.record_id], (err) => {
+    db.run(insert, [request.title, request.body, request.record_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {

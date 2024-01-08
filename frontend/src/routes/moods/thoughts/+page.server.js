@@ -1,5 +1,7 @@
 import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
+
 
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all thoughts
@@ -9,26 +11,28 @@ import axios from 'axios';
  */
 export const load = async ({ serverLoadEvent, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwtoken = cookies.get('jwt');
+    const payload = jwt.decode(jwtoken);
 
     const response = await axios.get('http://localhost:3011/thoughts', {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 
+    const userId = payload.id;
     const thoughts = response.data.data;
     const thoughtsDate = response.data.meta.date;
     const records = [];
     const moods = [];
     const moodType = [];
+    const filteredThoughtsByUser = thoughts.filter(thought => thought.user_id === userId);
 
+    for (let i = 0; i < filteredThoughtsByUser.length; i++) {
 
-    for (let i = 0; i < thoughts.length; i++) {
-
-      const recordResponse = await axios.get(`http://localhost:3011${thoughts[i].record_id}`, {
+      const recordResponse = await axios.get(`http://localhost:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
@@ -36,7 +40,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodResponse = await axios.get(`http://localhost:3011${records[i].mood_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
@@ -44,13 +48,14 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodTypeResponse = await axios.get(`http://localhost:3011${moods[i].mood_type_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
       moodType.push(moodTypeResponse.data.data[0].name);
     }
-    return { thoughts, thoughtsDate, records, moods, moodType };
+
+    return { filteredThoughtsByUser, thoughtsDate, records, moods, moodType };
   } catch (error) {
     console.log(error);
     if (error.response.status == 401) {

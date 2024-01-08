@@ -1,6 +1,7 @@
 import axios from "axios";
 import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 /**
  * Executes during the load of the svelte page
@@ -11,18 +12,39 @@ export const load = async ({ cookies }) => {
 
   try {
     // Get the cookie containing the JWT token
-    const jwt = cookies.get('jwt');
+    const jwtoken = cookies.get('jwt');
+    const payload = jwt.decode(jwtoken);
 
-    // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const response = await axios.get(`http://localhost:3011/users/id/${payload.id}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    if (isAuthenticated.data.message == "User is authenticated") {
-      isUserAuth = true;
+    const user = response.data.data;
+    const originalUsername = user.username
+
+    // Checks that the username is no longer than 12 or returns a shorter version
+    function checkUsernameLength(name) {
+      if (name.length > 12) {
+        // Finds the index of the first space
+        const spaceIndex = name.indexOf(' ');
+    
+       // Returns the string within the first space
+        if (spaceIndex !== -1) {
+          user.checkedUsername = name.substring(0, spaceIndex);
+        } else {
+          // Returns the first 10 characters and adds ...
+          user.checkedUsername = name.substring(0, 10) + "...";
+        }
+      } else {
+        user.checkedUsername = name;
+      } 
     }
+    
+    checkUsernameLength(originalUsername);
+
+   return { user };
   } catch (error) {
     console.log(error);
   }
