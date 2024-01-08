@@ -4,10 +4,10 @@
     import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
     // Data contains all data passed by the page server
     export let data;
-	import showElement from '$lib/showElement';
 
-	$showElement = false;
-    console.log(data);
+    import showElement from '$lib/showElement';
+
+    $showElement = false;
 </script>
 
 <WhiteBanner
@@ -19,15 +19,15 @@
 />
 
 <div class="flex justify-center items-center pt-14">
+    <div class="flex flex-col overflow-y-scroll ml-2 h-80 items-center w-80 px-1 gap-2">
+        {#if data.thoughts.length > 0}
+            {#each data.thoughts as thought, i}
+                <ThoughtItem thoughtId={thought.id} title={thought.title} date={data.thoughtsDate} iconType={data.moodType[i]}/>
+            {/each}
+        {:else}
+            <p>Here you will see your thoughts!</p>
+        {/if}
+    </div>
+</div>
 
-<div class="flex flex-col overflow-y-scroll ml-2 h-80 items-center w-80 px-1 gap-2">
-    {#if data.thoughts.length > 0}
-        {#each data.thoughts as thought}
-            <ThoughtItem title={thought.title} date={data.thoughtsDate} iconType={data}/>
-        {/each}
-    {:else}
-        <p>Here you will see your thoughts!</p>
-    {/if}
-</div>
-</div>
 <BottomMenu imgPath="../" displayMoodText="1" />
