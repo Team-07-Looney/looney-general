@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { fail, redirect } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 export const actions = {
-  createReason: async ({ request, cookies}) => {
-    
+  createReason: async ({ request, cookies }) => {
+
     try {
-      const jwt = cookies.get('jwt');
+      const jwtoken = cookies.get('jwt');
+      const payload = jwt.decode(jwtoken);
 
       // Retrieves the data from the form
       const formData = await request.formData();
@@ -22,9 +24,10 @@ export const actions = {
       // Set the body of the request, adds a header and sends post request to create record
       const data = await axios.post('http://localhost:3011/reasons', {
         name: name,
+        user_id: payload.id
       }, {
         headers: {
-          "Authorization": `Bearer ${jwt}`,
+          "Authorization": `Bearer ${jwtoken}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       });

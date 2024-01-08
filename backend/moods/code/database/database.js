@@ -16,8 +16,9 @@ const tableQueries = [
   user_id INTEGER)`,
   //Create Reasons table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Reasons (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     name TEXT NOT NULL)`,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  user_id INTEGER)`,
   //Create Records table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -127,7 +128,7 @@ async function populateMoodsTypeTable(db) {
 
 async function populateMoodsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = [
+    const predefinedMooods = [
       {
         moodTypeId: 1,
         name: 'Joyful'
@@ -190,7 +191,7 @@ async function populateMoodsTable(db) {
       }
     ];
     const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
-    predefinedCategories.forEach((mood) => {
+    predefinedMooods.forEach((mood) => {
       db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
         if (err) {
           reject(err.message);
@@ -204,11 +205,11 @@ async function populateMoodsTable(db) {
 
 async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
-    const insertQuery = 'INSERT INTO Reasons (name) VALUES (?)';
+    const predefinedReasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
+    const insertQuery = 'INSERT INTO Reasons (name, user_id) VALUES (?,?)';
 
-    predefinedCategories.forEach((name) => {
-      db.run(insertQuery, [name], (err) => {
+    predefinedReasons.forEach((reason) => {
+      db.run(insertQuery, [reason], (err) => {
         if (err) {
           reject(err.message);
         } else {

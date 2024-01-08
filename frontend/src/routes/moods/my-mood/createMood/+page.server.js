@@ -3,8 +3,8 @@ import { fail, redirect } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 
 export const actions = {
-  createMood: async ({ request, cookies}) => {
-    
+  createMood: async ({ request, cookies }) => {
+
     try {
       const jwtoken = cookies.get('jwt');
       const payload = jwt.decode(jwtoken);

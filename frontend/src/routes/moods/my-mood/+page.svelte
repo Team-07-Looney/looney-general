@@ -62,6 +62,7 @@
     </div>
     <div class="flex flex-wrap justify-center items-center mt-2">
       {#each data.reasons as reason}
+      {#if reason.user_id == null || reason.user_id == data.userId}
         <div class="p-1" id="element">
           <ReasonItem
             title={reason.name}
@@ -70,6 +71,7 @@
             on:reasonSelected={handleReasonClick}
           />
         </div>
+        {/if}
       {/each}
       <!-- add new reason button -->
       <a class="p-1" href="/moods/my-mood/createReason"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
