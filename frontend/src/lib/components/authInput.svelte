@@ -34,7 +34,7 @@
         {type}
         {name}
         id={name}
-        {placeholder}
+        placeholder={placeholder}
         aria-label={label}
         on:focus={onFocus}
         on:blur={onBlur}
@@ -49,3 +49,7 @@
     {/if}
   </div>
 </div>
+
+<style>
+ ::placeholder {color: rgb(156 163 175);}
+</style>
