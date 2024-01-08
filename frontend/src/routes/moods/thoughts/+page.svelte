@@ -36,7 +36,7 @@
     <div class="flex justify-center items-center pt-4">
         <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-96 items-center w-80 px-1 gap-2 mt-5">
             {#each data.filteredThoughtsByUser as thought, i}
-              <ThoughtItem thoughtId={thought.id} title={thought.title} date={data.thoughtsDate} iconType={data.moodType[i]}/>
+              <ThoughtItem thoughtId={thought.id} title={thought.title} date={data.thoughtsDate} iconType="{data.moodType[i]}"/>
             {/each}
         </div>
     </div>

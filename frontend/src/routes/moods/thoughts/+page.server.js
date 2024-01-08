@@ -28,11 +28,11 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const moodType = [];
     const filteredThoughtsByUser = thoughts.filter(thought => thought.user_id === userId);
 
-    for (let i = 0; i < thoughts.length; i++) {
+    for (let i = 0; i < filteredThoughtsByUser.length; i++) {
 
-      const recordResponse = await axios.get(`http://localhost:3011${thoughts[i].record_id}`, {
+      const recordResponse = await axios.get(`http://localhost:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
@@ -40,7 +40,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodResponse = await axios.get(`http://localhost:3011${records[i].mood_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
@@ -48,12 +48,13 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodTypeResponse = await axios.get(`http://localhost:3011${moods[i].mood_type_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwt}`
+          'Authorization': `Bearer ${jwtoken}`
         }
       });
 
       moodType.push(moodTypeResponse.data.data[0].name);
     }
+
     return { filteredThoughtsByUser, thoughtsDate, records, moods, moodType };
   } catch (error) {
     console.log(error);
