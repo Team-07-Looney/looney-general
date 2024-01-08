@@ -13,8 +13,9 @@
 <WhiteBanner
   title="Profile"
   description="Change password or logout"
-  route="/moods"
+  route="/home"
   displayBackButton="1"
+  displayMenuButton="0"
   imgExtraPath="../"
 />
 

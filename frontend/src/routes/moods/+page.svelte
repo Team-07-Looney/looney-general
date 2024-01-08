@@ -1,6 +1,5 @@
 <script>
     import OctopusButton from "../../lib/components/OctopusButton.svelte";
-    import Header from "../../lib/components/Header.svelte";
     import showElement from '$lib/showElement';
     import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../lib/components/BottomMenu.svelte";
