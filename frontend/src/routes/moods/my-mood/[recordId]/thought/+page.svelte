@@ -1,5 +1,6 @@
 <script>
-    import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
       /** @type {import('./$types').ActionData} */
     export let form;
 </script>
@@ -61,3 +62,5 @@
         </form>
     </div>
 </div>
+
+<BottomMenu imgPath="../../" displayMoodText="1" />
