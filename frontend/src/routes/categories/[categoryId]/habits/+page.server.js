@@ -2,7 +2,7 @@ import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
 
 /**
- * Fetches data from the moods microservice via the API gateway to retrieve all thougts
+ * Fetches data from the habits microservice via the API gateway to retrieve all habits
  * 
  * @param {*} serverLoadEvent 
  * @returns
