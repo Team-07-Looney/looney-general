@@ -2,9 +2,11 @@
   import AuthInput from "../../lib/components/authInput.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
+  import showElement from '$lib/showElement';
   import FormEars from "../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
     import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
+    $showElement = false;
 </script>
 
 <WhiteBanner title="Looney" description="Please Login" displayMenuButton=0/>
