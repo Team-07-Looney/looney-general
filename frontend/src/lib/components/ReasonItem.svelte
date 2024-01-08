@@ -14,14 +14,14 @@
 
     let reasonElement = document.getElementById(`reasonElement${id}`);
     if (storedReasonId == 0) {
-      reasonElement.classList.add("bg-[#fdefc7]");
+      reasonElement.classList.add("bg-accentColor");
       storedReasonId = id;
     } else {
       let previousreasonElement = document.getElementById(
         `reasonElement${storedReasonId}`,
       );
-      previousreasonElement.classList.remove("bg-[#fdefc7]");
-      reasonElement.classList.add("bg-[#fdefc7]");
+      previousreasonElement.classList.remove("bg-accentColor");
+      reasonElement.classList.add("bg-accentColor");
       storedReasonId = id;
     }
   }

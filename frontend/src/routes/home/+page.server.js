@@ -1,6 +1,7 @@
 import axios from "axios";
 import { redirect } from '@sveltejs/kit';
 import { fail } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 /**
  * Executes during the load of the svelte page
@@ -11,13 +12,12 @@ export const load = async ({ cookies }) => {
 
   try {
     // Get the cookie containing the JWT token
-    const jwt = cookies.get('jwt');
-
-    const payload = JSON.parse(Buffer.from(jwt.split('.')[1], 'base64').toString());
+    const jwtoken = cookies.get('jwt');
+    const payload = jwt.decode(jwtoken);
 
     const response = await axios.get(`http://localhost:3011/users/id/${payload.id}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 

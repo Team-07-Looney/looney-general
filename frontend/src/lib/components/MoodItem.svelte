@@ -14,14 +14,14 @@
 
     let moodElement = document.getElementById(`moodElement${id}`);
     if (storedMoodId == 0) {
-      moodElement.classList.add("bg-[#fdefc7]");
+      moodElement.classList.add("bg-accentColor");
       storedMoodId = id;
     } else {
       let previousMoodElement = document.getElementById(
         `moodElement${storedMoodId}`,
       );
-      previousMoodElement.classList.remove("bg-[#fdefc7]");
-      moodElement.classList.add("bg-[#fdefc7]");
+      previousMoodElement.classList.remove("bg-accentColor");
+      moodElement.classList.add("bg-accentColor");
       storedMoodId = id;
     }
   }
