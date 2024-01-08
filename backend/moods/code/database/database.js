@@ -12,7 +12,8 @@ const tableQueries = [
   `CREATE TABLE IF NOT EXISTS Moods (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   mood_type_id INTEGER REFERENCES Mood_Types(id),
-  name TEXT UNIQUE NOT NULL)`,
+  name TEXT UNIQUE NOT NULL,
+  user_id INTEGER)`,
   //Create Reasons table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Reasons (
      id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -188,9 +189,9 @@ async function populateMoodsTable(db) {
         name: 'Iritated'
       }
     ];
-    const insertQuery = 'INSERT INTO Moods (mood_type_id, name) VALUES (?,?)';
+    const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
     predefinedCategories.forEach((mood) => {
-      db.run(insertQuery, [mood.moodTypeId, mood.name], (err) => {
+      db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
         if (err) {
           reject(err.message);
         } else {

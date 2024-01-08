@@ -1,11 +1,13 @@
 import axios from 'axios';
 import { fail, redirect } from '@sveltejs/kit';
+import jwt from 'jsonwebtoken';
 
 export const actions = {
   createMood: async ({ request, cookies}) => {
     
     try {
-      const jwt = cookies.get('jwt');
+      const jwtoken = cookies.get('jwt');
+      const payload = jwt.decode(jwtoken);
 
       // Retrieves the data from the form
       const formData = await request.formData();
@@ -23,10 +25,11 @@ export const actions = {
       // Set the body of the request, adds a header and sends post request to create record
       const data = await axios.post('http://localhost:3011/moods', {
         name: name,
-        mood_type_id: mood_type_id
+        mood_type_id: mood_type_id,
+        user_id: payload.id
       }, {
         headers: {
-          "Authorization": `Bearer ${jwt}`,
+          "Authorization": `Bearer ${jwtoken}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
         }
       });

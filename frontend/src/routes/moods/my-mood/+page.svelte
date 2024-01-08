@@ -42,6 +42,7 @@
     </div>
     <div class="flex flex-wrap justify-center items-center mt-2 mb-2">
       {#each data.moods as mood}
+      {#if mood.user_id == null || mood.user_id == data.userId}
         <div class="p-1" id="element">
           <MoodItem
             title={mood.name}
@@ -50,6 +51,7 @@
             on:moodSelected={handleMoodClick}
           />
         </div>
+        {/if}
       {/each}
    <!-- add new mood button -->
       <a class="p-1" href="/moods/my-mood/createMood"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
