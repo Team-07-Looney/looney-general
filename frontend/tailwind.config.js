@@ -26,7 +26,7 @@ export default {
           '800': '#34355A',
           '900': '#1F213C',  // Darkest shade
         },
-        accentColor: '#fdefc7',
+        accent: '#fdefc7',
       },
     },
   },
@@ -49,5 +49,7 @@ export default {
     'border-gray-700',
     'text-black',
     'border-black',
+    'text-accent',
+    'bg-accent'
   ],
 };

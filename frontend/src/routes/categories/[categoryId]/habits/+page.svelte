@@ -61,7 +61,7 @@ imgExtraPath="../"
 />
 
   {#if data.filteredHabitsByCategory.length == 0} 
-    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accentColor">
+    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
       <h1 class="font-bold">Let's get started!</h1> 
       <p >Add your habits to the routine <br>by pressing on the plus button.</p>
     </div>

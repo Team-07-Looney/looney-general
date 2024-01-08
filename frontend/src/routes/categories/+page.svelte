@@ -64,7 +64,7 @@
 /> 
 
   {#if data.filteredCategoriesByUser.length == 0} 
-    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accentColor">
+    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
       <h1 class="font-bold">Create a Routine!</h1> 
       <p >Here you can organize your habits<br>based on different routines.</p>
     </div>

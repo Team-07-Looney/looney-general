@@ -14,14 +14,17 @@
 
     let moodElement = document.getElementById(`moodElement${id}`);
     if (storedMoodId == 0) {
-      moodElement.classList.add("bg-accentColor");
+      moodElement.classList.add("bg-accent");
+      moodElement.classList.remove("bg-gray-100");
       storedMoodId = id;
     } else {
       let previousMoodElement = document.getElementById(
         `moodElement${storedMoodId}`,
       );
-      previousMoodElement.classList.remove("bg-accentColor");
-      moodElement.classList.add("bg-accentColor");
+      previousMoodElement.classList.remove("bg-accent");
+      previousMoodElement.classList.add("bg-gray-100");
+      moodElement.classList.add("bg-accent");
+      moodElement.classList.remove("bg-gray-100");
       storedMoodId = id;
     }
   }

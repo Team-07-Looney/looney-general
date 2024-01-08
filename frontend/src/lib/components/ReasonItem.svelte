@@ -14,14 +14,17 @@
 
     let reasonElement = document.getElementById(`reasonElement${id}`);
     if (storedReasonId == 0) {
-      reasonElement.classList.add("bg-accentColor");
+      reasonElement.classList.add("bg-accent");
+      reasonElement.classList.remove("bg-gray-100");
       storedReasonId = id;
     } else {
-      let previousreasonElement = document.getElementById(
+      let previousReasonElement = document.getElementById(
         `reasonElement${storedReasonId}`,
       );
-      previousreasonElement.classList.remove("bg-accentColor");
-      reasonElement.classList.add("bg-accentColor");
+      previousReasonElement.classList.remove("bg-accent");
+      previousReasonElement.classList.add("bg-gray-100");
+      reasonElement.classList.add("bg-accent");
+      reasonElement.classList.remove("bg-gray-100");
       storedReasonId = id;
     }
   }
