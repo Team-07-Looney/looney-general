@@ -31,9 +31,9 @@ export async function getAllReasonData() {
 export async function createReasonInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Reasons (name) VALUES (?)';
+    const insert = 'INSERT INTO Reasons (name, user_id) VALUES (?,?)';
 
-    db.run(insert, [request.name], (err) => {
+    db.run(insert, [request.name, request.user_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
