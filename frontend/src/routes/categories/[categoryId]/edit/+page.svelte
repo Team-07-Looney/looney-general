@@ -6,9 +6,9 @@
     import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
     import showElement from '$lib/showElement';
-
-$showElement = false;
-   
+    import FormEars from "../../../../lib/components/FormEars.svelte";
+    import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
+    $showElement = false;
 </script>
 
 <WhiteBanner
@@ -18,11 +18,11 @@ $showElement = false;
     displayBackButton="1"
     imgExtraPath="../"
 />
-<div class="mt-20 flex justify-center items-center">
+<div class="mt-28 flex justify-center items-center">
     <div class="flex flex-col items-center">
-
+        <FormEars/>
         <div class="grid grid-cols-1">
-            
+            <ShadowsForForms height={159} width={259}/>
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form
