@@ -31,6 +31,21 @@ const tableQueries = [
   title TEXT,
   body TEXT NOT NULL,
   record_id INTEGER REFERENCES Records(id),
+  user_id INTEGER)`,
+  //Create Advice_Groups table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Advice_Groups (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT)`,
+  //Create Advice table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Advice (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  group_id INTEGER REFERENCES Advice_Groups(id),
+  mood_type_id INTEGER REFERENCES Moods_Types(id))`,
+  //Create Advice Records table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS Advice_Records (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  advice_id INTEGER REFERENCES Advice(id),
   user_id INTEGER)`
 ];
 
@@ -58,6 +73,7 @@ export async function openDatabaseConnection() {
             await populateMoodsTypeTable(db);
             await populateMoodsTable(db);
             await populateReasonsTable(db);
+            await populateAdviceGroupsTable(db);
           }
 
           resolve(db);
@@ -219,5 +235,44 @@ async function populateReasonsTable(db) {
         }
       });
     });
+  });
+}
+
+async function populateAdviceGroupsTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedAdviceGroups = ['Me Time', 'Entertainment', 'Well-being', 'New Challenge', 'Social'];
+    const insertQuery = 'INSERT INTO Advice_Groups (name) VALUES (?)';
+
+    predefinedAdviceGroups.forEach((advice_groups) => {
+      db.run(insertQuery, [advice_groups], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    });
+  });
+}
+
+async function populateAdviceTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedAdvice = [
+      {
+        name: 'Go for a walk',
+        groupId: 1,
+        moodTypeId: 1
+      },
+    ];
+    const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
+    predefinedMooods.forEach((mood) => {
+      db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    })
   });
 }
