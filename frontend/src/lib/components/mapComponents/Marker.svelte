@@ -18,7 +18,6 @@
 
     onMount(() => {
         if (map) {
-            console.log(marker);
             marker = L.marker(latLng).addTo(map);
         }
     });

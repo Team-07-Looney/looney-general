@@ -8,7 +8,6 @@
 
     const initialView = data.userLocation;
     const markerLocations = data.locations;
-    console.log(markerLocations);
 </script>
 
 <WhiteBanner
