@@ -28,9 +28,10 @@ import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
                 type="text"
                 class="bg-gray-300 p-2 w-full rounded-lg"
                 name="title"
+                value={form?.title ?? ""}
             />
             <label>Story:</label>
-            <textarea type="text" name="body" class="bg-gray-300 w-full p-4 rounded-lg"
+            <textarea type="text" name="body" value={form?.body ?? ""} rows="{form && form.errors ? '3': '8'}" class="bg-gray-300 w-full p-4 rounded-lg"
             ></textarea>
             {#if form && form.errors}
             <div

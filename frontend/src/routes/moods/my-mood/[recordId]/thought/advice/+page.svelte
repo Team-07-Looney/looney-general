@@ -2,6 +2,7 @@
     import WhiteBanner from "../../../../../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../../../../../lib/components/BottomMenu.svelte";
     import ProgressBar from "../../../../../../lib/components/ProgressBar.svelte";
+    import AdviceItem from "../../../../../../lib/components/AdviceItem.svelte";
     export let data;
     export let form;
 </script>
@@ -21,6 +22,10 @@
         <form method="POST" action="?/createAdvice" class="w-full">
            
            <h2 class="text-xl text-center">Select an advice:</h2>
+           <div class="flex bg-gray-200 rounded-lg h-52 p-1">
+              <AdviceItem name={data.finalAdvice[0].name} group={data.finalAdvice[0].groupName} />
+              <AdviceItem name={data.finalAdvice[1].name} group={data.finalAdvice[1].groupName} />
+           </div>
         
             {#if form && form.errors}
             <div

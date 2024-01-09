@@ -41,6 +41,12 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       }
     });
 
+    const adviceGroupsResponse = await axios.get('http://localhost:3011/advice-groups', {
+      headers: {
+        'Authorization': `Bearer ${jwtoken}`
+      }
+    });
+
     if (isAuthenticated.data.message == "User is authenticated") {
       isUserAuth = true;
     }
@@ -48,14 +54,15 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
     const userId = payload.id;
     const moods = moodsResponse.data.data;
     const advice = adviceResponse.data.data;
+    const adviceGroups = adviceGroupsResponse.data.data;
     const filteredRecordsByUser = records.filter(record => record.user_id === userId);
     const moodTypeCounts = {};
     let totalMoodTypes = 0;
 
-    // Iterate over filteredRecordsByUser
+    // Iterate over filteredRecordsByUser to create statistics
     filteredRecordsByUser.forEach((record) => {
       // Find the corresponding mood in the moodTable
-      const mood = moods.find((m) => m.id === parseInt(record.mood_id.split('/').pop(), 10));
+      const mood = moods.find((mood) => mood.id === parseInt(record.mood_id.split('/').pop(), 10));
       totalMoodTypes += 1;
       // Check if mood is found
       if (mood) {
@@ -79,35 +86,40 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       "total": totalMoodTypes
     };
 
+    // Advice 
     const selectedRecord = filteredRecordsByUser.find((record) => record.id === parseInt(recordId));
     const selectedMood = moods.find((mood) => mood.id === parseInt(selectedRecord.mood_id.split('/').pop(), 10));
-    console.log(selectedMood);
-  
-    // const filteredAdviceBySelectedMoodType = advice.filter(advice => advice.mood_type_id === selectedMoodType);
-    // // Function to pick two random pieces of advice
-    // function pickTwoRandomAdvice(array) {
-    //   // Generate random pieces of advice
-    //   const advice1 = Math.floor(Math.random() * array.length);
-    //   let advice2 = Math.floor(Math.random() * array.length);
+    const selectedMoodType = parseInt(selectedMood.mood_type_id.split('/').pop(), 10) 
+    const filteredAdviceBySelectedMoodType = advice.filter(advice => advice.mood_type_id === selectedMoodType);
+    
+    // Function to pick two random pieces of advice
+    function pickTwoRandomAdvice(array) {
+      // Generate random pieces of advice
+      const advice1 = Math.floor(Math.random() * array.length);
+      let advice2 = Math.floor(Math.random() * array.length);
 
-    //   // Make sure the second advice is different from the first
-    //   while (advice2 === advice1) {
-    //     advice2 = Math.floor(Math.random() * array.length);
-    //   }
+      // Make sure the second advice is different from the first
+      while (advice2 === advice1) {
+        advice2 = Math.floor(Math.random() * array.length);
+      }
 
-    //   // Return the two random pieces of advice
-    //   return [array[advice1], array[advice2]];
-    // }
-
-    // // Call the function and get two random instances
-    // const randomInstances = pickTwoRandomAdvice(filteredAdviceBySelectedMoodType);
-    // // console.log(randomInstances);
-    return { statistics, recordId };
+      // Return the two random pieces of advice
+      return [array[advice1], array[advice2]];
+    }
+    
+    // Call the function and get two random instances
+    const randomAdvice = pickTwoRandomAdvice(filteredAdviceBySelectedMoodType);
+    
+    // To add the group name to the random pieces of advice
+    const finalAdvice = randomAdvice.map(advice => ({
+      ...advice,
+      groupName: adviceGroups.find(group => group.id === advice.group_id)?.name || null
+    }));
+    
+        return { statistics, recordId, finalAdvice };
   } catch (error) {
     console.log(error);
   }
-
-
   // If they are authenticated they should not be able to access the login
   // Svelte issue with throwing redirect within a try-catch block workaround
   if (!isUserAuth) {
