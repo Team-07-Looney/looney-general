@@ -15,11 +15,14 @@ export const actions = {
       const formData = await request.formData();
       const title = formData.get('title');
       const body = formData.get('body');
+      const location = formData.get('location');
+      const latitude = formData.get('latitude');
+      const longitude = formData.get('longitude');
 
       // check for errors in a form data
       const errors = await validateCreateData(title, body);
 
-      //if there are any errors, return form with error messages
+      // if there are any errors, return form with error messages
       if (errors.length > 0) {
         return fail(400, { title, body, errors });
       }
@@ -28,6 +31,9 @@ export const actions = {
       const data = await axios.post('http://localhost:3011/thoughts', {
         title: title,
         body: body,
+        // if user gave permission to share their location, pass coordinates to the post request.
+        // Otherwise pass empty string
+        location: location ? `${latitude}, ${longitude}` : null,
         record_id: recordId,
         user_id: payload.id
       }, {

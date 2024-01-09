@@ -40,7 +40,6 @@
   route="/moods"
   displayBackButton="1"
   imgExtraPath="../"
-  displayBackButton="1"
 />
 
 <div

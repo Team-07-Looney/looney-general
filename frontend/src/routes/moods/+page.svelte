@@ -37,7 +37,7 @@ imgExtraPath="../"
         <OctopusButton
             buttonName="Map"
             buttonIcon="mapOctopus.png"
-            buttonLink="/"
+            buttonLink="/map"
         />
     </div>
 </div>
