@@ -25,14 +25,14 @@ imgExtraPath="../"
         <OctopusButton
             buttonName="Thoughts"
             buttonIcon="thoughtsOctopus.png"
-            buttonLink="moods/thoughts"
+            buttonLink="/moods/thoughts"
         />
     </div>
     <div class="flex flex-row gap-4 mt-4">
         <OctopusButton
             buttonName="Tracker"
             buttonIcon="trackerOctopus.png"
-            buttonLink="/"
+            buttonLink="/moods/tracker"
         />
         <OctopusButton
             buttonName="Map"
