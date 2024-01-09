@@ -74,6 +74,7 @@ export async function openDatabaseConnection() {
             await populateMoodsTable(db);
             await populateReasonsTable(db);
             await populateAdviceGroupsTable(db);
+            await populateAdviceTable(db);
           }
 
           resolve(db);
@@ -240,18 +241,39 @@ async function populateReasonsTable(db) {
 
 async function populateAdviceGroupsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedAdviceGroups = ['Me Time', 'Entertainment', 'Well-being', 'New Challenge', 'Social'];
-    const insertQuery = 'INSERT INTO Advice_Groups (name) VALUES (?)';
-
+    const predefinedAdviceGroups = [
+      {
+        id: 1,
+        name: 'Me Time'
+      },
+      {
+        id: 2,
+        name: 'Entertainment'
+      },
+      {
+        id: 3,
+        name: 'Well-being'
+      },
+      {
+        id: 4,
+        name: 'New Challenge'
+      },
+      {
+        id: 5,
+        name: 'Social'
+      }
+    ];
+  
+    const insertQuery = 'INSERT INTO Advice_Groups (id, name) VALUES (?,?)';
     predefinedAdviceGroups.forEach((advice_groups) => {
-      db.run(insertQuery, [advice_groups], (err) => {
+      db.run(insertQuery, [advice_groups.id, advice_groups.name], (err) => {
         if (err) {
           reject(err.message);
         } else {
           resolve();
         }
       });
-    });
+    })
   });
 }
 
@@ -259,14 +281,84 @@ async function populateAdviceTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedAdvice = [
       {
-        name: 'Go for a walk',
+        name: 'Read a Book',
         groupId: 1,
         moodTypeId: 1
       },
+      {
+        name: 'Art and Craft',
+        groupId: 2,
+        moodTypeId: 1
+      },
+      {
+        name: 'Do Yoga',
+        groupId: 3,
+        moodTypeId: 1
+      },
+      {
+        name: 'Try a new Recipe',
+        groupId: 4,
+        moodTypeId: 1
+      },
+      {
+        name: 'Go to a Café',
+        groupId: 5,
+        moodTypeId: 1
+      },
+      {
+        name: 'Bake Muffins',
+        groupId: 1,
+        moodTypeId: 2
+      },
+      {
+        name: 'Movie Night',
+        groupId: 2,
+        moodTypeId: 2
+      },
+      {
+        name: 'Outdoor Walk',
+        groupId: 3,
+        moodTypeId: 2
+      },
+      {
+        name: 'Try new Outfits',
+        groupId: 4,
+        moodTypeId: 2
+      },
+      {
+        name: 'Connect with a Friend',
+        groupId: 5,
+        moodTypeId: 2
+      },
+      {
+        name: 'Warm Bath',
+        groupId: 1,
+        moodTypeId: 3
+      },
+      {
+        name: 'Listen to Music',
+        groupId: 2,
+        moodTypeId: 3
+      },
+      {
+        name: 'Meditate',
+        groupId: 3,
+        moodTypeId: 3
+      },
+      {
+        name: 'Explore a Park',
+        groupId: 4,
+        moodTypeId: 3
+      },
+      {
+        name: 'Call Family',
+        groupId: 5,
+        moodTypeId: 3
+      }
     ];
-    const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
-    predefinedMooods.forEach((mood) => {
-      db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
+    const insertQuery = 'INSERT INTO Advice (name, group_id, mood_type_id) VALUES (?,?,?)';
+    predefinedAdvice.forEach((advice) => {
+      db.run(insertQuery, [advice.name, advice.groupId, advice.moodTypeId], (err) => {
         if (err) {
           reject(err.message);
         } else {
