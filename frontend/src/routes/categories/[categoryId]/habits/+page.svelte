@@ -6,9 +6,6 @@
     import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
     // Data contains all data passed by the page server
     export let data;
-    import showElement from '$lib/showElement';
-
-$showElement = false;
     
     let menuOpen = false;
     let storedId = 0;
@@ -53,7 +50,8 @@ $showElement = false;
   ::-webkit-scrollbar {
     width: 5px;
   }
-  </style>
+</style>
+
 <WhiteBanner
 title="{data.category[0].name}"
 description="Add new ones, check the old ones, Looney is going to be with you"
@@ -62,15 +60,20 @@ displayBackButton="1"
 imgExtraPath="../"
 />
 
-<ul style="overflow-y: scroll; height:305px; margin-top: 10px; position:relative; z-index: 5">
-  {#each data.habits as habit}
-    {#if data.category[0].id == habit.category_id} 
-      <li class="px-10 py-2">
-          <HabitItem title={habit.name} done={habit.done} time={habit.start_time} categoryId={habit.category_id} habitId={habit.id} on:click={handleOpening(habit.id)} />
-      </li> 
-    {/if}
-  {/each}
-</ul>
+  {#if data.filteredHabitsByCategory.length == 0} 
+    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
+      <h1 class="font-bold">Let's get started!</h1> 
+      <p >Add your habits to the routine <br>by pressing on the plus button.</p>
+    </div>
+  {:else}
+  <div class="flex justify-center items-center pt-4 relative z-index-0 mb-3">
+    <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[22rem] items-center w-80 px-1 gap-2">
+      {#each data.filteredHabitsByCategory as habit}
+        <HabitItem title={habit.name} done={habit.done} time={habit.start_time} categoryId={habit.category_id} habitId={habit.id} on:click={handleOpening(habit.id)} />
+      {/each}
+    </div>
+  </div>
+  {/if}
 
 <div class="flex justify-center items-center relative" style="z-index: 10;">
 <a class="p-2" href="/categories/{data.category[0].id}/habits/create"><img src="../../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>

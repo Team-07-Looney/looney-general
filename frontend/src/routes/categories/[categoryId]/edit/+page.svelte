@@ -14,8 +14,8 @@ $showElement = false;
 <WhiteBanner
     title="Edit Category"
     description="Tweak your category like a pro. Use this form to remix and upgrade your routine."
-    route="/"
-    displayBackButton="0"
+    route="/categories"
+    displayBackButton="1"
     imgExtraPath="../"
 />
 <div class="mt-20 flex justify-center items-center">

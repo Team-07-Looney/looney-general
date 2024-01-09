@@ -1,5 +1,6 @@
 <script>
-    import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
       /** @type {import('./$types').ActionData} */
     export let form;
     export let data;
@@ -7,9 +8,10 @@
 
 <WhiteBanner
     title="My Mood"
-    description="Gain more insight in how you are feeling, Looney will always be there
-"
+    description="Gain more insight in how you are feeling, Looney will always be there"
     imgExtraPath="../../"
+    route="/moods/my-mood"
+    displayBackButton="1"
 />
 
 <div
@@ -61,3 +63,5 @@
         </form>
     </div>
 </div>
+
+<BottomMenu imgPath="../../" displayMoodText="1" />

@@ -12,11 +12,13 @@ const tableQueries = [
   `CREATE TABLE IF NOT EXISTS Moods (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   mood_type_id INTEGER REFERENCES Mood_Types(id),
-  name TEXT UNIQUE NOT NULL)`,
+  name TEXT UNIQUE NOT NULL,
+  user_id INTEGER)`,
   //Create Reasons table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Reasons (
-     id INTEGER PRIMARY KEY AUTOINCREMENT,
-     name TEXT NOT NULL)`,
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT NOT NULL,
+  user_id INTEGER)`,
   //Create Records table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS Records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -28,7 +30,8 @@ const tableQueries = [
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
-  record_id INTEGER REFERENCES Records(id))`
+  record_id INTEGER REFERENCES Records(id),
+  user_id INTEGER)`
 ];
 
 /**
@@ -127,7 +130,7 @@ async function populateMoodsTypeTable(db) {
 
 async function populateMoodsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedMoods = [
+    const predefinedMooods = [
       {
         moodTypeId: 1,
         name: 'Joyful'
@@ -189,9 +192,9 @@ async function populateMoodsTable(db) {
         name: 'Iritated'
       }
     ];
-    const insertQuery = 'INSERT INTO Moods (mood_type_id, name) VALUES (?,?)';
-    predefinedMoods.forEach((mood) => {
-      db.run(insertQuery, [mood.moodTypeId, mood.name], (err) => {
+    const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
+    predefinedMooods.forEach((mood) => {
+      db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
         if (err) {
           reject(err.message);
         } else {
@@ -205,10 +208,10 @@ async function populateMoodsTable(db) {
 async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedReasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
-    const insertQuery = 'INSERT INTO Reasons (name) VALUES (?)';
+    const insertQuery = 'INSERT INTO Reasons (name, user_id) VALUES (?,?)';
 
-    predefinedReasons.forEach((name) => {
-      db.run(insertQuery, [name], (err) => {
+    predefinedReasons.forEach((reason) => {
+      db.run(insertQuery, [reason], (err) => {
         if (err) {
           reject(err.message);
         } else {
