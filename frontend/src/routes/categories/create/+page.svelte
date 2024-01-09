@@ -1,10 +1,11 @@
 <script>
-
   import AuthInput from "../../../lib/components/authInput.svelte";
     import BottomMenu from "../../../lib/components/BottomMenu.svelte";
     import showElement from '$lib/showElement';
     import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
-  $showElement = false;
+    import FormEars from "../../../lib/components/FormEars.svelte";
+    import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
+    $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
@@ -16,9 +17,11 @@
     imgExtraPath="../"
     displayMenuButton="1"
 /> 
-<div class="flex justify-center items-center mt-20">
+<div class="flex justify-center items-center mt-28">
   <div class="flex flex-col items-center">
+    <FormEars/>
     <div class="grid grid-cols-1">
+      <ShadowsForForms height={159} width={259}/>
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
           <form
