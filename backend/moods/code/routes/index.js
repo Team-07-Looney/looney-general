@@ -35,6 +35,9 @@ import {
     editThoughtById,
     deleteThoughtById
 } from '../controllers/thoughtsController.js'
+import { getAdvice } from '../controllers/adviceController.js';
+import { getAdviceGroups } from '../controllers/adviceGroupsController.js';
+import { getAdviceRecords } from '../controllers/adviceRecordsController.js';
 const router = express.Router();
 
 // routes
@@ -102,14 +105,23 @@ router.put('/reasons/:id', cors(), editReasonById);
 // route for deleteing a reason
 router.delete('/reasons/:id', cors(), deleteReasonById);
 
-// get a collection of all the records
+// get a collection of all the mood records
 router.get('/recordsMoods', cors(), getRecord);
-// route for creating a record
+// route for creating a mood record
 router.post('/recordsMoods', cors(), createRecord);
-// route for getting a record
+// route for getting a mood record
 router.get('/recordsMoods/:id', cors(), getRecordById);
-// route for editing a record
+// route for editing a mood record
 router.put('/recordsMoods/:id', cors(), editRecordById);
-// route for deleteing a record
+// route for deleteing a mood record
 router.delete('/recordsMoods/:id', cors(), deleteRecordById);
+
+// get a collection of all the pieces of advice
+router.get('/advice', cors(), getAdvice);
+
+// get a collection of all the groups of advice
+router.get('/advice-groups', cors(), getAdviceGroups);
+
+// get a collection of all the advice records
+router.get('/recordsAdvice', cors(), getAdviceRecords);
 export default router;
