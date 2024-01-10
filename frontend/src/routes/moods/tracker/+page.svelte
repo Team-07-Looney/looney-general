@@ -39,8 +39,8 @@ imgExtraPath="../"
     </div>
 </div>
 <div class="flex bg-white rounded-lg h-52 p-3 z-20 mt-2items-center shadow-lg mr-6 ml-6">
-{#each data.mostFrequentAdvice as advice}
-    <AdviceTrackerItem name={advice.name} group={advice.group_name}/>
+    {#each data.mostFrequentAdvice as advice}
+        <AdviceTrackerItem name={advice.name} group={advice.group_name} omitBg=1/>
     {/each}
 </div>
 {/if}

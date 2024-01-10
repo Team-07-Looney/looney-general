@@ -27,6 +27,7 @@ export default {
           '900': '#1F213C',  // Darkest shade
         },
         accent: '#fdefc7',
+        advice: '#eaecfd'
       },
     },
   },
