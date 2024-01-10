@@ -1,5 +1,6 @@
 import {
-    getAllAdviceRecordsData
+    getAllAdviceRecordsData,
+    createAdviceRecordInstance
 } from '../database/adviceRecordsAdapter.js'
 
 /**
@@ -40,3 +41,19 @@ const tempResponse = {
       next(err);
     }
   }
+
+    /**
+   * create a records
+   * @param {*} req request with the data for a new records
+   * @param {*} res response sent with the result message
+   * @param {*} next 
+   */
+    export async function createAdviceRecord(req, res, next) {
+      try {
+        await createAdviceRecordInstance(req.body);
+        tempResponse.data.message = "records created successfully";
+        res.status(200).send(tempResponse);
+      } catch (err) {
+        next(err);
+      }
+    }

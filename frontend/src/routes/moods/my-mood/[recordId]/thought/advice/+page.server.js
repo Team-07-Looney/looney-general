@@ -4,8 +4,8 @@ import jwt from 'jsonwebtoken';
 
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all moods
- * 
- * @param {*} serverLoadEvent 
+ *
+ * @param {*} serverLoadEvent
  * @returns
  */
 
@@ -86,12 +86,12 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       "total": totalMoodTypes
     };
 
-    // Advice 
+    // Advice
     const selectedRecord = filteredRecordsByUser.find((record) => record.id === parseInt(recordId));
     const selectedMood = moods.find((mood) => mood.id === parseInt(selectedRecord.mood_id.split('/').pop(), 10));
-    const selectedMoodType = parseInt(selectedMood.mood_type_id.split('/').pop(), 10) 
+    const selectedMoodType = parseInt(selectedMood.mood_type_id.split('/').pop(), 10)
     const filteredAdviceBySelectedMoodType = advice.filter(advice => advice.mood_type_id === selectedMoodType);
-    
+
     // Function to pick two random pieces of advice
     function pickTwoRandomAdvice(array) {
       // Generate random pieces of advice
@@ -106,17 +106,17 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       // Return the two random pieces of advice
       return [array[advice1], array[advice2]];
     }
-    
+
     // Call the function and get two random instances
     const randomAdvice = pickTwoRandomAdvice(filteredAdviceBySelectedMoodType);
-    
+
     // To add the group name to the random pieces of advice
     const finalAdvice = randomAdvice.map(advice => ({
       ...advice,
       groupName: adviceGroups.find(group => group.id === advice.group_id)?.name || null
     }));
-    
-        return { statistics, recordId, finalAdvice };
+
+    return { statistics, recordId, finalAdvice, userId };
   } catch (error) {
     console.log(error);
   }
@@ -127,3 +127,61 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
   }
 };
 
+/**
+ * createAdviceRecord is a function called when the user submits a form to create a record
+ */
+export const actions = {
+  createAdvice: async ({ request, cookies }) => {
+    let recordId;
+    try {
+      const jwtoken = cookies.get('jwt');
+      const payload = jwt.decode(jwtoken);
+
+      // Retrieves the data from the form
+      const formData = await request.formData();
+      const adviceId = formData.get('adviceId');
+
+      // check for errors in a form data
+      const errors = await validateCreateData(adviceId);
+
+      //if there are any errors, return form with error messages
+      if (errors.length > 0) {
+        return fail(400, { adviceId, errors });
+      }
+      console.log(adviceId);
+      // Set the body of the request, adds a header and sends post request to create record
+      const data = await axios.post('http://localhost:3011/recordsAdvice', {
+        advice_id: adviceId,
+        user_id: payload.id
+      }, {
+        headers: {
+          "Authorization": `Bearer ${jwtoken}`,
+          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+        }
+      });
+
+      const responseRecords = await axios.get('http://localhost:3011/recordsAdvice', {
+        headers: {
+          'Authorization': `Bearer ${jwtoken}`
+        }
+      });
+
+      const records = responseRecords.data.data;
+      const lastrecordId = records.length;
+      recordId = lastrecordId;
+      console.log(responseRecords);
+
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, '/login');
+      }
+    }
+
+    throw redirect(302, `/moods`);
+  }
+};
+
+async function validateCreateData(advice_id) {
+  let errors = [];
+  return errors;
+}

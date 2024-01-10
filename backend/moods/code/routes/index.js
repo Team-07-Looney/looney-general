@@ -1,43 +1,46 @@
 import express from 'express';
 import cors from 'cors';
 import {
-    getMood,
-    createMood,
-    getMoodById,
-    editMoodById,
-    deleteMoodById
+  getMood,
+  createMood,
+  getMoodById,
+  editMoodById,
+  deleteMoodById
 } from '../controllers/moodsController.js'
 import {
-    getMoodType,
-    createMoodType,
-    getMoodTypeById,
-    editMoodTypeById,
-    deleteMoodTypeById
+  getMoodType,
+  createMoodType,
+  getMoodTypeById,
+  editMoodTypeById,
+  deleteMoodTypeById
 } from '../controllers/moodTypesController.js'
 import {
-    getReason,
-    createReason,
-    getReasonById,
-    editReasonById,
-    deleteReasonById
+  getReason,
+  createReason,
+  getReasonById,
+  editReasonById,
+  deleteReasonById
 } from '../controllers/reasonsController.js'
 import {
-    getRecord,
-    createRecord,
-    getRecordById,
-    editRecordById,
-    deleteRecordById
+  getRecord,
+  createRecord,
+  getRecordById,
+  editRecordById,
+  deleteRecordById
 } from '../controllers/recordsController.js'
 import {
-    getThought,
-    createThought,
-    getThoughtById,
-    editThoughtById,
-    deleteThoughtById
+  getThought,
+  createThought,
+  getThoughtById,
+  editThoughtById,
+  deleteThoughtById
 } from '../controllers/thoughtsController.js'
 import { getAdvice } from '../controllers/adviceController.js';
 import { getAdviceGroups } from '../controllers/adviceGroupsController.js';
-import { getAdviceRecords } from '../controllers/adviceRecordsController.js';
+import {
+  getAdviceRecords,
+  createAdviceRecord
+} from '../controllers/adviceRecordsController.js';
 const router = express.Router();
 
 // routes
@@ -124,4 +127,6 @@ router.get('/advice-groups', cors(), getAdviceGroups);
 
 // get a collection of all the advice records
 router.get('/recordsAdvice', cors(), getAdviceRecords);
+// route for creating a advice record
+router.post('/recordsAdvice', cors(), createAdviceRecord);
 export default router;

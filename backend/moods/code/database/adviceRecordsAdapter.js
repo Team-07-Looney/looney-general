@@ -22,3 +22,26 @@ export async function getAllAdviceRecordsData() {
     });
   });
 }
+
+/**
+ * executes SQL query that inserts values from the request into advice_records table
+ * @param {*} request request body with the data for a new advice record
+ * @returns 
+ */
+export async function createAdviceRecordInstance(request) {
+  return new Promise(async (resolve, reject) => {
+    const db = await openDatabaseConnection();
+    const insert = 'INSERT INTO Advice_Records (advice_id, user_id) VALUES (?, ?)';
+
+    db.run(insert, [request.advice_id, request.user_id], (err) => {
+      closeDatabaseConnection(db);
+      console.log(request.advice_id);
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+}

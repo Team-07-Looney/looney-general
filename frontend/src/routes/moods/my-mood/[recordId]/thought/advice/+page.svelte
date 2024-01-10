@@ -5,6 +5,13 @@
     import AdviceItem from "../../../../../../lib/components/AdviceItem.svelte";
     export let data;
     export let form;
+    export let adviceId;
+
+    function handleAdviceClick(event) {
+    console.log("Advice clicked:", event.detail.adviceId);
+    adviceId = event.detail.adviceId;
+  }
+  let storedAdviceId = 0;
 </script>
 <WhiteBanner
     title="My Mood"
@@ -23,10 +30,10 @@
            
            <h2 class="text-xl text-center">Select an advice:</h2>
            <div class="flex bg-gray-200 rounded-lg h-52 p-1">
-              <AdviceItem name={data.finalAdvice[0].name} group={data.finalAdvice[0].groupName} />
-              <AdviceItem name={data.finalAdvice[1].name} group={data.finalAdvice[1].groupName} />
-           </div>
-        
+            {#each data.finalAdvice as advice}
+              <AdviceItem name={advice.name} group={advice.groupName} adviceId={advice.id} bind:storedAdviceId on:adviceSelected={handleAdviceClick}/>
+           {/each}
+          </div>
             {#if form && form.errors}
             <div
               class="bg-red-200 bg-opacity-60 text-red-800 p-4 rounded-lg"
@@ -45,15 +52,18 @@
               </ul>
             </div>
           {/if}
+          <input type="hidden" name="adviceId" bind:value={adviceId} />
             <div class="flex flex-row gap-8 justify-center items-center mt-2">
                 <a
                     class="z-10 flex justify-center items-center bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
                     href="/moods">Skip</a
                 >
+                {#if adviceId}
                 <button
                     class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"
                     type="submit">Submit</button
                 >
+                {/if}
             </div>
         </form>
     </div>
