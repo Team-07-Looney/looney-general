@@ -27,13 +27,12 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     thoughts.forEach((thought) => {
         let location = thought.location.split(',');
         thought.location = location.map(Number);
-        locations.push(thought.location);
     });
 
     const userThought = thoughts.find(thought => thought.user_id === userId);
     const userLocation = userThought.location;
 
-    return { thoughts, userLocation, locations };
+    return { thoughts, userLocation };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');

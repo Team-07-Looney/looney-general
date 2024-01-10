@@ -3,11 +3,11 @@
     import BottomMenu from "../../lib/components/BottomMenu.svelte";
     import Leaflet from "../../lib/components/mapComponents/Leaflet.svelte";
     import Marker from "../../lib/components/mapComponents/Marker.svelte";
+    import Popup from "../../lib/components/mapComponents/Popup.svelte";
 
     export let data;
 
     const initialView = data.userLocation;
-    const markerLocations = data.locations;
 </script>
 
 <WhiteBanner
@@ -23,8 +23,10 @@
 >
     <p class="text-xl">You are <strong>not</strong> ALONE</p>
     <Leaflet view={initialView} zoom={15}>
-        {#each markerLocations as latLng}
-            <Marker {latLng} width={40} height={40} />
+        {#each data.thoughts as thought}
+            <Marker latLng={thought.location} width={40} height={40}>
+                <Popup title={thought.title} body={thought.body} />
+            </Marker>
         {/each}
     </Leaflet>
 </div>
