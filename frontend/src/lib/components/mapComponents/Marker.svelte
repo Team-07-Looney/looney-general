@@ -8,6 +8,7 @@
 
     let marker;
     let markerElement;
+    
 
     const { getMap } = getContext('map');
     const map = getMap();
@@ -18,7 +19,15 @@
 
     onMount(() => {
         if (map) {
-            marker = L.marker(latLng).addTo(map);
+            const markerIcon = L.icon({
+                iconUrl: './src/img/location.png',
+
+                iconSize: [38, 38],
+                iconAnchor: [20, 40],
+                popupAnchor: [0, -30],
+            });
+
+            marker = L.marker(latLng, { icon: markerIcon }).addTo(map);
         }
     });
 
