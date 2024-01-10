@@ -51,7 +51,6 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       }
     });
 
-    
     const adviceResponse = await axios.get('http://localhost:3011/advice', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
@@ -131,8 +130,6 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       // Sort the array by count in descending order
       const mostFrequentAdvice = adviceCountsArray.sort((a, b) => b.count - a.count).slice(0, 2);
       
-      
-
         const positiveTotal = moodTypeCounts[moodType1] || 0;
         const neutralTotal = moodTypeCounts[moodType2] || 0;
         const negativeTotal = moodTypeCounts[moodType3] || 0;
