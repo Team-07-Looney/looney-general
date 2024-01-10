@@ -1,10 +1,9 @@
 <script>
-  import OctopusButton from "../../lib/components/OctopusButton.svelte";
-  import Header from "../../lib/components/Header.svelte";
-
   /** @type {import('./$types').ActionData} */
   export let form;
   import FormEars from "../../lib/components/FormEars.svelte";
+  import showElement from '$lib/showElement'
+	$showElement = false;
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../lib/components/BottomMenu.svelte";
   import AuthInput from "../../lib/components/authInput.svelte";
@@ -20,8 +19,9 @@
 />
 
 <div class="flex justify-center items-center pt-5">
-  <div class="flex flex-col ml-2 py-5 items-center w-80 px-1 gap-2">
-    <div class="bg-white rounded w-full p-3">
+  <div class="flex flex-col ml-2 py-5 items-center w-64 px-1 gap-2">
+    <FormEars/>
+    <div class="bg-white rounded w-full p-3 z-[2]">
       <form
         method="POST"
         class="grid grid-cols-1 gap-4 text-gray-900"
@@ -102,12 +102,18 @@
         </form>
       </div>
     </div>
+    <div class="w-full">
+      <div class="bg-white rounded w-full flex p-3">
+        <form method="POST" class="text-gray-900 w-full" action="?/logout">
+          <button
+            class="p-1.5 bg-lavender-500 w-full rounded-lg font-bold text-black"
+            type="submit"
+          >
+            Logout
+          </button>
+        </form>
+      </div>
+    </div>
   </div>
 </div>
-
-<!-- <div class="grid grid-cols-1">
-  <div class="bg-white rounded px-4 py-4 mb-16">
-    
-  </div>
-</div> -->
 <BottomMenu imgPath="../" />

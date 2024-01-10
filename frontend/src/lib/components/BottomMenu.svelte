@@ -16,10 +16,3 @@
         <a href="/moods" type="button"><img src="{imgPath}../src/img/moodIcon.png" alt="moods" class="h-8"></a>
     </div>
 </div>
-
-<style>
-    p {
-        font-weight: bold;
-        color: #909FF4;
-    }
-</style>

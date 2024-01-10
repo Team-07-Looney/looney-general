@@ -69,7 +69,7 @@ imgExtraPath="../"
     </div>
   {:else}
   <div class="flex justify-center items-center pt-5 relative z-index-0 mb-3">
-    <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[19rem] items-center w-80 px-1 pb-1 gap-2">
+    <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[19rem] items-center w-80 px-1 py-1 gap-2">
       {#each data.filteredHabitsByCategory as habit}
         <HabitItem title={habit.name} done={habit.done} time={habit.start_time} categoryId={habit.category_id} habitId={habit.id} on:click={handleOpening(habit.id)} />
       {/each}

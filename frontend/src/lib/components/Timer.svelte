@@ -88,15 +88,15 @@
     }
   </script>
 
-  <div class="flex flex-col justify-center items-center mt-4">
+  <div class="flex flex-col justify-center items-center">
     <div class="flex flex-row">
-      <svg viewBox="-60 -60 120 120" width="180" height="180">
+      <svg viewBox="-60 -60 120 120" width="240" height="240">
         <title>{count}</title>
-        <g fill="none" stroke="purple" stroke-width="9">
-          <circle stroke="purple" r="46" />
-          <path stroke="gray" d="M 0 -46 a 46 46 0 0 0 0 92 46 46 0 0 0 0 -92" pathLength="1" stroke-dasharray="1" stroke-dashoffset={$offset} />
+        <g fill="none" stroke="#FDEFC7" stroke-width="9">
+          <circle stroke="#FDEFC7" r="46" />
+          <path stroke="#DDDDDD" d="M 0 -46 a 46 46 0 0 0 0 92 46 46 0 0 0 0 -92" pathLength="1" stroke-dasharray="1" stroke-dashoffset={$offset} />
         </g>
-        <g fill="purple" stroke="none">
+        <g fill="#FDEFC7" stroke="none">
           <g transform="rotate({$rotation})">
             <g transform="translate(0 -46)">
               <circle r="4" />
@@ -116,9 +116,9 @@
       </svg>
     </div>
 
-    <div class="flex flex-row justify-center items-center mb-4 mt-6">
+    <div class="flex flex-row justify-center items-center mb-4 mt-2 gap-2 text-lg">
       {#if !isStarted}
-        <button on:click={handleStart} class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px]">Start</button>  
+        <button on:click={handleStart} class="bg-[#63648D] rounded-lg p-2 text-white min-w-[85px]">Start</button>  
       {:else}
         {#if isOver}
         <button on:click={handleReset} class="rounded-lg p-2 min-w-[85px] mr-2 bg-indigo-200 border-black">Reset</button>
@@ -128,7 +128,7 @@
           <button on:click={handleStart} class="bg-gray-300 rounded-lg p-2 text-black min-w-[85px] mr-2">Resume</button>
         {/if}
         <form method="POST" action={`/categories/${categoryId}/habits/${habitId}?/createRecord`}>
-          <button type="submit" class="bg-[#383e4d] rounded-lg p-2 text-white min-w-[85px] ml-2">Done</button>
+          <button type="submit" class="bg-[#63648D] rounded-lg p-2 text-white min-w-[85px] ml-2">Done</button>
         </form>
       {/if}
     </div>

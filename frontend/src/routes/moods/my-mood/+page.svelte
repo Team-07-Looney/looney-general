@@ -67,7 +67,7 @@
     <div class="flex justify-center items-center mt-5">
       <h2 class="text-xl">Why do you feel this way?</h2>
     </div>
-    <div class="flex flex-wrap justify-center items-center mt-2 overflow-y-scroll overflow-x-hidden h-[7.9rem] py-1">
+    <div class="flex flex-wrap justify-center items-center mt-2 overflow-y-scroll overflow-x-hidden h-[7.7rem]">
       {#each data.reasons as reason}
       {#if reason.user_id == null || reason.user_id == data.userId}
         <div class="p-1" id="element">
@@ -88,11 +88,11 @@
     <input type="hidden" name="reasonId" bind:value={reasonId} />
     <div class="flex flex-row gap-8 justify-center items-center mt-6">
       <a
-        class="z-10 flex justify-center items-center bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
+        class="z-[4] flex justify-center items-center bg-neutral-400 text-white font-bold p-2 rounded-lg w-20"
         href="/moods">Cancel</a
       >
       {#if moodId && reasonId}
-      <button class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20" type="submit">Next</button>
+      <button class="z-[4] bg-indigo-300 text-white font-bold p-2 rounded-lg w-20" type="submit">Next</button>
     {/if}
     </div>
   </form>
