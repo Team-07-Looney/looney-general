@@ -326,7 +326,7 @@ async function populateAdviceTable(db) {
         moodTypeId: 2
       },
       {
-        name: 'Connect with a Friend',
+        name: 'Talk to a Friend',
         groupId: 5,
         moodTypeId: 2
       },
