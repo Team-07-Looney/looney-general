@@ -3,7 +3,7 @@
 </script>
 
 
-<div in:fly={{x:200, duration:500}} out:fly={{x:200, duration:700}} class="z-10 absolute right-0 w-1/2 bg-zinc-50 h-screen top-0 pt-20 px-3">
+<div in:fly={{x:200, duration:500}} out:fly={{x:200, duration:700}} class="z-10 absolute right-0 w-1/2 bg-lavender-50 h-screen top-0 pt-20 px-3">
     <div class="flex flex-row gap-2 items-center border-2 p-1 rounded-xl border-blue-200 bg-blue-50 mb-4">
         <svg
         xmlns="http://www.w3.org/2000/svg"
