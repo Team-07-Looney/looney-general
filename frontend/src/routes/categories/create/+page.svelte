@@ -29,8 +29,8 @@
 <WhiteBanner
     title="Create Category"
     description="Organize your habit with your own personal folder"
-    route="/"
-    displayBackButton="0"
+    route="/categories"
+    displayBackButton="1"
     imgExtraPath="../"
     displayMenuButton="1"
 /> 

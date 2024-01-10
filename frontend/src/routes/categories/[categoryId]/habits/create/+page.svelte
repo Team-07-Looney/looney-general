@@ -21,8 +21,8 @@ $showElement = false;
 <WhiteBanner
 title="Create Habit"
 description="Time to build your new habit, use this form and let’s make it happen"
-route="/"
-displayBackButton="0"
+route="/categories/{data.categoryId}/habits"
+displayBackButton="1"
 imgExtraPath="../../"
 />
 <div class="mt-10 flex justify-center items-center">

@@ -21,7 +21,10 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
     const categories = response.data.data;
     const userId = payload.id
-    return { categories, userId };
+
+    const filteredCategoriesByUser = categories.filter(category => category.user_id === userId);
+
+    return { filteredCategoriesByUser };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');

@@ -3,32 +3,27 @@ import { fail, redirect } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 
 export const actions = {
-  createThought: async ({ request, cookies, params }) => {
-    
-    const { recordId } = params;
-  
+  createReason: async ({ request, cookies }) => {
+
     try {
       const jwtoken = cookies.get('jwt');
       const payload = jwt.decode(jwtoken);
 
       // Retrieves the data from the form
       const formData = await request.formData();
-      const title = formData.get('title');
-      const body = formData.get('body');
+      const name = formData.get('name');
 
       // check for errors in a form data
-      const errors = await validateCreateData(title, body);
+      const errors = await validateCreateData(name);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
-        return fail(400, { title, body, errors });
+        return fail(400, { name, errors });
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/thoughts', {
-        title: title,
-        body: body,
-        record_id: recordId,
+      const data = await axios.post('http://localhost:3011/reasons', {
+        name: name,
         user_id: payload.id
       }, {
         headers: {
@@ -42,17 +37,14 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/moods');
+    throw redirect(302, '/moods/my-mood');
   }
 };
 
-async function validateCreateData(title, body) {
+async function validateCreateData(name) {
   let errors = [];
-  if (!title) {
-    errors.push({ "input": "title", "message": "Title is missing" });
-  }
-  if (!body) {
-    errors.push({ "input": "body", "message": "Your story is missing" });
+  if (!name) {
+    errors.push({ "input": "name", "message": "Your reason is missing" });
   }
   return errors;
 }

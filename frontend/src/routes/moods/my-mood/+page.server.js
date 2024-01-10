@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit';
 import axios from 'axios';
-
+import jwt from 'jsonwebtoken';
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all moods
  * 
@@ -9,23 +9,24 @@ import axios from 'axios';
  */
 export const load = async ({ serverLoadEvent, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
-
+    const jwtoken = cookies.get('jwt');
+    const payload = jwt.decode(jwtoken);
     const response1 = await axios.get('http://localhost:3011/moods', {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 
     const response2 = await axios.get('http://localhost:3011/reasons', {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        'Authorization': `Bearer ${jwtoken}`
       }
     });
 
     const moods = response1.data.data;
     const reasons = response2.data.data;
-    return { moods, reasons};
+    const userId = payload.id;
+    return { moods, reasons, userId};
   } catch (error) {
     console.log(error);
   }

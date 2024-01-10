@@ -31,9 +31,9 @@ export async function getAllMoodData() {
 export async function createMoodInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Moods (name, mood_type_id) VALUES (?, ?)';
+    const insert = 'INSERT INTO Moods (name, mood_type_id, user_id) VALUES (?, ?, ?)';
 
-    db.run(insert, [request.name, request.mood_type_id], (err) => {
+    db.run(insert, [request.name, request.mood_type_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
