@@ -77,7 +77,7 @@ export async function getAllCategoriesData() {
   export async function editCategoryInstanceById(category, categoryId) {
     return new Promise(async (resolve, reject) => {
       const db = await openDatabaseConnection();
-      const update = `UPDATE categories SET name='${category.name}' WHERE id=${categoryId}`;
+      const update = `UPDATE categories SET name='${category.name}', icon_id='${category.icon_id}' WHERE id=${categoryId}`;
       
       db.run(update, (err) => {
         closeDatabaseConnection(db);

@@ -6,8 +6,19 @@
     import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
     import showElement from '$lib/showElement';
+    import IconsMenu from "../../../../lib/components/IconsMenu.svelte";
 
-$showElement = false;
+    $showElement = false;
+    let storedIconId = 0;
+    let iconId;
+    
+    console.log(iconId)
+
+  function handleIconClick(event) {
+    const id = event.detail.iconId.name;
+    iconId = id;
+    console.log(iconId);
+  }
    
 </script>
 
@@ -18,7 +29,7 @@ $showElement = false;
     displayBackButton="1"
     imgExtraPath="../"
 />
-<div class="mt-20 flex justify-center items-center">
+<div class="mt-3 flex justify-center items-center">
     <div class="flex flex-col items-center">
 
         <div class="grid grid-cols-1">
@@ -61,7 +72,9 @@ $showElement = false;
                                 (error) => error.input == "name",
                             )}
                         />
-
+                        <label>Choose an icon:</label>
+                        <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} />
+                        <input type="hidden" name="icon_id" value={iconId} />
                         <div
                             class="flex flex-row gap-12 justify-center items-center"
                         >

@@ -15,7 +15,7 @@
 >
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
         <div class="min-w-[50px] flex items-center">
-            <svelte:component this={iconComponent} size="30" />
+            <svelte:component this={iconComponent} size="33" class="m-1" />
         </div>
         <div class="flex items-center max-w-[180px]">
             <h1 class="text-lg ml-3 max-w-24"><strong>{title}</strong></h1>

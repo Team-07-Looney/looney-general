@@ -30,7 +30,7 @@
     {#each Array.from({ length: Object.keys(iconComponents).length / 6 }) as _, i}
         <div class="flex">
             {#each Object.values(iconComponents).slice(i * 6, (i + 1) * 6) as icon}
-                <svelte:component this={icon} size="45" bind:id={icon} on:click={handleIconSelection(icon)} class="p-2" />
+                <svelte:component this={icon} size="44" bind:id={icon} on:click={handleIconSelection(icon)} class="p-2" />
             {/each}
         </div>
     {/each}

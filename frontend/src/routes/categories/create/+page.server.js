@@ -77,7 +77,7 @@ async function validateCreateData(name, iconId) {
   }
 
   //check if an icon had been selected
-  if (!iconId) {
+  if (!iconId || iconId === 'undefined') {
     errors.push({ "input": "icon_id", "message": "You need to select an icon" });
   }
 

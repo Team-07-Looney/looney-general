@@ -21,7 +21,8 @@ export const load = async ({ params, cookies }) => {
 
     const category = {
       id: categoryData.id,
-      name: categoryData.name
+      name: categoryData.name,
+      iconId: categoryData.icon_id
     };
 
     return category;
@@ -40,18 +41,20 @@ export const actions = {
       const jwt = cookies.get('jwt');
       const { categoryId } = params;
       const name = formData.get('name');
+      const iconId = formData.get('icon_id');
 
       // check for errors in a form data
-      const errors = await validateEditData(name);
+      const errors = await validateEditData(name, iconId);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
-        return fail(400, { name, errors });
+        return fail(400, { name, iconId, errors });
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
       const data = await axios.put(`http://localhost:3011/categories/${categoryId}`, {
-        name: name
+        name: name,
+        icon_id: iconId,
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
@@ -68,12 +71,17 @@ export const actions = {
   }
 };
 
-async function validateEditData(name) {
+async function validateEditData(name, iconId) {
   let errors = [];
 
   //check if name exists
   if (!name) {
     errors.push({ "input": "name", "message": "Name is missing" });
+  }
+
+  //check if an icon had been selected
+  if (!iconId) {
+    errors.push({ "input": "icon_id", "message": "You need to select an icon" });
   }
 
   return errors;
