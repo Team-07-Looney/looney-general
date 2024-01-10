@@ -2,6 +2,7 @@
     import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../../lib/components/BottomMenu.svelte";
     import ProgressBar from "../../../lib/components/ProgressBar.svelte";
+    import AdviceTrackerItem from "../../../lib/components/AdviceTrackerItem.svelte";
     export let data;
 </script>
 <WhiteBanner
@@ -36,6 +37,11 @@ imgExtraPath="../"
         <p class="text-4xl font-chewy text-[#666e9f]">{data.mostRecordedReasonName}</p>
         <p class="text-m">As main cause<br>of your emotions</p>
     </div>
+</div>
+<div class="flex bg-white rounded-lg h-52 p-3 z-20 mt-2items-center shadow-lg mr-6 ml-6">
+{#each data.mostFrequentAdvice as advice}
+    <AdviceTrackerItem name={advice.name} group={advice.group_name}/>
+    {/each}
 </div>
 {/if}
 <BottomMenu imgPath="../../../" displayMoodText="1" />

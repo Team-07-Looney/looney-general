@@ -45,6 +45,25 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       }
     });
 
+    const adviceRecordsResponse = await axios.get('http://localhost:3011/recordsAdvice', {
+      headers: {
+        'Authorization': `Bearer ${jwtoken}`
+      }
+    });
+
+    
+    const adviceResponse = await axios.get('http://localhost:3011/advice', {
+      headers: {
+        'Authorization': `Bearer ${jwtoken}`
+      }
+    });
+
+    const groupsResponse = await axios.get('http://localhost:3011/advice-groups', {
+      headers: {
+        'Authorization': `Bearer ${jwtoken}`
+      }
+    });
+
     if (isAuthenticated.data.message == "User is authenticated") {
         isUserAuth = true;
       }
@@ -53,13 +72,18 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       const moods = moodsResponse.data.data;
       const thoughts = thoughtsResponse.data.data;
       const reasons = reasonsResponse.data.data;
+      const adviceRecords = adviceRecordsResponse.data.data;
+      const advice = adviceResponse.data.data;
+      const groups = groupsResponse.data.data;
       const filteredRecordsByUser = records.filter(record => record.user_id === userId);
+      const filteredAdviceRecordsByUser = adviceRecords.filter(adviceRecord => adviceRecord.user_id === userId)
       const moodTypeCounts = {};
       let totalMoodTypes = 0;
+      let adviceCounts = {};
+      let adviceDetails = {}; 
       const moodType1 = '/mood-types/1'; 
       const moodType2 = '/mood-types/2'; 
       const moodType3 = '/mood-types/3';
-    
       // Calculates the total thoughts written for the specific user
       const totalThoughts = thoughts.filter((thought) => {
         const record = filteredRecordsByUser.find((r) => r.id === parseInt(thought.record_id.split('/').pop(), 10));
@@ -78,7 +102,37 @@ export const load = async ({ serverLoadEvent, cookies }) => {
             moodTypeCounts[mood_type_id] = (moodTypeCounts[mood_type_id] || 0) + 1;
         }
       });
-    
+
+      filteredAdviceRecordsByUser.forEach((record) => {
+        const advice1 = advice.find((m) => m.id === parseInt(record.advice_id));
+      
+        if (advice1) {
+          adviceCounts[advice1.id] = (adviceCounts[advice1.id] || 0) + 1;
+      
+          // Find the corresponding group
+          const group = groups.find((g) => g.id === advice1.group_id);
+      
+          // Store additional details
+          adviceDetails[advice1.id] = {
+            name: advice1.name,
+            group: group || { id: 0, name: 'Unknown' } // Use 'Unknown' if the group is not found
+          };
+        }
+      });
+      
+      // Convert adviceCounts to an array of objects for easier sorting
+      const adviceCountsArray = Object.entries(adviceCounts).map(([id, count]) => ({
+        id: parseInt(id),
+        count: count,
+        name: adviceDetails[id].name,
+        group_name: adviceDetails[id].group.name
+      }));
+      
+      // Sort the array by count in descending order
+      const mostFrequentAdvice = adviceCountsArray.sort((a, b) => b.count - a.count).slice(0, 2);
+      
+      
+
         const positiveTotal = moodTypeCounts[moodType1] || 0;
         const neutralTotal = moodTypeCounts[moodType2] || 0;
         const negativeTotal = moodTypeCounts[moodType3] || 0;
@@ -116,7 +170,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
           // Calls the function to find the most recorded reason and saves it in a variable
           const mostRecordedReasonName = findMostRecordedReason(filteredRecordsByUser, reasons);
                 
-      return { statistics, totalThoughts, mostRecordedReasonName};
+      return { statistics, totalThoughts, mostRecordedReasonName, mostFrequentAdvice};
     } catch (error) {
       console.log(error);
     }
