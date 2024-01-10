@@ -1,29 +1,18 @@
 <script>
-    import AuthInput from "../../../lib/components/authInput.svelte";
-    import BottomMenu from "../../../lib/components/BottomMenu.svelte";
-    import showElement from '$lib/showElement';
-    import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
-    import * as Icon from 'svelte-twitter-emoji';
-    $showElement = false;
+  import AuthInput from "../../../lib/components/authInput.svelte";
+  import BottomMenu from "../../../lib/components/BottomMenu.svelte";
+  import showElement from '$lib/showElement';
+  import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
+  import IconsMenu from "../../../lib/components/IconsMenu.svelte";
+  $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
+  let storedIconId = 0;
+  let iconId;
 
-  $: iconId = null;
-  let storedIconId;
-
-  function selectIcon(id){
-    let icon = document.getElementById(id);
-    if (iconId == null) {
-      icon.classList.add("bg-[#fdefc7]");
-      iconId = id;
-      storedIconId = id;
-    } else {
-      let previousIcon = document.getElementById(storedIconId);
-      previousIcon.classList.remove("bg-[#fdefc7]");
-      icon.classList.add("bg-[#fdefc7]");
-      storedIconId = id;
-      iconId = id;
-    }
+  function handleIconClick(event) {
+    const id = event.detail.iconId.name;
+    iconId = id;
   }
 </script>
 <WhiteBanner
@@ -74,35 +63,8 @@
               error={form?.errors?.some((error) => error.input == "name")}
             />
             <label>Choose an icon:</label>
-            <div class="border-black-300 border-2 p-1">
-            <div class="flex">
-              <Icon.A1F315 class="p-2" size="45" id="A1F315" on:click={() => selectIcon('A1F315')}/>
-              <Icon.A1F316 class="p-2" size="43" id="A1F316" on:click={() => selectIcon('A1F316')}/>
-              <Icon.A1F318 class="p-2" size="45" id="A1F318" on:click={() => selectIcon('A1F318')}/>
-              <Icon.A1F313 class="p-2" size="45" id="A1F313" on:click={() => selectIcon('A1F313')}/>  
-              <Icon.A1F311 class="p-2" size="45" id="A1F311" on:click={() => selectIcon('A1F311')}/>
-              <Icon.A1F320 class="p-2" size="45" id="A1F320" on:click={() => selectIcon('A1F320')}/>
-            </div>
-            <div class="flex">
-              <Icon.A2600 class="p-2" size="45" id="A2600" on:click={() => selectIcon('A2600')}/>
-              <Icon.A2B50 class="p-2" size="45" id="A2B50" on:click={() => selectIcon('A2B50')}/>   
-              <Icon.A1F33b class="p-2" size="45" id="A1F33b" on:click={() => selectIcon('A1F33b')}/> 
-              <Icon.A1F338 class="p-2" size="45" id="A1F338" on:click={() => selectIcon('A1F338')}/>  
-              <Icon.A1F4aa1f3fc class="p-2" size="45" id="A1F4aa1f3fc" on:click={() => selectIcon('A1F4aa1f3fc')}/>
-              <Icon.A1F98b class="p-2" size="45" id="A1F98b" on:click={() => selectIcon('A1F98b')}/>
-           
-            </div>
-            <div class="flex"> 
-              <Icon.A1F3bc class="p-2" size="45" id="A1F3bc" on:click={() => selectIcon('A1F3bc')}/>   
-              <Icon.A1F4af class="p-2" size="45" id="A1F4af" on:click={() => selectIcon('A1F4af')}/>
-              <Icon.A1F4d5 class="p-2" size="45" id="A1F4d5" on:click={() => selectIcon('A1F4d5')}/>  
-              <Icon.A2764 class="p-2" size="45" id="A2764" on:click={() => selectIcon('A2764')}/>
-              <Icon.A2708 class="p-2" size="45" id="A2708" on:click={() => selectIcon('A2708')}/>
-              <Icon.A1F3ae class="p-2" size="45" id="A1F3ae" on:click={() => selectIcon('A1F3ae')}/>
-            </div>
-          </div>
-          <input type="hidden" name="icon_id" bind:value={iconId} />
-
+            <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} />
+            <input type="hidden" name="icon_id" value={iconId} />
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"
