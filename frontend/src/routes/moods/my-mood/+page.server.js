@@ -58,7 +58,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/recordsMoods', {
+      const data = await axios.post('http://localhost:3011/mood-records', {
         mood_id: moodId,
         reason_id: reasonId,
         user_id: payload.id
@@ -69,7 +69,7 @@ export const actions = {
         }
       });
 
-      const responseRecords = await axios.get('http://localhost:3011/recordsMoods', {
+      const responseRecords = await axios.get('http://localhost:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }

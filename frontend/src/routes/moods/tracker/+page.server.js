@@ -21,7 +21,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       }
     });
 
-    const recordsResponse = await axios.get('http://localhost:3011/recordsMoods', {
+    const recordsResponse = await axios.get('http://localhost:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -45,7 +45,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
       }
     });
 
-    const adviceRecordsResponse = await axios.get('http://localhost:3011/recordsAdvice', {
+    const adviceRecordsResponse = await axios.get('http://localhost:3011/advice-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }

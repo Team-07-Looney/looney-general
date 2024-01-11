@@ -22,7 +22,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
       }
     });
 
-    const recordsResponse = await axios.get('http://localhost:3011/recordsMoods', {
+    const recordsResponse = await axios.get('http://localhost:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -143,14 +143,14 @@ export const actions = {
 
       // check for errors in a form data
       const errors = await validateCreateData(adviceId);
-
+      console.log('sdad');
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
         return fail(400, { adviceId, errors });
       }
       console.log(adviceId);
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/recordsAdvice', {
+      const data = await axios.post('http://localhost:3011/advice-records', {
         advice_id: adviceId,
         user_id: payload.id
       }, {
@@ -160,7 +160,7 @@ export const actions = {
         }
       });
 
-      const responseRecords = await axios.get('http://localhost:3011/recordsAdvice', {
+      const responseRecords = await axios.get('http://localhost:3011/advice-records', {
         headers: {
           'Authorization': `Bearer ${jwtoken}`
         }

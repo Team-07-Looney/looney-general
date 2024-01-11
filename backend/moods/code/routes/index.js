@@ -109,15 +109,15 @@ router.put('/reasons/:id', cors(), editReasonById);
 router.delete('/reasons/:id', cors(), deleteReasonById);
 
 // get a collection of all the mood records
-router.get('/recordsMoods', cors(), getRecord);
+router.get('/mood-records', cors(), getRecord);
 // route for creating a mood record
-router.post('/recordsMoods', cors(), createRecord);
+router.post('/mood-records', cors(), createRecord);
 // route for getting a mood record
-router.get('/recordsMoods/:id', cors(), getRecordById);
+router.get('/mood-records/:id', cors(), getRecordById);
 // route for editing a mood record
-router.put('/recordsMoods/:id', cors(), editRecordById);
+router.put('/mood-records/:id', cors(), editRecordById);
 // route for deleteing a mood record
-router.delete('/recordsMoods/:id', cors(), deleteRecordById);
+router.delete('/mood-records/:id', cors(), deleteRecordById);
 
 // get a collection of all the pieces of advice
 router.get('/advice', cors(), getAdvice);
@@ -126,7 +126,7 @@ router.get('/advice', cors(), getAdvice);
 router.get('/advice-groups', cors(), getAdviceGroups);
 
 // get a collection of all the advice records
-router.get('/recordsAdvice', cors(), getAdviceRecords);
+router.get('/advice-records', cors(), getAdviceRecords);
 // route for creating a advice record
-router.post('/recordsAdvice', cors(), createAdviceRecord);
+router.post('/advice-records', cors(), createAdviceRecord);
 export default router;
