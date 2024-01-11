@@ -12,20 +12,17 @@
     $showElement = false;
     let storedIconId = data.iconId;
     let iconId = data.iconId;
-    let ref;
-    onMount(async () => {
-    await tick(); // Wait for the DOM to fully render
-    ref.handleIconSelection(storedIconId);
-    console.log(storedIconId);
-});
+    let referenceIcon;
 
-  
-    
+    onMount(async () => {
+        await tick(); // Wait for the DOM to fully render
+        referenceIcon.showPreviousSelection(storedIconId);
+    });
+
 
   function handleIconClick(event) {
     const id = event.detail.iconId.name;
     iconId = id;
-    console.log(iconId);
   }
    
 </script>
@@ -81,7 +78,7 @@
                             )}
                         />
                         <label>Choose an icon:</label>
-                        <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} bind:this={ref}/>
+                        <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} bind:this={referenceIcon}/>
                         <input type="hidden" name="icon_id" value={iconId} />
                         <div
                             class="flex flex-row gap-12 justify-center items-center"
