@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllAdviceRecordsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM Advice_Records";
+    const sql = "SELECT * FROM advice_records";
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -31,7 +31,7 @@ export async function getAllAdviceRecordsData() {
 export async function createAdviceRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Advice_Records (advice_id, user_id) VALUES (?, ?)';
+    const insert = 'INSERT INTO advice_records (advice_id, user_id) VALUES (?, ?)';
 
     db.run(insert, [request.advice_id, request.user_id], (err) => {
       closeDatabaseConnection(db);

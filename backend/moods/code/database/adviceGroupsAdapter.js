@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllAdviceGroupsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM Advice_Groups";
+    const sql = "SELECT * FROM advice_groups";
     const params = [];
 
     db.all(sql, params, (err, rows) => {

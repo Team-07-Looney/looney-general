@@ -4,7 +4,7 @@ import {
     getRecordInstanceById,
     editRecordInstanceById,
     deleteRecordInstanceById
-  } from '../database/recordsAdapter.js';
+  } from '../database/moodRecordsAdapter.js';
   
   /**
    * function that calculates today's date

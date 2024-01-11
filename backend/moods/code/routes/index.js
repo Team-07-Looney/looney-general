@@ -27,7 +27,7 @@ import {
   getRecordById,
   editRecordById,
   deleteRecordById
-} from '../controllers/recordsController.js'
+} from '../controllers/moodRecordsController.js'
 import {
   getThought,
   createThought,

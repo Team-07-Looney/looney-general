@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllRecordData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM Records";
+    const sql = "SELECT * FROM mood_records";
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -31,7 +31,7 @@ export async function getAllRecordData() {
 export async function createRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Records (mood_id, reason_id, user_id) VALUES (?, ?, ?)';
+    const insert = 'INSERT INTO mood_records (mood_id, reason_id, user_id) VALUES (?, ?, ?)';
 
     db.run(insert, [request.mood_id, request.reason_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
@@ -54,7 +54,7 @@ export async function createRecordInstance(request) {
 export async function getRecordInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = `SELECT * FROM Records WHERE id='${id}'`;
+    const sql = `SELECT * FROM mood_records WHERE id='${id}'`;
 
     db.all(sql, (err, row) => {
       closeDatabaseConnection(db);
@@ -78,7 +78,7 @@ export async function getRecordInstanceById(id) {
 export async function editRecordInstanceById(record, recordId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Records SET mood_id='${record.mood_id}', reason_id='${record.reason_id}' WHERE id=${recordId}`;
+    const update = `UPDATE mood_records SET mood_id='${record.mood_id}', reason_id='${record.reason_id}' WHERE id=${recordId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);
@@ -101,7 +101,7 @@ export async function editRecordInstanceById(record, recordId) {
 export async function deleteRecordInstanceById(recordId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const query = `DELETE FROM Records WHERE id='${recordId}'`;
+    const query = `DELETE FROM mood_records WHERE id='${recordId}'`;
     
     db.run(query, (err) => {
       closeDatabaseConnection(db);
