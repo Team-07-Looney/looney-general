@@ -49,34 +49,3 @@ export async function createPredefinedCategories(req, res, next) {
         next(err);
     }
 }
-
-
-//   export async function createPredefinedCategories(req, res, next) {
-//     try {
-//         tempResponse.data = await getAllPredefinedCategoriesData();
-//       await data.forEach(element => {
-//         createPredefinedCategoryInstance(.body);
-//       });
-//       tempResponse.data.message = "Predefined category created successfully";
-//       res.status(200).send(tempResponse);
-//     } catch (err) {
-//       next(err);
-//     }
-//   }
-
-// import { createPredefinedCategoryInstances, getAllPredefinedCategoriesData } from '../database/predefinedCategoriesAdapter.js';
-
-// export async function createPredefinedCategories(req, res, next) {
-//     try {
-//         // Retrieve predefined categories data
-//         const predefinedCategoriesData = await getAllPredefinedCategoriesData();
-
-//         // Create predefined category instances
-//         await createPredefinedCategoryInstances(predefinedCategoriesData);
-
-//         tempResponse.data.message = "Predefined category instances created successfully";
-//         res.status(200).send(tempResponse);
-//     } catch (err) {
-//         next(err);
-//     }
-// }
