@@ -7,12 +7,20 @@
     export let data;
     import showElement from '$lib/showElement';
     import IconsMenu from "../../../../lib/components/IconsMenu.svelte";
+    import { onMount, tick } from "svelte";
 
     $showElement = false;
-    let storedIconId = 0;
-    let iconId;
+    let storedIconId = data.iconId;
+    let iconId = data.iconId;
+    let ref;
+    onMount(async () => {
+    await tick(); // Wait for the DOM to fully render
+    ref.handleIconSelection(storedIconId);
+    console.log(storedIconId);
+});
+
+  
     
-    console.log(iconId)
 
   function handleIconClick(event) {
     const id = event.detail.iconId.name;
@@ -73,7 +81,7 @@
                             )}
                         />
                         <label>Choose an icon:</label>
-                        <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} />
+                        <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} bind:this={ref}/>
                         <input type="hidden" name="icon_id" value={iconId} />
                         <div
                             class="flex flex-row gap-12 justify-center items-center"

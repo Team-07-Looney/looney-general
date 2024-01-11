@@ -6,23 +6,37 @@
     const iconComponents = { A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50, A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae };
     const dispatch = createEventDispatcher();
     
-    function handleIconSelection(id) {
+    
+    export function handleIconSelection(id) {
+        
         dispatch("iconSelected", {
             iconId: id,
         });
-
+        console.log('function is running');
         let icon = document.getElementById(id);
-        if (iconId == null) {
+        let iconss = iconComponents[iconId];
+        console.log(id);
+        console.log(iconId);
+        console.log(storedIconId);
+        if (iconId){
+            let icons = document.getElementById(iconss);
+            icons.classList.add("bg-accent");
+            console.log(iconss);
+        }
+        if (iconId == null || iconId === storedIconId) {
             icon.classList.add("bg-accent");
             iconId = id;
             storedIconId = id;
+            console.log('1 run');
         } else {
             let previousIcon = document.getElementById(storedIconId);
             previousIcon.classList.remove("bg-accent");
             icon.classList.add("bg-accent");
             storedIconId = id;
             iconId = id;
+            console.log('2 run');
         }
+        console.log('Nothing run');
     }
 </script>
 
