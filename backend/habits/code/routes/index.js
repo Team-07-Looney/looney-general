@@ -15,6 +15,8 @@ import {
   getCategoryById
 } from '../controllers/categoriesController.js';
 import { createRecord, getRecordById, getRecords } from '../controllers/recordsController.js';
+import { createPredefinedCategories } from '../controllers/predefinedCategoriesController.js';
+
 const router = express.Router();
 
 // routes
@@ -77,5 +79,8 @@ router.post('/records', cors(), createRecord);
 
 // route for getting a record
 router.get('/records/:id', cors(), getRecordById);
+
+// route for creating predefined categories
+router.post('/predefined-categories', cors(), createPredefinedCategories);
 
 export default router;

@@ -5,7 +5,6 @@
     import OverviewItem from "../../lib/components/mainPageComponents/OverviewItem.svelte";
 	import showElement from '$lib/showElement';
 	export let data;
-	console.log(data);
 	
 	$showElement = false;
 </script>

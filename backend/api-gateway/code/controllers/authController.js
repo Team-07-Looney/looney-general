@@ -48,6 +48,14 @@ export async function register(req, res) {
     let token = createToken(getUserResponse.data.data.id);
     tempResponse.data.token = token;
 
+    await axios.post("http://mshabits:3010/predefined-categories", {
+      user_id: getUserResponse.data.data.id
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
+
     res.status(200).send(tempResponse);
 
   } catch (err) {

@@ -27,12 +27,12 @@
         </button>
         <div id={`dropdown${categoryId}`} class="hidden absolute bg-gray-200 flex-auto rounded-lg shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px]">
             <!-- DROPDOWN MENU -->
-            <div>
-                <a class="p-1.5 rounded-lg mt-3" href={`categories/${categoryId}/edit`}>Edit</a>
+            <div class="w-full">
+                <a class="p-2 rounded-lg mt-3 w-full h-full" href={`categories/${categoryId}/edit`}>Edit</a>
             </div>
             <div>
                 <form class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}?/deleteCategory`}>
-                    <button type="submit">Delete</button>
+                    <button type="submit" class="w-full h-full">Delete</button>
                 </form>
             </div>
         </div>

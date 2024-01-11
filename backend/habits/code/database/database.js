@@ -103,16 +103,17 @@ async function createPredefinedCategoriesTable(db) {
         } else {
           console.log('Table predefined categories created.');
 
-          const insertQuery = 'INSERT INTO predefined_categories (name, icon_id) VALUES (?, ?)';
+          const insertQuery = 'INSERT INTO predefined_categories (id, name, icon_id) VALUES (?,?,?)';
 
           const predefinedCategories = [
-            { name: 'Morning Routine', icon_id: 'A1F315' },
-            { name: 'Afternoon Routine', icon_id: 'A1F318' },
-            { name: 'Anytime', icon_id: 'A2B50' }
+            { id: 1, name: 'Morning Routine', icon_id: 'A1F315' },
+            { id: 2,name: 'Afternoon Routine', icon_id: 'A1F313' },
+            { id: 3,name: 'Evening Routine', icon_id: 'A1F311' },
+            { id: 4,name: 'Anytime', icon_id: 'A1F4aa1f3fc' }
           ];
 
-          predefinedCategories.forEach(({ name, icon_id }) => {
-            db.run(insertQuery, [name, icon_id], (err) => {
+          predefinedCategories.forEach(({ id, name, icon_id }) => {
+            db.run(insertQuery, [id, name, icon_id], (err) => {
               if (err) {
                 console.error(`Error inserting data for category ${name}: `, err.message);
                 reject(err.message);
@@ -179,18 +180,17 @@ async function createCategoriesTable(db) {
         name TEXT NOT NULL,
         user_id INTEGER,
         icon_id TEXT)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table habits created.');
-          resolve();
-        }
-      });
-  })
-}
-
+        (err) => {
+          if (err) {
+            console.error('Error creating table: ', err.message);
+            reject(err.message);
+          } else {
+            console.log('Table habits created.');
+            resolve();
+          }
+        });
+    })
+  }
 
 /**
  * The user_id is missing to be implemented
