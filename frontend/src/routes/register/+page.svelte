@@ -6,7 +6,7 @@
   /** @type {import('./$types').ActionData} */
   export let form;
   import showElement from '$lib/showElement'
-  	  $showElement = false;
+  $showElement = false;
 </script>
 
 <WhiteBanner title="Looney" description="Please register" displayMenuButton=0/>
@@ -93,8 +93,8 @@
             >Already have an account? Log in over here.</a
           >
         </form>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>

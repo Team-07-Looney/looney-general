@@ -88,6 +88,7 @@
   </script>
   
   <style>
+  ::placeholder {color: rgb(156 163 175);}
   .touch-date-popup{
     z-index: 1;
     position: fixed;
