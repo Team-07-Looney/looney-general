@@ -4,10 +4,10 @@
 	import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
 	import showElement from "$lib/showElement";
 	import BuyLooney from "../../lib/components/BuyLooney.svelte";
+  import { onMount } from "svelte";
+  
 	export let data;
 	$showElement = true;
-
-	import { onMount } from "svelte";
 	let tagIsOpen;
 	let tagButton = 1;
 	
