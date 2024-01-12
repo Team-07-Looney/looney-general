@@ -17,6 +17,16 @@ export const load = async ({ params, cookies }) => {
       }
     });
 
+    const predefinedHabitsResponse = await axios.get('http://localhost:3011/predefined-habits', {
+      headers: {
+        'Authorization': `Bearer ${jwt}`
+      }
+    });
+
+    const predefinedHabitsObject = predefinedHabitsResponse.data.data;
+
+    const predefinedHabits = predefinedHabitsObject.map(item => item.name);
+
     const category = params.categoryId;
     const habitData = response.data.data[0];
 
@@ -30,7 +40,7 @@ export const load = async ({ params, cookies }) => {
       duration: ((duration_seconds >= 0 && duration_seconds <= 9) ? `${duration_minutes}:0${duration_seconds}` : `${duration_minutes}:${duration_seconds}`)
     };
 
-    return { habit, category };
+    return { habit, category, predefinedHabits };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, '/login');

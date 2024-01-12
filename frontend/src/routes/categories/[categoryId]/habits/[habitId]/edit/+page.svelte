@@ -15,6 +15,25 @@
     // date for time picker
     let date = new Date();
     $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+
+    let filteredHabitNames = [];
+
+    // Function to handle input change and filter predefined habit names
+    const handleNameInputChange = (event) => {
+      const inputValue = event.target.value.trim().toLowerCase(); // trim to handle spaces
+      filteredHabitNames = inputValue
+        ? data.predefinedHabits.filter(
+            (name) => name.toLowerCase().includes(inputValue)
+          )
+        : [];
+    };
+
+    // Function to handle option click and set input value
+    const handleOptionClick = (option) => {
+      const input = document.getElementById('name');
+      input.value = option;
+      filteredHabitNames = [];
+    };
 </script>
 
 <WhiteBanner
@@ -65,7 +84,22 @@ imgExtraPath="../../../"
                             error={form?.errors?.some(
                                 (error) => error.input == "name",
                             )}
+                            on:input={(event) => {
+                                console.log('AuthInput on:input event');
+                                handleNameInputChange(event);
+                            }}
                         />
+                        {#if filteredHabitNames.length > 0}
+                            <div class="absolute mt-[61px] w-[230px] h-20">
+                                <ul class="bg-gray-100 border rounded-lg shadow-lg border-1 border-black">
+                                {#each filteredHabitNames as option, index (option)}
+                                    <li class="{index === filteredHabitNames.length - 1 ? 'cursor-pointer pl-4 py-1 pr-1' : 'cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black'} hover:bg-gray-100 w-full" on:click={() => handleOptionClick(option)}>
+                                    {option}
+                                    </li>
+                                {/each}
+                                </ul>
+                            </div>
+                        {/if}
 
                         <TimePicker 
                         bind:_date 

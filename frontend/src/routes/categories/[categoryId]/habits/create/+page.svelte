@@ -6,11 +6,9 @@
     import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
     import showElement from '$lib/showElement';
-
     $showElement = false;
     /** @type {import('./$types').ActionData} */
     export let form;
-
     export let data;
   
     // date for time picker
@@ -35,7 +33,6 @@
       input.value = option;
       filteredHabitNames = [];
     };
-
 </script>
 
 <WhiteBanner
