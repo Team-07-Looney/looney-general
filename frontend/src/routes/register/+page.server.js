@@ -113,8 +113,8 @@ async function validateRegistrationData(formData) {
     validationIssues.push({ "input": "password", "message": "The passwords are missing" });
   } else if (password != confirmPassword) {
     validationIssues.push({ "input": "password", "message": "The password are not matching" });
-  } else if (password.length < 12) {
-    validationIssues.push({ "input": "password", "message": "The password needs to be at least 12 characters long" });
+  } else if (password.length < 8) {
+    validationIssues.push({ "input": "password", "message": "The password needs to be at least 8 characters long" });
     validationIssues.push({ "input": "confirm-password", "message": "" });
   }
 
