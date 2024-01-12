@@ -27,13 +27,10 @@
                 let selectedIcon = iconComponents[storedIconId];
                 let previousIcon = document.getElementById(selectedIcon);
                 previousIcon.classList.remove("bg-accent", "border-zinc-950");
-                icon.classList.add("bg-accent", "border-zinc-950");
-                iconId = id;
-                storedIconId = id;
-            }
+            } 
             icon.classList.add("bg-accent", "border-zinc-950");
             iconId = id;
-            storedIconId = id;
+            storedIconId = id;            
         } else {
             let previousIcon = document.getElementById(storedIconId);
             previousIcon.classList.remove("bg-accent", "border-zinc-950");
