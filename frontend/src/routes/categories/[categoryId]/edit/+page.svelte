@@ -6,9 +6,9 @@
     import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
     import showElement from '$lib/showElement';
-
-$showElement = false;
-   
+    import FormEars from "../../../../lib/components/FormEars.svelte";
+    import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
+    $showElement = false;
 </script>
 
 <WhiteBanner
@@ -18,11 +18,11 @@ $showElement = false;
     displayBackButton="1"
     imgExtraPath="../"
 />
-<div class="mt-20 flex justify-center items-center">
+<div class="mt-28 flex justify-center items-center">
     <div class="flex flex-col items-center">
-
+        <FormEars/>
         <div class="grid grid-cols-1">
-            
+            <ShadowsForForms height={159} width={259}/>
             <div class="px-8 pt-8 z-[3]">
                 <div class="bg-white rounded-xl px-4 py-5">
                     <form
@@ -55,8 +55,7 @@ $showElement = false;
                             label={"Name"}
                             type={"text"}
                             placeholder={""}
-                            path={"M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"}
-                            value={data.name}
+                            path={"m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"}                            value={data.name}
                             error={form?.errors?.some(
                                 (error) => error.input == "name",
                             )}

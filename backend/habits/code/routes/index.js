@@ -15,6 +15,8 @@ import {
   getCategoryById
 } from '../controllers/categoriesController.js';
 import { createHabitRecord, getHabitRecordById, getHabitRecords } from '../controllers/habitRecordsController.js';
+import { createPredefinedCategories } from '../controllers/predefinedCategoriesController.js';
+
 const router = express.Router();
 
 // routes
@@ -77,5 +79,8 @@ router.post('/habit-records', cors(), createHabitRecord);
 
 // route for getting a record
 router.get('/habit-records/:id', cors(), getHabitRecordById);
+
+// route for creating predefined categories
+router.post('/predefined-categories', cors(), createPredefinedCategories);
 
 export default router;

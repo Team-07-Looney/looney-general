@@ -1,20 +1,18 @@
 <script>
-    import OctopusButton from "../../lib/components/OctopusButton.svelte";
-    import showElement from '$lib/showElement';
+    import showElement from "$lib/showElement";
     import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../lib/components/BottomMenu.svelte";
+    import MyMoodsButtons from "../../lib/components/MyMoodsButtons.svelte";
     $showElement = false;
-    
 </script>
-<WhiteBanner
-title="My Moods"
-description="Gain more insight in how you are feeling, Looney will always be there
-"
-route="/home"
-displayBackButton="1"
-imgExtraPath="../"
-/>
 
+<WhiteBanner
+    title="My Moods"
+    description="Gain more insight in how you are feeling, Looney will always be there"
+    route="/home"
+    displayBackButton="1"
+    imgExtraPath="../"
+/>
 <div class="flex flex-col justify-center items-center mt-6">
     <div class="flex flex-row gap-4">
         <OctopusButton
