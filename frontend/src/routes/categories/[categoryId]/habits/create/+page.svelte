@@ -31,13 +31,9 @@
 
     // Function to handle option click and set input value
     const handleOptionClick = (option) => {
-      console.log('form:', form);
-      console.log('option:', option);
-
-      if (form) {
-        form.name = option;
-        filteredHabitNames = [];
-      }
+      const input = document.getElementById('name');
+      input.value = option;
+      filteredHabitNames = [];
     };
 
 </script>
