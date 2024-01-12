@@ -14,7 +14,7 @@ import {
   getCategories,
   getCategoryById
 } from '../controllers/categoriesController.js';
-import { createRecord, getRecordById, getRecords } from '../controllers/recordsController.js';
+import { createHabitRecord, getHabitRecordById, getHabitRecords } from '../controllers/habitRecordsController.js';
 const router = express.Router();
 
 // routes
@@ -70,12 +70,12 @@ router.put('/categories/:categoryId/habits/:habitId', cors(), editHabitById);
 router.delete('/categories/:categoryId/habits/:habitId', cors(), deleteHabitById);
 
 // get a collection of all the records
-router.get('/records', cors(), getRecords);
+router.get('/habit-records', cors(), getHabitRecords);
 
 // route for creating a record
-router.post('/records', cors(), createRecord);
+router.post('/habit-records', cors(), createHabitRecord);
 
 // route for getting a record
-router.get('/records/:id', cors(), getRecordById);
+router.get('/habit-records/:id', cors(), getHabitRecordById);
 
 export default router;

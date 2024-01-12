@@ -58,11 +58,11 @@ export async function openDatabaseConnection() {
         resolve(db);
       });
 
-      // Records Table
-      db.get("SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type='table' AND name='records'", async (err, row) => {
+      // Habit Records Table
+      db.get("SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type='table' AND name='habit_records'", async (err, row) => {
         console.log(row);
-        if (row.tableRecordsExists == 0) {
-          await createRecordsTable(db);
+        if (row.tableHabitRecordsExists == 0) {
+          await createHabitRecordsTable(db);
         }
 
         resolve(db);
@@ -228,13 +228,13 @@ async function createHabitsTable(db) {
 }
 
 /**
- * Created records table
+ * Created habit records table
  * @param {*} db 
  * @returns 
  */
-async function createRecordsTable(db) {
+async function createHabitRecordsTable(db) {
   return new Promise((resolve, reject) => {
-    db.run(`CREATE TABLE records (
+    db.run(`CREATE TABLE habit_records (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       habit_id INTEGER NOT NULL,
       date TEXT,
@@ -244,7 +244,7 @@ async function createRecordsTable(db) {
           console.error('Error creating table: ', err.message);
           reject(err.message);
         } else {
-          console.log('Table records created.');
+          console.log('Table habit records created.');
           resolve();
         }
       });

@@ -1,8 +1,8 @@
 import { 
-    createRecordInstance,
-    getAllRecordsData,
-    getRecordInstanceById,
-} from '../database/recordsAdapter.js';
+    createHabitRecordInstance,
+    getAllHabitRecordsData,
+    getHabitRecordInstanceById,
+} from '../database/habitRecordsAdapter.js';
   
   /**
    * function that calculates today's date
@@ -34,9 +34,9 @@ import {
    * @param {*} res response sent with all the records
    * @param {*} next 
    */
-  export async function getRecords(req, res, next) {
+  export async function getHabitRecords(req, res, next) {
     try {
-      tempResponse.data = await getAllRecordsData();
+      tempResponse.data = await getAllHabitRecordsData();
       res.status(200).send(tempResponse);
     } catch (err) {
       next(err);
@@ -49,9 +49,9 @@ import {
    * @param {*} res response sent with the result message
    * @param {*} next 
    */
-  export async function createRecord(req, res, next) {
+  export async function createHabitRecord(req, res, next) {
     try {
-      const message = await createRecordInstance(req.body, tempResponse.meta.date);
+      const message = await createHabitRecordInstance(req.body, tempResponse.meta.date);
       tempResponse.data.message = message?message:"Record created successfully";
       res.status(200).send(tempResponse);
     } catch (err) {
@@ -65,9 +65,9 @@ import {
    * @param {*} res response sent with record data
    * @param {*} next 
    */
-  export async function getRecordById(req, res, next) {
+  export async function getHabitRecordById(req, res, next) {
     try {
-      tempResponse.data = await getRecordInstanceById(req.params.id);
+      tempResponse.data = await getHabitRecordInstanceById(req.params.id);
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
