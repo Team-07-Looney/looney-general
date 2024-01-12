@@ -12,32 +12,35 @@
     export let form;
 
     export let data;
-    let nameInput;
   
     // date for time picker
     let date = new Date();
     $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
 
-    // Filtered predefined habit names based on user input
     let filteredHabitNames = [];
 
-// Function to handle input change and filter predefined habit names
-const handleNameInputChange = (event) => {
-  console.log('function is running')
-  const inputValue = event.target.value.toLowerCase();
-  console.log('Input Value:', inputValue);
-  filteredHabitNames = data.predefinedHabits.filter(
-    (name) => name.toLowerCase().includes(inputValue)
-  );
-  console.log(filteredHabitNames);
-};
+    // Function to handle input change and filter predefined habit names
+    const handleNameInputChange = (event) => {
+      const inputValue = event.target.value.trim().toLowerCase(); // trim to handle spaces
+      filteredHabitNames = inputValue
+        ? data.predefinedHabits.filter(
+            (name) => name.toLowerCase().includes(inputValue)
+          )
+        : [];
+    };
 
-// Function to handle option click and set input value
-const handleOptionClick = (option) => {
-  form.name = option;
-  filteredHabitNames = [];
-};
-  </script>
+    // Function to handle option click and set input value
+    const handleOptionClick = (option) => {
+      console.log('form:', form);
+      console.log('option:', option);
+
+      if (form) {
+        form.name = option;
+        filteredHabitNames = [];
+      }
+    };
+
+</script>
 
 <WhiteBanner
 title="Create Habit"
@@ -92,20 +95,16 @@ imgExtraPath="../../"
             />
          
             {#if filteredHabitNames.length > 0}
-  <div class="absolute mt-[61px] w-[230px] h-20">
-    <ul class="bg-gray-200 border rounded-lg shadow-lg border-1 border-black">
-      {#each filteredHabitNames as option (option)}
-        <li
-          class="cursor-pointer pl-4 py-1 pr-1 hover:bg-gray-100 w-full"
-          on:click={() => handleOptionClick(option)}
-        >
-          {option}
-        </li>
-      {/each}
-    </ul>
-  </div>
-{/if}
-
+              <div class="absolute mt-[61px] w-[230px] h-20">
+                <ul class="bg-gray-100 border rounded-lg shadow-lg border-1 border-black">
+                  {#each filteredHabitNames as option, index (option)}
+                    <li class="{index === filteredHabitNames.length - 1 ? 'cursor-pointer pl-4 py-1 pr-1' : 'cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black'} hover:bg-gray-100 w-full" on:click={() => handleOptionClick(option)}>
+                      {option}
+                    </li>
+                  {/each}
+                </ul>
+              </div>
+            {/if}
 
             <TimePicker 
             bind:_date 
