@@ -1,5 +1,4 @@
 <script>
-    import { setContext } from "svelte";
     import { onMount } from "svelte";
     import CategoryItem from "../../lib/components/CategoryItem.svelte";
     import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
