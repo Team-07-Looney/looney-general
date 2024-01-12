@@ -1,27 +1,10 @@
 <script>
-    import { setContext } from "svelte";
+    import { openPopup } from "../popup";
     import DeleteConfirmationPopup from "../../lib/components/DeleteConfirmationPopup.svelte";
 
     export let title;
     export let categoryId;
     let icon = categoryId % 3;
-
-    setContext('closePopup', { closePopup });
-    setContext('submitDelete', { submitDelete });
-
-    function openPopup() {
-        const confirmation = document.getElementById('confirmation');
-        confirmation.classList.remove('hidden');
-    }
-
-    function closePopup() {
-        confirmation.classList.add('hidden');
-    }
-
-    function submitDelete() {
-        const form = document.getElementById('deleteForm');
-        form.submit();
-    }
 </script>
 <DeleteConfirmationPopup name='category' explanation='if you delete a category, its habits will be deleted as well' />
 <div class="bg-white rounded-xl py-2 px-3 flex flex-row w-full justify-between items-center min-h-[68px]" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">

@@ -1,10 +1,14 @@
 <script>
+    import { openPopup } from "../popup";
+    import DeleteConfirmationPopup from "./DeleteConfirmationPopup.svelte";
+
     export let title;
     export let time;
     export let habitId;
     export let categoryId;
     export let done;
 </script>
+<DeleteConfirmationPopup name='habit' />
 <div class="bg-white rounded-xl py-2 px-3 flex flex-row w-full justify-between items-center" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`habits/${habitId}`} class="flex w-full">
         <div>
@@ -37,8 +41,8 @@
                 <a class="p-1.5 rounded-lg mt-3" href={`/categories/${categoryId}/habits/${habitId}/edit`}>Edit</a>
             </div>
             <div>
-                <form class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
-                    <button type="submit">Delete</button>
+                <form id="deleteForm" class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
+                    <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>
         </div>
