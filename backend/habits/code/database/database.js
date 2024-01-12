@@ -170,32 +170,17 @@ async function createCategoriesTable(db) {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         user_id INTEGER)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table categories created.');
-
-          // Delete this
-          const categories = ['Morning Routine', 'Afternoon Routine', 'Anytime'];
-          const insertQuery = 'INSERT INTO categories (name) VALUES (?)';
-
-          categories.forEach((name) => {
-            db.run(insertQuery, [name], (err) => {
-              if (err) {
-                console.error(`Error inserting data for category `, err.message);
-                reject(err.message);
-              } else {
-                console.log(`Data inserted for category: ${name}`);
-                resolve();
-              }
-            });
-          });
-        }
-      });
-  });
-}
+        (err) => {
+          if (err) {
+            console.error('Error creating table: ', err.message);
+            reject(err.message);
+          } else {
+            console.log('Table habits created.');
+            resolve();
+          }
+        });
+    })
+  }
 
 
 /**

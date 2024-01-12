@@ -20,7 +20,7 @@ export let description;
 export let route = "";
 export let displayBackButton = 0;
 export let displayMenuButton = 1;
-export let imgExtraPath;
+export let imgExtraPath = "";
 </script>
 
 
