@@ -214,7 +214,7 @@ async function createHabitsTable(db) {
       start_time TEXT, 
       duration INTEGER,
       category_id INTEGER NOT NULL,
-      FOREIGN KEY (category_id) REFERENCES categories(id))`,
+      FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE)`,
       (err) => {
         if (err) {
           console.error('Error creating table: ', err.message);

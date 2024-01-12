@@ -42,7 +42,7 @@ import {
       
       const thoughtAPIResponse = thoughts.map(thought => ({
         ...thought,
-        record_id: `/recordsMoods/${thought.record_id}`
+        record_id: `/mood-records/${thought.record_id}`
       }))
 
       tempResponse.data = thoughtAPIResponse;

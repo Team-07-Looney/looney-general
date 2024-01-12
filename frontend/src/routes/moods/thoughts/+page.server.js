@@ -25,11 +25,10 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const thoughtsDate = response.data.meta.date;
     const records = [];
     const moods = [];
-    const moodType = [];
+    const moodType = [];;
     const filteredThoughtsByUser = thoughts.filter(thought => thought.user_id === userId);
-
+    console.log(filteredThoughtsByUser);
     for (let i = 0; i < filteredThoughtsByUser.length; i++) {
-
       const recordResponse = await axios.get(`http://localhost:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
           'Authorization': `Bearer ${jwtoken}`

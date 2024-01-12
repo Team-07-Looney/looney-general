@@ -37,8 +37,8 @@
   on:click={() => handleAdviceSelection(adviceId)}
 >
   <p class="font-semibold">{name}</p>
-  <div class="flex justify-center max-h-32">
-    <img src="../../../../src/img/adviceIcons/{name}.png" alt="advice image" class="object-cover h-full">
+  <div class="flex justify-center max-h-24">
+    <img src="../../../../src/img/adviceIcons/{name}.png" alt="advice image" class="object-cover h-full mt-4">
   </div>
   <span class="align-text-bottom" style="margin-top: auto;">{group}</span>
 </div>

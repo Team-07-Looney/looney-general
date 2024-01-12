@@ -143,12 +143,10 @@ export const actions = {
 
       // check for errors in a form data
       const errors = await validateCreateData(adviceId);
-      console.log('sdad');
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
         return fail(400, { adviceId, errors });
       }
-      console.log(adviceId);
       // Set the body of the request, adds a header and sends post request to create record
       const data = await axios.post('http://localhost:3011/advice-records', {
         advice_id: adviceId,
@@ -169,7 +167,6 @@ export const actions = {
       const records = responseRecords.data.data;
       const lastrecordId = records.length;
       recordId = lastrecordId;
-      console.log(responseRecords);
 
     } catch (error) {
       if (error.response.status == 401) {

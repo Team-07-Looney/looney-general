@@ -22,7 +22,7 @@ export const load = async ({ params, cookies }) => {
     const thoughtsDate = response.data.meta.date;
 
     
-    const responseRecords = await axios.get(`http://localhost:3011/recordsMoods/${thoughts[0].record_id}`, {
+    const responseRecords = await axios.get(`http://localhost:3011/mood-records/${thoughts[0].record_id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }

@@ -27,21 +27,26 @@ imgExtraPath="../"
     </div>
 </div>
 <div class="flex p-2 justify-center items-center text-center">
-    <div class="bg-white shadow-lg p-2 rounded-lg w-40 mr-2 h-32">
+    <div class="bg-white shadow-lg p-1 rounded-lg w-40 mr-2">
         <p class="text-m">You have written</p>
         <p class="text-6xl font-chewy text-[#666e9f]">{data.totalThoughts}</p>
         <p class="text-m">thoughts</p>
     </div>
-    <div class="bg-white shadow-lg p-2 rounded-lg w-40 h-32">
+    <div class="bg-white shadow-lg p-1 rounded-lg w-40">
         <p class="text-m">You have picked</p>
         <p class="text-4xl font-chewy text-[#666e9f]">{data.mostRecordedReasonName}</p>
         <p class="text-m">As main cause<br>of your emotions</p>
     </div>
 </div>
-<div class="flex bg-white rounded-lg h-52 p-3 z-20 mt-2items-center shadow-lg mr-6 ml-6">
+<div class="bg-white rounded-lg h-40 p-2 z-20 mt-2items-center shadow-lg mr-6 ml-6">
+    <p class="text-center">
+        Your most picked advice:
+    </p>
+    <div class="flex">
     {#each data.mostFrequentAdvice as advice}
         <AdviceTrackerItem name={advice.name} group={advice.group_name} omitBg=1/>
     {/each}
+</div>
 </div>
 {/if}
 <BottomMenu imgPath="../../../" displayMoodText="1" />
