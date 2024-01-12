@@ -66,11 +66,11 @@
   {#if data.filteredCategoriesByUser.length == 0} 
     <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
       <h1 class="font-bold">Create a Routine!</h1> 
-      <p >Here you can organize your habits<br>based on different routines.</p>
+      <p >Here you can organize your habits<br>based on different routines.<br>You can add up to 5 categories.</p>
     </div>
   {:else}
-    <div class="flex justify-center items-center pt-4 position:relative z-index-0 mb-3">
-      <div class="flex flex-col overflow-y-scroll overflow-x-hidden ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
+    <div class="flex justify-center items-center pt-9 position:relative z-index-0">
+      <div class="flex flex-col ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
         {#each data.filteredCategoriesByUser as category}
           <CategoryItem title={category.name} categoryId={category.id} iconId={category.icon_id} on:click={handleOpening(category.id)} />
         {/each}
@@ -78,7 +78,9 @@
     </div>
   {/if}
  
-<div class="flex justify-center items-center relative" style="z-index: 1;">
-<a class="p-2" href="/categories/create"><img src="../src/img/addButton.png" style="height: 50px;" class="h-10" alt="Add a habit"></a>
-</div>
+  {#if data.filteredCategoriesByUser.length < 5}
+  <div class="flex justify-center items-center absolute bottom-[5.2rem] w-full">
+    <a class="p-2" href="/categories/create"><img src="../src/img/addFolder.png" class="h-16" alt="Add a folder"></a>
+  </div>
+{/if}
 <BottomMenu imgPath="../" displayHabitText="1" />
