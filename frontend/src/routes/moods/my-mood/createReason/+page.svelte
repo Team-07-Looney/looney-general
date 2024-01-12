@@ -1,5 +1,5 @@
 <script>
-    import AuthInput from "../../../../lib/components/authInput.svelte";
+    import AuthInput from "../../../../lib/components/AuthInput.svelte";
     import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
     import showElement from "$lib/showElement";
     import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";

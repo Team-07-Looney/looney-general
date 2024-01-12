@@ -4,7 +4,7 @@
     import TimePicker from "../../../../../../lib/components/TimePicker.svelte";
     import FormEars from "../../../../../../lib/components/FormEars.svelte";
     import ShadowsForForms from "../../../../../../lib/components/ShadowsForForms.svelte";
-    import AuthInput from "../../../../../../lib/components/authInput.svelte";
+    import AuthInput from "../../../../../../lib/components/AuthInput.svelte";
     export let data;
     import showElement from '$lib/showElement';
     import WhiteBanner from "../../../../../../lib/components/WhiteBanner.svelte";

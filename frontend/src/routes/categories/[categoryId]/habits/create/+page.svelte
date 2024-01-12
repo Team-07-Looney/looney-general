@@ -1,21 +1,42 @@
   <script>
     import FormEars from "../../../../../lib/components/FormEars.svelte";
-    import AuthInput from "../../../../../lib/components/authInput.svelte";
+    import AuthInput from "../../../../../lib/components/AuthInput.svelte";
     import ShadowsForForms from "../../../../../lib/components/ShadowsForForms.svelte";
     import TimePicker from "../../../../../lib/components/TimePicker.svelte";
     import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
     import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
     import showElement from '$lib/showElement';
 
-$showElement = false;
+    $showElement = false;
     /** @type {import('./$types').ActionData} */
     export let form;
 
     export let data;
+    let nameInput;
   
     // date for time picker
     let date = new Date();
     $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+
+    // Filtered predefined habit names based on user input
+    let filteredHabitNames = [];
+
+// Function to handle input change and filter predefined habit names
+const handleNameInputChange = (event) => {
+  console.log('function is running')
+  const inputValue = event.target.value.toLowerCase();
+  console.log('Input Value:', inputValue);
+  filteredHabitNames = data.predefinedHabits.filter(
+    (name) => name.toLowerCase().includes(inputValue)
+  );
+  console.log(filteredHabitNames);
+};
+
+// Function to handle option click and set input value
+const handleOptionClick = (option) => {
+  form.name = option;
+  filteredHabitNames = [];
+};
   </script>
 
 <WhiteBanner
@@ -64,7 +85,27 @@ imgExtraPath="../../"
               autocomplete={"given-name"}
               path={"m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"}              value={form?.name ?? ""}
               error={form?.errors?.some((error) => error.input == "name")}
+              on:input={(event) => {
+                console.log('AuthInput on:input event');
+                handleNameInputChange(event);
+              }}
             />
+         
+            {#if filteredHabitNames.length > 0}
+  <div class="absolute mt-[61px] w-[230px] h-20">
+    <ul class="bg-gray-200 border rounded-lg shadow-lg border-1 border-black">
+      {#each filteredHabitNames as option (option)}
+        <li
+          class="cursor-pointer pl-4 py-1 pr-1 hover:bg-gray-100 w-full"
+          on:click={() => handleOptionClick(option)}
+        >
+          {option}
+        </li>
+      {/each}
+    </ul>
+  </div>
+{/if}
+
 
             <TimePicker 
             bind:_date 

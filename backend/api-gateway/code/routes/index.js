@@ -34,6 +34,7 @@ const moodProxy = createProxyMiddleware({
 
 router.use('/categories', cors(), requireAuth, habitProxy);
 router.use('/records', cors(), requireAuth, habitProxy);
+router.use('/predefined-habits', cors(), requireAuth, habitProxy);
 router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
 router.use('/mood-types', cors(), requireAuth, moodProxy);

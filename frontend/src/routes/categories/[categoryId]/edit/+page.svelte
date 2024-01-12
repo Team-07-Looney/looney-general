@@ -3,11 +3,11 @@
     import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
     /** @type {import('./$types').ActionData} */
     export let form;
-    import AuthInput from "../../../../lib/components/authInput.svelte";
     export let data;
     import showElement from '$lib/showElement';
     import FormEars from "../../../../lib/components/FormEars.svelte";
     import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
+    import AuthInput from "../../../../lib/components/AuthInput.svelte";
     $showElement = false;
 </script>
 
