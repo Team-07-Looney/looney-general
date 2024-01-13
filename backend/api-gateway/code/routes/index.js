@@ -48,7 +48,11 @@ router.post('/login', cors(), login);
 router.post('/profile/change-password', cors(), changePassword);
 
 // Route to make sure user is authenticated
-router.get('/verify', cors(), requireAuth, (req, res) => {
+// router.get('/verify', cors(), requireAuth, (req, res) => {
+//   res.status(200).send({"message": "User is authenticated"});
+// });
+
+router.get('/verify', requireAuth, cors(), (req, res) => {
   res.status(200).send({"message": "User is authenticated"});
 });
 
