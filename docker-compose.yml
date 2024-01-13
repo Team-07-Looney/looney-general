@@ -2,7 +2,8 @@ version: '3.8'
 services:
   habits:
     container_name: mshabits
-    image: valst3/looney-basic-ms:latest
+    image: looney/basic-ms
+    build: ./backend/common
     volumes:
       - ./backend/habits/code:/usr/src/app
     networks:
@@ -13,7 +14,8 @@ services:
     command: bash -c "npm install && npm run dev"
   gateway:
     container_name: apigateway
-    image: valst3/looney-basic-ms:latest
+    image: looney/basic-ms
+    build: ./backend/common
     volumes:
       - ./backend/api-gateway/code:/usr/src/app
     networks:
@@ -24,7 +26,8 @@ services:
     command: bash -c "npm install && npm run dev"
   moods:
     container_name: msmoods
-    image: valst3/looney-basic-ms:latest
+    image: looney/basic-ms
+    build: ./backend/common
     volumes:
       - ./backend/moods/code:/usr/src/app
     networks:
@@ -35,7 +38,8 @@ services:
     command: bash -c "npm install && npm run dev"
   users:
     container_name: msusers
-    image: valst3/looney-basic-ms:latest
+    image: looney/basic-ms
+    build: ./backend/common
     volumes:
       - ./backend/users/code:/usr/src/app
     networks:
