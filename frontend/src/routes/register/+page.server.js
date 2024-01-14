@@ -6,14 +6,14 @@ import { fail } from '@sveltejs/kit';
  * Executes during the load of the svelte page
  * @param {*} param0 
  */
-export const load = async ({ cookies }) => {
+export const load = async ({ fetch, setHeaders, cookies }) => {
   let isUserAuth = false;
 
   try {
     // Get the cookie containing the JWT token
     const jwt = cookies.get('jwt');
 
-    // Send request to the apigateway to check if the user is authenticated
+    // // Send request to the apigateway to check if the user is authenticated
     const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwt}`
@@ -55,7 +55,7 @@ export const actions = {
 
     try {
       // Send request to the apigateway to register new user
-      const data = await axios.post('http://localhost:3011/register', {
+      const data = await axios.post('http://apigateway:3011/register', {
         name: name,
         password: password,
         email: email,

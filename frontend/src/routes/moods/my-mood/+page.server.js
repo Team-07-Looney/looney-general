@@ -11,13 +11,13 @@ export const load = async ({ serverLoadEvent, cookies }) => {
   try {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
-    const response1 = await axios.get('http://localhost:3011/moods', {
+    const response1 = await axios.get('http://apigateway:3011/moods', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const response2 = await axios.get('http://localhost:3011/reasons', {
+    const response2 = await axios.get('http://apigateway:3011/reasons', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -56,7 +56,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/recordsMoods', {
+      const data = await axios.post('http://apigateway:3011/recordsMoods', {
         mood_id: moodId,
         reason_id: reasonId,
       }, {
@@ -66,7 +66,7 @@ export const actions = {
         }
       });
 
-      const responseRecords = await axios.get('http://localhost:3011/recordsMoods', {
+      const responseRecords = await axios.get('http://apigateway:3011/recordsMoods', {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }

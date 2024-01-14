@@ -12,7 +12,7 @@ export const load = async ({ cookies }) => {
     const jwt = cookies.get('jwt');
 
     // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -46,7 +46,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post('http://localhost:3011/categories', {
+      const data = await axios.post('http://apigateway:3011/categories', {
         name: name,
         user_id: payload.id
       }, {

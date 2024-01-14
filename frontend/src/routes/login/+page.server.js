@@ -14,7 +14,7 @@ export const load = async ({ cookies }) => {
     const jwt = cookies.get('jwt');
 
     // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -57,7 +57,7 @@ export const actions = {
 
     try {
       // Sends a request to the API gateway to try and login the user
-      const data = await axios.post('http://localhost:3011/login', {
+      const data = await axios.post('http://apigateway:3011/login', {
         password: password,
         email: email,
       }, {

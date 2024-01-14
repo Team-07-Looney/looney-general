@@ -12,19 +12,19 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
     const jwt = cookies.get('jwt');
     const { categoryId } = params;
 
-    const responseRecords = await axios.get(`http://localhost:3011/records`, {
+    const responseRecords = await axios.get(`http://apigateway:3011/records`, {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    const responseCategory = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
+    const responseCategory = await axios.get(`http://apigateway:3011/categories/${categoryId}`, {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    const responseHabits = await axios.get(`http://localhost:3011/categories/${categoryId}/habits`, {
+    const responseHabits = await axios.get(`http://apigateway:3011/categories/${categoryId}/habits`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }

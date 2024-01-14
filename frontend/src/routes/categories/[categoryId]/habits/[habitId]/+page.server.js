@@ -12,7 +12,7 @@ export const load = async ({ params, cookies }) => {
     const jwt = cookies.get('jwt');
     const { categoryId, habitId } = params;
 
-    const response = await axios.get(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
+    const response = await axios.get(`http://apigateway:3011/categories/${categoryId}/habits/${habitId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -36,7 +36,7 @@ export const actions = {
       const jwt = cookies.get('jwt');
 
       // Set the body of the request, adds a header and sends delete request to delete habit
-      const data = await axios.delete(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
+      const data = await axios.delete(`http://apigateway:3011/categories/${categoryId}/habits/${habitId}`, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
           "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
@@ -58,7 +58,7 @@ export const actions = {
       const jwt = cookies.get('jwt');
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post(`http://localhost:3011/records`, {
+      const data = await axios.post(`http://apigateway:3011/records`, {
         habit_id: habitId
       }, {
         headers: {

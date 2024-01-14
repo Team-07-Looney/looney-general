@@ -12,7 +12,7 @@ export const load = async ({ params, cookies }) => {
     const jwt = cookies.get('jwt');
     const { thoughtsId } = params;
 
-    const response = await axios.get(`http://localhost:3011/thoughts/${thoughtsId}`, {
+    const response = await axios.get(`http://apigateway:3011/thoughts/${thoughtsId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -22,7 +22,7 @@ export const load = async ({ params, cookies }) => {
     const thoughtsDate = response.data.meta.date;
 
     
-    const responseRecords = await axios.get(`http://localhost:3011/recordsMoods/${thoughts[0].record_id}`, {
+    const responseRecords = await axios.get(`http://apigateway:3011/recordsMoods/${thoughts[0].record_id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -30,7 +30,7 @@ export const load = async ({ params, cookies }) => {
 
     const records = responseRecords.data.data;
 
-    const responseMoods = await axios.get(`http://localhost:3011${records[0].mood_id}`, {
+    const responseMoods = await axios.get(`http://apigateway:3011${records[0].mood_id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -38,7 +38,7 @@ export const load = async ({ params, cookies }) => {
 
     const moods = responseMoods.data.data;
 
-    const responseMoodType = await axios.get(`http://localhost:3011${moods[0].mood_type_id}`, {
+    const responseMoodType = await axios.get(`http://apigateway:3011${moods[0].mood_type_id}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -59,7 +59,7 @@ export const actions = {
       const { thoughtsId } = params;
       try {
         const jwt = cookies.get('jwt');
-        const data = await axios.delete(`http://localhost:3011/thoughts/${thoughtsId}`, {
+        const data = await axios.delete(`http://apigateway:3011/thoughts/${thoughtsId}`, {
           headers: {
             "Authorization": `Bearer ${jwt}`,
             "Content-Type": 'application/x-www-form-urlencoded'

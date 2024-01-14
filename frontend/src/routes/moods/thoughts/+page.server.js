@@ -14,7 +14,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get('http://localhost:3011/thoughts', {
+    const response = await axios.get('http://apigateway:3011/thoughts', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -30,7 +30,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
     for (let i = 0; i < filteredThoughtsByUser.length; i++) {
 
-      const recordResponse = await axios.get(`http://localhost:3011${filteredThoughtsByUser[i].record_id}`, {
+      const recordResponse = await axios.get(`http://apigateway:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
           'Authorization': `Bearer ${jwtoken}`
         }
@@ -38,7 +38,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       records.push(recordResponse.data.data[0]);
 
-      const moodResponse = await axios.get(`http://localhost:3011${records[i].mood_id}`, {
+      const moodResponse = await axios.get(`http://apigateway:3011${records[i].mood_id}`, {
         headers: {
           'Authorization': `Bearer ${jwtoken}`
         }
@@ -46,7 +46,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       moods.push(moodResponse.data.data[0]);
 
-      const moodTypeResponse = await axios.get(`http://localhost:3011${moods[i].mood_type_id}`, {
+      const moodTypeResponse = await axios.get(`http://apigateway:3011${moods[i].mood_type_id}`, {
         headers: {
           'Authorization': `Bearer ${jwtoken}`
         }

@@ -12,7 +12,7 @@ export const load = async ({ params, cookies }) => {
     const jwt = cookies.get('jwt');
 
     const { categoryId } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
+    const response = await axios.get(`http://apigateway:3011/categories/${categoryId}`, {
       headers: {
         'Authorization': `Bearer ${jwt}`
       }
@@ -50,7 +50,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
-      const data = await axios.put(`http://localhost:3011/categories/${categoryId}`, {
+      const data = await axios.put(`http://apigateway:3011/categories/${categoryId}`, {
         name: name
       }, {
         headers: {

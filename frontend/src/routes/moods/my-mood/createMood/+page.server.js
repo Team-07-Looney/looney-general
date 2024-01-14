@@ -23,7 +23,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/moods', {
+      const data = await axios.post('http://apigateway:3011/moods', {
         name: name,
         mood_type_id: mood_type_id,
         user_id: payload.id

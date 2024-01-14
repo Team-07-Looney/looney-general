@@ -13,7 +13,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get('http://localhost:3011/categories', {
+    const response = await axios.get('http://apigateway:3011/categories', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }

@@ -15,7 +15,7 @@ export const load = async ({ cookies }) => {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get(`http://localhost:3011/users/id/${payload.id}`, {
+    const response = await axios.get(`http://apigateway:3011/users/id/${payload.id}`, {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
