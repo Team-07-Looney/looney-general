@@ -8,7 +8,7 @@
   export let autocomplete = null;
   export let error = false;
 
-  let color = error ? "red-700" : "black";
+  const color = error ? "red-700" : "black";
 
   let isFocused = false;
   const onFocus = () => (isFocused = true);
@@ -30,11 +30,12 @@
         <path stroke-linecap="round" stroke-linejoin="round" d={path} />
       </svg>
       <input
-        class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none font"
+        class="appearance-none bg-transparent border-none w-full
+        mr-3 py-1 px-2 leading-tight focus:outline-none font"
         {type}
         {name}
         id={name}
-        placeholder={placeholder}
+        {placeholder}
         aria-label={label}
         on:focus={onFocus}
         on:blur={onBlur}
@@ -51,5 +52,7 @@
 </div>
 
 <style>
- ::placeholder {color: rgb(156 163 175);}
+  ::placeholder {
+    color: rgb(156 163 175);
+  }
 </style>
