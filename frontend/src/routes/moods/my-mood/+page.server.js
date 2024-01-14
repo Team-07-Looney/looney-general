@@ -1,32 +1,33 @@
-import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
-import jwt from 'jsonwebtoken';
+import { redirect, fail } from "@sveltejs/kit";
+import axios from "axios";
+import jwt from "jsonwebtoken";
+
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all moods
  * 
  * @param {*} serverLoadEvent 
  * @returns
  */
-export const load = async ({ serverLoadEvent, cookies }) => {
+export const load = async ({ cookies }) => {
   try {
-    const jwtoken = cookies.get('jwt');
-    const payload = jwt.decode(jwtoken);
-    const response1 = await axios.get('http://apigateway:3011/moods', {
+    const jwtToken = cookies.get("jwt");
+    const payload = jwt.decode(jwtToken);
+    const moodsResponse = await axios.get("http://apigateway:3011/moods", {
       headers: {
-        'Authorization': `Bearer ${jwtoken}`
+        "Authorization": `Bearer ${jwtToken}`
       }
     });
 
-    const response2 = await axios.get('http://apigateway:3011/reasons', {
+    const reasonsResponse = await axios.get("http://apigateway:3011/reasons", {
       headers: {
-        'Authorization': `Bearer ${jwtoken}`
+        "Authorization": `Bearer ${jwtToken}`
       }
     });
 
-    const moods = response1.data.data;
-    const reasons = response2.data.data;
+    const moods = moodsResponse.data.data;
+    const reasons = reasonsResponse.data.data;
     const userId = payload.id;
-    return { moods, reasons, userId};
+    return { moods, reasons, userId };
   } catch (error) {
     console.log(error);
   }
@@ -39,16 +40,16 @@ export const actions = {
   createRecord: async ({ request, cookies }) => {
     let recordId;
     try {
-      const jwt = cookies.get('jwt');
+      const jwt = cookies.get("jwt");
 
       // Retrieves the data from the form
       const formData = await request.formData();
-      const moodId = formData.get('moodId');
-      const reasonId = formData.get('reasonId');
-
+      const moodId = formData.get("moodId");
+      const reasonId = formData.get("reasonId");
 
       // check for errors in a form data
-      const errors = await validateCreateData(moodId, reasonId);
+      const errors = [];
+      // const errors = await validateCreateData(moodId, reasonId);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
@@ -56,29 +57,29 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://apigateway:3011/recordsMoods', {
+      await axios.post("http://apigateway:3011/recordsMoods", {
         mood_id: moodId,
         reason_id: reasonId,
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
 
-      const responseRecords = await axios.get('http://apigateway:3011/recordsMoods', {
-      headers: {
-        'Authorization': `Bearer ${jwt}`
-      }
-    });
+      const responseRecords = await axios.get("http://apigateway:3011/recordsMoods", {
+        headers: {
+          "Authorization": `Bearer ${jwt}`
+        }
+      });
 
       const records = responseRecords.data.data;
       const lastRecordId = records.length;
       recordId = lastRecordId;
-      
+
     } catch (error) {
       if (error.response.status == 401) {
-        throw redirect(302, '/login');
+        throw redirect(302, "/login");
       }
     }
 
@@ -86,7 +87,8 @@ export const actions = {
   }
 };
 
-async function validateCreateData(mood_id, reason_id) {
-  let errors = [];
-  return errors;
-}
+// TODO: Whoever implemented it - fix it
+// async function validateCreateData(mood_id, reason_id) {
+//   let errors = [];
+//   return errors;
+// }

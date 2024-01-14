@@ -1,7 +1,6 @@
-import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
-import jwt from 'jsonwebtoken';
-
+import { redirect } from "@sveltejs/kit";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all thoughts
@@ -9,14 +8,14 @@ import jwt from 'jsonwebtoken';
  * @param {*} serverLoadEvent 
  * @returns
  */
-export const load = async ({ serverLoadEvent, cookies }) => {
+export const load = async ({ cookies }) => {
   try {
-    const jwtoken = cookies.get('jwt');
-    const payload = jwt.decode(jwtoken);
+    const jwtToken = cookies.get("jwt");
+    const payload = jwt.decode(jwtToken);
 
-    const response = await axios.get('http://apigateway:3011/thoughts', {
+    const response = await axios.get("http://apigateway:3011/thoughts", {
       headers: {
-        'Authorization': `Bearer ${jwtoken}`
+        "Authorization": `Bearer ${jwtToken}`
       }
     });
 
@@ -32,7 +31,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const recordResponse = await axios.get(`http://apigateway:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwtoken}`
+          "Authorization": `Bearer ${jwtToken}`
         }
       });
 
@@ -40,7 +39,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodResponse = await axios.get(`http://apigateway:3011${records[i].mood_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwtoken}`
+          "Authorization": `Bearer ${jwtToken}`
         }
       });
 
@@ -48,7 +47,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
 
       const moodTypeResponse = await axios.get(`http://apigateway:3011${moods[i].mood_type_id}`, {
         headers: {
-          'Authorization': `Bearer ${jwtoken}`
+          "Authorization": `Bearer ${jwtToken}`
         }
       });
 
@@ -59,7 +58,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
   } catch (error) {
     console.log(error);
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };

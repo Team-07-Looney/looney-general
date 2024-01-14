@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
+import { redirect } from "@sveltejs/kit";
+import axios from "axios";
 
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve a thought based on id
@@ -9,22 +9,22 @@ import axios from 'axios';
  */
 export const load = async ({ params, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
     const { thoughtsId } = params;
 
     const response = await axios.get(`http://apigateway:3011/thoughts/${thoughtsId}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
     const thoughts = response.data.data;
     const thoughtsDate = response.data.meta.date;
 
-    
+
     const responseRecords = await axios.get(`http://apigateway:3011/recordsMoods/${thoughts[0].record_id}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -32,7 +32,7 @@ export const load = async ({ params, cookies }) => {
 
     const responseMoods = await axios.get(`http://apigateway:3011${records[0].mood_id}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -40,37 +40,37 @@ export const load = async ({ params, cookies }) => {
 
     const responseMoodType = await axios.get(`http://apigateway:3011${moods[0].mood_type_id}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
     const moodType = responseMoodType.data.data[0].name;
- 
+
     return { thoughts, thoughtsDate, records, moods, moodType };
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
 
 export const actions = {
-    deleteThought: async ({ params, cookies }) => {
-      const { thoughtsId } = params;
-      try {
-        const jwt = cookies.get('jwt');
-        const data = await axios.delete(`http://apigateway:3011/thoughts/${thoughtsId}`, {
-          headers: {
-            "Authorization": `Bearer ${jwt}`,
-            "Content-Type": 'application/x-www-form-urlencoded'
-          }
-        });
-      } catch (error) {
-        if (error.response.status == 401) {
-          throw redirect(302, '/login');
+  deleteThought: async ({ params, cookies }) => {
+    const { thoughtsId } = params;
+    try {
+      const jwt = cookies.get("jwt");
+
+      await axios.delete(`http://apigateway:3011/thoughts/${thoughtsId}`, {
+        headers: {
+          "Authorization": `Bearer ${jwt}`,
+          "Content-Type": "application/x-www-form-urlencoded"
         }
+      });
+    } catch (error) {
+      if (error.response.status == 401) {
+        throw redirect(302, "/login");
       }
-      throw redirect(302, `/moods/thoughts`);
     }
-  };
-  
+    throw redirect(302, "/moods/thoughts");
+  }
+};
