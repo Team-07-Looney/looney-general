@@ -1,0 +1,9 @@
+// Needed in order to make the ESLint VS Extension aware that there are
+// files that are being ignored
+{
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+}
