@@ -13,10 +13,12 @@
     "dependencies": {
         "cors": "^2.8.5",
         "dotenv": "^16.0.2",
+        "eslint-plugin-jsdoc": "^48.0.2",
         "express": "^4.17.1",
         "sqlite3": "^5.1.6"
     },
     "devDependencies": {
+        "eslint": "^8.56.0",
         "nodemon": "^3.0.1"
     }
 }

@@ -96,18 +96,6 @@
             </div>
           </form>
         </div>
-        <!-- <div class="w-full">
-      <div class="bg-white rounded w-full flex p-3">
-        <form method="POST" class="text-gray-900 w-full" action="?/logout">
-          <button
-            class="p-1.5 bg-lavender-500 w-full rounded-lg font-bold text-black"
-            type="submit"
-          >
-            Logout
-          </button>
-        </form>
-      </div>
-    </div> -->
       </div>
     </div>
   </div>

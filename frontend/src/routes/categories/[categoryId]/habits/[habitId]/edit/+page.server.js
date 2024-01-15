@@ -1,5 +1,5 @@
 import axios from "axios";
-import { redirect, fail } from '@sveltejs/kit';
+import { redirect, fail } from "@sveltejs/kit";
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve a habit based on id
@@ -9,11 +9,11 @@ import { redirect, fail } from '@sveltejs/kit';
  */
 export const load = async ({ params, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
 
-    const response = await axios.get(`http://localhost:3011/categories/${params.categoryId}/habits/${params.habitId}`, {
+    const response = await axios.get(`http://apigateway:3011/categories/${params.categoryId}/habits/${params.habitId}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -30,20 +30,20 @@ export const load = async ({ params, cookies }) => {
     const category = params.categoryId;
     const habitData = response.data.data[0];
 
-    const duration_minutes = Math.floor(habitData.duration / 60);
-    const duration_seconds = habitData.duration - duration_minutes * 60;
+    const durationMinutes = Math.floor(habitData.duration / 60);
+    const durationSeconds = habitData.duration - durationMinutes * 60;
 
     const habit = {
       id: habitData.id,
       name: habitData.name,
       start_time: habitData.start_time,
-      duration: ((duration_seconds >= 0 && duration_seconds <= 9) ? `${duration_minutes}:0${duration_seconds}` : `${duration_minutes}:${duration_seconds}`)
+      duration: ((durationSeconds >= 0 && durationSeconds <= 9) ? `${durationMinutes}:0${durationSeconds}` : `${durationMinutes}:${durationSeconds}`)
     };
 
     return { habit, category, predefinedHabits };
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
@@ -54,12 +54,12 @@ export const actions = {
     try {
       // Retrieves the data from the form
       const formData = await request.formData();
-      const jwt = cookies.get('jwt');
+      const jwt = cookies.get("jwt");
       
-      const name = formData.get('name');
-      const startTime = formData.get('start_time');
-      const duration = formData.get('duration');
-      const durationElements = duration.split(':');
+      const name = formData.get("name");
+      const startTime = formData.get("start_time");
+      const duration = formData.get("duration");
+      const durationElements = duration.split(":");
 
       // check for errors in a form data
       const errors = await validateEditData(name, startTime, duration);
@@ -70,19 +70,19 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
-      const data = await axios.put(`http://localhost:3011/categories/${categoryId}/habits/${habitId}`, {
+      await axios.put(`http://apigateway:3011/categories/${categoryId}/habits/${habitId}`, {
         name: name,
         start_time: startTime,
         duration: parseInt(durationElements[0]) * 60 + parseInt(durationElements[1])
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
     } catch (error) {
       if (error.response.status == 401) {
-        throw redirect(302, '/login');
+        throw redirect(302, "/login");
       }
     }
 
@@ -91,7 +91,7 @@ export const actions = {
 };
 
 async function validateEditData(name, startTime, duration) {
-  let errors = [];
+  const errors = [];
 
   //check if name exists
   if (!name) {
@@ -111,7 +111,7 @@ async function validateEditData(name, startTime, duration) {
     //if it exists, check for invalid input
     const startTimeRegex = /^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$/;
     if (!startTimeRegex.test(startTime)) {
-      errors.push({ "input": "start_time", "message": "Start time should be of a format hh:mm" })
+      errors.push({ "input": "start_time", "message": "Start time should be of a format hh:mm" });
     }
   }
 
@@ -121,7 +121,7 @@ async function validateEditData(name, startTime, duration) {
   } else {
     //if it exists, check for invalid input
     const durationRegex = /^([0-8]?[0-9]|90):([0-5]?[0-9]|60)$/;
-    const durationElements = duration.split(':');
+    const durationElements = duration.split(":");
     if (!durationRegex.test(duration)) {
       errors.push({ "input": "duration", "message": "Duration should be of a format (m)m:(s)s" });
     } else if (parseInt(durationElements[0]) === 0 && parseInt(durationElements[1]) === 0) {

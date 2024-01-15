@@ -1,27 +1,28 @@
 <script>
   import AuthInput from "../../../lib/components/AuthInput.svelte";
-    import BottomMenu from "../../../lib/components/BottomMenu.svelte";
-    import showElement from '$lib/showElement';
-    import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
-    import FormEars from "../../../lib/components/FormEars.svelte";
-    import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
-    $showElement = false;
+  import BottomMenu from "../../../lib/components/BottomMenu.svelte";
+  import showElement from "$lib/showElement";
+  import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
+  import FormEars from "../../../lib/components/FormEars.svelte";
+  import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
+  $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
+
 <WhiteBanner
-    title="Create Category"
-    description="Organize your habit with your own personal folder"
-    route="/categories"
-    displayBackButton="1"
-    imgExtraPath="../"
-    displayMenuButton="1"
-/> 
+  title="Create Category"
+  description="Organize your habit with your own personal folder"
+  route="/categories"
+  displayBackButton="1"
+  imgExtraPath="../"
+  displayMenuButton="1"
+/>
 <div class="flex justify-center items-center mt-28">
   <div class="flex flex-col items-center">
-    <FormEars/>
+    <FormEars />
     <div class="grid grid-cols-1">
-      <ShadowsForForms height={159} width={259}/>
+      <ShadowsForForms height={159} width={259} />
       <div class="px-8 pt-8 z-[3]">
         <div class="bg-white rounded-xl px-4 py-5">
           <form
@@ -47,7 +48,7 @@
                 </ul>
               </div>
             {/if}
-            
+
             <AuthInput
               name={"name"}
               label={"Name"}
