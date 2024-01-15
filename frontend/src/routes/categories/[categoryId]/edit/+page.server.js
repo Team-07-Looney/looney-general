@@ -1,5 +1,5 @@
 import axios from "axios";
-import { redirect, fail } from '@sveltejs/kit';
+import { redirect, fail } from "@sveltejs/kit";
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve a habit based on id
@@ -9,12 +9,12 @@ import { redirect, fail } from '@sveltejs/kit';
  */
 export const load = async ({ params, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
 
     const { categoryId } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
+    const response = await axios.get(`http://apigateway:3011/categories/${categoryId}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
     const categoryData = response.data.data[0];
@@ -28,7 +28,7 @@ export const load = async ({ params, cookies }) => {
     return category;
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
@@ -38,10 +38,11 @@ export const actions = {
     try {
       // Retrieves the data from the form
       const formData = await request.formData();
-      const jwt = cookies.get('jwt');
+      const jwt = cookies.get("jwt");
       const { categoryId } = params;
-      const name = formData.get('name');
-      const iconId = formData.get('icon_id');
+      const name = formData.get("name");
+      const iconId = formData.get("icon_id");
+
 
       // check for errors in a form data
       const errors = await validateEditData(name, iconId);
@@ -52,27 +53,28 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends put request to update habit
-      const data = await axios.put(`http://localhost:3011/categories/${categoryId}`, {
+      await axios.put(`http://apigateway:3011/categories/${categoryId}`, {
         name: name,
         icon_id: iconId,
+
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
     } catch (error) {
       if (error.response.status == 401) {
-        throw redirect(302, '/login');
+        throw redirect(302, "/login");
       }
     }
 
-    throw redirect(302, `/categories`);
+    throw redirect(302, "/categories");
   }
 };
 
 async function validateEditData(name, iconId) {
-  let errors = [];
+  const errors = [];
 
   //check if name exists
   if (!name) {
@@ -80,7 +82,7 @@ async function validateEditData(name, iconId) {
   }
 
   //check if an icon had been selected
-  if (!iconId || iconId === 'undefined') {
+  if (!iconId || iconId === "undefined") {
     errors.push({ "input": "icon_id", "message": "You need to select an icon" });
   }
 

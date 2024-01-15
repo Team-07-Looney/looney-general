@@ -38,6 +38,7 @@ router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
 router.use('/mood-types', cors(), requireAuth, moodProxy);
 router.use('/thoughts', cors(), requireAuth, moodProxy);
+router.use('/latest-thoughts', cors(), requireAuth, moodProxy);
 router.use('/reasons', cors(), requireAuth, moodProxy);
 router.use('/recordsMoods', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
@@ -48,7 +49,7 @@ router.post('/login', cors(), login);
 router.post('/profile/change-password', cors(), changePassword);
 
 // Route to make sure user is authenticated
-router.get('/verify', cors(), requireAuth, (req, res) => {
+router.get('/verify', requireAuth, cors(), (req, res) => {
   res.status(200).send({"message": "User is authenticated"});
 });
 

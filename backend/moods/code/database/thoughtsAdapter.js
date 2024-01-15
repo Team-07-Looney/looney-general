@@ -2,12 +2,34 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 
 /**
  * executes SQL query that retrieves all the thoughtss from thoughtss table
- * @returns thoughtss data from the database
+ * @returns thoughts data from the database
  */
 export async function getAllThoughtData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const sql = "SELECT * FROM Thoughts";
+    const params = [];
+
+    db.all(sql, params, (err, rows) => {
+      closeDatabaseConnection(db);
+
+      if (err) {
+        console.error(err);
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
+/**
+ * executes SQL query that retrieves the latest thoughts based on every user
+ */
+export async function getLatestThoughtsInstances() {
+  return new Promise(async (resolve, reject) => {
+    const db = await openDatabaseConnection();
+    const sql = "SELECT title, body, location, user_id, MAX(id) FROM Thoughts WHERE location IS NOT NULL GROUP BY user_id";
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -31,9 +53,9 @@ export async function getAllThoughtData() {
 export async function createThoughtInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Thoughts (title, body, record_id, user_id) VALUES (?, ?, ?,?)';
+    const insert = 'INSERT INTO Thoughts (title, body, location, record_id, user_id) VALUES (?, ?, ?, ?,?)';
 
-    db.run(insert, [request.title, request.body, request.record_id, request.user_id], (err) => {
+    db.run(insert, [request.title, request.body, request.location, request.record_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {

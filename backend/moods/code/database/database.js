@@ -29,6 +29,7 @@ const tableQueries = [
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
+  location TEXT,
   record_id INTEGER REFERENCES Records(id),
   user_id INTEGER)`
 ];
