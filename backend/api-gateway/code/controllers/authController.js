@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../variables.env' });
+dotenv.config({ path: '../variables.env' }) 
 
 function getToDay() {
   const date = new Date();

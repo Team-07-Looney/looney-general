@@ -4,15 +4,13 @@
     "es2021": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:jsdoc/recommended"
+    "eslint:recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": [
-    "jsdoc"
   ],
   "rules": {
     "indent": [
@@ -77,7 +75,6 @@
       "warn",
       "all"
     ],
-    "no-async-promise-executor": 0,
-    "jsdoc/require-returns-type": 0
+    "no-async-promise-executor": 0
   }
 }
