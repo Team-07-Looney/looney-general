@@ -1,10 +1,11 @@
-import { createNewUser, getAllUsers, getUserBy } from "../../database/adapter";
-import { openDatabaseConnection, closeDatabaseConnection, refreshTestingDatabase } from "../../database/database";
+/* eslint-disable no-undef */
+import { createNewUser, getAllUsers, getUserBy } from '../../database/adapter';
+import { refreshTestingDatabase } from '../../database/database';
 
-describe("getting all users from the database", () => {
-  test("successfully retrieve all users in the database", async () => {
+describe('getting all users from the database', () => {
+  test('successfully retrieve all users in the database', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    const db = await refreshTestingDatabase();
 
     const insertData = [
       { username: 'John Doe', email: 'john@looney.nl', password: '123' },
@@ -25,8 +26,8 @@ describe("getting all users from the database", () => {
   });
 });
 
-describe("adding new users to the database", () => {
-  test("successfully adding a new user to the database", async () => {
+describe('adding new users to the database', () => {
+  test('successfully adding a new user to the database', async () => {
     // Arrange
     await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
@@ -42,31 +43,33 @@ describe("adding new users to the database", () => {
     });
   });
 
-  test("failing to add a new user to the database with the same email", async () => {
+  test('failing to add a new user to the database with the same email', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    const db = await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
     const query = `INSERT INTO users (username, email, password) VALUES ("${userData.username}", "${userData.email}", "${userData.password}")`;
     await db.run(query);
 
     // Act + Assert
-    await expect(createNewUser(userData.username, userData.email, userData.password)).rejects.toEqual({
-      code: 409,
-      message: 'SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email'
-    });
+    await expect(
+      createNewUser(userData.username, userData.email, userData.password))
+      .rejects.toEqual({
+        code: 409,
+        message: 'SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email'
+      });
   });
 });
 
 describe('getting users from the database', () => {
   test('selecting the user by email from the database if they exist', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    const db = await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
     const query = `INSERT INTO users (username, email, password) VALUES ("${userData.username}", "${userData.email}", "${userData.password}")`;
     await db.run(query);
 
     // Act 
-    let response = await getUserBy('email', userData.email);
+    const response = await getUserBy('email', userData.email);
 
     // Assert
     expect(response).toEqual({
@@ -79,13 +82,13 @@ describe('getting users from the database', () => {
 
   test('selecting the user by id from the database if they exist', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    const db = await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
     const query = `INSERT INTO users (username, email, password) VALUES ("${userData.username}", "${userData.email}", "${userData.password}")`;
     await db.run(query);
 
     // Act 
-    let response = await getUserBy('id', 1);
+    const response = await getUserBy('id', 1);
 
     // Assert
     expect(response).toEqual({
@@ -98,25 +101,25 @@ describe('getting users from the database', () => {
 
   test('failing when selecting the user by key different from email or id', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    const db = await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
     const query = `INSERT INTO users (username, email, password) VALUES ("${userData.username}", "${userData.email}", "${userData.password}")`;
     await db.run(query);
 
     // Act + Assert
-    await expect(getUserBy("username", userData.username))
-      .rejects.toThrowError("Invalid param for defining the user. Key must be 'id' or 'email'.");
+    await expect(getUserBy('username', userData.username))
+      .rejects.toThrowError('Invalid param for defining the user. Key must be \'id\' or \'email\'.');
   });
 
   test('receiving empty response when selecting user that does not exists', async () => {
     // Arrange
-    let db = await refreshTestingDatabase();
+    await refreshTestingDatabase();
     const userData = { username: 'John Doe', email: 'john@looney.nl', password: '123' };
 
     // Act
-    let response = await getUserBy("email", userData.email);
+    const response = await getUserBy('email', userData.email);
 
     // Assert
     expect(response).toBeUndefined();
   });
-})
+});

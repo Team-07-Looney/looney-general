@@ -1,12 +1,16 @@
 import { createNewUser, getAllUsers, getUserBy, updateUserWith } from '../database/adapter.js';
 
+/**
+ * A function that returns the current date
+ * @returns the current date
+ */
 function getToDay() {
   const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   // This arrangement can be altered based on how we want the date's format to appear.
-  let currentDate = `${day}-${month}-${year}`;
+  const currentDate = `${day}-${month}-${year}`;
   console.log(currentDate);
   return currentDate;
 }
@@ -24,7 +28,7 @@ let tempResponse = {
  * Retrieves all users via the database adapter and returns them via req response
  * @param {*} req the request
  * @param {*} res the response
- * @param {*} next 
+ * @param {*} next callback argument
  */
 export async function getUsers(req, res, next) {
   try {
@@ -40,8 +44,8 @@ export async function getUsers(req, res, next) {
  * Retrieve a user based on the key sent within a request - userEmail or userId
  * @param {*} req the request
  * @param {*} res the response
- * @param {*} next 
- * @returns 
+ * @param {*} next callback argument
+ * @returns the user if found
  */
 export async function getUser(req, res, next) {
   try {
@@ -59,7 +63,7 @@ export async function getUser(req, res, next) {
     }
 
     if (!retrievedData) {
-      tempResponse.data = "No user found with such key";
+      tempResponse.data = 'No user found with such key';
       res.status(404).send(tempResponse);
     } else {
       tempResponse.data = retrievedData;
@@ -74,9 +78,8 @@ export async function getUser(req, res, next) {
  * Handles the creation a new user when a request is called
  * @param {*} req The POST request 
  * @param {*} res The response
- * @param {*} next 
  */
-export async function createUser(req, res, next) {
+export async function createUser(req, res) {
   try {
     tempResponse = await freshResponse();
 
@@ -89,7 +92,12 @@ export async function createUser(req, res, next) {
   }
 }
 
-export async function updateUser(req, res, next) {
+/**
+ * Updates a user based on their id and the key and value passed in the request body
+ * @param {*} req the request
+ * @param {*} res the response 
+ */
+export async function updateUser(req, res) {
   try {
     tempResponse = await freshResponse();
 
@@ -107,6 +115,10 @@ export async function updateUser(req, res, next) {
   }
 }
 
+/**
+ * Generates a fresh response based on the structure above
+ * @returns new temporary response structure
+ */
 async function freshResponse() {
   return {
     meta: {
