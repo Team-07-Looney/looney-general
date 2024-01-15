@@ -1,11 +1,12 @@
 <script>
-    import { A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50, A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae } from 'svelte-twitter-emoji';
+    import { A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50, A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae } from "svelte-twitter-emoji";
     export let iconId;
     export let title;
     export let categoryId;
 
     let iconComponent;
-    const iconComponents = {A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50, A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae};
+    const iconComponents = {A1F315, A1F316, A1F318, A1F313, A1F311, A1F320, A2600, A2B50,
+      A1F33b, A1F338, A1F4aa1f3fc, A1F98b, A1F3bc, A1F4af, A1F4d5, A2764, A2708, A1F3ae};
     iconComponent = iconComponents[iconId];
 </script>
 <div class="bg-white rounded-xl py-2 px-3 flex flex-row w-full justify-between items-center
@@ -26,10 +27,10 @@ min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg
         min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
             <!-- DROPDOWN MENU -->
-            <div class="flex justify-center items-center">
+            <div class="h-6 flex justify-center items-center">
                 <a class="rounded-lg" href={`categories/${categoryId}/edit`}>Edit</a>
             </div>
-            <div>
+            <div class="h-7 flex justify-center items-center">
                 <form class="w-full rounded-lg" method="POST" action={`/categories/${categoryId}?/deleteCategory`}>
                     <button type="submit" class="w-full h-full">Delete</button>
                 </form>

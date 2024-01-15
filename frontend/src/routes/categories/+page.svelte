@@ -50,18 +50,20 @@
     route="/home"
     displayBackButton="1"
     imgExtraPath="../"
-/> 
+/>
 
 {#if data.filteredCategoriesByUser.length == 0}
   <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
     <h1 class="font-bold">Create a Routine!</h1>
-    <p>Here you can organize your habits<br />based on different routines.<br/>You can add up to 5 categories.</p>
+    <p>Here you can organize your habits<br/>
+      based on different routines.<br/>You can add up to 5 categories.</p>
   </div>
 {:else}
   <div class="flex justify-center items-center pt-9 position:relative z-index-0">
     <div class="flex flex-col ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
       {#each data.filteredCategoriesByUser as category}
-        <CategoryItem title={category.name} categoryId={category.id} iconId={category.icon_id} on:click={handleOpening(category.id)} />
+        <CategoryItem title={category.name} categoryId={category.id}
+        iconId={category.icon_id} on:click={handleOpening(category.id)} />
       {/each}
     </div>
   </div>

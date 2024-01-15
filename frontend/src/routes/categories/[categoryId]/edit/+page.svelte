@@ -75,8 +75,9 @@
               value={data.name}
               error={form?.errors?.some((error) => error.input == "name")}
             />
-            <label>Choose an icon:</label>
-            <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} bind:this={referenceIcon}/>
+            <label for="iconSelect">Choose an icon:</label>
+            <IconsMenu bind:storedIconId iconId={iconId}
+            on:iconSelected={handleIconClick} bind:this={referenceIcon}/>
             <input type="hidden" name="icon_id" value={iconId} />
 
             <div class="flex flex-row gap-12 justify-center items-center">
