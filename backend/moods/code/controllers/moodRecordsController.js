@@ -59,6 +59,7 @@ import {
    */
   export async function createRecord(req, res, next) {
     try {
+      console.log(req.body);
       await createRecordInstance(req.body);
       tempResponse.data.message = "records created successfully";
       res.status(200).send(tempResponse);

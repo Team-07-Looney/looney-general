@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { redirect, fail } from '@sveltejs/kit';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
@@ -12,13 +12,13 @@ export const load = async ({ serverLoadEvent, cookies }) => {
   try {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
-    const response1 = await axios.get('http://localhost:3011/moods', {
+    const response1 = await axios.get('http://apigateway:3011/moods', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const response2 = await axios.get('http://localhost:3011/reasons', {
+    const response2 = await axios.get('http://apigateway:3011/reasons', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -58,7 +58,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/mood-records', {
+      const data = await axios.post('http://apigateway:3011/mood-records', {
         mood_id: moodId,
         reason_id: reasonId,
         user_id: payload.id
@@ -69,7 +69,7 @@ export const actions = {
         }
       });
 
-      const responseRecords = await axios.get('http://localhost:3011/mood-records', {
+      const responseRecords = await axios.get('http://apigateway:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }

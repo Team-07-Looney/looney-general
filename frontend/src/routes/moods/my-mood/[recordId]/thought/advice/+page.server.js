@@ -16,32 +16,32 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
 
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const recordsResponse = await axios.get('http://localhost:3011/mood-records', {
+    const recordsResponse = await axios.get('http://apigateway:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const moodsResponse = await axios.get('http://localhost:3011/moods', {
+    const moodsResponse = await axios.get('http://apigateway:3011/moods', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
 
-    const adviceResponse = await axios.get('http://localhost:3011/advice', {
+    const adviceResponse = await axios.get('http://apigateway:3011/advice', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const adviceGroupsResponse = await axios.get('http://localhost:3011/advice-groups', {
+    const adviceGroupsResponse = await axios.get('http://apigateway:3011/advice-groups', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
@@ -148,7 +148,7 @@ export const actions = {
         return fail(400, { adviceId, errors });
       }
       // Set the body of the request, adds a header and sends post request to create record
-      const data = await axios.post('http://localhost:3011/advice-records', {
+      const data = await axios.post('http://apigateway:3011/advice-records', {
         advice_id: adviceId,
         user_id: payload.id
       }, {
@@ -158,7 +158,7 @@ export const actions = {
         }
       });
 
-      const responseRecords = await axios.get('http://localhost:3011/advice-records', {
+      const responseRecords = await axios.get('http://apigateway:3011/advice-records', {
         headers: {
           'Authorization': `Bearer ${jwtoken}`
         }

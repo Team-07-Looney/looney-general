@@ -15,49 +15,49 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     const jwtoken = cookies.get('jwt');
     const payload = jwt.decode(jwtoken);
 
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const recordsResponse = await axios.get('http://localhost:3011/mood-records', {
+    const recordsResponse = await axios.get('http://apigateway:3011/mood-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const moodsResponse = await axios.get('http://localhost:3011/moods', {
+    const moodsResponse = await axios.get('http://apigateway:3011/moods', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const thoughtsResponse = await axios.get('http://localhost:3011/thoughts', {
+    const thoughtsResponse = await axios.get('http://apigateway:3011/thoughts', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const reasonsResponse = await axios.get('http://localhost:3011/reasons', {
+    const reasonsResponse = await axios.get('http://apigateway:3011/reasons', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const adviceRecordsResponse = await axios.get('http://localhost:3011/advice-records', {
+    const adviceRecordsResponse = await axios.get('http://apigateway:3011/advice-records', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const adviceResponse = await axios.get('http://localhost:3011/advice', {
+    const adviceResponse = await axios.get('http://apigateway:3011/advice', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }
     });
 
-    const groupsResponse = await axios.get('http://localhost:3011/advice-groups', {
+    const groupsResponse = await axios.get('http://apigateway:3011/advice-groups', {
       headers: {
         'Authorization': `Bearer ${jwtoken}`
       }

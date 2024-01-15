@@ -1,0 +1,14 @@
+name: Build Test
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Docker Compose Action
+        uses: isbang/compose-action@v1.5.1
+        with:
+          compose-file: "docker-compose.yml"
+            

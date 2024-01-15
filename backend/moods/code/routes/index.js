@@ -34,7 +34,7 @@ import {
   getThoughtById,
   editThoughtById,
   deleteThoughtById
-} from '../controllers/thoughtsController.js'
+} from '../controllers/thoughtsController.js';
 import { getAdvice } from '../controllers/adviceController.js';
 import { getAdviceGroups } from '../controllers/adviceGroupsController.js';
 import {

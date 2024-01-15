@@ -1,5 +1,5 @@
-import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
+import { redirect } from "@sveltejs/kit";
+import axios from "axios";
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve all habits
@@ -7,26 +7,26 @@ import axios from 'axios';
  * @param {*} serverLoadEvent 
  * @returns
  */
-export const load = async ({ serverLoadEvent, cookies, params }) => {
+export const load = async ({ cookies, params }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
     const { categoryId } = params;
 
-    const responseRecords = await axios.get(`http://localhost:3011/habit-records`, {
+    const responseRecords = await axios.get("http://apigateway:3011/mood-records", {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    const responseCategory = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
+    const responseCategory = await axios.get(`http://apigateway:3011/categories/${categoryId}`, {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    const responseHabits = await axios.get(`http://localhost:3011/categories/${categoryId}/habits`, {
+    const responseHabits = await axios.get(`http://apigateway:3011/categories/${categoryId}/habits`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -40,7 +40,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
         if (habit.id === record.habit_id && record.date === responseHabits.data.meta.date) {
           habit.done = true;
         }
-      })
+      });
 
       if (!habit.done) {
         habit.done = false;
@@ -50,7 +50,7 @@ export const load = async ({ serverLoadEvent, cookies, params }) => {
     return { category, filteredHabitsByCategory };
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
