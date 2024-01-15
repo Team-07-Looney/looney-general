@@ -45,34 +45,23 @@
 </script>
 
 <WhiteBanner
-  title="My Habits"
-  description="Add new ones, check the old ones, Looney is going to be with you"
-  route="/home"
-  displayBackButton="1"
-  imgExtraPath="../"
-/>
+    title="My Habits"
+    description="Add new ones, check the old ones, Looney is going to be with you"
+    route="/home"
+    displayBackButton="1"
+    imgExtraPath="../"
+/> 
 
 {#if data.filteredCategoriesByUser.length == 0}
-  <div
-    class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent"
-  >
+  <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
     <h1 class="font-bold">Create a Routine!</h1>
-    <p>
-      Here you can organize your habits<br />based on different routines.<br
-      />You can add up to 5 categories.
-    </p>
+    <p>Here you can organize your habits<br />based on different routines.<br/>You can add up to 5 categories.</p>
   </div>
 {:else}
-  <div
-    class="flex justify-center items-center pt-9 position:relative z-index-0"
-  >
+  <div class="flex justify-center items-center pt-9 position:relative z-index-0">
     <div class="flex flex-col ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
       {#each data.filteredCategoriesByUser as category}
-        <CategoryItem
-          title={category.name}
-          categoryId={category.id}
-          on:click={handleOpening(category.id)}
-        />
+        <CategoryItem title={category.name} categoryId={category.id} iconId={category.icon_id} on:click={handleOpening(category.id)} />
       {/each}
     </div>
   </div>
@@ -85,44 +74,5 @@
     >
   </div>
 {/if}
-<BottomMenu imgPath="../" displayHabitText="1" />
 
-<style>
-  ::-webkit-scrollbar-thumb {
-    background: gray;
-    border-radius: 20px;
-  }
-  ::-webkit-scrollbar {
-    width: 5px;
-  }
-</style>
- 
-<WhiteBanner
-    title="My Habits"
-    description="Add new ones, check the old ones, Looney is going to be with you"
-    route="/home"
-    displayBackButton="1"
-    imgExtraPath="../"
-/> 
-
-  {#if data.filteredCategoriesByUser.length == 0} 
-    <div class="rounded-xl p-1 shadow-lg text-center mr-10 ml-10 pt-2 pb-2 mt-4 bg-accent">
-      <h1 class="font-bold">Create a Routine!</h1> 
-      <p >Here you can organize your habits<br>based on different routines.<br>You can add up to 5 categories.</p>
-    </div>
-  {:else}
-    <div class="flex justify-center items-center pt-9 position:relative z-index-0">
-      <div class="flex flex-col ml-2 h-[22rem] items-center w-80 px-1 gap-2 z-0">
-        {#each data.filteredCategoriesByUser as category}
-          <CategoryItem title={category.name} categoryId={category.id} iconId={category.icon_id} on:click={handleOpening(category.id)} />
-        {/each}
-      </div>
-    </div>
-  {/if}
- 
-  {#if data.filteredCategoriesByUser.length < 5}
-  <div class="flex justify-center items-center absolute bottom-[5.2rem] w-full">
-    <a class="p-2" href="/categories/create"><img src="../src/img/addFolder.png" class="h-16" alt="Add a folder"></a>
-  </div>
-{/if}
 <BottomMenu imgPath="../" displayHabitText="1" />

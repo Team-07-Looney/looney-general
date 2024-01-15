@@ -35,7 +35,7 @@
   displayBackButton="1"
   imgExtraPath="../"
 />
-<div class="mt-28 flex justify-center items-center">
+<div class="mt-7 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
