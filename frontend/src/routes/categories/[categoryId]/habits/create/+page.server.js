@@ -11,7 +11,7 @@ export const load = async ({ cookies, params }) => {
     const jwt = cookies.get("jwt");
     const { categoryId } = params;
 
-    const predefinedHabitsResponse = await axios.get("http://localhost:3011/predefined-habits", {
+    const predefinedHabitsResponse = await axios.get("http://apigateway:3011/predefined-habits", {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }

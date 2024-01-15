@@ -5,7 +5,7 @@
   import TimePicker from "../../../../../lib/components/TimePicker.svelte";
   import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
-  import showElement from '$lib/showElement';
+  import showElement from "$lib/showElement";
     
   $showElement = false;
   /** @type {import('./$types').ActionData} */
@@ -13,8 +13,8 @@
   export let data;
   
   // date for time picker
-  let date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: 'short' });
+  const date = new Date();
+  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: "short" });
 
   let filteredHabitNames = [];
 
@@ -23,14 +23,14 @@
     const inputValue = event.target.value.trim().toLowerCase(); // trim to handle spaces
     filteredHabitNames = inputValue
       ? data.predefinedHabits.filter(
-          (name) => name.toLowerCase().includes(inputValue)
-        )
+        (name) => name.toLowerCase().includes(inputValue)
+      )
       : [];
   };
 
   // Function to handle option click and set input value
   const handleOptionClick = (option) => {
-    const input = document.getElementById('name');
+    const input = document.getElementById("name");
     input.value = option;
     filteredHabitNames = [];
   };
@@ -84,7 +84,6 @@
               value={form?.name ?? ""}
               error={form?.errors?.some((error) => error.input == "name")}
               on:input={(event) => {
-                console.log('AuthInput on:input event');
                 handleNameInputChange(event);
               }}
             />
@@ -93,8 +92,10 @@
               <div class="absolute mt-[61px] w-[230px] h-20">
                 <ul class="bg-gray-100 border rounded-lg shadow-lg border-1 border-black">
                   {#each filteredHabitNames as option, index (option)}
-                    <li class="{index === filteredHabitNames.length - 1 ? 'cursor-pointer pl-4 py-1 pr-1' : 'cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black'} hover:bg-gray-100 w-full" on:click={() => handleOptionClick(option)}>
-                      {option}
+                    <li class="{index === filteredHabitNames.length - 1 ? "cursor-pointer pl-4 py-1 pr-1" : "cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black"} hover:bg-gray-100 w-full" >
+                      <button on:click={() => handleOptionClick(option)}>
+                        {option}
+                      </button>
                     </li>
                   {/each}
                 </ul>

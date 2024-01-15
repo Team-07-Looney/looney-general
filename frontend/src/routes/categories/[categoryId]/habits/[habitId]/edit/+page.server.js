@@ -17,9 +17,9 @@ export const load = async ({ params, cookies }) => {
       }
     });
 
-    const predefinedHabitsResponse = await axios.get('http://localhost:3011/predefined-habits', {
+    const predefinedHabitsResponse = await axios.get("http://localhost:3011/predefined-habits", {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
