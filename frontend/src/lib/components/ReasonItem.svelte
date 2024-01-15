@@ -12,13 +12,13 @@
       reasonId: reasonId,
     });
 
-    let reasonElement = document.getElementById(`reasonElement${id}`);
+    const reasonElement = document.getElementById(`reasonElement${id}`);
     if (storedReasonId == 0) {
       reasonElement.classList.add("bg-accent");
       reasonElement.classList.remove("bg-gray-100");
       storedReasonId = id;
     } else {
-      let previousReasonElement = document.getElementById(
+      const previousReasonElement = document.getElementById(
         `reasonElement${storedReasonId}`,
       );
       previousReasonElement.classList.remove("bg-accent");
@@ -30,9 +30,12 @@
   }
 </script>
 
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<!-- svelte-ignore a11y-click-events-have-key-events -->
 <div
   id="reasonElement{reasonId}"
-  class="font-light focus:outline-none focus:ring focus:ring-gray-300 bg-gray-100 rounded-lg py-1 px-3"
+  class="font-light focus:outline-none focus:ring
+  focus:ring-gray-300 bg-gray-100 rounded-lg py-1 px-3"
   on:click={handleReasonSelection(reasonId)}
 >
   <h1 class="text-base"><strong>{title}</strong></h1>

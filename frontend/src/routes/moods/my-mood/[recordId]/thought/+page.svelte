@@ -1,6 +1,8 @@
 <script>
     import { onMount } from "svelte";
     import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
+    import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+
       /** @type {import('./$types').ActionData} */
     export let form;
     let latitude;
@@ -25,15 +27,16 @@
 </script>
 
 <WhiteBanner
-    title="My Mood"
-    description="Gain more insight in how you are feeling, Looney will always be there"
-    imgExtraPath="../../"
-    route="/moods/my-mood"
-    displayBackButton="1"
+  title="My Mood"
+  description="Gain more insight in how you are feeling, Looney will always be there"
+  imgExtraPath="../../"
+  route="/moods/my-mood"
+  displayBackButton="1"
 />
 
 <div
-    class="bg-white z-20 mt-2 p-3 mr-6 ml-6 rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg"
+  class="bg-white z-20 mt-2 p-3 mr-6 ml-6 rounded-lg
+  min-h-fit flex flex-col justify-center items-center shadow-lg"
 >
     <div class="flex justify-center items-center flex-col">
         <h2 class="text-xl text-center">
@@ -89,3 +92,5 @@
         </form>
     </div>
 </div>
+
+<BottomMenu imgPath="../../" displayMoodText="1" />

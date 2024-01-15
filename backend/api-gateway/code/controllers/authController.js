@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../variables.env' });
+dotenv.config({ path: '../variables.env' }) 
 
 function getToDay() {
   const date = new Date();
@@ -47,6 +47,14 @@ export async function register(req, res) {
     // Create a JWT token
     let token = createToken(getUserResponse.data.data.id);
     tempResponse.data.token = token;
+
+    await axios.post("http://mshabits:3010/predefined-categories", {
+      user_id: getUserResponse.data.data.id
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    })
 
     res.status(200).send(tempResponse);
 

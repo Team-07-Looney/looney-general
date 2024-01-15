@@ -1,9 +1,9 @@
 import sqlite3 from 'sqlite3';
 
-export let DBSOURCE = "./database/db.sqlite"
+export const DBSOURCE = './database/db.sqlite';
 
 // Only testing database, DO NOT USE IN ANYTHING BUT JEST
-let testingDatabase = new sqlite3.Database(":memory:");
+let testingDatabase = new sqlite3.Database(':memory:');
 
 /**
  * USED ONLY FOR TESTING WITH JEST
@@ -13,7 +13,7 @@ let testingDatabase = new sqlite3.Database(":memory:");
  */
 export async function refreshTestingDatabase() {
   return new Promise(async (resolve) => {
-    testingDatabase = new sqlite3.Database(":memory:");
+    testingDatabase = new sqlite3.Database(':memory:');
     await createTable(testingDatabase);
 
     resolve(testingDatabase);
@@ -28,6 +28,7 @@ export async function openDatabaseConnection() {
   return new Promise(async (resolve, reject) => {
 
     // Not the cleanest solution but works - NODE_ENV is set by npm test - refer to package.json
+    // eslint-disable-next-line no-undef
     if (process.env.NODE_ENV === 'test') {
       await createTable(testingDatabase);
       resolve(testingDatabase);
@@ -40,7 +41,7 @@ export async function openDatabaseConnection() {
       }
 
       // Runs a query to check if the users table exists
-      db.get("SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type='table' AND name='users'", async (err, row) => {
+      db.get('SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type=\'table\' AND name=\'users\'', async (err, row) => {
         // If there is no such table create one
         if (row.tableUsersExists == 0) {
           await createTable(db);
@@ -78,15 +79,15 @@ export async function createTable(db) {
       username TEXT NOT NULL, 
       email TEXT NOT NULL UNIQUE,
       password TEXT NOT NULL)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          console.log('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table users created.');
-          resolve();
-        }
-      });
-  })
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        console.log('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table users created.');
+        resolve();
+      }
+    });
+  });
 }
