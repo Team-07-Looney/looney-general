@@ -1,0 +1,83 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:jsdoc/recommended"
+  ],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "jsdoc"
+  ],
+  "rules": {
+    "indent": [
+      "error",
+      2
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "array-bracket-spacing": [
+      "warn",
+      "never"
+    ],
+    "eol-last": [
+      "warn",
+      "always"
+    ],
+    "camelcase": [
+      "error",
+      {
+        "properties": "never",
+        "ignoreDestructuring": true
+      }
+    ],
+    "no-trailing-spaces": [
+      "warn",
+      {
+        "skipBlankLines": true,
+        "ignoreComments": true
+      }
+    ],
+    "no-multiple-empty-lines": [
+      "warn",
+      {
+        "max": 2,
+        "maxBOF": 1,
+        "maxEOF": 1
+      }
+    ],
+    "max-len": [
+      "warn",
+      100,
+      2,
+      {
+        "ignoreUrls": true,
+        "ignoreComments": false,
+        "ignoreRegExpLiterals": true,
+        "ignoreStrings": true,
+        "ignoreTemplateLiterals": true
+      }
+    ],
+    "no-multi-spaces": "warn",
+    "comma-spacing": "off",
+    "no-var": "warn",
+    "prefer-const": "warn",
+    "curly": [
+      "warn",
+      "all"
+    ],
+    "no-async-promise-executor": 0,
+    "jsdoc/require-returns-type": 0
+  }
+}

@@ -1,6 +1,6 @@
 import axios from "axios";
-import { redirect } from '@sveltejs/kit';
-import { fail } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
+import { fail } from "@sveltejs/kit";
 
 /**
  * Executes during the load of the svelte page
@@ -11,12 +11,12 @@ export const load = async ({ cookies }) => {
 
   try {
     // Get the cookie containing the JWT token
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
 
-    // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    // // Send request to the apigateway to check if the user is authenticated
+    const isAuthenticated = await axios.get("http://apigateway:3011/verify", {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -43,9 +43,9 @@ export const actions = {
   register: async ({ cookies, request }) => {
     const formData = await request.formData();
 
-    let name = formData.get('name');
-    let password = formData.get('password')
-    let email = formData.get('email');
+    const name = formData.get("name");
+    const password = formData.get("password");
+    const email = formData.get("email");
 
     // Checks if there are any validation errors and if so returns to the form
     let errors = await validateRegistrationData(formData);
@@ -55,18 +55,18 @@ export const actions = {
 
     try {
       // Send request to the apigateway to register new user
-      const data = await axios.post('http://localhost:3011/register', {
+      const data = await axios.post("http://apigateway:3011/register", {
         name: name,
         password: password,
         email: email,
       }, {
         headers: {
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
 
       // Sets new cookie that contains the JWT token of the user
-      cookies.set('jwt', data.data.data.token, {
+      cookies.set("jwt", data.data.data.token, {
         httpOnly: true,
         maxAge: 60 * 60 * 24
       });
@@ -79,7 +79,7 @@ export const actions = {
       }
     }
 
-    throw redirect(302, '/home');
+    throw redirect(302, "/home");
   }
 };
 
@@ -89,18 +89,18 @@ export const actions = {
  * @returns array of errors caused by validation fails
  */
 async function validateRegistrationData(formData) {
-  let email = formData.get('email');
-  let name = formData.get('name');
-  let password = formData.get('password');
-  let confirmPassword = formData.get('confirm-password');
+  const email = formData.get("email");
+  const name = formData.get("name");
+  const password = formData.get("password");
+  const confirmPassword = formData.get("confirm-password");
 
-  let validationIssues = [];
+  const validationIssues = [];
 
   if (!email) {
     validationIssues.push({ "input": "email", "message": "The email is missing" });
   } else {
-    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
-    if (!emailRegex.test(formData.get('email'))) {
+    const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    if (!emailRegex.test(formData.get("email"))) {
       validationIssues.push({ "input": "email", "message": "The email that has been provided is invalid" });
     }
   }

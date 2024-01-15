@@ -13,12 +13,13 @@ app.use('/', indexRouter);
 app.use((req, res, next) => {
   try {
     //set header before response
-    res.status(404).send("Sorry can't find that!");
+    res.status(404).send('Sorry can\'t find that!');
   } catch (err) {
     next(err);
   }
 });
 
+// eslint-disable-next-line no-undef
 app.set('port', process.env.PORT || 3012);
 const server = app.listen(app.get('port'), () => {
   console.log(`🍿 Express running → PORT ${server.address().port}`);

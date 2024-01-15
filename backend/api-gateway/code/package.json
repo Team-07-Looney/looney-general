@@ -16,6 +16,7 @@
         "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^16.0.2",
+        "eslint-plugin-jsdoc": "^48.0.2",
         "express": "^4.17.1",
         "jsonwebtoken": "^9.0.2",
         "morgan": "^1.10.0",
@@ -24,6 +25,7 @@
         "passport-local": "^1.0.0"
     },
     "devDependencies": {
+        "eslint": "^8.56.0",
         "http-proxy-middleware": "^2.0.6",
         "nodemon": "^3.0.1"
     }
