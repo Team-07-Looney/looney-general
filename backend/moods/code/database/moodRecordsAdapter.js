@@ -32,7 +32,6 @@ export async function createRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const insert = 'INSERT INTO mood_records (mood_id, reason_id, user_id) VALUES (?, ?, ?)';
-      console.log(request);
     db.run(insert, [request.mood_id, request.reason_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
       if (err) {

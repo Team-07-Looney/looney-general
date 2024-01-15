@@ -14,7 +14,7 @@
     };
 
     return closeSideMenu;
-});
+  });
 export let title;
 export let description;
 export let route;

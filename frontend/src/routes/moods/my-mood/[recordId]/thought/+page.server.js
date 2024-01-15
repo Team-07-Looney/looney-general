@@ -1,6 +1,6 @@
-import axios from 'axios';
-import { fail, redirect } from '@sveltejs/kit';
-import jwt from 'jsonwebtoken';
+import axios from "axios";
+import { fail, redirect } from "@sveltejs/kit";
+import jwt from "jsonwebtoken";
 
 /**
  * Executes during the load of the svelte page
@@ -11,12 +11,12 @@ export const load = async ({ cookies, params }) => {
   const { recordId } = params;
   try {
     // Get the cookie containing the JWT token
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
 
     // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://apigateway:3011/verify', {
+    const isAuthenticated = await axios.get("http://apigateway:3011/verify", {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 

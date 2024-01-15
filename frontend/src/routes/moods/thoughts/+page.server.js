@@ -24,7 +24,7 @@ export const load = async ({ cookies }) => {
     const thoughtsDate = response.data.meta.date;
     const records = [];
     const moods = [];
-    const moodType = [];;
+    const moodType = [];
     const filteredThoughtsByUser = thoughts.filter(thought => thought.user_id === userId);
     console.log(filteredThoughtsByUser);
     for (let i = 0; i < filteredThoughtsByUser.length; i++) {
