@@ -35,7 +35,9 @@
                 </p>
                 <ul class="text-sm">
                   {#each form?.errors as error}
-                    <li class="error">* {error.message}</li>
+                    {#if error.message}
+                      <li class="error">* {error.message}</li>
+                    {/if}
                   {/each}
                 </ul>
               </div>
