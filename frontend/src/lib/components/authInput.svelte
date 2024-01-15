@@ -43,7 +43,7 @@
         {autocomplete}
       />
     </div>
-    {#if isFocused && name=="password"}
+    {#if isFocused && name=="password" && autocomplete != "current-password"}
       <p class="text-sm text-red-400 mt-1">
         Must be at least 8 characters long.
       </p>
