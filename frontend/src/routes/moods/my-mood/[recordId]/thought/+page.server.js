@@ -13,11 +13,11 @@ export const actions = {
 
       // Retrieves the data from the form
       const formData = await request.formData();
-      const title = formData.get('title');
-      const body = formData.get('body');
-      const location = formData.get('location');
-      const latitude = formData.get('latitude');
-      const longitude = formData.get('longitude');
+      const title = formData.get("title");
+      const body = formData.get("body");
+      const location = formData.get("location");
+      const latitude = formData.get("latitude");
+      const longitude = formData.get("longitude");
 
       // check for errors in a form data
       const errors = await validateCreateData(title, body);

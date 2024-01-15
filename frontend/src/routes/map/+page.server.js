@@ -1,6 +1,6 @@
-import { redirect } from '@sveltejs/kit';
-import axios from 'axios';
-import jwt from 'jsonwebtoken';
+import { redirect } from "@sveltejs/kit";
+import axios from "axios";
+import jwt from "jsonwebtoken";
 
 export const ssr = false;
 
@@ -10,23 +10,22 @@ export const ssr = false;
  * @param {*} serverLoadEvent 
  * @returns
  */
-export const load = async ({ serverLoadEvent, cookies }) => {
+export const load = async ({ cookies }) => {
   try {
-    const jwtoken = cookies.get('jwt');
+    const jwtoken = cookies.get("jwt");
     const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get('http://localhost:3011/latest-thoughts', {
+    const response = await axios.get("http://localhost:3011/latest-thoughts", {
       headers: {
-        'Authorization': `Bearer ${jwtoken}`
+        "Authorization": `Bearer ${jwtoken}`
       }
     });
 
-    let thoughts = response.data.data;
+    const thoughts = response.data.data;
     const userId = payload.id;
-    const locations = [];
     thoughts.forEach((thought) => {
-        let location = thought.location.split(',');
-        thought.location = location.map(Number);
+      const location = thought.location.split(",");
+      thought.location = location.map(Number);
     });
 
     const userThought = thoughts.find(thought => thought.user_id === userId);
@@ -35,7 +34,7 @@ export const load = async ({ serverLoadEvent, cookies }) => {
     return { thoughts, userLocation };
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
