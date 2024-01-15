@@ -12,10 +12,18 @@ jobs:
         with:
           node-version: '20.x'
       
-      - name: Install Dependencies
+      - name: Install Dependencies of the client
         run: npm install
         working-directory: ./frontend
 
       - name: Run ESLint in /frontend
         run: npx eslint .
         working-directory: ./frontend/src
+
+      - name: Install Dependencies of the Users microservice
+        run: npm install
+        working-directory: ./backend/users/code
+
+      - name: Run ESLint users microservice
+        run: npx eslint .
+        working-directory: ./backend/users/code
