@@ -24,6 +24,7 @@
         "passport-local": "^1.0.0"
     },
     "devDependencies": {
+        "eslint": "^8.56.0",
         "http-proxy-middleware": "^2.0.6",
         "nodemon": "^3.0.1"
     }
