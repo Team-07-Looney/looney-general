@@ -13,7 +13,7 @@
   let iconId;
 
   function handleIconClick(event) {
-    const id = event.detail.iconId.name;
+    const id = event.detail.iconId;
     iconId = id;
   }
 </script>

@@ -14,9 +14,8 @@
   const dispatch = createEventDispatcher();
 
   export function showPreviousSelection(id) {
-    const selectedIcon = iconComponents[id];
     if (id){
-      const icon = document.getElementById(selectedIcon);
+      const icon = document.getElementById(id);
       icon.classList.add("bg-accent", "border-zinc-950");
       iconId = id;
       storedIconId = id;
@@ -28,13 +27,8 @@
       iconId: id,
     });
     const icon = document.getElementById(id);
-    console.log(id);
         
-    if (iconId == null || iconId === storedIconId) {
-      if (iconId === storedIconId) {
-        const previousIcon = document.getElementById(storedIconId);
-        previousIcon.classList.remove("bg-accent", "border-zinc-950");
-      }
+    if (iconId == null) {
       icon.classList.add("bg-accent", "border-zinc-950");
       iconId = id;
       storedIconId = id;
@@ -54,7 +48,7 @@
       on:keypress={() => handleIconSelection(icon)}
       id={icon}
       role="button" tabindex="0"
-      class="flex justify-center border-2 border-white"
+      class="flex justify-center border-2 border-white rounded-lg"
     ><p class="text-3xl p-1">
       {@html icon}</p>
     </div>
