@@ -50,11 +50,13 @@
         type="text"
         class="bg-gray-300 p-2 w-full rounded-lg"
         name="title"
+        value={form?.title ?? ""}
       />
       <label for="body">Story:</label>
       <textarea
         type="text"
         name="body"
+        value={form?.body ?? ""}
         class="bg-gray-300 w-full p-4 rounded-lg"
         rows="{form && form.errors?'2':'5'}"
       ></textarea>
