@@ -7,6 +7,7 @@
 min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
         <div class="min-w-[50px] flex items-center">
+            <!-- eslint-disable-next-line svelte/no-at-html-tags -->
             <p class="text-3xl">{@html iconId}</p>
         </div>
         <div class="flex items-center max-w-[180px]">
