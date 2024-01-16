@@ -1,4 +1,4 @@
-// BLE Configuration for the Arduino R4 WiFi 
+// Configuration for the Arduino R4 WiFi
 
 #include <ArduinoBLE.h>
 #include "Arduino_LED_Matrix.h"
@@ -31,6 +31,12 @@ uint32_t connected[] = {
   0x80180000
 };
 
+uint32_t receivedFace[] = {
+  0x18018018,
+  0xc001801,
+  0x80180000
+};
+
 void setup() {
   Serial.begin(9600);
   // Initialize BLE
@@ -58,11 +64,21 @@ void loop() {
 
     while (central.connected()) {
       if (dataCharacteristic.written()) {
-        String value = dataCharacteristic.value();
+        const int size = 4;
+        const int numberOfValues = dataCharacteristic.valueLength() / size;
 
-        Serial.print("Received string: ");
-        Serial.println(value);
+        for (int i = 0; i < numberOfValues; i++) {
+          uint32_t value = 0;
+          for (int j = 0; j < size; j++) {
+            value |= (uint32_t)((uint8_t)dataCharacteristic.value()[i * size + j]) << (j * 8);
+          }
+          receivedFace[i] = value;
+          Serial.print("Received value: ");
+          Serial.println(value, HEX);
+        }
       }
+
+      matrix.loadFrame(receivedFace);
     }
     Serial.print("Disconnected from central: ");
     Serial.println(central.address());
