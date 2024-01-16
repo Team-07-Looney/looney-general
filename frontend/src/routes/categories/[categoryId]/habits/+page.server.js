@@ -32,6 +32,7 @@ export const load = async ({ cookies, params }) => {
 
     const habits = responseHabits.data.data;
     const category = responseCategory.data.data;
+    console.log(category);
     const records = responseRecords.data.data;
     const filteredHabitsByCategory = habits.filter(habit => habit.category_id === category[0].id);
 
