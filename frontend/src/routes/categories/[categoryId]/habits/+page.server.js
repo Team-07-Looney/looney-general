@@ -12,7 +12,7 @@ export const load = async ({ cookies, params }) => {
     const jwt = cookies.get("jwt");
     const { categoryId } = params;
 
-    const responseRecords = await axios.get("http://apigateway:3011/records", {
+    const responseRecords = await axios.get("http://apigateway:3011/mood-records", {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
