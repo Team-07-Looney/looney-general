@@ -30,6 +30,7 @@ const tableQueries = [
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
+  location TEXT,
   record_id INTEGER REFERENCES mood_records(id),
   user_id INTEGER)`,
   //Create advice_groups table if it doesn't exists

@@ -29,12 +29,13 @@ import {
   deleteRecordById
 } from '../controllers/moodRecordsController.js'
 import {
-  getThought,
-  createThought,
-  getThoughtById,
-  editThoughtById,
-  deleteThoughtById
-} from '../controllers/thoughtsController.js';
+    getThought,
+    createThought,
+    getThoughtById,
+    getLatestThoughts,
+    editThoughtById,
+    deleteThoughtById
+} from '../controllers/thoughtsController.js'
 import { getAdvice } from '../controllers/adviceController.js';
 import { getAdviceGroups } from '../controllers/adviceGroupsController.js';
 import {
@@ -88,6 +89,8 @@ router.delete('/mood-types/:id', cors(), deleteMoodTypeById);
 
 // get a collection of all the thoughts
 router.get('/thoughts', cors(), getThought);
+// get a collection of all the latest thoughts
+router.get('/latest-thoughts', cors(), getLatestThoughts);
 // route for creating a thought
 router.post('/thoughts', cors(), createThought);
 // route for getting a thought

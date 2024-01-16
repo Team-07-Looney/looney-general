@@ -1,5 +1,5 @@
 <script>
-  import AuthInput from "../../lib/components/authInput.svelte";
+  import AuthInput from "../../lib/components/AuthInput.svelte";
   import FormEars from "../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
@@ -35,7 +35,9 @@
                 </p>
                 <ul class="text-sm">
                   {#each form?.errors as error}
-                    <li class="error">* {error.message}</li>
+                    {#if error.message}
+                      <li class="error">* {error.message}</li>
+                    {/if}
                   {/each}
                 </ul>
               </div>

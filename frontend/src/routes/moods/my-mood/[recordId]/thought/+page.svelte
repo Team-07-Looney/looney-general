@@ -1,9 +1,30 @@
 <script>
-    import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
-import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
-      /** @type {import('./$types').ActionData} */
-    export let form;
-    export let data;
+  import { onMount } from "svelte";
+  import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
+  import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+
+  /** @type {import('./$types').ActionData} */
+  export let form;
+  export let data;
+  let latitude;
+  let longitude;
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(storePosition);
+    } else {
+      onMount(() => {
+        const locationCheckbox = document.getElementById("location");
+        locationCheckbox.checked = false;
+      });
+    }
+  }
+
+  function storePosition(location) {
+    latitude = location.coords.latitude;
+    longitude = location.coords.longitude;
+    console.log(location);
+  }
 </script>
 
 <WhiteBanner
@@ -22,6 +43,7 @@ import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
     <h2 class="text-xl text-center">
       Would you like to write something about it?
     </h2>
+    <!-- svelte-ignore a11y-no-static-element-interactions -->
     <form method="POST" action="?/createThought" class="w-full">
       <label for="title">Title:</label>
       <input
@@ -35,6 +57,21 @@ import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
         name="body"
         class="bg-gray-300 w-full p-4 rounded-lg"
       ></textarea>
+      <!-- svelte-ignore a11y-click-events-have-key-events -->
+      <div
+        class="flex gap-1 items-center justify-center"
+        on:click={getLocation}
+      >
+        <input type="checkbox" name="location" id="location" class="w-4 h-4" />
+        <label for="location">Share with everybody on the map</label>
+        <input class="hidden" id="latitude" name="latitude" value={latitude} />
+        <input
+          class="hidden"
+          id="longitude"
+          name="longitude"
+          value={longitude}
+        />
+      </div>
       {#if form && form.errors}
         <div class="bg-red-200 bg-opacity-60 text-red-800 p-4 rounded-lg">
           <p class="text-sm pb-2">

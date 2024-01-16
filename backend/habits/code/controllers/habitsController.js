@@ -12,11 +12,11 @@ import {
  */
 function getToDay() {
   const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   // This arrangement can be altered based on how we want the date's format to appear.
-  let currentDate = `${day}-${month}-${year}`;
+  const currentDate = `${day}-${month}-${year}`;
   console.log(currentDate);
   return currentDate;
 }
@@ -54,7 +54,7 @@ export async function getHabits(req, res, next) {
 export async function createHabit(req, res, next) {
   try {
     await createHabitInstance(req.body);
-    tempResponse.data.message = "habit created successfully";
+    tempResponse.data.message = 'habit created successfully';
     res.status(200).send(tempResponse);
   } catch (err) {
     next(err);
@@ -85,7 +85,7 @@ export async function getHabitById(req, res, next) {
 export async function editHabitById(req, res, next) {
   try {
     await editHabitInstanceById(req.body, req.params.habitId);
-    tempResponse.data.message = "habit edited successfully";
+    tempResponse.data.message = 'habit edited successfully';
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);
@@ -101,7 +101,7 @@ export async function editHabitById(req, res, next) {
 export async function deleteHabitById(req, res, next) {
   try {
     await deleteHabitInstanceById(req.params.habitId);
-    tempResponse.data.message = "habit deleted successfully";
+    tempResponse.data.message = 'habit deleted successfully';
     res.status(200).send(tempResponse);
   } catch(err) {
     next(err);

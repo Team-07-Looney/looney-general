@@ -2,6 +2,7 @@ import {
     createThoughtInstance,
     getAllThoughtData,
     getThoughtInstanceById,
+    getLatestThoughtsInstances,
     editThoughtInstanceById,
     deleteThoughtInstanceById
   } from '../database/thoughtsAdapter.js';
@@ -78,6 +79,21 @@ import {
   export async function getThoughtById(req, res, next) {
     try {
       tempResponse.data = await getThoughtInstanceById(req.params.id);
+      res.status(200).send(tempResponse);
+    } catch(err) {
+      next(err);
+    }
+  }
+
+  /**
+   * get the latest thoughts based on every user
+   * @param {*} req request
+   * @param {*} res response
+   * @param {*} next 
+   */
+  export async function getLatestThoughts(req, res, next) {
+    try {
+      tempResponse.data = await getLatestThoughtsInstances();
       res.status(200).send(tempResponse);
     } catch(err) {
       next(err);
