@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllHabitsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM habits";
+    const sql = 'SELECT * FROM habits';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -33,7 +33,8 @@ export async function createHabitInstance(request) {
     const db = await openDatabaseConnection();
     const insert = 'INSERT INTO habits (name, start_time, duration, category_id) VALUES (?,?,?,?)';
 
-    db.run(insert, [request.name, request.start_time, request.duration, request.category_id], (err) => {
+    db.run(insert, [request.name, request.start_time,
+      request.duration, request.category_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {

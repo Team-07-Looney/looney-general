@@ -1,5 +1,5 @@
-import axios from 'axios';
-import { fail, redirect } from '@sveltejs/kit';
+import axios from "axios";
+import { fail, redirect } from "@sveltejs/kit";
 
 /**
  * Executes during the load of the svelte page
@@ -8,20 +8,23 @@ import { fail, redirect } from '@sveltejs/kit';
 export const load = async ({ cookies, params }) => {
   try {
     // Get the cookie containing the JWT token
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
     const { categoryId } = params;
 
-    // Send request to the apigateway to check if the user is authenticated
-    const isAuthenticated = await axios.get('http://localhost:3011/verify', {
+    const predefinedHabitsResponse = await axios.get("http://apigateway:3011/predefined-habits", {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
-    return { categoryId };
+    const predefinedHabitsObject = predefinedHabitsResponse.data.data;
+
+    const predefinedHabits = predefinedHabitsObject.map(item => item.name);
+
+    return { categoryId, predefinedHabits };
   } catch (error) {
-    if (error.response.status == 401)  {
-      throw redirect(302, '/login');
+    if (error.response.status == 401) {
+      throw redirect(302, "/login");
     }
   }
 };
@@ -32,17 +35,17 @@ export const load = async ({ cookies, params }) => {
 export const actions = {
   createHabit: async ({ request, cookies, params }) => {
 
-    const { categoryId } = params
+    const { categoryId } = params;
 
     try {
-      const jwt = cookies.get('jwt');
+      const jwt = cookies.get("jwt");
 
       // Retrieves the data from the form
       const formData = await request.formData();
-      const name = formData.get('name');
-      const startTime = formData.get('start_time');
-      const duration = formData.get('duration');
-      const durationElements = duration.split(':');
+      const name = formData.get("name");
+      const startTime = formData.get("start_time");
+      const duration = formData.get("duration");
+      const durationElements = duration.split(":");
 
       // check for errors in a form data
       const errors = await validateCreateData(name, startTime, duration);
@@ -53,7 +56,7 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create habit
-      const data = await axios.post(`http://localhost:3011/categories/${categoryId}/habits`, {
+      await axios.post(`http://apigateway:3011/categories/${categoryId}/habits`, {
         name: name,
         start_time: startTime,
         duration: parseInt(durationElements[0]) * 60 + parseInt(durationElements[1]),
@@ -61,12 +64,12 @@ export const actions = {
       }, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
     } catch (error) {
       if (error.response.status == 401) {
-        throw redirect(302, '/login');
+        throw redirect(302, "/login");
       }
     }
 
@@ -75,7 +78,7 @@ export const actions = {
 };
 
 async function validateCreateData(name, startTime, duration) {
-  let errors = [];
+  const errors = [];
 
   //check if name exists
   if (!name) {
@@ -105,7 +108,7 @@ async function validateCreateData(name, startTime, duration) {
   } else {
     //if it exists, check for invalid input
     const durationRegex = /^([0-8]?[0-9]|90):([0-5]?[0-9]|60)$/;
-    const durationElements = duration.split(':');
+    const durationElements = duration.split(":");
     if (!durationRegex.test(duration)) {
       errors.push({ "input": "duration", "message": "Duration should be of a format (m)m:(s)s" });
     } else if (parseInt(durationElements[0]) === 0 && parseInt(durationElements[1]) === 0) {

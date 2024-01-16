@@ -4,7 +4,7 @@ import { getUsers, getUser, createUser, updateUser } from '../controllers/userCo
 const router = express.Router();
 
 // routes
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.json('hi from users');
 });
 

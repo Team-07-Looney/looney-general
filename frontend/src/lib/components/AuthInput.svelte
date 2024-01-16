@@ -8,7 +8,7 @@
   export let autocomplete = null;
   export let error = false;
 
-  let color = error ? "red-700" : "black";
+  const color = error ? "red-700" : "black";
 
   let isFocused = false;
   const onFocus = () => (isFocused = true);
@@ -30,26 +30,30 @@
         <path stroke-linecap="round" stroke-linejoin="round" d={path} />
       </svg>
       <input
-        class="appearance-none bg-transparent border-none w-full mr-3 py-1 px-2 leading-tight focus:outline-none font"
+        class="appearance-none bg-transparent border-none w-full
+        mr-3 py-1 px-2 leading-tight focus:outline-none font"
         {type}
         {name}
         id={name}
-        placeholder={placeholder}
+        {placeholder}
         aria-label={label}
         on:focus={onFocus}
         on:blur={onBlur}
         value={value ? value : ""}
         {autocomplete}
+        on:input
       />
     </div>
-    {#if isFocused && autocomplete == "new-password"}
-      <p class="text-sm text-orange-500 mt-1">
-        The password needs to be at least 12 characters long.
+    {#if isFocused && name=="password" && autocomplete != "current-password"}
+      <p class="text-sm text-red-400 mt-1">
+        Must be at least 8 characters long.
       </p>
     {/if}
   </div>
 </div>
 
 <style>
- ::placeholder {color: rgb(156 163 175);}
+  ::placeholder {
+    color: rgb(156 163 175);
+  }
 </style>

@@ -1,5 +1,6 @@
-import { openDatabaseConnection, closeDatabaseConnection, createTable, refreshTestingDatabase } from "../../database/database";
-import sqlite3 from "sqlite3";
+/* eslint-disable no-undef */
+import { openDatabaseConnection, closeDatabaseConnection, createTable, refreshTestingDatabase } from '../../database/database';
+import sqlite3 from 'sqlite3';
 
 describe('database connection opening', () => {
   test('successful opening a database connection and existence of users table', async () => {
@@ -10,7 +11,7 @@ describe('database connection opening', () => {
     // Assert
     expect(db).toBeInstanceOf(sqlite3.Database);
 
-    db.get("SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type='table' AND name='users'", (err, row) => {
+    db.get('SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type=\'table\' AND name=\'users\'', (err, row) => {
       expect(row.tableUsersExists).toBe(1);
     });
   });
@@ -52,13 +53,13 @@ describe('database connection closing', () => {
 describe('creation of table users', () => {
   test('successful creation of table users', async () => {
     // Arrange
-    const db = new sqlite3.Database(":memory:");
+    const db = new sqlite3.Database(':memory:');
 
     // Act
     await createTable(db);
 
     // Assert
-    db.get("SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type='table' AND name='users'", (err, row) => {
+    db.get('SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type=\'table\' AND name=\'users\'', (err, row) => {
       expect(row.tableUsersExists).toBe(1);
     });
   });
@@ -72,7 +73,7 @@ describe('creation of table users', () => {
     await createTable(db);
 
     // Assert
-    db.get("SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type='table' AND name='users'", (err, row) => {
+    db.get('SELECT count(*) AS tableUsersExists FROM sqlite_master WHERE type=\'table\' AND name=\'users\'', (err, row) => {
       expect(row.tableUsersExists).toBe(1);
     });
   });

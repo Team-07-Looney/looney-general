@@ -7,9 +7,9 @@ import bcrypt from 'bcrypt';
  */
 export async function getAllUsers() {
   return new Promise(async (resolve, reject) => {
-    let db = await openDatabaseConnection();
-    let sql = "SELECT * FROM users";
-    let params = [];
+    const db = await openDatabaseConnection();
+    const sql = 'SELECT * FROM users';
+    const params = [];
 
     db.all(sql, params, (err, rows) => {
       closeDatabaseConnection(db);
@@ -35,11 +35,11 @@ export async function createNewUser(name, email, password) {
   const saltRounds = 12;
 
   // Using bcrypt alg to hash the password
-  let hash = await bcrypt.hash(password, saltRounds);
+  const hash = await bcrypt.hash(password, saltRounds);
 
   return new Promise(async (resolve, reject) => {
     // Establishes connection with the db
-    let db = await openDatabaseConnection();
+    const db = await openDatabaseConnection();
     const query = 'INSERT INTO users (username, email, password) VALUES (?,?,?)';
 
     // Run the insert query
@@ -79,7 +79,7 @@ export async function createNewUser(name, email, password) {
 /**
  * Retrieves a user from the database based on key-value pair within a promise
  * @param {*} key Possible values: id, email
- * @param {*} value 
+ * @param {*} value The value behind the key
  * @returns A user based on the matching of the key-value pair
  */
 export async function getUserBy(key, value) {
@@ -88,12 +88,12 @@ export async function getUserBy(key, value) {
     const possibleKeys = ['id', 'email'];
 
     if (!possibleKeys.includes(key)) {
-      reject(new Error("Invalid param for defining the user. Key must be 'id' or 'email'."));
+      reject(new Error('Invalid param for defining the user. Key must be \'id\' or \'email\'.'));
       return;
     }
 
     // Establishing the db connection
-    let db = await openDatabaseConnection();
+    const db = await openDatabaseConnection();
     const query = `SELECT * FROM users WHERE ${key} = ?`;
 
     db.get(query, [value], (err, row) => {
@@ -108,23 +108,30 @@ export async function getUserBy(key, value) {
   });
 }
 
+/**
+ * Updates a user's details identified by their id
+ * @param {*} id the id of the user
+ * @param {*} key the parameter of the user that will be updated (only password currently allowed)
+ * @param {*} value the value of the parameter
+ * @returns status message if the update was successful
+ */
 export async function updateUserWith(id, key, value) {
   return new Promise(async (resolve, reject) => {
     const possibleKeys = ['password'];
     if (!possibleKeys.includes(key)) {
-      reject(new Error("Invalid param for updating the user. Currently only the password is allowed."));
+      reject(new Error('Invalid param for updating the user. Currently only the password is allowed.'));
       return;
     }
 
     const query = `UPDATE users SET ${key} = "${value}" WHERE id = ${id}`;
 
-    let db = await openDatabaseConnection();
+    const db = await openDatabaseConnection();
     db.run(query, function (err) {
       if (err) {
         console.error(err);
         reject({
           code: 403,
-          message: "Failed to update the user",
+          message: 'Failed to update the user',
           userId: id,
           error: err.message // Include the specific error message
         });
