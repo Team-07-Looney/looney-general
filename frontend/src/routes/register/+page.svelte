@@ -1,5 +1,5 @@
 <script>
-  import AuthInput from "../../lib/components/authInput.svelte";
+  import AuthInput from "../../lib/components/AuthInput.svelte";
   import FormEars from "../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";

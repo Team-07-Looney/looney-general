@@ -6,7 +6,7 @@
   $showElement = false;
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../lib/components/BottomMenu.svelte";
-  import AuthInput from "../../lib/components/authInput.svelte";
+  import AuthInput from "../../lib/components/AuthInput.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
 

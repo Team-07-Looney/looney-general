@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 
-export const DBSOURCE = "./database/db.sqlite"
+export const DBSOURCE = './database/db.sqlite';
 
 /**
  * Establishes a connection with the habits database
@@ -18,7 +18,7 @@ export async function openDatabaseConnection() {
 
       // Runs a query to check if the tables exists and if not create one
       // Categories Table
-      db.get("SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type='table' AND name='categories'", async (err, row) => {
+      db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type="table" AND name="categories"', async (err, row) => {
         console.log(row);
         if (row.tableCategoriesExists == 0) {
           await createCategoriesTable(db);
@@ -28,7 +28,7 @@ export async function openDatabaseConnection() {
       });
 
       // Predefined Categories Table
-      db.get("SELECT count(*) AS tablePredefinedCategoriesExists FROM sqlite_master WHERE type='table' AND name='predefined_categories'", async (err, row) => {
+      db.get('SELECT count(*) AS tablePredefinedCategoriesExists FROM sqlite_master WHERE type="table" AND name="predefined_categories"', async (err, row) => {
         // If there is no such table create one
         console.log(row);
         if (row.tablePredefinedCategoriesExists == 0) {
@@ -39,7 +39,7 @@ export async function openDatabaseConnection() {
       });
 
       // Predefined Habits Table
-      db.get("SELECT count(*) AS tablePredefinedHabitsExists FROM sqlite_master WHERE type='table' AND name='predefined_habits'", async (err, row) => {
+      db.get('SELECT count(*) AS tablePredefinedHabitsExists FROM sqlite_master WHERE type="table" AND name="predefined_habits"', async (err, row) => {
         console.log(row);
         if (row.tablePredefinedHabitsExists == 0) {
           await createPredefinedHabitsTable(db);
@@ -49,7 +49,7 @@ export async function openDatabaseConnection() {
       });
 
       // Habits Table
-      db.get("SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type='table' AND name='habits'", async (err, row) => {
+      db.get('SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type="table" AND name="habits"', async (err, row) => {
         console.log(row);
         if (row.tableHabitsExists == 0) {
           await createHabitsTable(db);
@@ -59,7 +59,7 @@ export async function openDatabaseConnection() {
       });
 
       // Records Table
-      db.get("SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type='table' AND name='records'", async (err, row) => {
+      db.get('SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type="table" AND name="records"', async (err, row) => {
         console.log(row);
         if (row.tableRecordsExists == 0) {
           await createRecordsTable(db);
@@ -95,31 +95,31 @@ async function createPredefinedCategoriesTable(db) {
     db.run(`CREATE TABLE predefined_categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table predefined categories created.');
-          
-          // Insert Data
-          const predefinedCategories = ['Morning Routine', 'Afternoon Routine', 'Anytime'];
-          const insertQuery = 'INSERT INTO predefined_categories (name) VALUES (?)';
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table predefined categories created.');
 
-          predefinedCategories.forEach((name) => {
-            db.run(insertQuery, [name], (err) => {
-              if (err) {
-                console.error(`Error inserting data for category `, err.message);
-                reject(err.message);
-              } else {
-                console.log(`Data inserted for category: ${name}`);
-                resolve();
-              }
-            });
+        // Insert Data
+        const predefinedCategories = ['Morning Routine', 'Afternoon Routine', 'Anytime'];
+        const insertQuery = 'INSERT INTO predefined_categories (name) VALUES (?)';
+
+        predefinedCategories.forEach((name) => {
+          db.run(insertQuery, [name], (err) => {
+            if (err) {
+              console.error('Error inserting data for category ', err.message);
+              reject(err.message);
+            } else {
+              console.log(`Data inserted for category: ${name}`);
+              resolve();
+            }
           });
-        }
-      });
-  })
+        });
+      }
+    });
+  });
 }
 
 /**
@@ -132,31 +132,31 @@ async function createPredefinedHabitsTable(db) {
     db.run(`CREATE TABLE predefined_habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT NOT NULL)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table predefined habits created.');
-          
-          // Insert Data
-          const predefinedHabits = ['Brush Teeth', 'Eat Breakfast', 'Walk', 'Read', 'Workout', 'Eat Lunch', 'Study', 'Paint', 'Eat Dinner', 'Go Out'];
-          const insertQuery = 'INSERT INTO predefined_habits (name) VALUES (?)';
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table predefined habits created.');
 
-          predefinedHabits.forEach((name) => {
-            db.run(insertQuery, [name], (err) => {
-              if (err) {
-                console.error(`Error inserting data for category `, err.message);
-                reject(err.message);
-              } else {
-                console.log(`Data inserted for category: ${name}`);
-                resolve();
-              }
-            });
+        // Insert Data
+        const predefinedHabits = ['Brush Teeth', 'Eat Breakfast', 'Walk', 'Read', 'Workout', 'Eat Lunch', 'Study', 'Paint', 'Eat Dinner', 'Go Out'];
+        const insertQuery = 'INSERT INTO predefined_habits (name) VALUES (?)';
+
+        predefinedHabits.forEach((name) => {
+          db.run(insertQuery, [name], (err) => {
+            if (err) {
+              console.error('Error inserting data for category ', err.message);
+              reject(err.message);
+            } else {
+              console.log(`Data inserted for category: ${name}`);
+              resolve();
+            }
           });
-        }
-      });
-  })
+        });
+      }
+    });
+  });
 }
 
 /**
@@ -170,17 +170,17 @@ async function createCategoriesTable(db) {
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
         user_id INTEGER)`,
-        (err) => {
-          if (err) {
-            console.error('Error creating table: ', err.message);
-            reject(err.message);
-          } else {
-            console.log('Table habits created.');
-            resolve();
-          }
-        });
-    })
-  }
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table habits created.');
+        resolve();
+      }
+    });
+  });
+}
 
 
 /**
@@ -200,16 +200,16 @@ async function createHabitsTable(db) {
       duration INTEGER,
       category_id INTEGER NOT NULL,
       FOREIGN KEY (category_id) REFERENCES categories(id))`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table habits created.');
-          resolve();
-        }
-      });
-  })
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table habits created.');
+        resolve();
+      }
+    });
+  });
 }
 
 /**
@@ -224,14 +224,14 @@ async function createRecordsTable(db) {
       habit_id INTEGER NOT NULL,
       date TEXT,
       FOREIGN KEY (habit_id) REFERENCES habits(id))`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table records created.');
-          resolve();
-        }
-      });
-  })
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table records created.');
+        resolve();
+      }
+    });
+  });
 }

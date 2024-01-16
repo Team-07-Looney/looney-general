@@ -1,5 +1,5 @@
 <script>
-  import AuthInput from "../../lib/components/authInput.svelte";
+  import AuthInput from "../../lib/components/AuthInput.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
   import showElement from "$lib/showElement";
