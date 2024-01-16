@@ -30,7 +30,7 @@
   <MyMoodsButtons
     buttonName="Tracker"
     buttonIcon="tracker.png"
-    buttonLink="/"
+    buttonLink="/moods/tracker"
   />
   <MyMoodsButtons
     buttonName="Map"

@@ -33,7 +33,7 @@ const moodProxy = createProxyMiddleware({
 });
 
 router.use('/categories', cors(), requireAuth, habitProxy);
-router.use('/records', cors(), requireAuth, habitProxy);
+router.use('/habit-records', cors(), requireAuth, habitProxy);
 router.use('/predefined-habits', cors(), requireAuth, habitProxy);
 router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
@@ -41,7 +41,10 @@ router.use('/mood-types', cors(), requireAuth, moodProxy);
 router.use('/thoughts', cors(), requireAuth, moodProxy);
 router.use('/latest-thoughts', cors(), requireAuth, moodProxy);
 router.use('/reasons', cors(), requireAuth, moodProxy);
-router.use('/recordsMoods', cors(), requireAuth, moodProxy);
+router.use('/mood-records', cors(), requireAuth, moodProxy);
+router.use('/advice', cors(), requireAuth, moodProxy);
+router.use('/advice-groups', cors(), requireAuth, moodProxy);
+router.use('/advice-records', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
 
 // Authentication routes

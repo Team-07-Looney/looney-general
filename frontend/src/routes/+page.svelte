@@ -1,7 +1,7 @@
 <script>
   import showElement from "$lib/showElement";
   import WhiteBanner from "../lib/components/WhiteBanner.svelte";
-  $showElement = false;
+  $showElement = true;
 </script>
 
 <div>

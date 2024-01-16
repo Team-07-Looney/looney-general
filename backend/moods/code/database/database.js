@@ -4,33 +4,49 @@ export const DBSOURCE = "./database/db.sqlite";
 
 // Define table creation queries
 const tableQueries = [
-  //Create Mood_Types table if it doesn't exists
-  `CREATE TABLE IF NOT EXISTS Mood_Types (
+  //Create mood_types table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS mood_types (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL)`,
-  //Create Moods table if it doesn't exists
-  `CREATE TABLE IF NOT EXISTS Moods (
+  //Create moods table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS moods (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  mood_type_id INTEGER REFERENCES Mood_Types(id),
+  mood_type_id INTEGER REFERENCES mood_types(id),
   name TEXT UNIQUE NOT NULL,
   user_id INTEGER)`,
-  //Create Reasons table if it doesn't exists
-  `CREATE TABLE IF NOT EXISTS Reasons (
+  //Create reasons table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS reasons (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   name TEXT NOT NULL,
   user_id INTEGER)`,
-  //Create Records table if it doesn't exists
-  `CREATE TABLE IF NOT EXISTS Records (
+  //Create mood_records table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS mood_records (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  reason_id INTEGER REFERENCES Reasons(id),
-  mood_id INTEGER REFERENCES Moods(id))`,
-  //Create Thoughts table if it doesn't exists
-  `CREATE TABLE IF NOT EXISTS Thoughts (
+  reason_id INTEGER REFERENCES reasons(id),
+  mood_id INTEGER REFERENCES moods(id),
+  user_id INTEGER)`,
+  //Create thoughts table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS thoughts (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   title TEXT,
   body TEXT NOT NULL,
   location TEXT,
-  record_id INTEGER REFERENCES Records(id),
+  record_id INTEGER REFERENCES mood_records(id),
+  user_id INTEGER)`,
+  //Create advice_groups table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS advice_groups (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT)`,
+  //Create advice table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS advice (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  group_id INTEGER REFERENCES advice_groups(id),
+  mood_type_id INTEGER REFERENCES moods_types(id))`,
+  //Create advice mood_records table if it doesn't exists
+  `CREATE TABLE IF NOT EXISTS advice_records (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  advice_id INTEGER REFERENCES advice(id),
   user_id INTEGER)`
 ];
 
@@ -50,14 +66,16 @@ export async function openDatabaseConnection() {
 
       try {
 
-        db.get("SELECT count(*) AS tableMoodsExists FROM sqlite_master WHERE type='table' AND name='Moods'", async (err, row) => {
+        db.get("SELECT count(*) AS tablemoodsExists FROM sqlite_master WHERE type='table' AND name='moods'", async (err, row) => {
           // If there is no such table create one
-          if (row.tableMoodsExists == 0) {
+          if (row.tablemoodsExists == 0) {
             // Use a separate async function within the callback
             await createTables(db);
-            await populateMoodsTypeTable(db);
-            await populateMoodsTable(db);
-            await populateReasonsTable(db);
+            await populatemoodsTypeTable(db);
+            await populatemoodsTable(db);
+            await populatereasonsTable(db);
+            await populateadviceGroupsTable(db);
+            await populateadviceTable(db);
           }
 
           resolve(db);
@@ -111,12 +129,12 @@ async function createTableIfNotExists(db, query) {
   });
 }
 
-async function populateMoodsTypeTable(db) {
+async function populatemoodsTypeTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedCategories = ['Positive', 'Neutral', 'Negative'];
-    const insertQuery = 'INSERT INTO Mood_Types (name) VALUES (?)';
+    const predefinedMoodTypes = ['Positive', 'Neutral', 'Negative'];
+    const insertQuery = 'INSERT INTO mood_types (name) VALUES (?)';
 
-    predefinedCategories.forEach((name) => {
+    predefinedMoodTypes.forEach((name) => {
       db.run(insertQuery, [name], (err) => {
         if (err) {
           reject(err.message);
@@ -128,7 +146,7 @@ async function populateMoodsTypeTable(db) {
   });
 }
 
-async function populateMoodsTable(db) {
+async function populatemoodsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedMooods = [
       {
@@ -192,7 +210,7 @@ async function populateMoodsTable(db) {
         name: 'Iritated'
       }
     ];
-    const insertQuery = 'INSERT INTO Moods (mood_type_id, name, user_id) VALUES (?,?,?)';
+    const insertQuery = 'INSERT INTO moods (mood_type_id, name, user_id) VALUES (?,?,?)';
     predefinedMooods.forEach((mood) => {
       db.run(insertQuery, [mood.moodTypeId, mood.name, mood.user_id], (err) => {
         if (err) {
@@ -205,12 +223,12 @@ async function populateMoodsTable(db) {
   });
 }
 
-async function populateReasonsTable(db) {
+async function populatereasonsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedReasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
-    const insertQuery = 'INSERT INTO Reasons (name, user_id) VALUES (?,?)';
+    const predefinedreasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
+    const insertQuery = 'INSERT INTO reasons (name, user_id) VALUES (?,?)';
 
-    predefinedReasons.forEach((reason) => {
+    predefinedreasons.forEach((reason) => {
       db.run(insertQuery, [reason], (err) => {
         if (err) {
           reject(err.message);
@@ -219,5 +237,135 @@ async function populateReasonsTable(db) {
         }
       });
     });
+  });
+}
+
+async function populateadviceGroupsTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedadviceGroups = [
+      {
+        id: 1,
+        name: 'Me Time'
+      },
+      {
+        id: 2,
+        name: 'Entertainment'
+      },
+      {
+        id: 3,
+        name: 'Well-being'
+      },
+      {
+        id: 4,
+        name: 'New Challenge'
+      },
+      {
+        id: 5,
+        name: 'Social'
+      }
+    ];
+  
+    const insertQuery = 'INSERT INTO advice_groups (id, name) VALUES (?,?)';
+    predefinedadviceGroups.forEach((advice_groups) => {
+      db.run(insertQuery, [advice_groups.id, advice_groups.name], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    })
+  });
+}
+
+async function populateadviceTable(db) {
+  return new Promise((resolve, reject) => {
+    const predefinedadvice = [
+      {
+        name: 'Read a Book',
+        groupId: 1,
+        moodTypeId: 1
+      },
+      {
+        name: 'Art and Craft',
+        groupId: 2,
+        moodTypeId: 1
+      },
+      {
+        name: 'Do Yoga',
+        groupId: 3,
+        moodTypeId: 1
+      },
+      {
+        name: 'Try a new Recipe',
+        groupId: 4,
+        moodTypeId: 1
+      },
+      {
+        name: 'Go to a Café',
+        groupId: 5,
+        moodTypeId: 1
+      },
+      {
+        name: 'Bake Muffins',
+        groupId: 1,
+        moodTypeId: 2
+      },
+      {
+        name: 'Movie Night',
+        groupId: 2,
+        moodTypeId: 2
+      },
+      {
+        name: 'Outdoor Walk',
+        groupId: 3,
+        moodTypeId: 2
+      },
+      {
+        name: 'Try new Outfits',
+        groupId: 4,
+        moodTypeId: 2
+      },
+      {
+        name: 'Talk to a Friend',
+        groupId: 5,
+        moodTypeId: 2
+      },
+      {
+        name: 'Warm Bath',
+        groupId: 1,
+        moodTypeId: 3
+      },
+      {
+        name: 'Listen to Music',
+        groupId: 2,
+        moodTypeId: 3
+      },
+      {
+        name: 'Meditate',
+        groupId: 3,
+        moodTypeId: 3
+      },
+      {
+        name: 'Explore a Park',
+        groupId: 4,
+        moodTypeId: 3
+      },
+      {
+        name: 'Call Family',
+        groupId: 5,
+        moodTypeId: 3
+      }
+    ];
+    const insertQuery = 'INSERT INTO advice (name, group_id, mood_type_id) VALUES (?,?,?)';
+    predefinedadvice.forEach((advice) => {
+      db.run(insertQuery, [advice.name, advice.groupId, advice.moodTypeId], (err) => {
+        if (err) {
+          reject(err.message);
+        } else {
+          resolve();
+        }
+      });
+    })
   });
 }

@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition";
   import { onMount } from "svelte";
+  import bluetoothMessage from "$lib/bluetoothMessage.js";
 
   let isAvailable;
   let deviceServer;
@@ -59,7 +60,8 @@
       }
 
       await characteristic.writeValue(buffer);
-      console.log("Array sent to the device successfully!");
+      console.log("String sent to the device successfully!");
+      $bluetoothMessage = "Your Looney is connected";
     } catch (e) {
       console.error("Error sending array:", e);
     }
@@ -81,6 +83,6 @@
     on:click={() => requestBluetoothDevices()}
   >
     <img src="/src/img/bluetooth.png" alt="octopus" class="h-[85px] w-[90px]" />
-    <p>Connect your Looney to the application</p>
+    <p>{$bluetoothMessage}</p>
   </div>
 </div>

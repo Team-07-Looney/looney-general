@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllMoodTypeData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM Mood_Types";
+    const sql = "SELECT * FROM mood_types";
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -31,7 +31,7 @@ export async function getAllMoodTypeData() {
 export async function createMoodTypeInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Mood_Types (name) VALUES (?)';
+    const insert = 'INSERT INTO mood_types (name) VALUES (?)';
 
     db.run(insert, [request.name], (err) => {
       closeDatabaseConnection(db);
@@ -54,7 +54,7 @@ export async function createMoodTypeInstance(request) {
 export async function getMoodTypeInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = `SELECT * FROM Mood_Types WHERE id='${id}'`;
+    const sql = `SELECT * FROM mood_types WHERE id='${id}'`;
 
     db.all(sql, (err, row) => {
       closeDatabaseConnection(db);
@@ -78,7 +78,7 @@ export async function getMoodTypeInstanceById(id) {
 export async function editMoodTypeInstanceById(moodType, moodTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Mood_Types SET name='${moodType.name}' WHERE id=${moodTypeId}`;
+    const update = `UPDATE mood_types SET name='${moodType.name}' WHERE id=${moodTypeId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);
@@ -101,7 +101,7 @@ export async function editMoodTypeInstanceById(moodType, moodTypeId) {
 export async function deleteMoodTypeInstanceById(moodTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const query = `DELETE FROM Mood_Types WHERE id='${moodTypeId}'`;
+    const query = `DELETE FROM mood_types WHERE id='${moodTypeId}'`;
     
     db.run(query, (err) => {
       closeDatabaseConnection(db);

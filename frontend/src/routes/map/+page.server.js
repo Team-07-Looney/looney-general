@@ -7,7 +7,7 @@ export const ssr = false;
 /**
  * Fetches data from the moods microservice via the API gateway to retrieve all locations
  * 
- * @param {*} serverLoadEvent 
+ * @param {*} cookies 
  * @returns
  */
 export const load = async ({ cookies }) => {
@@ -15,7 +15,7 @@ export const load = async ({ cookies }) => {
     const jwtoken = cookies.get("jwt");
     const payload = jwt.decode(jwtoken);
 
-    const response = await axios.get("http://localhost:3011/latest-thoughts", {
+    const response = await axios.get("http://apigateway:3011/latest-thoughts", {
       headers: {
         "Authorization": `Bearer ${jwtoken}`
       }
@@ -29,9 +29,11 @@ export const load = async ({ cookies }) => {
     });
 
     const userThought = thoughts.find(thought => thought.user_id === userId);
-    const userLocation = userThought.location;
-
-    return { thoughts, userLocation };
+    console.log(userThought);
+    const userLocation = userThought?userThought.location:[0, 0];
+    const mapZoom = userThought?15:1;
+    
+    return { thoughts, userLocation, mapZoom };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, "/login");

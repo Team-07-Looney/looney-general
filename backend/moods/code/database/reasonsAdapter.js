@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllReasonData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM Reasons";
+    const sql = "SELECT * FROM reasons";
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -31,7 +31,7 @@ export async function getAllReasonData() {
 export async function createReasonInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO Reasons (name, user_id) VALUES (?,?)';
+    const insert = 'INSERT INTO reasons (name, user_id) VALUES (?,?)';
 
     db.run(insert, [request.name, request.user_id], (err) => {
       closeDatabaseConnection(db);
@@ -54,7 +54,7 @@ export async function createReasonInstance(request) {
 export async function getReasonInstanceById(id) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = `SELECT * FROM Reasons WHERE id='${id}'`;
+    const sql = `SELECT * FROM reasons WHERE id='${id}'`;
 
     db.all(sql, (err, row) => {
       closeDatabaseConnection(db);
@@ -78,7 +78,7 @@ export async function getReasonInstanceById(id) {
 export async function editReasonInstanceById(reasonsType, reasonsTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const update = `UPDATE Reasons SET name='${reasonsType.name}' WHERE id=${reasonsTypeId}`;
+    const update = `UPDATE reasons SET name='${reasonsType.name}' WHERE id=${reasonsTypeId}`;
     
     db.run(update, (err) => {
       closeDatabaseConnection(db);
@@ -101,7 +101,7 @@ export async function editReasonInstanceById(reasonsType, reasonsTypeId) {
 export async function deleteReasonInstanceById(reasonsTypeId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const query = `DELETE FROM Reasons WHERE id='${reasonsTypeId}'`;
+    const query = `DELETE FROM reasons WHERE id='${reasonsTypeId}'`;
     
     db.run(query, (err) => {
       closeDatabaseConnection(db);
