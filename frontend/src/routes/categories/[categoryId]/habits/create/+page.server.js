@@ -11,14 +11,17 @@ export const load = async ({ cookies, params }) => {
     const jwt = cookies.get("jwt");
     const { categoryId } = params;
 
-    // Send request to the apigateway to check if the user is authenticated
-    await axios.get("http://apigateway:3011/verify", {
+    const predefinedHabitsResponse = await axios.get("http://apigateway:3011/predefined-habits", {
       headers: {
         "Authorization": `Bearer ${jwt}`
       }
     });
 
-    return { categoryId };
+    const predefinedHabitsObject = predefinedHabitsResponse.data.data;
+
+    const predefinedHabits = predefinedHabitsObject.map(item => item.name);
+
+    return { categoryId, predefinedHabits };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, "/login");

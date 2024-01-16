@@ -19,19 +19,22 @@
 >
   <MyMoodsButtons
     buttonName="My Mood"
-    buttonIcon="myMoodOctopus.png"
+    buttonIcon="myMood.png"
     buttonLink="/moods/my-mood"
   />
   <MyMoodsButtons
     buttonName="Thoughts"
-    buttonIcon="thoughtsOctopus.png"
+    buttonIcon="thoughts.png"
     buttonLink="moods/thoughts"
   />
   <MyMoodsButtons
     buttonName="Tracker"
-    buttonIcon="trackerOctopus.png"
+    buttonIcon="tracker.png"
     buttonLink="/"
   />
-  <MyMoodsButtons buttonName="Map" buttonIcon="mapOctopus.png" buttonLink="/" />
+  <MyMoodsButtons
+    buttonName="Map"
+    buttonIcon="map.png"
+    buttonLink="/map" />
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />

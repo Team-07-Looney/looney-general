@@ -41,6 +41,7 @@
         on:blur={onBlur}
         value={value ? value : ""}
         {autocomplete}
+        on:input
       />
     </div>
     {#if isFocused && name=="password" && autocomplete != "current-password"}

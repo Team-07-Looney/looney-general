@@ -3,7 +3,7 @@
   import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
-  import AuthInput from "../../../../lib/components/authInput.svelte";
+  import AuthInput from "../../../../lib/components/AuthInput.svelte";
   export let data;
   import showElement from "$lib/showElement";
   import FormEars from "../../../../lib/components/FormEars.svelte";
