@@ -58,7 +58,7 @@ export const actions = {
       const jwt = cookies.get("jwt");
 
       // Set the body of the request, adds a header and sends post request to create record
-      await axios.post("http://apigateway:3011/records", {
+      await axios.post("http://apigateway:3011/habit-records", {
         habit_id: habitId
       }, {
         headers: {
