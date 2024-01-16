@@ -1,6 +1,6 @@
 <script>
     import L from "leaflet";
-    import "eaflet/dist/leaflet.css";
+    import "leaflet/dist/leaflet.css";
     import { onDestroy, onMount, setContext } from "svelte";
 
     export let bounds;
@@ -36,7 +36,7 @@
     }
 </script>
 
-<div class="h-full w-full" bind:this={mapElement}>
+<div class="h-full w-full z-0" bind:this={mapElement}>
     {#if map}
         <slot />
     {/if}
