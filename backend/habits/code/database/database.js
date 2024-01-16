@@ -106,10 +106,10 @@ async function createPredefinedCategoriesTable(db) {
         const insertQuery = 'INSERT INTO predefined_categories (id, name, icon_id) VALUES (?,?,?)';
 
         const predefinedCategories = [
-          { id: 1, name: 'Morning Routine', icon_id: 'A1F315' },
-          { id: 2,name: 'Afternoon Routine', icon_id: 'A1F313' },
-          { id: 3,name: 'Evening Routine', icon_id: 'A1F311' },
-          { id: 4,name: 'Anytime', icon_id: 'A1F4aa1f3fc' }
+          { id: 1, name: 'Morning Routine', icon_id: '&#127765' },
+          { id: 2,name: 'Afternoon Routine', icon_id: '&#127763' },
+          { id: 3,name: 'Evening Routine', icon_id: '&#127761' },
+          { id: 4,name: 'Anytime', icon_id: '&#127775' }
         ];
 
         predefinedCategories.forEach(({ id, name, icon_id }) => {

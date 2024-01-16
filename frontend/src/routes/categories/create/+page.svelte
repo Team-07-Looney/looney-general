@@ -26,7 +26,7 @@
   imgExtraPath="../"
   displayMenuButton="1"
 />
-<div class="flex justify-center items-center mt-7">
+<div class="flex justify-center items-center mt-5">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
