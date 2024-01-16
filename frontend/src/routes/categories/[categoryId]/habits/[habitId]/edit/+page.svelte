@@ -115,7 +115,6 @@
               placeholder="minutes and seconds"
               error={form?.errors?.some((error) => error.input == "duration")}
             />
-
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories/{data.category}/habits"

@@ -1,8 +1,15 @@
 <script>
+    import { openPopup } from "../popup";
+    import DeleteConfirmationPopup from "../../lib/components/DeleteConfirmationPopup.svelte";
+
     export let title;
     export let categoryId;
     const icon = categoryId % 3;
 </script>
+
+<DeleteConfirmationPopup
+    name='category'
+    explanation='if you delete a category, its habits will be deleted as well' />
 <div class="bg-white rounded-xl py-2 px-3 flex flex-row w-full justify-between items-center
 min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px 3.2px">
     <a href={`categories/${categoryId}/habits`} class="flex w-full">
@@ -26,8 +33,8 @@ min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
                 <a class="rounded-lg" href={`categories/${categoryId}/edit`}>Edit</a>
             </div>
             <div>
-                <form class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}?/deleteCategory`}>
-                    <button type="submit">Delete</button>
+                <form id="deleteForm" class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}?/deleteCategory`}>
+                    <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>
         </div>

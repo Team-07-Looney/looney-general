@@ -58,7 +58,6 @@
               value={data.name}
               error={form?.errors?.some((error) => error.input == "name")}
             />
-
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"
