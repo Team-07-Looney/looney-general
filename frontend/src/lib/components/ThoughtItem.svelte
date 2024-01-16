@@ -31,7 +31,9 @@
   </a>
   <div>
     <form id="deleteForm" class="w-full rounded-lg p-1" method="POST" action={`/moods/thoughts/${thoughtId}?/deleteThought`}>
-      <button on:click|preventDefault={openPopup}><img src="../../src/img/trashIcon.png" alt="trash" class="h-8"></button>
+      <button on:click|preventDefault={openPopup}>
+        <img src="../../src/img/trashIcon.png" alt="trash" class="h-8">
+      </button>
     </form>
   </div>
 </div>
