@@ -1,4 +1,4 @@
-import { 
+import {
   createHabitInstance,
   getAllHabitsData,
   getHabitInstanceById,

@@ -2,7 +2,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../variables.env' }) 
+dotenv.config({ path: '../variables.env' });
 
 function getToDay() {
   const date = new Date();
@@ -48,7 +48,7 @@ export async function register(req, res) {
     const token = createToken(getUserResponse.data.data.id);
     tempResponse.data.token = token;
 
-    await axios.post("http://mshabits:3010/predefined-categories", {
+    await axios.post('http://mshabits:3010/predefined-categories', {
       user_id: getUserResponse.data.data.id
     }, {
       headers: {
@@ -141,6 +141,7 @@ export async function changePassword(req, res) {
  * @returns the JWT token
  */
 function createToken(id) {
+  // eslint-disable-next-line no-undef
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: 24 * 60 * 60
   });

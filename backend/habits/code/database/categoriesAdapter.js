@@ -66,7 +66,7 @@ export async function getCategoryInstanceById(id) {
 }
 
 /**
- * executes SQL query that looks for category with specified id in table categories and updates its values
+ * executes SQL query that looks for category with specified id in table categories and updates it
  * @param {*} category new data of a category
  * @param {*} categoryId id of a category that needs to be updated
  * @returns 

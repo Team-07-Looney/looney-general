@@ -59,7 +59,7 @@ export async function openDatabaseConnection() {
       });
 
       // Habit Records Table
-      db.get("SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type='table' AND name='habit_records'", async (err, row) => {
+      db.get('SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habit_records\'', async (err, row) => {
         console.log(row);
         if (row.tableHabitRecordsExists == 0) {
           await createHabitRecordsTable(db);
@@ -200,16 +200,16 @@ async function createHabitsTable(db) {
       duration INTEGER,
       category_id INTEGER NOT NULL,
       FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE)`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table habits created.');
-          resolve();
-        }
-      });
-  })
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table habits created.');
+        resolve();
+      }
+    });
+  });
 }
 
 /**
@@ -224,14 +224,14 @@ async function createHabitRecordsTable(db) {
       habit_id INTEGER NOT NULL,
       date TEXT,
       FOREIGN KEY (habit_id) REFERENCES habits(id))`,
-      (err) => {
-        if (err) {
-          console.error('Error creating table: ', err.message);
-          reject(err.message);
-        } else {
-          console.log('Table habit records created.');
-          resolve();
-        }
-      });
-  })
+    (err) => {
+      if (err) {
+        console.error('Error creating table: ', err.message);
+        reject(err.message);
+      } else {
+        console.log('Table habit records created.');
+        resolve();
+      }
+    });
+  });
 }

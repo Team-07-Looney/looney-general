@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllHabitRecordsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM habit_records";
+    const sql = 'SELECT * FROM habit_records';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -52,7 +52,7 @@ export async function createHabitRecordInstance(request, date) {
           }
         });
       } else {
-        resolve("This habit was already recorded today");
+        resolve('This habit was already recorded today');
       }
     });
   });
