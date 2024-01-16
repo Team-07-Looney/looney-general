@@ -58,7 +58,7 @@
         name="body"
         value={form?.body ?? ""}
         class="bg-gray-300 w-full p-4 rounded-lg"
-        rows="{form && form.errors?'2':'5'}"
+        rows="{form && form.errors?"2":"5"}"
       ></textarea>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
