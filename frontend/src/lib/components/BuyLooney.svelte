@@ -46,17 +46,22 @@
 
   async function sendDataToConnectedDevice() {
     try {
-      const stringData = "3 4";
+      const hexArray = [0xc00c06c, 0xc00cc06, 0xc00c0000];
       if (!characteristic) {
         throw new Error("No characteristic found to send data.");
       }
-      // Convert the string to an ArrayBuffer.
-      const encoder = new TextEncoder(); // Create a new TextEncoder instance
-      const buffer = encoder.encode(stringData); // Encode the string into an ArrayBuffer
+
+      const buffer = new ArrayBuffer(hexArray.length * 4);
+      const view = new Uint32Array(buffer);
+
+      for (let i = 0; i < hexArray.length; i++) {
+        view[i] = hexArray[i];
+      }
+
       await characteristic.writeValue(buffer);
-      console.log("String sent to the device successfully!");
+      console.log("Array sent to the device successfully!");
     } catch (e) {
-      console.error("Error sending string:", e);
+      console.error("Error sending array:", e);
     }
   }
 </script>
