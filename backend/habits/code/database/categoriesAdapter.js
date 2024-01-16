@@ -11,7 +11,6 @@ export async function getAllCategoriesData() {
     const params = [];
     db.all(sql, params, (err, rows) => {
       closeDatabaseConnection(db);
-  
       if (err) {
         console.error(err);
         reject(err);
@@ -23,6 +22,7 @@ export async function getAllCategoriesData() {
 }
 
 /**
+<<<<<<< HEAD
    * executes SQL query that inserts values from the request into categories table
    * @param {*} request request body with the data for a new category
    * @returns 
@@ -34,7 +34,6 @@ export async function createCategoryInstance(request) {
   
     db.run(insert, [request.name, request.user_id, request.icon_id], (err) => {
       closeDatabaseConnection(db);
-  
       if (err) {
         console.error(err);
         reject(err);

@@ -5,6 +5,7 @@
 
   /** @type {import('./$types').ActionData} */
   export let form;
+  export let data;
   let latitude;
   let longitude;
 
@@ -55,6 +56,7 @@
         type="text"
         name="body"
         class="bg-gray-300 w-full p-4 rounded-lg"
+        rows="{form && form.errors?'2':'5'}"
       ></textarea>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div
@@ -90,8 +92,8 @@
       <div class="flex flex-row gap-8 justify-center items-center mt-2">
         <a
           class="z-10 flex justify-center items-center bg-neutral-400
-           text-white font-bold p-2 rounded-lg w-20"
-          href="/moods">Skip</a
+        text-white font-bold p-2 rounded-lg w-20"
+        href="/moods/my-mood/{data.recordId}/thought/advice">Skip</a
         >
         <button
           class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"

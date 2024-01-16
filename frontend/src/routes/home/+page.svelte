@@ -48,13 +48,13 @@
     <div class="flex flex-col gap-6">
       <OctopusButton
         buttonName="My Habits"
-        buttonIcon="habitOctopus.png"
+        buttonIcon="habits.png"
         buttonLink="/categories"
         buttonDescription="Add new ones, check the old ones, Looney is going to be with you"
       />
       <OctopusButton
         buttonName="My Moods"
-        buttonIcon="moodOctopus.png"
+        buttonIcon="myMoods.png"
         buttonLink="/moods"
         buttonDescription="Gain more insight in how you are feeling, Looney will always be there"
       />

@@ -17,6 +17,16 @@ export const load = async ({ params, cookies }) => {
       }
     });
 
+    const predefinedHabitsResponse = await axios.get("http://apigateway:3011/predefined-habits", {
+      headers: {
+        "Authorization": `Bearer ${jwt}`
+      }
+    });
+
+    const predefinedHabitsObject = predefinedHabitsResponse.data.data;
+
+    const predefinedHabits = predefinedHabitsObject.map(item => item.name);
+
     const category = params.categoryId;
     const habitData = response.data.data[0];
 
@@ -30,7 +40,7 @@ export const load = async ({ params, cookies }) => {
       duration: ((durationSeconds >= 0 && durationSeconds <= 9) ? `${durationMinutes}:0${durationSeconds}` : `${durationMinutes}:${durationSeconds}`)
     };
 
-    return { habit, category };
+    return { habit, category, predefinedHabits };
   } catch (error) {
     if (error.response.status == 401) {
       throw redirect(302, "/login");

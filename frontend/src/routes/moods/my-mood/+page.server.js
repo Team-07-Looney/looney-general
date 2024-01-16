@@ -10,24 +10,24 @@ import jwt from "jsonwebtoken";
  */
 export const load = async ({ cookies }) => {
   try {
-    const jwtToken = cookies.get("jwt");
-    const payload = jwt.decode(jwtToken);
-    const moodsResponse = await axios.get("http://apigateway:3011/moods", {
+    const jwtoken = cookies.get("jwt");
+    const payload = jwt.decode(jwtoken);
+    const response1 = await axios.get("http://apigateway:3011/moods", {
       headers: {
-        "Authorization": `Bearer ${jwtToken}`
+        "Authorization": `Bearer ${jwtoken}`
       }
     });
 
-    const reasonsResponse = await axios.get("http://apigateway:3011/reasons", {
+    const response2 = await axios.get("http://apigateway:3011/reasons", {
       headers: {
-        "Authorization": `Bearer ${jwtToken}`
+        "Authorization": `Bearer ${jwtoken}`
       }
     });
 
-    const moods = moodsResponse.data.data;
-    const reasons = reasonsResponse.data.data;
+    const moods = response1.data.data;
+    const reasons = response2.data.data;
     const userId = payload.id;
-    return { moods, reasons, userId };
+    return { moods, reasons, userId};
   } catch (error) {
     console.log(error);
   }
@@ -40,16 +40,17 @@ export const actions = {
   createRecord: async ({ request, cookies }) => {
     let recordId;
     try {
-      const jwt = cookies.get("jwt");
+      const jwtoken = cookies.get("jwt");
+      const payload = jwt.decode(jwtoken);
 
       // Retrieves the data from the form
       const formData = await request.formData();
       const moodId = formData.get("moodId");
       const reasonId = formData.get("reasonId");
 
+
       // check for errors in a form data
-      const errors = [];
-      // const errors = await validateCreateData(moodId, reasonId);
+      const errors = await validateCreateData(moodId, reasonId);
 
       //if there are any errors, return form with error messages
       if (errors.length > 0) {
@@ -57,26 +58,27 @@ export const actions = {
       }
 
       // Set the body of the request, adds a header and sends post request to create record
-      await axios.post("http://apigateway:3011/recordsMoods", {
+      await axios.post("http://apigateway:3011/mood-records", {
         mood_id: moodId,
         reason_id: reasonId,
+        user_id: payload.id
       }, {
         headers: {
-          "Authorization": `Bearer ${jwt}`,
+          "Authorization": `Bearer ${jwtoken}`,
           "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
 
-      const responseRecords = await axios.get("http://apigateway:3011/recordsMoods", {
+      const responseRecords = await axios.get("http://apigateway:3011/mood-records", {
         headers: {
-          "Authorization": `Bearer ${jwt}`
+          "Authorization": `Bearer ${jwtoken}`
         }
       });
 
       const records = responseRecords.data.data;
       const lastRecordId = records.length;
       recordId = lastRecordId;
-
+      
     } catch (error) {
       if (error.response.status == 401) {
         throw redirect(302, "/login");
@@ -87,8 +89,7 @@ export const actions = {
   }
 };
 
-// TODO: Whoever implemented it - fix it
-// async function validateCreateData(mood_id, reason_id) {
-//   let errors = [];
-//   return errors;
-// }
+async function validateCreateData() {
+  const errors = [];
+  return errors;
+}

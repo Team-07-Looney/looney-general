@@ -4,7 +4,7 @@ import {
     getRecordInstanceById,
     editRecordInstanceById,
     deleteRecordInstanceById
-  } from '../database/recordsAdapter.js';
+  } from '../database/moodRecordsAdapter.js';
   
   /**
    * function that calculates today's date
@@ -59,6 +59,7 @@ import {
    */
   export async function createRecord(req, res, next) {
     try {
+      console.log(req.body);
       await createRecordInstance(req.body);
       tempResponse.data.message = "records created successfully";
       res.status(200).send(tempResponse);

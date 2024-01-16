@@ -3,7 +3,7 @@
   import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
   /** @type {import('./$types').ActionData} */
   export let form;
-  import AuthInput from "../../../../lib/components/authInput.svelte";
+  import AuthInput from "../../../../lib/components/AuthInput.svelte";
   export let data;
   import showElement from "$lib/showElement";
   import FormEars from "../../../../lib/components/FormEars.svelte";
@@ -79,7 +79,6 @@
             <IconsMenu bind:storedIconId iconId={iconId}
             on:iconSelected={handleIconClick} bind:this={referenceIcon}/>
             <input type="hidden" name="icon_id" value={iconId} />
-
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"

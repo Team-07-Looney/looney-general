@@ -1,5 +1,5 @@
 <script>
-  import AuthInput from "../../../lib/components/authInput.svelte";
+  import AuthInput from "../../../lib/components/AuthInput.svelte";
   import BottomMenu from "../../../lib/components/BottomMenu.svelte";
   import showElement from "$lib/showElement";
   import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
@@ -73,11 +73,11 @@
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"
-                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                class="px-5 py-2 rounded-lg mt-3 font-bold text-white"
                 style="background-color: #B4B4B4">Cancel</a
               >
               <button
-                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                class="px-5 py-2 rounded-lg mt-3 font-bold text-white"
                 type="submit"
                 style="background-color: #9B9DD1">Create</button
               >

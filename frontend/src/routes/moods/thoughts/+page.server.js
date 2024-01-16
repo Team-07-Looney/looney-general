@@ -26,9 +26,8 @@ export const load = async ({ cookies }) => {
     const moods = [];
     const moodType = [];
     const filteredThoughtsByUser = thoughts.filter(thought => thought.user_id === userId);
-
+    console.log(filteredThoughtsByUser);
     for (let i = 0; i < filteredThoughtsByUser.length; i++) {
-
       const recordResponse = await axios.get(`http://apigateway:3011${filteredThoughtsByUser[i].record_id}`, {
         headers: {
           "Authorization": `Bearer ${jwtToken}`

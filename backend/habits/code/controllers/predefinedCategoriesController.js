@@ -31,7 +31,6 @@ export async function getPredefinedCategories(req, res, next) {
   } catch (err) {
     next(err);
   }
-
 }
 
 export async function createPredefinedCategories(req, res, next) {
