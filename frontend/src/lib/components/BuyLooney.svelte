@@ -56,7 +56,7 @@
       const buffer = encoder.encode(stringData); // Encode the string into an ArrayBuffer
       await characteristic.writeValue(buffer);
       console.log("String sent to the device successfully!");
-      $bluetoothMessage = 'Your Looney is connected';
+      $bluetoothMessage = "Your Looney is connected";
     } catch (e) {
       console.error("Error sending string:", e);
     }
