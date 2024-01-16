@@ -6,36 +6,36 @@ import {
   getMoodById,
   editMoodById,
   deleteMoodById
-} from '../controllers/moodsController.js'
+} from '../controllers/moodsController.js';
 import {
   getMoodType,
   createMoodType,
   getMoodTypeById,
   editMoodTypeById,
   deleteMoodTypeById
-} from '../controllers/moodTypesController.js'
+} from '../controllers/moodTypesController.js';
 import {
   getReason,
   createReason,
   getReasonById,
   editReasonById,
   deleteReasonById
-} from '../controllers/reasonsController.js'
+} from '../controllers/reasonsController.js';
 import {
   getRecord,
   createRecord,
   getRecordById,
   editRecordById,
   deleteRecordById
-} from '../controllers/moodRecordsController.js'
+} from '../controllers/moodRecordsController.js';
 import {
-    getThought,
-    createThought,
-    getThoughtById,
-    getLatestThoughts,
-    editThoughtById,
-    deleteThoughtById
-} from '../controllers/thoughtsController.js'
+  getThought,
+  createThought,
+  getThoughtById,
+  getLatestThoughts,
+  editThoughtById,
+  deleteThoughtById
+} from '../controllers/thoughtsController.js';
 import { getAdvice } from '../controllers/adviceController.js';
 import { getAdviceGroups } from '../controllers/adviceGroupsController.js';
 import {
@@ -45,7 +45,7 @@ import {
 const router = express.Router();
 
 // routes
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.json('hi');
 });
 

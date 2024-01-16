@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllMoodData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM moods";
+    const sql = 'SELECT * FROM moods';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -26,7 +26,7 @@ export async function getAllMoodData() {
 /**
  * executes SQL query that inserts values from the request into habits table
  * @param {*} request request body with the data for a new habit
- * @returns 
+ * @returns insert into moods table
  */
 export async function createMoodInstance(request) {
   return new Promise(async (resolve, reject) => {
@@ -73,7 +73,7 @@ export async function getMoodInstanceById(id) {
  * executes SQL query that looks for habit with specified id in table habits and updates its values
  * @param {*} mood new data of a mood
  * @param {*} moodId id of a mood that needs to be updated
- * @returns 
+ * @returns updates a mood
  */
 export async function editMoodInstanceById(mood, moodId) {
   return new Promise(async (resolve, reject) => {
@@ -96,7 +96,7 @@ export async function editMoodInstanceById(mood, moodId) {
 /**
  * executes SQL query that looks for mood with specified id and deletes it from habits table
  * @param {*} moodId id of a mood that needs to be deleted
- * @returns 
+ * @returns deletes a mood
  */
 export async function deleteMoodInstanceById(moodId) {
   return new Promise(async (resolve, reject) => {

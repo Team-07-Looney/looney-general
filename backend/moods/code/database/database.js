@@ -1,6 +1,6 @@
 import sqlite3 from 'sqlite3';
 
-export const DBSOURCE = "./database/db.sqlite";
+export const DBSOURCE = './database/db.sqlite';
 
 // Define table creation queries
 const tableQueries = [
@@ -66,14 +66,14 @@ export async function openDatabaseConnection() {
 
       try {
 
-        db.get("SELECT count(*) AS tablemoodsExists FROM sqlite_master WHERE type='table' AND name='moods'", async (err, row) => {
+        db.get('SELECT count(*) AS tablemoodsExists FROM sqlite_master WHERE type=\'table\' AND name=\'moods\'', async (err, row) => {
           // If there is no such table create one
           if (row.tablemoodsExists == 0) {
             // Use a separate async function within the callback
             await createTables(db);
-            await populatemoodsTypeTable(db);
-            await populatemoodsTable(db);
-            await populatereasonsTable(db);
+            await populateMoodsTypeTable(db);
+            await populateMoodsTable(db);
+            await populateReasonsTable(db);
             await populateadviceGroupsTable(db);
             await populateadviceTable(db);
           }
@@ -129,7 +129,11 @@ async function createTableIfNotExists(db, query) {
   });
 }
 
-async function populatemoodsTypeTable(db) {
+/**
+ * @param {*} db The database in which the table should be created
+ * @returns populates the moods types table
+ */
+async function populateMoodsTypeTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedMoodTypes = ['Positive', 'Neutral', 'Negative'];
     const insertQuery = 'INSERT INTO mood_types (name) VALUES (?)';
@@ -146,7 +150,11 @@ async function populatemoodsTypeTable(db) {
   });
 }
 
-async function populatemoodsTable(db) {
+/**
+ * @param {*} db The database in which the table should be created
+ * @returns populates the moods table
+ */
+async function populateMoodsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedMooods = [
       {
@@ -219,11 +227,15 @@ async function populatemoodsTable(db) {
           resolve();
         }
       });
-    })
+    });
   });
 }
 
-async function populatereasonsTable(db) {
+/**
+ * @param {*} db The database in which the table should be created
+ * @returns populates the reasons table
+ */
+async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedreasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
     const insertQuery = 'INSERT INTO reasons (name, user_id) VALUES (?,?)';
@@ -240,6 +252,10 @@ async function populatereasonsTable(db) {
   });
 }
 
+/**
+ * @param {*} db The database in which the table should be created
+ * @returns populates the advice groups table
+ */
 async function populateadviceGroupsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedadviceGroups = [
@@ -266,18 +282,22 @@ async function populateadviceGroupsTable(db) {
     ];
   
     const insertQuery = 'INSERT INTO advice_groups (id, name) VALUES (?,?)';
-    predefinedadviceGroups.forEach((advice_groups) => {
-      db.run(insertQuery, [advice_groups.id, advice_groups.name], (err) => {
+    predefinedadviceGroups.forEach((adviceGroups) => {
+      db.run(insertQuery, [adviceGroups.id, adviceGroups.name], (err) => {
         if (err) {
           reject(err.message);
         } else {
           resolve();
         }
       });
-    })
+    });
   });
 }
 
+/**
+ * @param {*} db The database in which the table should be created
+ * @returns populates the advice table
+ */
 async function populateadviceTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedadvice = [
@@ -366,6 +386,6 @@ async function populateadviceTable(db) {
           resolve();
         }
       });
-    })
+    });
   });
 }
