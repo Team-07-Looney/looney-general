@@ -39,6 +39,7 @@ router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
 router.use('/mood-types', cors(), requireAuth, moodProxy);
 router.use('/thoughts', cors(), requireAuth, moodProxy);
+router.use('/latest-thoughts', cors(), requireAuth, moodProxy);
 router.use('/reasons', cors(), requireAuth, moodProxy);
 router.use('/recordsMoods', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);

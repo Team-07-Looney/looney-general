@@ -32,6 +32,6 @@
     buttonIcon="trackerOctopus.png"
     buttonLink="/"
   />
-  <MyMoodsButtons buttonName="Map" buttonIcon="mapOctopus.png" buttonLink="/" />
+  <MyMoodsButtons buttonName="Map" buttonIcon="mapOctopus.png" buttonLink="/map" />
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />

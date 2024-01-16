@@ -32,6 +32,7 @@ import {
     getThought,
     createThought,
     getThoughtById,
+    getLatestThoughts,
     editThoughtById,
     deleteThoughtById
 } from '../controllers/thoughtsController.js'
@@ -82,6 +83,8 @@ router.delete('/mood-types/:id', cors(), deleteMoodTypeById);
 
 // get a collection of all the thoughts
 router.get('/thoughts', cors(), getThought);
+// get a collection of all the latest thoughts
+router.get('/latest-thoughts', cors(), getLatestThoughts);
 // route for creating a thought
 router.post('/thoughts', cors(), createThought);
 // route for getting a thought
