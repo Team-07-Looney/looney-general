@@ -123,11 +123,11 @@
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories/{data.categoryId}/habits"
-                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                class="px-5 py-2 rounded-lg mt-3 font-bold text-white"
                 style="background-color: #B4B4B4">Cancel</a
               >
               <button
-                class="px-5 py-2 rounded-lg mt-3 font-bold"
+                class="px-5 py-2 rounded-lg mt-3 font-bold text-white"
                 type="submit"
                 style="background-color: #9B9DD1">Create</button
               >
