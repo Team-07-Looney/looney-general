@@ -59,7 +59,7 @@ export async function openDatabaseConnection() {
       });
 
       // Records Table
-      db.get('SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type="table2 AND name="records"', async (err, row) => {
+      db.get('SELECT count(*) AS tableRecordsExists FROM sqlite_master WHERE type="table" AND name="records"', async (err, row) => {
         console.log(row);
         if (row.tableRecordsExists == 0) {
           await createRecordsTable(db);
