@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllThoughtData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM thoughts";
+    const sql = 'SELECT * FROM thoughts';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -25,11 +25,12 @@ export async function getAllThoughtData() {
 
 /**
  * executes SQL query that retrieves the latest thoughts based on every user
+ * @returns the latest thought
  */
 export async function getLatestThoughtsInstances() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT title, body, location, user_id, MAX(id) FROM thoughts WHERE location IS NOT NULL GROUP BY user_id";
+    const sql = 'SELECT title, body, location, user_id, MAX(id) FROM thoughts WHERE location IS NOT NULL GROUP BY user_id';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -48,14 +49,14 @@ export async function getLatestThoughtsInstances() {
 /**
  * executes SQL query that inserts values from the request into thoughtss table
  * @param {*} request request body with the data for a new thoughts
- * @returns 
  */
 export async function createThoughtInstance(request) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
     const insert = 'INSERT INTO thoughts (title, body, location, record_id, user_id) VALUES (?, ?, ?, ?,?)';
 
-    db.run(insert, [request.title, request.body, request.location, request.record_id, request.user_id], (err) => {
+    db.run(insert, [
+      request.title, request.body, request.location, request.record_id, request.user_id], (err) => {
       closeDatabaseConnection(db);
 
       if (err) {
@@ -92,10 +93,10 @@ export async function getThoughtInstanceById(id) {
 }
 
 /**
- * executes SQL query that looks for thoughts with specified id in table thoughtss and updates its values
+ * executes SQL query that looks for thoughts with specified id in table thoughts and updates it
  * @param {*} thoughts new data of a thoughts
  * @param {*} thoughtsId id of a thoughts that needs to be updated
- * @returns 
+ * @returns edits a thought
  */
 export async function editThoughtInstanceById(thoughts, thoughtsId) {
   return new Promise(async (resolve, reject) => {
@@ -118,7 +119,6 @@ export async function editThoughtInstanceById(thoughts, thoughtsId) {
 /**
  * executes SQL query that looks for thoughts with specified id and deletes it from thoughtss table
  * @param {*} thoughtsId id of a thoughts that needs to be deleted
- * @returns 
  */
 export async function deleteThoughtInstanceById(thoughtsId) {
   return new Promise(async (resolve, reject) => {

@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllAdviceRecordsData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM advice_records";
+    const sql = 'SELECT * FROM advice_records';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -26,7 +26,7 @@ export async function getAllAdviceRecordsData() {
 /**
  * executes SQL query that inserts values from the request into advice_records table
  * @param {*} request request body with the data for a new advice record
- * @returns 
+ * @returns creates advice records table
  */
 export async function createAdviceRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
