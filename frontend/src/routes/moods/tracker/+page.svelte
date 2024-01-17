@@ -3,8 +3,14 @@
     import BottomMenu from "../../../lib/components/BottomMenu.svelte";
     import ProgressBar from "../../../lib/components/ProgressBar.svelte";
     import AdviceTrackerItem from "../../../lib/components/AdviceTrackerItem.svelte";
+    import showElement from "$lib/showElement";
+  $showElement = false;
     export let data;
 </script>
+<svelte:head>
+    <title>Tracker</title> 
+</svelte:head>
+
 <WhiteBanner
 title="Tracker"
 description="Check your progress, and find out patterns in your mood"
@@ -39,7 +45,7 @@ rounded-lg min-h-fit flex flex-col justify-center items-center shadow-lg">
     </div>
 </div>
 <div class="flex p-2 justify-center items-center text-center">
-    <div class="bg-white shadow-lg p-1 rounded-lg w-40 mr-2">
+    <div class="bg-white shadow-lg p-1 rounded-lg w-40 h-[7.5rem] mr-2">
         <p class="text-m">You have written</p>
         <p class="text-6xl font-chewy text-[#666e9f]">{data.totalThoughts}</p>
         <p class="text-m">thoughts</p>

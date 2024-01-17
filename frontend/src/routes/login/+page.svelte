@@ -8,16 +8,19 @@
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
   $showElement = false;
 </script>
+<svelte:head>
+    <title>Login</title> 
+</svelte:head>
 
 <WhiteBanner title="Looney" description="Please Login" displayMenuButton="0" />
 
 <div class="mt-6 flex justify-center items-center">
-  <div class="flex flex-col items-center mt-10">
+  <div class="flex flex-col items-center mt-14">
     <FormEars />
     <div class="grid grid-cols-1">
       <ShadowsForForms height={194} width={260} />
       <div class="px-8 pt-8 z-[2]">
-        <div class="bg-white rounded px-4 py-4 mb-16">
+        <div class="bg-white rounded px-5 pb-4 pt-11 mb-16">
           <form
             method="POST"
             class="grid grid-cols-1 gap-4 text-gray-900"

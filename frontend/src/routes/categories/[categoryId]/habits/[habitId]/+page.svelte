@@ -7,6 +7,9 @@
   export let data;
   $showElement = false;
 </script>
+<svelte:head>
+    <title>Timer</title> 
+</svelte:head>
 
 <WhiteBanner
   title={data.habit[0].name}

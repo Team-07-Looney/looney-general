@@ -7,21 +7,22 @@
   $showElement = false;
   // Data contains all data passed by the page server
   export let data;
-  export let moodId;
-  export let reasonId;
+  export let moodId = "";
+  export let reasonId = "";
 
   function handleMoodClick(event) {
-    console.log("Mood clicked:", event.detail.moodId);
     moodId = event.detail.moodId;
   }
   function handleReasonClick(event) {
-    console.log("Reason clicked:", event.detail.reasonId);
     reasonId = event.detail.reasonId;
   }
 
   let storedMoodId = 0;
   let storedReasonId = 0;
 </script>
+<svelte:head>
+    <title>My Mood</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Mood"

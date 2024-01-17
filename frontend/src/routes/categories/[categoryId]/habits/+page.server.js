@@ -35,6 +35,19 @@ export const load = async ({ cookies, params }) => {
     const records = responseRecords.data.data;
     const filteredHabitsByCategory = habits.filter(habit => habit.category_id === category[0].id);
 
+    filteredHabitsByCategory.sort((a,b) => {
+      const startTimeA = a.start_time;
+      const startTimeB = b.start_time;
+
+      if (startTimeA < startTimeB) {
+        return -1;
+      }
+      if (startTimeA > startTimeB) {
+        return 1;
+      }
+      return 0;
+    })
+
     filteredHabitsByCategory.forEach(habit => {
       records.forEach(record => {
         if (habit.id === record.habit_id && record.date === responseHabits.data.meta.date) {

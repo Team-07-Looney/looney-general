@@ -8,6 +8,9 @@
   import showElement from "$lib/showElement";
   $showElement = false;
 </script>
+<svelte:head>
+    <title>Register</title> 
+</svelte:head>
 
 <WhiteBanner
   title="Looney"
@@ -18,9 +21,9 @@
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
-      <ShadowsForForms width={260} height={420} />
+      <ShadowsForForms width={278} height={375} />
       <div class="px-8 pt-8 z-[2]">
-        <div class=" bg-white rounded-xl px-4 py-5">
+        <div class=" bg-white rounded-xl px-6 py-5">
           <form
             method="POST"
             class="grid grid-cols-1 gap-4 text-gray-900"

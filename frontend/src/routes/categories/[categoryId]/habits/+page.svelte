@@ -42,6 +42,9 @@
     }
   }
 </script>
+<svelte:head>
+    <title>Habits</title> 
+</svelte:head>
 
 <WhiteBanner
   title={data.category[0].name}

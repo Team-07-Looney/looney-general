@@ -37,7 +37,7 @@ items-center hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         <button id={`button${habitId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
             <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>
-        <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
+        <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem] z-10">
             <!-- DROPDOWN MENU -->
             <div class="h-[2rem] flex justify-center items-center">
                 <a class="rounded-lg" href={`/categories/${categoryId}/habits/${habitId}/edit`}>Edit</a>

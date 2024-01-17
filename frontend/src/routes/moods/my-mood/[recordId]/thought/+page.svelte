@@ -2,7 +2,9 @@
   import { onMount } from "svelte";
   import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
-
+  import showElement from "$lib/showElement";
+  $showElement = false;
+  
   /** @type {import('./$types').ActionData} */
   export let form;
   export let data;
@@ -23,9 +25,11 @@
   function storePosition(location) {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
-    console.log(location);
   }
 </script>
+<svelte:head>
+    <title>Write Thought</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Mood"
@@ -48,14 +52,14 @@
       <label for="title">Title:</label>
       <input
         type="text"
-        class="bg-gray-300 p-2 w-full rounded-lg"
+        class="bg-[#EDEDED] p-2 w-full rounded-lg"
         name="title"
       />
       <label for="body">Story:</label>
       <textarea
         type="text"
         name="body"
-        class="bg-gray-300 w-full p-4 rounded-lg"
+        class="bg-[#EDEDED] w-full p-4 rounded-lg"
       ></textarea>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div

@@ -12,10 +12,6 @@
   export let data;
   export let form;
 
-  // date for time picker
-  const date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: "short" });
-
   let filteredHabitNames = [];
 
   // Function to handle input change and filter predefined habit names
@@ -35,6 +31,9 @@
     filteredHabitNames = [];
   };
 </script>
+<svelte:head>
+    <title>Edit habit</title> 
+</svelte:head>
 
 <WhiteBanner
   title="Edit Habit"
@@ -99,7 +98,6 @@
             {/if}
 
             <TimePicker
-              bind:_date
               label="Start Time"
               data={data.habit.start_time}
               display24="true"

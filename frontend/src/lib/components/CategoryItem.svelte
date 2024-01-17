@@ -27,7 +27,7 @@ min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         </button>
         <div id={`dropdown${categoryId}`}
         class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg
-        min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
+        min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem] z-10">
             <!-- DROPDOWN MENU -->
             <div class="h-[2rem] flex justify-center items-center">
                 <a class="rounded-lg" href={`categories/${categoryId}/edit`}>Edit</a>

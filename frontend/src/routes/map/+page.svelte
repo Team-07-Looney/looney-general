@@ -12,6 +12,9 @@
 
     $showElement = false;
 </script>
+<svelte:head>
+    <title>Map</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Map"
@@ -28,7 +31,7 @@
     <p class="text-xl">You are <strong>not</strong> ALONE</p>
     <Leaflet view={initialView} zoom={data.mapZoom}>
         {#each data.thoughts as thought}
-            <Marker latLng={thought.location} width={40} height={40}>
+            <Marker latLng={thought.location}>
                 <Popup title={thought.title} body={thought.body} />
             </Marker>
         {/each}

@@ -1,7 +1,6 @@
 <script>
   // Data contains all data passed by the page server
   export let data;
-  console.log(data);
   import showElement from "$lib/showElement";
   import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
   import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
@@ -17,6 +16,9 @@
     icon = "neutral";
   }
 </script>
+<svelte:head>
+    <title>Thought</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Thoughts"

@@ -43,6 +43,9 @@
     }
   }
 </script>
+<svelte:head>
+    <title>Categories</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Habits"

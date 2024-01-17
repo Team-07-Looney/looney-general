@@ -3,7 +3,7 @@
     import L from "leaflet";
 
     export let latLng;
-
+    
     let marker;
     let markerElement;
     

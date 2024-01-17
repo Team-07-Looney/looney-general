@@ -3,16 +3,21 @@
     import BottomMenu from "../../../../../../lib/components/BottomMenu.svelte";
     import ProgressBar from "../../../../../../lib/components/ProgressBar.svelte";
     import AdviceItem from "../../../../../../lib/components/AdviceItem.svelte";
+    import showElement from "$lib/showElement";
+  $showElement = false;
     export let data;
     export let form;
-    export let adviceId;
+    export let adviceId = "";
 
     function handleAdviceClick(event) {
-      console.log("Advice clicked:", event.detail.adviceId);
       adviceId = event.detail.adviceId;
     }
   let storedAdviceId = 0;
 </script>
+<svelte:head>
+    <title>Advice</title> 
+</svelte:head>
+
 <WhiteBanner
     title="My Mood"
     description="Gain more insight in how you are feeling, Looney will always be there"

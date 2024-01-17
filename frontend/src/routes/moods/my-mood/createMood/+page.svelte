@@ -10,6 +10,9 @@
   export let form;
   let selectedMoodType = ""; // Variable to track the selected mood type
 </script>
+<svelte:head>
+    <title>Create Mood</title> 
+</svelte:head>
 
 <WhiteBanner
   title="Add Mood"

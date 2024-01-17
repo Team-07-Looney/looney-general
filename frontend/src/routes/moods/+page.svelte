@@ -5,6 +5,9 @@
   import MyMoodsButtons from "../../lib/components/MyMoodsButtons.svelte";
   $showElement = false;
 </script>
+<svelte:head>
+    <title>Moods</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Moods"

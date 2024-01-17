@@ -8,6 +8,9 @@
 
   $showElement = false;
 </script>
+<svelte:head>
+    <title>Thoughts</title> 
+</svelte:head>
 
 <WhiteBanner
   title="My Thoughts"
