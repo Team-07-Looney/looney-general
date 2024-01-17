@@ -32,6 +32,12 @@ const moodProxy = createProxyMiddleware({
   onProxyReq: fixRequestBody,
 });
 
+const arduinoProxy = createProxyMiddleware({
+  target: 'http://msarduino:3014',
+  changeOrigin: true,
+  onProxyReq: fixRequestBody,
+});
+
 router.use('/categories', cors(), requireAuth, habitProxy);
 router.use('/habit-records', cors(), requireAuth, habitProxy);
 router.use('/predefined-habits', cors(), requireAuth, habitProxy);
@@ -46,6 +52,7 @@ router.use('/advice', cors(), requireAuth, moodProxy);
 router.use('/advice-groups', cors(), requireAuth, moodProxy);
 router.use('/advice-records', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
+router.use('/faces', arduinoProxy);
 
 // Authentication routes
 router.post('/register', cors(), register);
