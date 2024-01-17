@@ -22,7 +22,6 @@ export async function getAllCategoriesData() {
 }
 
 /**
-<<<<<<< HEAD
    * executes SQL query that inserts values from the request into categories table
    * @param {*} request request body with the data for a new category
    * @returns 

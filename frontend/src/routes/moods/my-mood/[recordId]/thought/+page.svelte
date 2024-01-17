@@ -2,6 +2,7 @@
   import { onMount } from "svelte";
   import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
+  import showElement from "$lib/showElement";
 
   /** @type {import('./$types').ActionData} */
   export let form;
@@ -23,8 +24,9 @@
   function storePosition(location) {
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
-    console.log(location);
   }
+
+  $showElement = false;
 </script>
 
 <WhiteBanner
