@@ -9,8 +9,9 @@
   /** @type {import('./$types').ActionData} */
   export let form;
 </script>
+
 <svelte:head>
-    <title>Create Reason</title> 
+  <title>Create Reason</title>
 </svelte:head>
 
 <WhiteBanner

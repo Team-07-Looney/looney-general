@@ -42,8 +42,9 @@
     }
   }
 </script>
+
 <svelte:head>
-    <title>Habits</title> 
+  <title>Habits</title>
 </svelte:head>
 
 <WhiteBanner

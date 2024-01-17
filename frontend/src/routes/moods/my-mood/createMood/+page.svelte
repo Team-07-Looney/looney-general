@@ -10,8 +10,9 @@
   export let form;
   let selectedMoodType = ""; // Variable to track the selected mood type
 </script>
+
 <svelte:head>
-    <title>Create Mood</title> 
+  <title>Create Mood</title>
 </svelte:head>
 
 <WhiteBanner
@@ -68,7 +69,9 @@
                 <label
                   for="1"
                   class="justify-center items-center flex flex-col
-                  {selectedMoodType === "1" ? "text-sm font-medium selected-label" : "text-sm font-medium"}"
+                  {selectedMoodType === '1'
+                    ? 'text-sm font-medium selected-label'
+                    : 'text-sm font-medium'}"
                 >
                   <input
                     id="1"
@@ -92,7 +95,9 @@
                 <label
                   for="2"
                   class="justify-center items-center flex flex-col
-                  {selectedMoodType === "2" ? "text-sm font-medium selected-label": "text-sm font-medium"}"
+                  {selectedMoodType === '2'
+                    ? 'text-sm font-medium selected-label'
+                    : 'text-sm font-medium'}"
                 >
                   <input
                     id="2"
@@ -116,9 +121,9 @@
                 <label
                   for="3"
                   class="justify-center items-center flex flex-col {selectedMoodType ===
-                  "3"
-                    ? "text-sm font-medium selected-label"
-                    : "text-sm font-medium"}"
+                  '3'
+                    ? 'text-sm font-medium selected-label'
+                    : 'text-sm font-medium'}"
                 >
                   <input
                     id="3"

@@ -43,8 +43,9 @@
     }
   }
 </script>
+
 <svelte:head>
-    <title>Categories</title> 
+  <title>Categories</title>
 </svelte:head>
 
 <WhiteBanner

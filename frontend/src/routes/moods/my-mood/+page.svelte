@@ -20,8 +20,9 @@
   let storedMoodId = 0;
   let storedReasonId = 0;
 </script>
+
 <svelte:head>
-    <title>My Mood</title> 
+  <title>My Mood</title>
 </svelte:head>
 
 <WhiteBanner

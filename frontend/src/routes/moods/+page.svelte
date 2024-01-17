@@ -5,8 +5,9 @@
   import MyMoodsButtons from "../../lib/components/MyMoodsButtons.svelte";
   $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Moods</title> 
+  <title>Moods</title>
 </svelte:head>
 
 <WhiteBanner
@@ -35,9 +36,6 @@
     buttonIcon="tracker.png"
     buttonLink="/moods/tracker"
   />
-  <MyMoodsButtons
-    buttonName="Map"
-    buttonIcon="map.png"
-    buttonLink="/map" />
+  <MyMoodsButtons buttonName="Map" buttonIcon="map.png" buttonLink="/map" />
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />

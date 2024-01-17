@@ -9,8 +9,9 @@
   import AuthInput from "../../lib/components/AuthInput.svelte";
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
+
 <svelte:head>
-    <title>Profile</title> 
+  <title>Profile</title>
 </svelte:head>
 
 <WhiteBanner

@@ -46,7 +46,7 @@ export const load = async ({ cookies, params }) => {
         return 1;
       }
       return 0;
-    })
+    });
 
     filteredHabitsByCategory.forEach(habit => {
       records.forEach(record => {

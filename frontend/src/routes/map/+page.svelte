@@ -12,20 +12,21 @@
 
     $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Map</title> 
+    <title>Map</title>
 </svelte:head>
 
 <WhiteBanner
-  title="My Map"
-  description="Look at the map and read through other people’s vents! You are never alone"
-  route="/moods"
-  displayBackButton="1"
-  imgExtraPath="../"
+    title="My Map"
+    description="Look at the map and read through other people’s vents! You are never alone"
+    route="/moods"
+    displayBackButton="1"
+    imgExtraPath="../"
 />
 
 <div
-  class="bg-white mt-2 p-3 mr-6 ml-6 rounded-lg min-h-fit flex
+    class="bg-white mt-2 p-3 mr-6 ml-6 rounded-lg min-h-fit flex
    flex-col justify-center items-center shadow-lg h-4/6 overflow-y-scroll overflow-x-hidden"
 >
     <p class="text-xl">You are <strong>not</strong> ALONE</p>

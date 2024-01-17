@@ -8,8 +8,9 @@
   import showElement from "$lib/showElement";
   $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Register</title> 
+  <title>Register</title>
 </svelte:head>
 
 <WhiteBanner

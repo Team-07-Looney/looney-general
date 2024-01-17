@@ -16,8 +16,9 @@
     icon = "neutral";
   }
 </script>
+
 <svelte:head>
-    <title>Thought</title> 
+  <title>Thought</title>
 </svelte:head>
 
 <WhiteBanner

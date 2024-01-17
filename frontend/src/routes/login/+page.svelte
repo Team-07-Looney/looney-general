@@ -8,8 +8,9 @@
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
   $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Login</title> 
+  <title>Login</title>
 </svelte:head>
 
 <WhiteBanner title="Looney" description="Please Login" displayMenuButton="0" />

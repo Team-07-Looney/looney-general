@@ -7,8 +7,9 @@
   export let data;
   $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Timer</title> 
+  <title>Timer</title>
 </svelte:head>
 
 <WhiteBanner

@@ -4,7 +4,7 @@
   import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
   import showElement from "$lib/showElement";
   $showElement = false;
-  
+
   /** @type {import('./$types').ActionData} */
   export let form;
   export let data;
@@ -27,8 +27,9 @@
     longitude = location.coords.longitude;
   }
 </script>
+
 <svelte:head>
-    <title>Write Thought</title> 
+  <title>Write Thought</title>
 </svelte:head>
 
 <WhiteBanner
@@ -96,7 +97,7 @@
         <a
           class="z-10 flex justify-center items-center bg-neutral-400
         text-white font-bold p-2 rounded-lg w-20"
-        href="/moods/my-mood/{data.recordId}/thought/advice">Skip</a
+          href="/moods/my-mood/{data.recordId}/thought/advice">Skip</a
         >
         <button
           class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"

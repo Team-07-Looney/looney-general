@@ -10,8 +10,9 @@
   import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
   $showElement = false;
 </script>
+
 <svelte:head>
-    <title>Edit category</title> 
+  <title>Edit category</title>
 </svelte:head>
 
 <WhiteBanner
