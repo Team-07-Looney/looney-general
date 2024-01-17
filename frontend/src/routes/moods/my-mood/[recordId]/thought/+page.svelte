@@ -26,6 +26,8 @@
     latitude = location.coords.latitude;
     longitude = location.coords.longitude;
   }
+
+  $showElement = false;
 </script>
 
 <svelte:head>
@@ -55,12 +57,16 @@
         type="text"
         class="bg-[#EDEDED] p-2 w-full rounded-lg"
         name="title"
+        value={form?.title ?? ""}
       />
       <label for="body">Story:</label>
       <textarea
         type="text"
         name="body"
         class="bg-[#EDEDED] w-full p-4 rounded-lg"
+        value={form?.body ?? ""}
+        class="bg-[#EDEDED] w-full p-4 rounded-lg"
+        rows="{form && form.errors?"2":"5"}"
       ></textarea>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
       <div

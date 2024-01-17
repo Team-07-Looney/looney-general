@@ -40,7 +40,7 @@
         on:focus={onFocus}
         on:blur={onBlur}
         value={value ? value : ""}
-        {autocomplete}
+        autocomplete="off"
         on:input
       />
     </div>
