@@ -63,7 +63,6 @@
       <textarea
         type="text"
         name="body"
-        class="bg-[#EDEDED] w-full p-4 rounded-lg"
         value={form?.body ?? ""}
         class="bg-[#EDEDED] w-full p-4 rounded-lg"
         rows="{form && form.errors?"2":"5"}"
