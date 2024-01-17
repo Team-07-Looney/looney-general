@@ -19,8 +19,8 @@
     const inputValue = event.target.value.trim().toLowerCase(); // trim to handle spaces
     filteredHabitNames = inputValue
       ? data.predefinedHabits.filter((name) =>
-          name.toLowerCase().includes(inputValue),
-        )
+        name.toLowerCase().includes(inputValue),
+      )
       : [];
   };
 
@@ -94,8 +94,8 @@
                   {#each filteredHabitNames as option, index (option)}
                     <li
                       class="{index === filteredHabitNames.length - 1
-                        ? 'cursor-pointer pl-4 py-1 pr-1'
-                        : 'cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black'} hover:bg-gray-100 w-full"
+                        ? "cursor-pointer pl-4 py-1 pr-1"
+                        : "cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black"} hover:bg-gray-100 w-full"
                     >
                       <button on:click={() => handleOptionClick(option)}>
                         {option}
