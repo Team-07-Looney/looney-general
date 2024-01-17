@@ -29,11 +29,11 @@ export async function getAllPredefinedCategoriesData() {
 export async function createPredefinedCategoryInstances(predefinedCategoriesData, userId) {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const insert = 'INSERT INTO categories (name, user_id) VALUES (?,?)';
+    const insert = 'INSERT INTO categories (name, user_id, icon_id) VALUES (?,?,?)';
 
     // Iterate over each predefined category data and insert into the categories table
     for (const category of predefinedCategoriesData) {
-      db.run(insert, [category.name, userId], (err) => {
+      db.run(insert, [category.name, userId, category.icon_id], (err) => {
         if (err) {
           console.error(err);
           reject(err);
