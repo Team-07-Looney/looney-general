@@ -2,12 +2,44 @@ import sqlite3 from 'sqlite3';
 
 export const DBSOURCE = './database/db.sqlite';
 
+// Only testing database, DO NOT USE IN ANYTHING BUT JEST
+let testingDatabase = new sqlite3.Database(':memory:');
+
+/**
+ * USED ONLY FOR TESTING WITH JEST
+ * Refreshes the in memory database to allow fresh db every time
+ * a new test is ran
+ * @returns the testing database
+ */
+export async function refreshTestingDatabase() {
+  return new Promise(async (resolve) => {
+    testingDatabase = new sqlite3.Database(':memory:');
+    await createCategoriesTable(testingDatabase);
+    await createPredefinedCategoriesTable(testingDatabase);
+    await createPredefinedHabitsTable(testingDatabase);
+    await createHabitsTable(testingDatabase);
+    await createHabitRecordsTable(testingDatabase);
+    resolve(testingDatabase);
+  });
+}
+
 /**
  * Establishes a connection with the habits database
  * @returns database
  */
 export async function openDatabaseConnection() {
   return new Promise(async (resolve, reject) => {
+    // Not the cleanest solution but works - NODE_ENV is set by npm test - refer to package.json
+    // eslint-disable-next-line no-undef
+    if (process.env.NODE_ENV === 'test') {
+      await createCategoriesTable(testingDatabase);
+      await createPredefinedCategoriesTable(testingDatabase);
+      await createPredefinedHabitsTable(testingDatabase);
+      await createHabitsTable(testingDatabase);
+      await createHabitRecordsTable(testingDatabase);
+      resolve(testingDatabase);
+    }
+
     const db = new sqlite3.Database(DBSOURCE, (err) => {
       if (err) {
         console.error(err.message);
