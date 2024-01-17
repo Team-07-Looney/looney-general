@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllMoodTypeData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM mood_types";
+    const sql = 'SELECT * FROM mood_types';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -26,7 +26,7 @@ export async function getAllMoodTypeData() {
 /**
  * executes SQL query that inserts values from the request into habits table
  * @param {*} request request body with the data for a new habit
- * @returns 
+ * @returns creates a mood type
  */
 export async function createMoodTypeInstance(request) {
   return new Promise(async (resolve, reject) => {
@@ -73,7 +73,7 @@ export async function getMoodTypeInstanceById(id) {
  * executes SQL query that looks for habit with specified id in table habits and updates its values
  * @param {*} moodType new data of a mood type
  * @param {*} moodTypeId id of a mood type that needs to be updated
- * @returns 
+ * @returns updates a mood type
  */
 export async function editMoodTypeInstanceById(moodType, moodTypeId) {
   return new Promise(async (resolve, reject) => {
@@ -96,7 +96,7 @@ export async function editMoodTypeInstanceById(moodType, moodTypeId) {
 /**
  * executes SQL query that looks for mood type with specified id and deletes it from habits table
  * @param {*} moodTypeId id of a mood type that needs to be deleted
- * @returns 
+ * @returns deletes a mood type
  */
 export async function deleteMoodTypeInstanceById(moodTypeId) {
   return new Promise(async (resolve, reject) => {

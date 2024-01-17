@@ -238,7 +238,7 @@ async function createHabitRecordsTable(db) {
         console.error('Error creating table: ', err.message);
         reject(err.message);
       } else {
-        console.log('Table records created.');
+        console.log('Table habit records created.');
         resolve();
       }
     });

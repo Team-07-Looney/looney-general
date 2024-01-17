@@ -7,7 +7,7 @@ import { openDatabaseConnection, closeDatabaseConnection } from './database.js';
 export async function getAllRecordData() {
   return new Promise(async (resolve, reject) => {
     const db = await openDatabaseConnection();
-    const sql = "SELECT * FROM mood_records";
+    const sql = 'SELECT * FROM mood_records';
     const params = [];
 
     db.all(sql, params, (err, rows) => {
@@ -26,7 +26,7 @@ export async function getAllRecordData() {
 /**
  * executes SQL query that inserts values from the request into records table
  * @param {*} request request body with the data for a new record
- * @returns 
+ * @returns creates a mood record
  */
 export async function createRecordInstance(request) {
   return new Promise(async (resolve, reject) => {
@@ -68,10 +68,10 @@ export async function getRecordInstanceById(id) {
 }
 
 /**
- * executes SQL query that looks for record with specified id in table records and updates its values
+ * executes SQL query that looks for record with specified id in table records and updates it
  * @param {*} record new data of a record
  * @param {*} recordId id of a record that needs to be updated
- * @returns 
+ * @returns updates a mood record
  */
 export async function editRecordInstanceById(record, recordId) {
   return new Promise(async (resolve, reject) => {
@@ -94,7 +94,7 @@ export async function editRecordInstanceById(record, recordId) {
 /**
  * executes SQL query that looks for record with specified id and deletes it from records table
  * @param {*} recordId id of a record that needs to be deleted
- * @returns 
+ * @returns deleted a mood record
  */
 export async function deleteRecordInstanceById(recordId) {
   return new Promise(async (resolve, reject) => {

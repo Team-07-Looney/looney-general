@@ -73,4 +73,3 @@ export async function getHabitRecordById(req, res, next) {
     next(err);
   }
 }
-

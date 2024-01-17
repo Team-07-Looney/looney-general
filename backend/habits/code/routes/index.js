@@ -21,7 +21,7 @@ import { getPredefinedHabits } from '../controllers/predefinedHabitsController.j
 const router = express.Router();
 
 // routes
-router.get('/', (req, res, next) => {
+router.get('/', (req, res) => {
   res.json('hi');
 });
 
