@@ -52,7 +52,7 @@ router.use('/advice', cors(), requireAuth, moodProxy);
 router.use('/advice-groups', cors(), requireAuth, moodProxy);
 router.use('/advice-records', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
-router.use('/test', cors(), arduinoProxy);
+router.use('/faces', arduinoProxy);
 
 // Authentication routes
 router.post('/register', cors(), register);
