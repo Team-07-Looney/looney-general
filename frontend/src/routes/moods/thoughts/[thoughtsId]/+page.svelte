@@ -34,7 +34,7 @@
 >
   <div class="flex flex-row gap-6">
     <img src={`../../src/img/${icon}.png`} alt="emotion" class="h-14" />
-    <div class=" text-center">
+    <div class=" text-left">
       <p class="underline text-4xl">{data.thoughts[0].title}</p>
       <p>{data.thoughtsDate}</p>
     </div>
