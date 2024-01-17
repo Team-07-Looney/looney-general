@@ -5,9 +5,17 @@
   import WhiteBanner from "../../../lib/components/WhiteBanner.svelte";
   import FormEars from "../../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../../lib/components/ShadowsForForms.svelte";
+  import IconsMenu from "../../../lib/components/IconsMenu.svelte";
   $showElement = false;
   /** @type {import('./$types').ActionData} */
   export let form;
+  let storedIconId = 0;
+  let iconId;
+
+  function handleIconClick(event) {
+    const id = event.detail.iconId;
+    iconId = id;
+  }
 </script>
 
 <WhiteBanner
@@ -18,7 +26,7 @@
   imgExtraPath="../"
   displayMenuButton="1"
 />
-<div class="flex justify-center items-center mt-28">
+<div class="flex justify-center items-center mt-5">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
@@ -59,7 +67,9 @@
               value={form?.name ?? ""}
               error={form?.errors?.some((error) => error.input == "name")}
             />
-
+            <label for="iconSelect">Choose an icon:</label>
+            <IconsMenu bind:storedIconId iconId={iconId} on:iconSelected={handleIconClick} />
+            <input type="hidden" name="icon_id" value={iconId} />
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"

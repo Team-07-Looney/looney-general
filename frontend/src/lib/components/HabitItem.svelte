@@ -39,11 +39,11 @@ items-center hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         </button>
         <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
             <!-- DROPDOWN MENU -->
-            <div class="h-[2rem] flex justify-center items-center">
+            <div class="h-6 flex justify-center items-center">
                 <a class="rounded-lg" href={`/categories/${categoryId}/habits/${habitId}/edit`}>Edit</a>
             </div>
-            <div>
-                <form id="deleteForm" class="w-full rounded-lg p-1" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
+            <div class="h-7 flex justify-center items-center">
+                <form id="deleteForm" class="w-full rounded-lg" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
                     <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>

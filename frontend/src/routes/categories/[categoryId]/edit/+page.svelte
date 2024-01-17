@@ -9,6 +9,23 @@
   import FormEars from "../../../../lib/components/FormEars.svelte";
   import ShadowsForForms from "../../../../lib/components/ShadowsForForms.svelte";
   $showElement = false;
+  import IconsMenu from "../../../../lib/components/IconsMenu.svelte";
+  import { onMount, tick } from "svelte";
+
+  $showElement = false;
+  let storedIconId = data.iconId;
+  let iconId = data.iconId;
+  let referenceIcon;
+
+  onMount(async () => {
+    await tick(); // Wait for the DOM to fully render
+    referenceIcon.showPreviousSelection(storedIconId);
+  });
+
+  function handleIconClick(event) {
+    const id = event.detail.iconId;
+    iconId = id;
+  }
 </script>
 
 <WhiteBanner
@@ -18,7 +35,7 @@
   displayBackButton="1"
   imgExtraPath="../"
 />
-<div class="mt-28 flex justify-center items-center">
+<div class="mt-5 flex justify-center items-center">
   <div class="flex flex-col items-center">
     <FormEars />
     <div class="grid grid-cols-1">
@@ -58,6 +75,10 @@
               value={data.name}
               error={form?.errors?.some((error) => error.input == "name")}
             />
+            <label for="iconSelect">Choose an icon:</label>
+            <IconsMenu bind:storedIconId iconId={iconId}
+            on:iconSelected={handleIconClick} bind:this={referenceIcon}/>
+            <input type="hidden" name="icon_id" value={iconId} />
             <div class="flex flex-row gap-12 justify-center items-center">
               <a
                 href="/categories"

@@ -3,6 +3,9 @@
     import BottomMenu from "../../../../../../lib/components/BottomMenu.svelte";
     import ProgressBar from "../../../../../../lib/components/ProgressBar.svelte";
     import AdviceItem from "../../../../../../lib/components/AdviceItem.svelte";
+    import showElement from "$lib/showElement";
+
+    $showElement = false;
     export let data;
     export let form;
     export let adviceId;
