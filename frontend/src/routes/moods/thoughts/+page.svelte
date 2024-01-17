@@ -9,6 +9,10 @@
   $showElement = false;
 </script>
 
+<svelte:head>
+  <title>Thoughts</title>
+</svelte:head>
+
 <WhiteBanner
   title="My Thoughts"
   description="Vent out your feelings and look back at them to see your personal growth"

@@ -44,6 +44,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Categories</title>
+</svelte:head>
+
 <WhiteBanner
     title="My Habits"
     description="Add new ones, check the old ones, Looney is going to be with you"

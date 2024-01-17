@@ -28,6 +28,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Edit category</title>
+</svelte:head>
+
 <WhiteBanner
   title="Edit Category"
   description="Tweak your category like a pro. Use this form to remix and upgrade your routine."

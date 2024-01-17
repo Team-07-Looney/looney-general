@@ -12,18 +12,14 @@
   export let data;
   export let form;
 
-  // date for time picker
-  const date = new Date();
-  $: _date = date.toLocaleTimeString("en-GB", { timeStyle: "short" });
-
   let filteredHabitNames = [];
 
   // Function to handle input change and filter predefined habit names
   const handleNameInputChange = (event) => {
     const inputValue = event.target.value.trim().toLowerCase(); // trim to handle spaces
     filteredHabitNames = inputValue
-      ? data.predefinedHabits.filter(
-        (name) => name.toLowerCase().includes(inputValue)
+      ? data.predefinedHabits.filter((name) =>
+        name.toLowerCase().includes(inputValue),
       )
       : [];
   };
@@ -35,6 +31,10 @@
     filteredHabitNames = [];
   };
 </script>
+
+<svelte:head>
+  <title>Edit habit</title>
+</svelte:head>
 
 <WhiteBanner
   title="Edit Habit"
@@ -82,24 +82,31 @@
               path={"m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125"}
               value={data.habit.name}
               error={form?.errors?.some((error) => error.input == "name")}
-              on:input={(event) => {handleNameInputChange(event);}}
+              on:input={(event) => {
+                handleNameInputChange(event);
+              }}
             />
             {#if filteredHabitNames.length > 0}
               <div class="absolute mt-[61px] w-[230px] h-20">
-                <ul class="bg-gray-100 border rounded-lg shadow-lg border-1 border-black">
+                <ul
+                  class="bg-gray-100 border rounded-lg shadow-lg border-1 border-black"
+                >
                   {#each filteredHabitNames as option, index (option)}
-                    <li class="{index === filteredHabitNames.length - 1 ? "cursor-pointer pl-4 py-1 pr-1" : "cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black"} hover:bg-gray-100 w-full" >
+                    <li
+                      class="{index === filteredHabitNames.length - 1
+                        ? "cursor-pointer pl-4 py-1 pr-1"
+                        : "cursor-pointer pl-4 py-1 pr-1 border-b-[1px] border-black"} hover:bg-gray-100 w-full"
+                    >
                       <button on:click={() => handleOptionClick(option)}>
                         {option}
                       </button>
-                      </li>
+                    </li>
                   {/each}
                 </ul>
               </div>
             {/if}
 
             <TimePicker
-              bind:_date
               label="Start Time"
               data={data.habit.start_time}
               display24="true"

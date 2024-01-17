@@ -1,7 +1,6 @@
 <script>
   // Data contains all data passed by the page server
   export let data;
-  console.log(data);
   import showElement from "$lib/showElement";
   import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
   import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
@@ -18,6 +17,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Thought</title>
+</svelte:head>
+
 <WhiteBanner
   title="My Thoughts"
   description="Vent out your feelings and look back at them to see your personal growth"
@@ -31,7 +34,7 @@
 >
   <div class="flex flex-row gap-6">
     <img src={`../../src/img/${icon}.png`} alt="emotion" class="h-14" />
-    <div class=" text-center">
+    <div class=" text-left">
       <p class="underline text-4xl">{data.thoughts[0].title}</p>
       <p>{data.thoughtsDate}</p>
     </div>

@@ -18,6 +18,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Create category</title>
+</svelte:head>
+
 <WhiteBanner
   title="Create Category"
   description="Organize your habit with your own personal folder"

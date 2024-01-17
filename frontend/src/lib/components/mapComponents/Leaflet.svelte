@@ -3,9 +3,9 @@
     import "leaflet/dist/leaflet.css";
     import { onDestroy, onMount, setContext } from "svelte";
 
-    export let bounds;
-    export let view;
-    export let zoom;
+    export let bounds = "";
+    export let view = "";
+    export let zoom = "";
 
     let map;
     let mapElement;

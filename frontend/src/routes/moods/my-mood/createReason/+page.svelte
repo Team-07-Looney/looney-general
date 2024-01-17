@@ -10,6 +10,10 @@
   export let form;
 </script>
 
+<svelte:head>
+  <title>Create Reason</title>
+</svelte:head>
+
 <WhiteBanner
   title="Add Mood"
   description="Add a reason that fits your current situation"

@@ -6,6 +6,10 @@
   $showElement = false;
 </script>
 
+<svelte:head>
+  <title>Moods</title>
+</svelte:head>
+
 <WhiteBanner
   title="My Moods"
   description="Gain more insight in how you are feeling, Looney will always be there"
@@ -32,9 +36,6 @@
     buttonIcon="tracker.png"
     buttonLink="/moods/tracker"
   />
-  <MyMoodsButtons
-    buttonName="Map"
-    buttonIcon="map.png"
-    buttonLink="/map" />
+  <MyMoodsButtons buttonName="Map" buttonIcon="map.png" buttonLink="/map" />
 </div>
 <BottomMenu imgPath="../../../" displayMoodText="1" />
