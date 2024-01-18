@@ -6,10 +6,13 @@
     import showElement from "$lib/showElement";
     $showElement = false;
     export let data;
+    let lowerCaseReason;
     if (data.mostRecordedReasonName !== null) {
-        let lowerCaseReason = `${data.mostRecordedReasonName
+        lowerCaseReason = `${data.mostRecordedReasonName
             .charAt(0)
-            .toUpperCase()}${data.mostRecordedReasonName.slice(1).toLowerCase()}`;
+            .toUpperCase()}${data.mostRecordedReasonName
+            .slice(1)
+            .toLowerCase()}`;
         if (lowerCaseReason.length > 10) {
             lowerCaseReason = `${lowerCaseReason.slice(0, 9)}...`;
         }
