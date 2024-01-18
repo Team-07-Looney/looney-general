@@ -49,6 +49,22 @@ const tableQueries = [
   advice_id INTEGER REFERENCES advice(id),
   user_id INTEGER)`
 ];
+// Only testing database, DO NOT USE IN ANYTHING BUT JEST
+let testingDatabase = new sqlite3.Database(':memory:');
+/**
+ * USED ONLY FOR TESTING WITH JEST
+ * Refreshes the in memory database to allow fresh db every time
+ * a new test is ran
+ * @returns the testing database
+ */
+export async function refreshTestingDatabase() {
+  return new Promise(async (resolve) => {
+    testingDatabase = new sqlite3.Database(':memory:');
+    await createTables(testingDatabase);
+
+    resolve(testingDatabase);
+  });
+}
 
 /**
  * Establishes a connection with the habits database
@@ -56,6 +72,13 @@ const tableQueries = [
  */
 export async function openDatabaseConnection() {
   return new Promise(async (resolve, reject) => {
+    // Not the cleanest solution but works - NODE_ENV is set by npm test - refer to package.json
+    // eslint-disable-next-line no-undef
+    if (process.env.NODE_ENV === 'test') {
+      await createTables(testingDatabase);
+      resolve(testingDatabase);
+    }
+
     const db = new sqlite3.Database(DBSOURCE, async (err) => {
       if (err) {
         console.error(err.message);
@@ -74,8 +97,8 @@ export async function openDatabaseConnection() {
             await populateMoodsTypeTable(db);
             await populateMoodsTable(db);
             await populateReasonsTable(db);
-            await populateadviceGroupsTable(db);
-            await populateadviceTable(db);
+            await populateAdviceGroupsTable(db);
+            await populateAdviceTable(db);
           }
 
           resolve(db);
@@ -105,7 +128,7 @@ export function closeDatabaseConnection(db) {
  * Creates tables if they don't exist
  * @param {*} db The database in which the tables should be created
  */
-async function createTables(db) {
+export async function createTables(db) {
   // Use Promise.all to await all promises in parallel
   await Promise.all(tableQueries.map(query => createTableIfNotExists(db, query)));
 }
@@ -133,7 +156,7 @@ async function createTableIfNotExists(db, query) {
  * @param {*} db The database in which the table should be created
  * @returns populates the moods types table
  */
-async function populateMoodsTypeTable(db) {
+export async function populateMoodsTypeTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedMoodTypes = ['Positive', 'Neutral', 'Negative'];
     const insertQuery = 'INSERT INTO mood_types (name) VALUES (?)';
@@ -154,7 +177,7 @@ async function populateMoodsTypeTable(db) {
  * @param {*} db The database in which the table should be created
  * @returns populates the moods table
  */
-async function populateMoodsTable(db) {
+export async function populateMoodsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedMooods = [
       {
@@ -235,7 +258,7 @@ async function populateMoodsTable(db) {
  * @param {*} db The database in which the table should be created
  * @returns populates the reasons table
  */
-async function populateReasonsTable(db) {
+export async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedreasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
     const insertQuery = 'INSERT INTO reasons (name, user_id) VALUES (?,?)';
@@ -256,7 +279,7 @@ async function populateReasonsTable(db) {
  * @param {*} db The database in which the table should be created
  * @returns populates the advice groups table
  */
-async function populateadviceGroupsTable(db) {
+export async function populateAdviceGroupsTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedadviceGroups = [
       {
@@ -298,7 +321,7 @@ async function populateadviceGroupsTable(db) {
  * @param {*} db The database in which the table should be created
  * @returns populates the advice table
  */
-async function populateadviceTable(db) {
+export async function populateAdviceTable(db) {
   return new Promise((resolve, reject) => {
     const predefinedadvice = [
       {

@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import { createUser, getUser, getUsers, updateUser } from '../../controllers/userController';
 import { refreshTestingDatabase } from '../../database/database';
-
+ 
 describe('get all users', () => {
   test('from the database', async () => {
     // Arrange
@@ -15,21 +15,21 @@ describe('get all users', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {};
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await getUsers(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
     expect(responseData.data.length).toEqual(2);
   });
 });
-
+ 
 describe('get a user', () => {
   test('that exists via their email', async () => {
     // Arrange
@@ -42,7 +42,7 @@ describe('get a user', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {
       params: {
         userEmail: insertData[0].email
@@ -50,18 +50,18 @@ describe('get a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await getUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
     expect(responseData.data.username).toEqual(insertData[0].username);
     expect(responseData.data.email).toEqual(insertData[0].email);
     expect(responseData.data.password).toEqual(insertData[0].password);
   });
-
+ 
   test('that exists via their id', async () => {
     // Arrange
     const db = await refreshTestingDatabase();
@@ -73,7 +73,7 @@ describe('get a user', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {
       params: {
         userId: 1
@@ -81,22 +81,22 @@ describe('get a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await getUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
     expect(responseData.data.username).toEqual(insertData[0].username);
     expect(responseData.data.email).toEqual(insertData[0].email);
     expect(responseData.data.password).toEqual(insertData[0].password);
   });
-
+ 
   test('with wrong key will throw an error', async () => {
     // Arrange
     await refreshTestingDatabase();
-
+ 
     const req = {
       params: {
         userName: 'John Doe'
@@ -104,21 +104,21 @@ describe('get a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await getUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
     console.log(responseData);
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(404);
     expect(responseData.data).toEqual('The key for the user is not found');
   });
-
+ 
   test('that does not exist will throw an error', async () => {
     // Arrange
     await refreshTestingDatabase();
-
+ 
     const req = {
       params: {
         userEmail: 'john.doe@looney.nl'
@@ -126,22 +126,22 @@ describe('get a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await getUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(404);
     expect(responseData.data).toEqual('No user found with such key');
   });
 });
-
+ 
 describe('create a user', () => {
   test('with email that is valid and all parameters available', async () => {
     // Arrange
     await refreshTestingDatabase();
-
+ 
     const req = {
       body: {
         name: 'John Doe',
@@ -151,17 +151,17 @@ describe('create a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await createUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(responseData.data.message).toEqual('Successfully added user');
     expect(responseData.data.email).toEqual(req.body.email);
     expect(res.status).toHaveBeenCalledWith(200);
   });
-
+ 
   test('with email that is already taken', async () => {
     // Arrange
     const db = await refreshTestingDatabase();
@@ -173,7 +173,7 @@ describe('create a user', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {
       body: {
         name: 'Jane Doe',
@@ -183,19 +183,19 @@ describe('create a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await createUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(responseData.data).toEqual('SQLITE_CONSTRAINT: UNIQUE constraint failed: users.email');
   });
-
+ 
   test('with missing parameters', async () => {
     // Arrange
     await refreshTestingDatabase();
-
+ 
     const req = {
       body: {
         name: 'John Doe',
@@ -204,17 +204,17 @@ describe('create a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await createUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
     console.log(responseData);
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(409);
   });
 });
-
+ 
 describe('update a user', () => {
   test('and their password', async () => {
     // Arrange
@@ -227,7 +227,7 @@ describe('update a user', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {
       params: {
         userId: 1
@@ -239,17 +239,17 @@ describe('update a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await updateUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
     expect(responseData.data.message).toEqual('Successfully updated the user\'s password');
     expect(responseData.data.userId).toEqual(req.params.userId);
   });
-
+ 
   test('and their id is not possible', async () => {
     // Arrange
     const db = await refreshTestingDatabase();
@@ -261,7 +261,7 @@ describe('update a user', () => {
       const query = `INSERT INTO users (username, email, password) VALUES ('${username}', '${email}', '${password}')`;
       await db.run(query);
     }));
-
+ 
     const req = {
       params: {
         userId: 1
@@ -273,17 +273,17 @@ describe('update a user', () => {
     };
     const res = mockResponse();
     const next = jest.fn();
-
+ 
     // Act
     await updateUser(req, res, next);
     const responseData = res.send.mock.calls[0][0];
-
+ 
     // Assert
     expect(res.status).toHaveBeenCalledWith(409);
     expect(responseData.data).toEqual('Invalid param for updating the user. Currently only the password is allowed.');
   });
 });
-
+ 
 /**
  * Creates a mock response for the controller
  * @returns the mock response
