@@ -49,7 +49,7 @@
 </svelte:head>
 
 <WhiteBanner
-    title="My Habits"
+    title="My Routines"
     description="Add new ones, check the old ones, Looney is going to be with you"
     route="/home"
     displayBackButton="1"

@@ -145,7 +145,6 @@ export const load = async ({ cookies }) => {
           
     // Calls the function to find the most recorded reason and saves it in a variable
     const mostRecordedReasonName = findMostRecordedReason(filteredRecordsByUser, reasons);
-                
     return { statistics, totalThoughts, mostRecordedReasonName, mostFrequentAdvice};
   } catch (error) {
     console.log(error);
