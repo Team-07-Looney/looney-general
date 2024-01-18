@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { getAllAdviceRecordsData } from '../../database/adviceRecordsAdapter';
+import { createAdviceRecordInstance, getAllAdviceRecordsData } from '../../database/adviceRecordsAdapter';
 import { refreshTestingDatabase } from '../../database/database';
 
 describe('getting all advice records from the database', () => {
@@ -30,10 +30,14 @@ describe('getting all advice records from the database', () => {
 //   test('successfully adding a new advice record to the database', async () => {
 //     // Arrange
 //     await refreshTestingDatabase();
-//     const adviceRecordData = { advice_id: 4, user_id: 5};
+//     const adviceRecordData = { advice_id: 1, user_id: 2};
 
 //     // Act
-//     const response = await createAdviceRecordInstance(adviceRecordData.advice_id, adviceRecordData.user_id);
+//     const response = await createAdviceRecordInstance({
+//       advice_id: adviceRecordData.advice_id,
+//       user_id: adviceRecordData.user_id
+//     });
+    
 
 //     // Assert
 //     expect(response).toEqual({

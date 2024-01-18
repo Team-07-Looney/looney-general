@@ -45,7 +45,7 @@ describe('get an advice record', () => {
  
     const req = {
       params: {
-        id: insertData[0].id
+        id: insertData[0].advice_id
       }
     };
     const res = mockResponse();
@@ -75,20 +75,20 @@ describe('get an advice record', () => {
  
     const req = {
       params: {
-        id: 1
+        advice_id: 1
       }
     };
     const res = mockResponse();
     const next = jest.fn();
  
     // Act
-    await getUser(req, res, next);
+    await getAdviceRecords(req, res, next);
     const responseData = res.send.mock.calls[0][0];
  
     // Assert
     expect(res.status).toHaveBeenCalledWith(200);
-    expect(responseData.data.username).toEqual(insertData[0].advice_id);
-    expect(responseData.data.email).toEqual(insertData[0].user_id);
+    expect(responseData.data.advice_id).toEqual(insertData[0].advice_id);
+    expect(responseData.data.user_id).toEqual(insertData[0].user_id);
   });
  
   test('with wrong key will throw an error', async () => {
