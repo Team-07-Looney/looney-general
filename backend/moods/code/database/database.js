@@ -237,7 +237,7 @@ async function populateMoodsTable(db) {
  */
 async function populateReasonsTable(db) {
   return new Promise((resolve, reject) => {
-    const predefinedreasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel'];
+    const predefinedreasons = ['Weather', 'Family', 'Friends', 'School', 'Pets', 'Food', 'Travel', 'Work', 'Partner', 'Myself', 'TV-show', 'Movie'];
     const insertQuery = 'INSERT INTO reasons (name, user_id) VALUES (?,?)';
 
     predefinedreasons.forEach((reason) => {

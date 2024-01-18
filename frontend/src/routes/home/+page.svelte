@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
 
   export let data;
+  
   $showElement = true;
   let tagIsOpen;
   let tagButton = 1;
