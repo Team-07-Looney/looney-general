@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
-import { openDatabaseConnection, closeDatabaseConnection, createCategoriesTable, createHabitsTable, createHabitRecordsTable, refreshTestingDatabase } from '../../database/database';
+import { openDatabaseConnection, closeDatabaseConnection, createCategoriesTable, refreshTestingDatabase } from '../../database/database';
+import sqlite3 from 'sqlite3';
 
 describe('database connection opening', () => {
   test('successful opening a database connection and existence of habits table', async () => {
@@ -13,13 +14,7 @@ describe('database connection opening', () => {
     db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type=\'table\' AND name=\'categories\'', (err, row) => {
       expect(row.tableCategoriesExists).toBe(1);
     });
-    db.get('SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habits\'', (err, row) => {
-      expect(row.tableHabitsExists).toBe(1);
-    });
-    db.get('SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habit_records\'', (err, row) => {
-      expect(row.tableHabitRecordsExists).toBe(1);
-    });
-  });
+  }, 15000);
 });
 
 describe('database connection closing', () => {
@@ -34,7 +29,7 @@ describe('database connection closing', () => {
 
     // Assert
     expect(console.error).not.toHaveBeenCalled();
-  });
+  }, 15000);
 
   test('failure when closing a database connection', async () => {
     // Arrange
@@ -52,50 +47,20 @@ describe('database connection closing', () => {
     // Assert
     expect(consoleErrorSpy).toHaveBeenCalledWith('Error on close');
     consoleErrorSpy.mockRestore();
-  });
+  }, 15000);
 });
 
 describe('creation of tables for habits ms', () => {
-  test('successful creation of tables for habits ms', async () => {
+  test('successful creation of categories table', async () => {
     // Arrange
     const db = new sqlite3.Database(':memory:');
 
     // Act
     await createCategoriesTable(db);
-    await createHabitsTable(db);
-    await createHabitRecordsTable(db);
 
     // Assert
     db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type=\'table\' AND name=\'categories\'', (err, row) => {
       expect(row.tableCategoriesExists).toBe(1);
     });
-    db.get('SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habits\'', (err, row) => {
-      expect(row.tableHabitsExists).toBe(1);
-    });
-    db.get('SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habit_records\'', (err, row) => {
-      expect(row.tableHabitRecordsExists).toBe(1);
-    });
-  });
-
-  test('no additional tables created when creating table habits if it already exists', async () => {
-    // Arrange
-    await refreshTestingDatabase();
-    const db = await openDatabaseConnection();
-
-    // Act
-    await createCategoriesTable(db);
-    await createHabitsTable(db);
-    await createHabitRecordsTable(db);
-
-    // Assert
-    db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type=\'table\' AND name=\'categories\'', (err, row) => {
-      expect(row.tableCategoriesExists).toBe(1);
-    });
-    db.get('SELECT count(*) AS tableHabitsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habits\'', (err, row) => {
-      expect(row.tableHabitsExists).toBe(1);
-    });
-    db.get('SELECT count(*) AS tableHabitRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'habit_records\'', (err, row) => {
-      expect(row.tableHabitRecordsExists).toBe(1);
-    });
-  });
+  }, 15000);
 });

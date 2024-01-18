@@ -122,7 +122,7 @@ export function closeDatabaseConnection(db) {
  * @param {*} db 
  * @returns 
  */
-async function createPredefinedCategoriesTable(db) {
+export async function createPredefinedCategoriesTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE predefined_categories (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -138,14 +138,14 @@ async function createPredefinedCategoriesTable(db) {
         const insertQuery = 'INSERT INTO predefined_categories (id, name, icon_id) VALUES (?,?,?)';
 
         const predefinedCategories = [
-          { id: 1, name: 'Morning Routine', icon_id: '&#127765' },
-          { id: 2,name: 'Afternoon Routine', icon_id: '&#127763' },
-          { id: 3,name: 'Evening Routine', icon_id: '&#127761' },
-          { id: 4,name: 'Anytime', icon_id: '&#127775' }
+          { id: 1, name: 'Morning Routine', iconId: '&#127765' },
+          { id: 2,name: 'Afternoon Routine', iconId: '&#127763' },
+          { id: 3,name: 'Evening Routine', iconId: '&#127761' },
+          { id: 4,name: 'Anytime', iconId: '&#127775' }
         ];
 
-        predefinedCategories.forEach(({ id, name, icon_id }) => {
-          db.run(insertQuery, [id, name, icon_id], (err) => {
+        predefinedCategories.forEach(({ id, name, iconId }) => {
+          db.run(insertQuery, [id, name, iconId], (err) => {
             if (err) {
               console.error(`Error inserting data for category ${name}: `, err.message);
               reject(err.message);
@@ -168,7 +168,7 @@ async function createPredefinedCategoriesTable(db) {
  * @param {*} db 
  * @returns 
  */
-async function createPredefinedHabitsTable(db) {
+export async function createPredefinedHabitsTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE predefined_habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -205,7 +205,7 @@ async function createPredefinedHabitsTable(db) {
  * @param {*} db 
  * @returns 
  */
-async function createCategoriesTable(db) {
+export async function createCategoriesTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE categories (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -232,7 +232,7 @@ async function createCategoriesTable(db) {
  */
 // The function needs to be async because otherwise other functions were taking over
 // priority (which were using the table in question) and would result in an error
-async function createHabitsTable(db) {
+export async function createHabitsTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE habits (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -258,7 +258,7 @@ async function createHabitsTable(db) {
  * @param {*} db 
  * @returns 
  */
-async function createHabitRecordsTable(db) {
+export async function createHabitRecordsTable(db) {
   return new Promise((resolve, reject) => {
     db.run(`CREATE TABLE habit_records (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
