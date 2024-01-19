@@ -32,15 +32,27 @@ const moodProxy = createProxyMiddleware({
   onProxyReq: fixRequestBody,
 });
 
+const arduinoProxy = createProxyMiddleware({
+  target: 'http://msarduino:3014',
+  changeOrigin: true,
+  onProxyReq: fixRequestBody,
+});
+
 router.use('/categories', cors(), requireAuth, habitProxy);
-router.use('/records', cors(), requireAuth, habitProxy);
+router.use('/habit-records', cors(), requireAuth, habitProxy);
+router.use('/predefined-habits', cors(), requireAuth, habitProxy);
 router.use('/home', cors(), requireAuth);
 router.use('/moods', cors(), requireAuth, moodProxy);
 router.use('/mood-types', cors(), requireAuth, moodProxy);
 router.use('/thoughts', cors(), requireAuth, moodProxy);
+router.use('/latest-thoughts', cors(), requireAuth, moodProxy);
 router.use('/reasons', cors(), requireAuth, moodProxy);
-router.use('/recordsMoods', cors(), requireAuth, moodProxy);
+router.use('/mood-records', cors(), requireAuth, moodProxy);
+router.use('/advice', cors(), requireAuth, moodProxy);
+router.use('/advice-groups', cors(), requireAuth, moodProxy);
+router.use('/advice-records', cors(), requireAuth, moodProxy);
 router.use('/users', cors(), requireAuth, usersProxy);
+router.use('/faces', arduinoProxy);
 
 // Authentication routes
 router.post('/register', cors(), register);
@@ -48,8 +60,8 @@ router.post('/login', cors(), login);
 router.post('/profile/change-password', cors(), changePassword);
 
 // Route to make sure user is authenticated
-router.get('/verify', cors(), requireAuth, (req, res) => {
-  res.status(200).send({"message": "User is authenticated"});
+router.get('/verify', requireAuth, cors(), (req, res) => {
+  res.status(200).send({'message': 'User is authenticated'});
 });
 
 

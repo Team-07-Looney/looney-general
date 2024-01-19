@@ -1,5 +1,5 @@
 import axios from "axios";
-import { redirect } from '@sveltejs/kit';
+import { redirect } from "@sveltejs/kit";
 
 /**
  * Fetches data from the habits microservice via the API gateway to retrieve a habit based on id
@@ -9,12 +9,12 @@ import { redirect } from '@sveltejs/kit';
  */
 export const load = async ({ params, cookies }) => {
   try {
-    const jwt = cookies.get('jwt');
+    const jwt = cookies.get("jwt");
 
     const { categoryId } = params;
-    const response = await axios.get(`http://localhost:3011/categories/${categoryId}`, {
+    const response = await axios.get(`http://apigateway:3011/categories/${categoryId}`, {
       headers: {
-        'Authorization': `Bearer ${jwt}`
+        "Authorization": `Bearer ${jwt}`
       }
     });
 
@@ -22,32 +22,33 @@ export const load = async ({ params, cookies }) => {
     return { categories };
   } catch (error) {
     if (error.response.status == 401) {
-      throw redirect(302, '/login');
+      throw redirect(302, "/login");
     }
   }
 };
 
 export const actions = {
-  deleteCategory: async ({ params, cookies }) => {
+  deleteCategory: async ({ request, cookies }) => {
     try {
       // Retrieves the id from the url
-      const { categoryId } = params;
-      const jwt = cookies.get('jwt');
+      const jwt = cookies.get("jwt");
+      const formData = await request.formData();
+      const category = formData.get("category_id");
 
       // Set the body of the request, adds a header and sends delete request to delete habit
-      const data = await axios.delete(`http://localhost:3011/categories/${categoryId}`, {
+      await axios.delete(`http://apigateway:3011/categories/${category}`, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
-          "Content-Type": 'application/x-www-form-urlencoded' // The header is important!
+          "Content-Type": "application/x-www-form-urlencoded" // The header is important!
         }
       });
 
     } catch (error) {
       if (error.response.status == 401) {
-        throw redirect(302, '/login');
+        throw redirect(302, "/login");
       }
     }
 
-    throw redirect(302, '/categories');
+    throw redirect(302, "/categories");
   }
 };

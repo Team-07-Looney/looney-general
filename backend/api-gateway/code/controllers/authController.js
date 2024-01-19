@@ -6,11 +6,11 @@ dotenv.config({ path: '../variables.env' });
 
 function getToDay() {
   const date = new Date();
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
   // This arrangement can be altered based on how we want the date's format to appear.
-  let currentDate = `${day}-${month}-${year}`;
+  const currentDate = `${day}-${month}-${year}`;
   return currentDate;
 }
 
@@ -45,8 +45,16 @@ export async function register(req, res) {
     const getUserResponse = await axios.get(`http://msusers:3012/users/email/${createUserResponse.data.data.email}`);
 
     // Create a JWT token
-    let token = createToken(getUserResponse.data.data.id);
+    const token = createToken(getUserResponse.data.data.id);
     tempResponse.data.token = token;
+
+    await axios.post('http://mshabits:3010/predefined-categories', {
+      user_id: getUserResponse.data.data.id
+    }, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
+    });
 
     res.status(200).send(tempResponse);
 
@@ -74,7 +82,7 @@ export async function login(req, res) {
       const auth = await bcrypt.compare(req.body.password, getUserResponse.data.data.password);
       if (auth) {
         // Create the JWT token
-        let token = createToken(getUserResponse.data.data.id);
+        const token = createToken(getUserResponse.data.data.id);
         tempResponse.data.token = token;
 
         tempResponse.data.message = 'Successful login';
@@ -108,11 +116,11 @@ export async function changePassword(req, res) {
   const auth = await bcrypt.compare(req.body.currentPassword, getUserResponse.data.data.password);
   if(auth) {
     const saltRounds = 12;
-    let hash = await bcrypt.hash(req.body.newPassword, saltRounds);
+    const hash = await bcrypt.hash(req.body.newPassword, saltRounds);
 
     // Call the microservice function to update a user on a key (column) and value
     const data = await axios.post(`http://msusers:3012/users/${decoded.payload.id}`, {
-      key: "password",
+      key: 'password',
       value: hash
     }, {
       headers: {
@@ -122,7 +130,7 @@ export async function changePassword(req, res) {
 
     res.status(209).send(data.data);
   } else {
-    tempResponse.data.message = "The current password does not match";
+    tempResponse.data.message = 'The current password does not match';
     res.status(409).send(tempResponse);
   }
 }
@@ -133,6 +141,7 @@ export async function changePassword(req, res) {
  * @returns the JWT token
  */
 function createToken(id) {
+  // eslint-disable-next-line no-undef
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: 24 * 60 * 60
   });
