@@ -1,5 +1,5 @@
 <script>
-    import { openPopup } from "../popup";
+    import { openPopup, habit } from "../popup";
     import DeleteConfirmationPopup from "./DeleteConfirmationPopup.svelte";
 
     export let title;
@@ -7,6 +7,7 @@
     export let habitId;
     export let categoryId;
     export let done;
+    habit.set(habitId);
 </script>
 
 <DeleteConfirmationPopup name='habit' />
@@ -44,6 +45,7 @@ items-center hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
             </div>
             <div class="h-7 flex justify-center items-center">
                 <form id="deleteForm" class="w-full rounded-lg" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
+                    <input type="hidden" name="habit_id" value={$habit} />
                     <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>

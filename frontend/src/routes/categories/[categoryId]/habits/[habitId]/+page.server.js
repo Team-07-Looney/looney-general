@@ -29,14 +29,16 @@ export const load = async ({ params, cookies }) => {
 };
 
 export const actions = {
-  deleteHabit: async ({ params, cookies }) => {
-    const { categoryId, habitId } = params;
+  deleteHabit: async ({ params, cookies, request }) => {
+    const { categoryId } = params;
     try {
       // Retrieves the id from the url
       const jwt = cookies.get("jwt");
+      const formData = await request.formData();
+      const habit = formData.get("habit_id");
 
       // Set the body of the request, adds a header and sends delete request to delete habit
-      await axios.delete(`http://apigateway:3011/categories/${categoryId}/habits/${habitId}`, {
+      await axios.delete(`http://apigateway:3011/categories/${categoryId}/habits/${habit}`, {
         headers: {
           "Authorization": `Bearer ${jwt}`,
           "Content-Type": "application/x-www-form-urlencoded" // The header is important!
