@@ -19,8 +19,9 @@
   description="Change your password"
   route="/home"
   displayBackButton="1"
-  displayMenuButton="0"
+  displayMenuButton="1"
   imgExtraPath="../"
+  showProfile = 0
 />
 
 <div class="mt-4 flex justify-center items-center">

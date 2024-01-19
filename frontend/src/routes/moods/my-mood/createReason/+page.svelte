@@ -15,7 +15,7 @@
 </svelte:head>
 
 <WhiteBanner
-  title="Add Mood"
+  title="Add Reason"
   description="Add a reason that fits your current situation"
   displayBackButton="0"
   imgExtraPath="../"

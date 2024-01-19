@@ -29,12 +29,12 @@
 </script>
 
 <svelte:head>
-  <title>Edit category</title>
+  <title>Edit routine</title>
 </svelte:head>
 
 <WhiteBanner
-  title="Edit Category"
-  description="Tweak your category like a pro. Use this form to remix and upgrade your routine."
+  title="Edit Routine"
+  description="Tweak your routine like a pro. Use this form to remix and upgrade your routine."
   route="/categories"
   displayBackButton="1"
   imgExtraPath="../"

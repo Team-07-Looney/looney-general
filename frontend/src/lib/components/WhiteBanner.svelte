@@ -21,10 +21,11 @@
   export let displayBackButton = 0;
   export let displayMenuButton = 1;
   export let imgExtraPath = "";
+  export let showProfile = 1;
 </script>
 
 {#if isSideMenuOpen}
-  <SideMenu />
+  <SideMenu showProfileOption={showProfile} />
 {/if}
 <div class="bg-white h-36 w-full pt-1">
   <div class="flex flex-row justify-between items-center relative z-10 pr-3">

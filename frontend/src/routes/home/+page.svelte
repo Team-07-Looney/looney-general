@@ -7,6 +7,7 @@
   import { onMount } from "svelte";
 
   export let data;
+  
   $showElement = true;
   let tagIsOpen;
   let tagButton = 1;
@@ -47,7 +48,7 @@
   <div class="flex flex-col justify-center items-center gap-4 mb-10">
     <div class="flex flex-col gap-6">
       <OctopusButton
-        buttonName="My Habits"
+        buttonName="My Routines"
         buttonIcon="habits.png"
         buttonLink="/categories"
         buttonDescription="Add new ones, check the old ones, Looney is going to be with you"
