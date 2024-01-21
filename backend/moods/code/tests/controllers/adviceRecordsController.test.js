@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
 import { createAdviceRecord, getAdviceRecords } from '../../controllers/adviceRecordsController';
 import { refreshTestingDatabase } from '../../database/database';
@@ -91,50 +92,6 @@ test('that exists via their id', async () => {
   expect(responseData.data[0].advice_id).toEqual(insertData[0].advice_id);
   expect(responseData.data[0].user_id).toEqual(insertData[0].user_id);
 });
- 
-// test('with wrong key will throw an error', async () => {
-//   // Arrange
-//   await refreshTestingDatabase();
- 
-//   const req = {
-//     params: {
-//       idWrong: 66
-//     }
-//   };
-//   const res = mockResponse();
-//   const next = jest.fn();
- 
-//   // Act
-//   await getAdviceRecords(req, res, next);
-//   const responseData = res.send.mock.calls[0][0];
-//   console.log(responseData.data);
-//   // Assert
-//   expect(res.status).toHaveBeenCalledWith(404);
-//   expect(responseData.data).toEqual('The key for the advice record is not found');
-// });
- 
-
-//   test('that does not exist will throw an error', async () => {
-//     // Arrange
-//     await refreshTestingDatabase();
- 
-//     const req = {
-//       params: {
-//         id: 1
-//       }
-//     };
-//     const res = mockResponse();
-//     const next = jest.fn();
- 
-//     // Act
-//     await getAdviceRecords(req, res, next);
-//     const responseData = res.send.mock.calls[0][0];
- 
-//     // Assert
-//     expect(res.status).toHaveBeenCalledWith(404);
-//     expect(responseData.data).toEqual('No advice record found with such key');
-//   });
-// });
  
 describe('create a advice record', () => {
   test('with id that is valid and all parameters available', async () => {

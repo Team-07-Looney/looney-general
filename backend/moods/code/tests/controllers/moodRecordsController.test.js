@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable no-undef */
 import { getRecord, createRecord } from '../../controllers/moodRecordsController';
 import { refreshTestingDatabase } from '../../database/database';

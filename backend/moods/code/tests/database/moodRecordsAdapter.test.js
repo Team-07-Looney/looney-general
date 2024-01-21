@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { getAllRecordData, createRecordInstance } from '../../database/moodRecordsAdapter';
+import { getAllRecordData} from '../../database/moodRecordsAdapter';
 import { refreshTestingDatabase } from '../../database/database';
 
 
@@ -15,6 +15,7 @@ describe('getting all advice records from the database', () => {
 
     await Promise.all(insertData.map(async (moodRecord) => {
       const { reason_id, mood_id, user_id } = moodRecord;
+      // eslint-disable-next-line camelcase
       const query = `INSERT INTO mood_records (reason_id, mood_id, user_id) VALUES ('${reason_id}', '${mood_id}', '${user_id}')`;
       await db.run(query);
     }));
