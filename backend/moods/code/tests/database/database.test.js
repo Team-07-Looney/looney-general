@@ -77,13 +77,6 @@ describe('creation of tables for moods ms', () => {
     db.get('SELECT count(*) AS tableMoodsExists FROM sqlite_master WHERE type=\'table\' AND name=\'moods\'', (err, row) => {
       expect(row.tableMoodsExists).toBe(1);
     });
-      
-    // db.get('SELECT count(*) AS tableAdviceRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'advice-records\'', (err, row) => {
-    //   expect(row.tableAdviceRecordsExists).toBe(1);
-    // });
-    // db.get('SELECT count(*) AS tableThoughtsExists FROM sqlite_master WHERE type=\'table\' AND name=\'thoughts\'', (err, row) => {
-    //   expect(row.tableThoughtsExists).toBe(1);
-    // });
   });
 });
 
@@ -98,10 +91,4 @@ test('no additional tables created when creating table moods if it already exist
   db.get('SELECT count(*) AS tableMoodsExists FROM sqlite_master WHERE type=\'table\' AND name=\'moods\'', (err, row) => {
     expect(row.tableMoodsExists).toBe(1);
   });
-  // db.get('SELECT count(*) AS tableAdviceRecordsExists FROM sqlite_master WHERE type=\'table\' AND name=\'advice-records\'', (err, row) => {
-  //   expect(row.tableAdviceRecordsExists).toBe(1);
-  // });
-  // db.get('SELECT count(*) AS tableThoughtsExists FROM sqlite_master WHERE type=\'table\' AND name=\'thoughts\'', (err, row) => {
-  //   expect(row.tableThoughtsExists).toBe(1);
-  // });
 });

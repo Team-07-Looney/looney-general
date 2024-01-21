@@ -34,8 +34,8 @@ describe('getting all advice records from the database', () => {
 
 //     // Act
 //     const response = await createAdviceRecordInstance({
-//       advice_id: adviceRecordData.advice_id,
-//       user_id: adviceRecordData.user_id
+//       advice_id: adviceRecordData[0].advice_id,
+//       user_id: adviceRecordData[0].user_id
 //     });
     
 
