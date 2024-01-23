@@ -26,11 +26,13 @@ jobs:
         with:
           github-token:  ${{ secrets.TESTING_TOKEN }}
           coverage-summary-path: ./backend/users/code/coverage/coverage-summary.json
-          title: My Jest Coverage Comment
-          summary-title: My Summary Title
+          title: Unit Testing Coverage - Users MS
+          summary-title: Summary
           badge-title: Coverage
           hide-comment: false
           create-new-comment: false
           hide-summary: false
+          junitxml-title: Tests ran
           junitxml-path: ./backend/users/code/junit.xml
-          junitxml-title: My JUnit Title
+          coverage-title: Details
+          coverage-path: ./backend/users/code/coverage.txt
