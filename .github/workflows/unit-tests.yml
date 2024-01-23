@@ -19,7 +19,7 @@ jobs:
         run: |
           cd backend/users/code
           npm ci
-          npm run coverage-test
+          npx jest --coverage --reporters=default --reporters=jest-junit
 
       - name: Jest Coverage Comment
         uses: MishaKav/jest-coverage-comment@main
@@ -31,5 +31,5 @@ jobs:
           hide-comment: false
           create-new-comment: false
           hide-summary: false
+          junitxml-path: ./backend/users/code/coverage/junit.xml
           junitxml-title: My JUnit Title
-          junitxml-path: ./backend/users/code/coverage/clover.xml
