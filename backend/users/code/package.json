@@ -15,15 +15,13 @@
     "setupFiles": [
       "./tests/test-setup.js"
     ],
-    "jest": {
-      "collectCoverage": true,
-      "coverageReporters": [
-        "json-summary",
-        "text",
-        "lcov",
-        "jest-junit"
-      ]
-    }
+    "collectCoverage": true,
+    "coverageReporters": [
+      "json-summary",
+      "text",
+      "lcov",
+      "jest-junit"
+    ]
   },
   "author": "",
   "license": "ISC",
