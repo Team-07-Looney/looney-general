@@ -51,18 +51,3 @@ jobs:
           tags: looneyuvc/uvc-project:arduino:latest
           labels: ${{ steps.meta.outputs.labels }}
           
-      - name: Build and push the gateway image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./backend/api-gateway
-          push: true
-          tags: looneyuvc/uvc-project:apigateway:latest
-          labels: ${{ steps.meta.outputs.labels }}
-          
-      - name: Build and push the sveltekit image
-        uses: docker/build-push-action@v2
-        with:
-          context: ./frontend
-          push: true
-          tags: looneyuvc/uvc-project:client:latest
-          labels: ${{ steps.meta.outputs.labels }}
