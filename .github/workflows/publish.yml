@@ -2,7 +2,7 @@ name: Publish images
 on: [push]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu:latest
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
@@ -19,42 +19,50 @@ jobs:
         with:
           images: looneyuvc/uvc-project
 
-      - name: Build and push 'habits' service
+      - name: Build and push 'habits' service image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/habits
           push: true
-          tags: looneyuvc/uvc-project:habits-latest
+          tags: looneyuvc/uvc-project:habits:latest
           labels: ${{ steps.meta.outputs.labels }}
           
-      - name: Build and push 'users' service
+      - name: Build and push 'users' service image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/users
           push: true
-          tags: looneyuvc/uvc-project:users-latest
+          tags: looneyuvc/uvc-project:users:latest
           labels: ${{ steps.meta.outputs.labels }}
           
-      - name: Build and push 'moods' service
+      - name: Build and push 'moods' service image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/moods
           push: true
-          tags: looneyuvc/uvc-project:moods-latest
+          tags: looneyuvc/uvc-project:moods:latest
           labels: ${{ steps.meta.outputs.labels }}
           
-      - name: Build and push 'arduino' service
+      - name: Build and push 'arduino' service image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/arduino
           push: true
-          tags: looneyuvc/uvc-project:arduino-latest
+          tags: looneyuvc/uvc-project:arduino:latest
           labels: ${{ steps.meta.outputs.labels }}
           
-      - name: Build and push the gateway
+      - name: Build and push the gateway image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/api-gateway
           push: true
-          tags: looneyuvc/uvc-project:apigateway-latest
+          tags: looneyuvc/uvc-project:apigateway:latest
+          labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push the sveltekit image
+        uses: docker/build-push-action@v2
+        with:
+          context: ./frontend
+          push: true
+          tags: looneyuvc/uvc-project:apigateway:latest
           labels: ${{ steps.meta.outputs.labels }}
