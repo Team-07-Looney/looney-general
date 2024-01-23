@@ -33,3 +33,5 @@ jobs:
           hide-summary: false
           junitxml-path: ./backend/users/code/junit.xml
           junitxml-title: My JUnit Title
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
