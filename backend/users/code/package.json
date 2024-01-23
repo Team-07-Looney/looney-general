@@ -8,7 +8,7 @@
     "dev": "./node_modules/nodemon/bin/nodemon.js start.js",
     "dev win": "./node_modules/.bin/nodemon start.js",
     "test": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js",
-    "coverage-test": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage --coverageReporters json-summary"
+    "coverage-test": "NODE_ENV=test node --experimental-vm-modules node_modules/jest/bin/jest.js --coverage"
   },
   "jest": {
     "transform": {},
