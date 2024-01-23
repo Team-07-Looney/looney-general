@@ -63,6 +63,18 @@ services:
         - ./frontend:/usr/src/app
       networks:
         - mslooney
+  arduino:
+      container_name: msarduino
+      image: looney/basic-ms
+      build: ./backend/common
+      volumes:
+        - ./backend/arduino/code:/usr/src/app
+      networks:
+        - mslooney
+      ports:
+        - "3014:3014"
+      working_dir: /usr/src/app
+      command: bash -c "npm install && npm run dev"
 networks:
   mslooney:
     driver: bridge

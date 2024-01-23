@@ -1,6 +1,7 @@
 <script>
   import { fly } from "svelte/transition";
   import { onMount } from "svelte";
+  import { characteristicsStore } from "$lib/bluetoothStore.js";
   import bluetoothMessage from "$lib/bluetoothMessage.js";
 
   let isAvailable;
@@ -37,28 +38,12 @@
       characteristic = await service.getCharacteristic(
         "66559f85-2ef4-4d2a-b34d-94f875dab6b4",
       );
+
+      characteristicsStore.set(characteristic);
+
       console.log(connectedDevice);
-      console.log(characteristic);
-      await sendDataToConnectedDevice();
     } catch (e) {
       console.error(e);
-    }
-  }
-
-  async function sendDataToConnectedDevice() {
-    try {
-      const stringData = "3 4";
-      if (!characteristic) {
-        throw new Error("No characteristic found to send data.");
-      }
-      // Convert the string to an ArrayBuffer.
-      const encoder = new TextEncoder(); // Create a new TextEncoder instance
-      const buffer = encoder.encode(stringData); // Encode the string into an ArrayBuffer
-      await characteristic.writeValue(buffer);
-      console.log("String sent to the device successfully!");
-      $bluetoothMessage = "Your Looney is connected";
-    } catch (e) {
-      console.error("Error sending string:", e);
     }
   }
 </script>

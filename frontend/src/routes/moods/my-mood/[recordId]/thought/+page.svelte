@@ -3,6 +3,7 @@
   import WhiteBanner from "../../../../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../../../../lib/components/BottomMenu.svelte";
   import showElement from "$lib/showElement";
+  $showElement = false;
 
   /** @type {import('./$types').ActionData} */
   export let form;
@@ -29,6 +30,10 @@
   $showElement = false;
 </script>
 
+<svelte:head>
+  <title>Write Thought</title>
+</svelte:head>
+
 <WhiteBanner
   title="My Mood"
   description="Gain more insight in how you are feeling, Looney will always be there"
@@ -50,7 +55,7 @@
       <label for="title">Title:</label>
       <input
         type="text"
-        class="bg-gray-300 p-2 w-full rounded-lg"
+        class="bg-[#EDEDED] p-2 w-full rounded-lg"
         name="title"
         value={form?.title ?? ""}
       />
@@ -59,7 +64,7 @@
         type="text"
         name="body"
         value={form?.body ?? ""}
-        class="bg-gray-300 w-full p-4 rounded-lg"
+        class="bg-[#EDEDED] w-full p-4 rounded-lg"
         rows="{form && form.errors?"2":"5"}"
       ></textarea>
       <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -97,7 +102,7 @@
         <a
           class="z-10 flex justify-center items-center bg-neutral-400
         text-white font-bold p-2 rounded-lg w-20"
-        href="/moods/my-mood/{data.recordId}/thought/advice">Skip</a
+          href="/moods/my-mood/{data.recordId}/thought/advice">Skip</a
         >
         <button
           class="z-10 bg-indigo-300 text-white font-bold p-2 rounded-lg w-20"

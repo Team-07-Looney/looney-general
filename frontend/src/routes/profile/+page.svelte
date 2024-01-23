@@ -10,13 +10,18 @@
   import ShadowsForForms from "../../lib/components/ShadowsForForms.svelte";
 </script>
 
+<svelte:head>
+  <title>Profile</title>
+</svelte:head>
+
 <WhiteBanner
   title="Profile"
-  description="Change password or logout"
+  description="Change your password"
   route="/home"
   displayBackButton="1"
-  displayMenuButton="0"
+  displayMenuButton="1"
   imgExtraPath="../"
+  showProfile = 0
 />
 
 <div class="mt-4 flex justify-center items-center">
@@ -47,7 +52,9 @@
                 </ul>
               </div>
             {/if}
-            <h3 class="text-lg font-extrabold">Change password</h3>
+            <div class="w-full text-center">
+              <h3 class="text-lg font-extrabold">Change password</h3>
+            </div>
 
             <AuthInput
               name={"current-password"}

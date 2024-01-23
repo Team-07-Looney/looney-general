@@ -8,6 +8,10 @@
   $showElement = false;
 </script>
 
+<svelte:head>
+  <title>Timer</title>
+</svelte:head>
+
 <WhiteBanner
   title={data.habit[0].name}
   description="Start it, pause it, resume it, cancel it! No shame of doing so!"

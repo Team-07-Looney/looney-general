@@ -18,8 +18,12 @@
   }
 </script>
 
+<svelte:head>
+  <title>Create routine</title>
+</svelte:head>
+
 <WhiteBanner
-  title="Create Category"
+  title="Create Routine"
   description="Organize your habit with your own personal folder"
   route="/categories"
   displayBackButton="1"

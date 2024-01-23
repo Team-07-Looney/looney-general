@@ -1,5 +1,5 @@
 <script>
-    import { openPopup } from "../popup";
+    import { openPopup, habit } from "../popup";
     import DeleteConfirmationPopup from "./DeleteConfirmationPopup.svelte";
 
     export let title;
@@ -7,6 +7,7 @@
     export let habitId;
     export let categoryId;
     export let done;
+    habit.set(habitId);
 </script>
 
 <DeleteConfirmationPopup name='habit' />
@@ -37,13 +38,14 @@ items-center hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         <button id={`button${habitId}`} on:click|stopPropagation class="p-3 pl-0 mt-1">
             <img src="../../src/img/optionsButton.png" class="h-5" alt="Options Button">
         </button>
-        <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
+        <div id={`dropdown${habitId}`} class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem] z-10">
             <!-- DROPDOWN MENU -->
             <div class="h-6 flex justify-center items-center">
                 <a class="rounded-lg" href={`/categories/${categoryId}/habits/${habitId}/edit`}>Edit</a>
             </div>
             <div class="h-7 flex justify-center items-center">
                 <form id="deleteForm" class="w-full rounded-lg" method="POST" action={`/categories/${categoryId}/habits/${habitId}?/deleteHabit`}>
+                    <input type="hidden" name="habit_id" value={$habit} />
                     <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>

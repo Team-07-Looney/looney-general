@@ -1,9 +1,10 @@
 <script>
-    import { openPopup } from "../popup";
+    import { openPopup, category } from "../popup";
     import DeleteConfirmationPopup from "../../lib/components/DeleteConfirmationPopup.svelte";
     export let iconId;
     export let title;
     export let categoryId;
+    category.set(categoryId);
 </script>
 
 <DeleteConfirmationPopup
@@ -26,13 +27,14 @@ min-h-[68px] hover:bg-accent" style="box-shadow: rgba(0, 0, 0, 0.15) 2.4px 2.4px
         </button>
         <div id={`dropdown${categoryId}`}
         class="hidden absolute bg-gray-200 flex-auto rounded-md shadow-lg
-        min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem]">
+        min-w-[70px] grid-cols-1 divide-y-[1px] divide-gray-400 mt-[-14px] ml-[-1.2rem] z-10">
             <!-- DROPDOWN MENU -->
             <div class="h-6 flex justify-center items-center">
                 <a class="rounded-lg" href={`categories/${categoryId}/edit`}>Edit</a>
             </div>
             <div class="h-7 flex justify-center items-center">
                 <form id="deleteForm" class="w-full rounded-lg" method="POST" action={`/categories/${categoryId}?/deleteCategory`}>
+                    <input type="hidden" name="category_id" value={$category} />
                     <button on:click|preventDefault={openPopup}>Delete</button>
                 </form>
             </div>

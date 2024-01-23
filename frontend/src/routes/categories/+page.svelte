@@ -4,6 +4,7 @@
   import WhiteBanner from "../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../lib/components/BottomMenu.svelte";
   import showElement from "$lib/showElement";
+  import { category } from "../../lib/popup";
 
   $showElement = false;
   // Data contains all data passed by the page server
@@ -24,6 +25,7 @@
 
   function handleOpening(id) {
     const dropdown = document.getElementById(`dropdown${id}`);
+    category.set(id);
 
     if (!menuOpen) {
       // Displays menu
@@ -44,8 +46,12 @@
   }
 </script>
 
+<svelte:head>
+  <title>Categories</title>
+</svelte:head>
+
 <WhiteBanner
-    title="My Habits"
+    title="My Routines"
     description="Add new ones, check the old ones, Looney is going to be with you"
     route="/home"
     displayBackButton="1"

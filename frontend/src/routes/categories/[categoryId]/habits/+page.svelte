@@ -4,6 +4,7 @@
   import WhiteBanner from "../../../../lib/components/WhiteBanner.svelte";
   import BottomMenu from "../../../../lib/components/BottomMenu.svelte";
   import showElement from "$lib/showElement";
+  import { habit } from "../../../../lib/popup";
   $showElement = false;
   // Data contains all data passed by the page server
   export let data;
@@ -23,6 +24,7 @@
 
   function handleOpening(id) {
     const dropdown = document.getElementById(`dropdown${id}`);
+    habit.set(id);
 
     if (!menuOpen) {
       // Displays menu
@@ -42,6 +44,10 @@
     }
   }
 </script>
+
+<svelte:head>
+  <title>Habits</title>
+</svelte:head>
 
 <WhiteBanner
   title={data.category[0].name}
