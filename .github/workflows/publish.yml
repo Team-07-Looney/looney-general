@@ -64,5 +64,5 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: looneyuvc/uvc-project:apigateway:latest
+          tags: looneyuvc/uvc-project:client:latest
           labels: ${{ steps.meta.outputs.labels }}
