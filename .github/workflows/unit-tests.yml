@@ -19,7 +19,7 @@ jobs:
         run: |
           cd backend/users/code
           npm ci
-          npx jest --coverage --reporters=default --reporters=jest-junit
+          npm run coverage-test
 
       - name: Jest Coverage Comment
         uses: MishaKav/jest-coverage-comment@main
