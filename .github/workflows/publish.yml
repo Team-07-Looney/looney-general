@@ -24,5 +24,37 @@ jobs:
         with:
           context: ./backend/habits
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: looneyuvc/uvc-project:habits-latest
+          labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push 'users' service
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend/users
+          push: true
+          tags: looneyuvc/uvc-project:users-latest
+          labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push 'moods' service
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend/moods
+          push: true
+          tags: looneyuvc/uvc-project:moods-latest
+          labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push 'arduino' service
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend/arduino
+          push: true
+          tags: looneyuvc/uvc-project:arduino-latest
+          labels: ${{ steps.meta.outputs.labels }}
+          
+      - name: Build and push the gateway
+        uses: docker/build-push-action@v2
+        with:
+          context: ./backend/api-gateway
+          push: true
+          tags: looneyuvc/uvc-project:apigateway-latest
           labels: ${{ steps.meta.outputs.labels }}
