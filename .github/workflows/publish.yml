@@ -17,14 +17,14 @@ jobs:
         id: meta
         uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          images: looneyuvc/uvc-project
+          images: ${{ secrets.DOCKER_USERNAME }}/uvc-project
 
       - name: Build and push 'habits' service image
         uses: docker/build-push-action@v2
         with:
           context: ./backend/habits
           push: true
-          tags: looneyuvc/uvc-project:habits:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/uvc-project:habits:latest
           labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push 'users' service image
@@ -32,7 +32,7 @@ jobs:
         with:
           context: ./backend/users
           push: true
-          tags: looneyuvc/uvc-project:users:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/uvc-project:users:latest
           labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push 'moods' service image
@@ -40,7 +40,7 @@ jobs:
         with:
           context: ./backend/moods
           push: true
-          tags: looneyuvc/uvc-project:moods:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/uvc-project:moods:latest
           labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push 'arduino' service image
@@ -48,7 +48,7 @@ jobs:
         with:
           context: ./backend/arduino
           push: true
-          tags: looneyuvc/uvc-project:arduino:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/uvc-project:arduino:latest
           labels: ${{ steps.meta.outputs.labels }}
           
       - name: Build and push the sveltekit client image
@@ -56,7 +56,7 @@ jobs:
         with:
           context: ./frontend
           push: true
-          tags: looneyuvc/uvc-project:client
+          tags: ${{ secrets.DOCKER_USERNAME }}/uvc-project:client
           labels: ${{ steps.meta.outputs.labels }}
           
           
