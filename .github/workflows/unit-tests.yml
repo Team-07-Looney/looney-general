@@ -24,6 +24,7 @@ jobs:
       - name: Jest Coverage Comment
         uses: MishaKav/jest-coverage-comment@main
         with:
+          github-token:  ${{ secrets.GITHUB_TOKEN }}
           coverage-summary-path: ./backend/users/code/coverage/coverage-summary.json
           title: My Jest Coverage Comment
           summary-title: My Summary Title
@@ -33,5 +34,3 @@ jobs:
           hide-summary: false
           junitxml-path: ./backend/users/code/junit.xml
           junitxml-title: My JUnit Title
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
