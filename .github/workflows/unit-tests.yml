@@ -13,5 +13,11 @@ jobs:
           node-version: '20.x'
         
       - name: Run jest tests in the users microservice
-        run: cd backend/users/code && npm ci && npm test
+        env:
+          NODE_ENV: test
+        run: |
+          cd backend/users/code
+          npm ci
+          jest --coverage
+
        
