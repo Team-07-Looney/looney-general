@@ -27,3 +27,29 @@ jobs:
       - name: Run ESLint users microservice
         run: npx eslint .
         working-directory: ./backend/users/code
+
+      - name: Install Dependencies of the Habits microservice
+        run: npm install
+        working-directory: ./backend/habits/code
+
+      - name: Run ESLint habits microservice
+        run: npx eslint .
+        working-directory: ./backend/babits/code
+
+      - name: Install Dependencies of the Moods microservice
+        run: npm install
+        working-directory: ./backend/moods/code
+
+      - name: Run ESLint moods microservice
+        run: npx eslint .
+        working-directory: ./backend/moods/code
+
+      - name: Install Dependencies of the gateway
+        run: npm install
+        working-directory: ./backend/api-gateway/code
+
+      - name: Run ESLint gateway
+        run: npx eslint .
+        working-directory: ./backend/api-gateway/code
+
+        
