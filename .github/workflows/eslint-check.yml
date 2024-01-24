@@ -34,7 +34,7 @@ jobs:
 
       - name: Run ESLint habits microservice
         run: npx eslint .
-        working-directory: ./backend/babits/code
+        working-directory: ./backend/habits/code
 
       - name: Install Dependencies of the Moods microservice
         run: npm install
