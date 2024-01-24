@@ -89,9 +89,9 @@ export async function openDatabaseConnection() {
 
       try {
 
-        db.get('SELECT count(*) AS tablemoodsExists FROM sqlite_master WHERE type=\'table\' AND name=\'moods\'', async (err, row) => {
+        db.get('SELECT count(*) AS tableMoodsExists FROM sqlite_master WHERE type=\'table\' AND name=\'moods\'', async (err, row) => {
           // If there is no such table create one
-          if (row.tablemoodsExists == 0) {
+          if (row.tableMoodsExists == 0) {
             // Use a separate async function within the callback
             await createTables(db);
             await populateMoodsTypeTable(db);
