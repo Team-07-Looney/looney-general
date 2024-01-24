@@ -12,7 +12,7 @@ const tableQueries = [
   `CREATE TABLE IF NOT EXISTS moods (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   mood_type_id INTEGER REFERENCES mood_types(id),
-  name TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
   user_id INTEGER)`,
   //Create reasons table if it doesn't exists
   `CREATE TABLE IF NOT EXISTS reasons (

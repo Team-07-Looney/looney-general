@@ -1,14 +1,13 @@
 /* eslint-disable no-undef */
-import { getCategories } from '../../controllers/categoriesController';
+import { getCategories} from '../../controllers/categoriesController';
 import { refreshTestingDatabase } from '../../database/database';
 
 describe('get all categories', () => {
   test('from the database', async () => {
     // Arrange
     const db = await refreshTestingDatabase();
-    const insertData = [
-      { name: 'Morning Routine', userId: 1, iconId: '&#127765'},
-      { name: 'Afternoon Routine', userId: 2, iconId: '&#127763'},
+    const insertData = [{ name: 'Morning Routine', userId: 1, iconId: '&#127765'},
+      { name: 'Afternoon Routine', userId: 2, iconId: '&#127763'}
     ];
     await Promise.all(insertData.map(async (category) => {
       const { name, userId, iconId } = category;
@@ -169,10 +168,10 @@ describe('get all categories', () => {
 //   });
 // });
 
-/**
- * Creates a mock response for the controller
- * @returns the mock response
- */
+// /**
+//  * Creates a mock response for the controller
+//  * @returns the mock response
+//  */
 function mockResponse() {
   const res = {};
   res.status = jest.fn().mockReturnValue(res);

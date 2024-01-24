@@ -15,10 +15,7 @@ export async function refreshTestingDatabase() {
   return new Promise(async (resolve) => {
     testingDatabase = new sqlite3.Database(':memory:');
     await createCategoriesTable(testingDatabase);
-    await createPredefinedCategoriesTable(testingDatabase);
-    await createPredefinedHabitsTable(testingDatabase);
-    await createHabitsTable(testingDatabase);
-    await createHabitRecordsTable(testingDatabase);
+
     resolve(testingDatabase);
   });
 }
@@ -33,10 +30,7 @@ export async function openDatabaseConnection() {
     // eslint-disable-next-line no-undef
     if (process.env.NODE_ENV === 'test') {
       await createCategoriesTable(testingDatabase);
-      await createPredefinedCategoriesTable(testingDatabase);
-      await createPredefinedHabitsTable(testingDatabase);
-      await createHabitsTable(testingDatabase);
-      await createHabitRecordsTable(testingDatabase);
+
       resolve(testingDatabase);
     }
 
@@ -150,7 +144,7 @@ export async function createPredefinedCategoriesTable(db) {
               console.error(`Error inserting data for category ${name}: `, err.message);
               reject(err.message);
             } else {
-              console.log(`Data inserted for category: ${name}`);
+              console.log(`Data inserted for predefined category: ${name}`);
             }
           });
         });
@@ -190,7 +184,7 @@ export async function createPredefinedHabitsTable(db) {
               console.error('Error inserting data for category ', err.message);
               reject(err.message);
             } else {
-              console.log(`Data inserted for category: ${name}`);
+              console.log(`Data inserted for predefined habits: ${name}`);
               resolve();
             }
           });

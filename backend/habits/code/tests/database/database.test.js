@@ -1,12 +1,11 @@
 /* eslint-disable no-undef */
-import { openDatabaseConnection, closeDatabaseConnection, createCategoriesTable, refreshTestingDatabase } from '../../database/database';
+import { closeDatabaseConnection, createCategoriesTable, refreshTestingDatabase } from '../../database/database';
 import sqlite3 from 'sqlite3';
 
 describe('database connection opening', () => {
   test('successful opening a database connection and existence of habits table', async () => {
     // Arrange + Act
-    await refreshTestingDatabase();
-    const db = await openDatabaseConnection();
+    const db = await refreshTestingDatabase();
 
     // Assert
     expect(db).toBeInstanceOf(sqlite3.Database);
@@ -14,14 +13,13 @@ describe('database connection opening', () => {
     db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type=\'table\' AND name=\'categories\'', (err, row) => {
       expect(row.tableCategoriesExists).toBe(1);
     });
-  }, 15000);
+  });
 });
 
 describe('database connection closing', () => {
   test('successful closing of a database connection', async () => {
     // Arrange
-    await refreshTestingDatabase();
-    const db = await openDatabaseConnection();
+    const db = await refreshTestingDatabase();
     console.error = jest.fn();
 
     // Act
@@ -29,7 +27,7 @@ describe('database connection closing', () => {
 
     // Assert
     expect(console.error).not.toHaveBeenCalled();
-  }, 15000);
+  });
 
   test('failure when closing a database connection', async () => {
     // Arrange
@@ -47,7 +45,7 @@ describe('database connection closing', () => {
     // Assert
     expect(consoleErrorSpy).toHaveBeenCalledWith('Error on close');
     consoleErrorSpy.mockRestore();
-  }, 15000);
+  });
 });
 
 describe('creation of tables for habits ms', () => {
@@ -62,5 +60,5 @@ describe('creation of tables for habits ms', () => {
     db.get('SELECT count(*) AS tableCategoriesExists FROM sqlite_master WHERE type=\'table\' AND name=\'categories\'', (err, row) => {
       expect(row.tableCategoriesExists).toBe(1);
     });
-  }, 15000);
+  });
 });
